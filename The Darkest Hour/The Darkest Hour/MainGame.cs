@@ -1,0 +1,108 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using The_Darkest_Hour.Characters;
+using The_Darkest_Hour.Items_and_Inventory;
+using The_Darkest_Hour.Characters.Mobs;
+using The_Darkest_Hour.Areas;
+
+namespace The_Darkest_Hour
+{
+    class MainGame
+    {
+        Player myHero;
+        Mob mob;
+        string userInput;
+        Battle battle = new Battle();
+        Skeleton skeleton;
+        Bandit bandit;
+        Random rand = new Random();
+        int temp = 0;
+        GeneralStore sellStore;
+
+        public MainGame()
+        {
+            myHero = new Player();
+            mob = new Mob();
+
+            myHero.Initialize(myHero);
+
+            Console.WriteLine(myHero.Identifier);
+            myHero.DisplayProfession(myHero);
+            Console.WriteLine("\n\nAnd your inventory is: \n");
+            int i = 1;
+            foreach (Item displayInventory in myHero.Inventory)
+            {
+                Console.WriteLine(i + ". " + displayInventory);
+                i++;
+            }
+            Console.WriteLine();
+            ClearScreen();
+            
+            do
+            {
+                skeleton = new Skeleton();
+                bandit = new Bandit();
+                Console.WriteLine("Do you want to go to the arena or quit the game?");
+                Console.WriteLine("(1) Arena \n(2) Display your stats \n(3) Display Inventory \n(4) Sell Items \n(5) Save \n(6) Quit\n");
+                string answer = Console.ReadLine();
+                if (answer == "1")
+                {
+                    temp = rand.Next(1, 3);
+                    if (temp == 1)
+                    {
+                        Console.Clear();
+                        battle.DoBattle(myHero, skeleton);
+                        myHero.ResetHealth(myHero);
+                        Console.Clear();
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        battle.DoBattle(myHero, bandit);
+                        myHero.ResetHealth(myHero);
+                        Console.Clear();
+                    }
+                }
+                else if (answer == "2")
+                {
+                    myHero.DisplayStats(myHero);
+                    ClearScreen();
+                }
+                else if (answer == "3")
+                {
+                    myHero.DisplayInventory(myHero);
+                    ClearScreen();
+                }
+                else if (answer == "4")
+                {
+                    sellStore = new GeneralStore(myHero);
+                }
+                else if (answer == "5")
+                {
+                    LoadSave save = new LoadSave();
+                    save.SaveOne(myHero);
+                    ClearScreen();
+                }
+                else if (answer == "6")
+                {
+                    userInput = "10";
+                    break;
+                }
+                else
+                {
+                    Console.Clear();
+                }
+            }while(userInput != "10");
+        }
+
+        public void ClearScreen()
+        {
+            Console.WriteLine("\n\nPress enter to continue on...");
+            Console.ReadLine();
+            Console.Clear();
+        }
+    }
+}
