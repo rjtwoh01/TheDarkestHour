@@ -159,70 +159,84 @@ namespace The_Darkest_Hour
                 {
                     Directory.CreateDirectory(@"c:\TheDarkestHour\CharacterSavesAlpha");
                 }
-                StreamWriter firstCharacterStreamWriter = new StreamWriter(@"c:\TheDarkestHour\CharacterSavesAlpha\FirstCharacter.txt");
 
-                firstCharacterStreamWriter.WriteLine(myHero.Identifier);
-                firstCharacterStreamWriter.WriteLine(myHero.health);
-                firstCharacterStreamWriter.WriteLine(myHero.maxHealth);
-                firstCharacterStreamWriter.WriteLine(myHero.mainStat);
-                firstCharacterStreamWriter.WriteLine(myHero.critChance);
-                firstCharacterStreamWriter.WriteLine(myHero.critDamage);
-                firstCharacterStreamWriter.WriteLine(myHero.damage);
-                firstCharacterStreamWriter.WriteLine(myHero.level);
-                firstCharacterStreamWriter.WriteLine(myHero.xp);
-                firstCharacterStreamWriter.WriteLine(myHero.requiredXP);
-                firstCharacterStreamWriter.WriteLine(myHero.armor);
-                firstCharacterStreamWriter.WriteLine(myHero.profession);
-                firstCharacterStreamWriter.WriteLine(myHero.isHardCore);
-                firstCharacterStreamWriter.WriteLine(myHero.WeaponsFull);
-                firstCharacterStreamWriter.WriteLine(myHero.ArmorFull);
-                firstCharacterStreamWriter.WriteLine(myHero.AmuletFull);
-                firstCharacterStreamWriter.WriteLine(myHero.HelmetFull);
-                firstCharacterStreamWriter.WriteLine(myHero.PotionsFull);
-                firstCharacterStreamWriter.Close();
+                // You need to either use a try/finally statement to ensure the the close/displose is called regardless if there is an error or not.
+                // Any objects that are flagged as IDisposable should be wrapped in an using statement (or use try/finally but using is much cleaner
+                // code to look at).
+                // The is one of the number one mistakes I see junior programmers do that can cause huge headaches in the long run.  What happens 
+                // is under load of if the program has been running a load time, you may run into crashes and/or memory leaks.  These are terribly
+                // difficult problems to debug. 
+                // Please get into the habit of using the using statement on any and all disposable objects (if it has a close method it most likely has a
+                // dispose method).  Visual Stuidio will tell you if an object is IDisposable or not when you try to use the using statement on it.
+                using(StreamWriter firstCharacterStreamWriter = new StreamWriter(@"c:\TheDarkestHour\CharacterSavesAlpha\FirstCharacter.txt"))
+                {
+                    firstCharacterStreamWriter.WriteLine(myHero.Identifier);
+                    firstCharacterStreamWriter.WriteLine(myHero.health);
+                    firstCharacterStreamWriter.WriteLine(myHero.maxHealth);
+                    firstCharacterStreamWriter.WriteLine(myHero.mainStat);
+                    firstCharacterStreamWriter.WriteLine(myHero.critChance);
+                    firstCharacterStreamWriter.WriteLine(myHero.critDamage);
+                    firstCharacterStreamWriter.WriteLine(myHero.damage);
+                    firstCharacterStreamWriter.WriteLine(myHero.level);
+                    firstCharacterStreamWriter.WriteLine(myHero.xp);
+                    firstCharacterStreamWriter.WriteLine(myHero.requiredXP);
+                    firstCharacterStreamWriter.WriteLine(myHero.armor);
+                    firstCharacterStreamWriter.WriteLine(myHero.profession);
+                    firstCharacterStreamWriter.WriteLine(myHero.isHardCore);
+                    firstCharacterStreamWriter.WriteLine(myHero.WeaponsFull);
+                    firstCharacterStreamWriter.WriteLine(myHero.ArmorFull);
+                    firstCharacterStreamWriter.WriteLine(myHero.AmuletFull);
+                    firstCharacterStreamWriter.WriteLine(myHero.HelmetFull);
+                    firstCharacterStreamWriter.WriteLine(myHero.PotionsFull);
+                    firstCharacterStreamWriter.Close();
+                }
+
+
 
                 if (Directory.Exists(@"c:\TheDarkestHour\CharacterSavesAlpha") == false)
                 {
                     Directory.CreateDirectory(@"c:\TheDarkestHour\CharacterSavesAlpha");
                 }
-                StreamWriter firstCharacterInventoryStreamWriter = new StreamWriter(@"c:\TheDarkestHour\CharacterSavesAlpha\FirstCharacterInventory.txt");
-
-                string check = "true";
-                int i = 0;
-                
-                foreach (Item x in myHero.Inventory)
+                using (StreamWriter firstCharacterInventoryStreamWriter = new StreamWriter(@"c:\TheDarkestHour\CharacterSavesAlpha\FirstCharacterInventory.txt"))
                 {
-                    try
-                    {
-                        firstCharacterInventoryStreamWriter.WriteLine(x); 
-                        //An iteration of what I tried. Tried many things
-                        Item selectedItem = myHero.Inventory.ElementAt(i);
-                        // You used the file variable from up above.  you should have used your InventoryFile object instead.  The first file variable as already closed.
-                        // I went ahead and renamed the character stream writer (note the naming convention) and the inventory stream writer.
-                        // using a very generic word (like file) caused you some confusing when writing this code.  I more applicable name
-                        // like firstCharacterStreamWriter is very specific and helps keeps these kind of scenarios from happening.
-                        firstCharacterInventoryStreamWriter.WriteLine(selectedItem.name);  
-                        firstCharacterInventoryStreamWriter.WriteLine(selectedItem.itemType);
-                        firstCharacterInventoryStreamWriter.WriteLine(selectedItem.damage);
-                        firstCharacterInventoryStreamWriter.WriteLine(selectedItem.strength);
-                        firstCharacterInventoryStreamWriter.WriteLine(selectedItem.agility);
-                        firstCharacterInventoryStreamWriter.WriteLine(selectedItem.intelligence);
-                        firstCharacterInventoryStreamWriter.WriteLine(selectedItem.health);
-                        firstCharacterInventoryStreamWriter.WriteLine(selectedItem.goldFind);
-                        firstCharacterInventoryStreamWriter.WriteLine(selectedItem.magicFind);
-                        firstCharacterInventoryStreamWriter.WriteLine(selectedItem.requiredLevel);
-                        firstCharacterInventoryStreamWriter.WriteLine(selectedItem.critChance);
-                        firstCharacterInventoryStreamWriter.WriteLine(selectedItem.critDamage);
-                        firstCharacterInventoryStreamWriter.WriteLine(selectedItem.worth);
-                        i++;
-                    }
-                    catch
-                    {
-                    }
-                }
 
-                firstCharacterInventoryStreamWriter.Close();
-                Console.WriteLine("Game Save successful\n");
+                    string check = "true";
+                    int i = 0;
+
+                    foreach (Item x in myHero.Inventory)
+                    {
+                        try
+                        {
+                            firstCharacterInventoryStreamWriter.WriteLine(x);
+                            //An iteration of what I tried. Tried many things
+                            Item selectedItem = myHero.Inventory.ElementAt(i);
+                            // You used the file variable from up above.  you should have used your InventoryFile object instead.  The first file variable as already closed.
+                            // I went ahead and renamed the character stream writer (note the naming convention) and the inventory stream writer.
+                            // using a very generic word (like file) caused you some confusing when writing this code.  I more applicable name
+                            // like firstCharacterStreamWriter is very specific and helps keeps these kind of scenarios from happening.
+                            firstCharacterInventoryStreamWriter.WriteLine(selectedItem.name);
+                            firstCharacterInventoryStreamWriter.WriteLine(selectedItem.itemType);
+                            firstCharacterInventoryStreamWriter.WriteLine(selectedItem.damage);
+                            firstCharacterInventoryStreamWriter.WriteLine(selectedItem.strength);
+                            firstCharacterInventoryStreamWriter.WriteLine(selectedItem.agility);
+                            firstCharacterInventoryStreamWriter.WriteLine(selectedItem.intelligence);
+                            firstCharacterInventoryStreamWriter.WriteLine(selectedItem.health);
+                            firstCharacterInventoryStreamWriter.WriteLine(selectedItem.goldFind);
+                            firstCharacterInventoryStreamWriter.WriteLine(selectedItem.magicFind);
+                            firstCharacterInventoryStreamWriter.WriteLine(selectedItem.requiredLevel);
+                            firstCharacterInventoryStreamWriter.WriteLine(selectedItem.critChance);
+                            firstCharacterInventoryStreamWriter.WriteLine(selectedItem.critDamage);
+                            firstCharacterInventoryStreamWriter.WriteLine(selectedItem.worth);
+                            i++;
+                        }
+                        catch
+                        {
+                        }
+                    }
+
+                    firstCharacterInventoryStreamWriter.Close();
+                    Console.WriteLine("Game Save successful\n");
+                }
             }
             catch (Exception e)
             {
