@@ -159,33 +159,33 @@ namespace The_Darkest_Hour
                 {
                     Directory.CreateDirectory(@"c:\TheDarkestHour\CharacterSavesAlpha");
                 }
-                StreamWriter file = new StreamWriter(@"c:\TheDarkestHour\CharacterSavesAlpha\FirstCharacter.txt");
+                StreamWriter firstCharacterStreamWriter = new StreamWriter(@"c:\TheDarkestHour\CharacterSavesAlpha\FirstCharacter.txt");
 
-                file.WriteLine(myHero.Identifier);
-                file.WriteLine(myHero.health);
-                file.WriteLine(myHero.maxHealth);
-                file.WriteLine(myHero.mainStat);
-                file.WriteLine(myHero.critChance);
-                file.WriteLine(myHero.critDamage);
-                file.WriteLine(myHero.damage);
-                file.WriteLine(myHero.level);
-                file.WriteLine(myHero.xp);
-                file.WriteLine(myHero.requiredXP);
-                file.WriteLine(myHero.armor);
-                file.WriteLine(myHero.profession);
-                file.WriteLine(myHero.isHardCore);
-                file.WriteLine(myHero.WeaponsFull);
-                file.WriteLine(myHero.ArmorFull);
-                file.WriteLine(myHero.AmuletFull);
-                file.WriteLine(myHero.HelmetFull);
-                file.WriteLine(myHero.PotionsFull);
-                file.Close();
+                firstCharacterStreamWriter.WriteLine(myHero.Identifier);
+                firstCharacterStreamWriter.WriteLine(myHero.health);
+                firstCharacterStreamWriter.WriteLine(myHero.maxHealth);
+                firstCharacterStreamWriter.WriteLine(myHero.mainStat);
+                firstCharacterStreamWriter.WriteLine(myHero.critChance);
+                firstCharacterStreamWriter.WriteLine(myHero.critDamage);
+                firstCharacterStreamWriter.WriteLine(myHero.damage);
+                firstCharacterStreamWriter.WriteLine(myHero.level);
+                firstCharacterStreamWriter.WriteLine(myHero.xp);
+                firstCharacterStreamWriter.WriteLine(myHero.requiredXP);
+                firstCharacterStreamWriter.WriteLine(myHero.armor);
+                firstCharacterStreamWriter.WriteLine(myHero.profession);
+                firstCharacterStreamWriter.WriteLine(myHero.isHardCore);
+                firstCharacterStreamWriter.WriteLine(myHero.WeaponsFull);
+                firstCharacterStreamWriter.WriteLine(myHero.ArmorFull);
+                firstCharacterStreamWriter.WriteLine(myHero.AmuletFull);
+                firstCharacterStreamWriter.WriteLine(myHero.HelmetFull);
+                firstCharacterStreamWriter.WriteLine(myHero.PotionsFull);
+                firstCharacterStreamWriter.Close();
 
                 if (Directory.Exists(@"c:\TheDarkestHour\CharacterSavesAlpha") == false)
                 {
                     Directory.CreateDirectory(@"c:\TheDarkestHour\CharacterSavesAlpha");
                 }
-                StreamWriter inventoryFile = new StreamWriter(@"c:\TheDarkestHour\CharacterSavesAlpha\FirstCharacterInventory.txt");
+                StreamWriter firstCharacterInventoryStreamWriter = new StreamWriter(@"c:\TheDarkestHour\CharacterSavesAlpha\FirstCharacterInventory.txt");
 
                 string check = "true";
                 int i = 0;
@@ -194,30 +194,34 @@ namespace The_Darkest_Hour
                 {
                     try
                     {
-                        file.WriteLine(x); 
+                        firstCharacterInventoryStreamWriter.WriteLine(x); 
                         //An iteration of what I tried. Tried many things
-                        //Item selectedItem = myHero.Inventory.ElementAt(i);
-                        //file.WriteLine(selectedItem.name);
-                        //file.WriteLine(selectedItem.itemType);
-                        //file.WriteLine(selectedItem.damage);
-                        //file.WriteLine(selectedItem.strength);
-                        //file.WriteLine(selectedItem.agility);
-                        //file.WriteLine(selectedItem.intelligence);
-                        //file.WriteLine(selectedItem.health);
-                        //file.WriteLine(selectedItem.goldFind);
-                        //file.WriteLine(selectedItem.magicFind);
-                        //file.WriteLine(selectedItem.requiredLevel);
-                        //file.WriteLine(selectedItem.critChance);
-                        //file.WriteLine(selectedItem.critDamage);
-                        //file.WriteLine(selectedItem.worth);
-                        //i++;
+                        Item selectedItem = myHero.Inventory.ElementAt(i);
+                        // You used the file variable from up above.  you should have used your InventoryFile object instead.  The first file variable as already closed.
+                        // I went ahead and renamed the character stream writer (note the naming convention) and the inventory stream writer.
+                        // using a very generic word (like file) caused you some confusing when writing this code.  I more applicable name
+                        // like firstCharacterStreamWriter is very specific and helps keeps these kind of scenarios from happening.
+                        firstCharacterInventoryStreamWriter.WriteLine(selectedItem.name);  
+                        firstCharacterInventoryStreamWriter.WriteLine(selectedItem.itemType);
+                        firstCharacterInventoryStreamWriter.WriteLine(selectedItem.damage);
+                        firstCharacterInventoryStreamWriter.WriteLine(selectedItem.strength);
+                        firstCharacterInventoryStreamWriter.WriteLine(selectedItem.agility);
+                        firstCharacterInventoryStreamWriter.WriteLine(selectedItem.intelligence);
+                        firstCharacterInventoryStreamWriter.WriteLine(selectedItem.health);
+                        firstCharacterInventoryStreamWriter.WriteLine(selectedItem.goldFind);
+                        firstCharacterInventoryStreamWriter.WriteLine(selectedItem.magicFind);
+                        firstCharacterInventoryStreamWriter.WriteLine(selectedItem.requiredLevel);
+                        firstCharacterInventoryStreamWriter.WriteLine(selectedItem.critChance);
+                        firstCharacterInventoryStreamWriter.WriteLine(selectedItem.critDamage);
+                        firstCharacterInventoryStreamWriter.WriteLine(selectedItem.worth);
+                        i++;
                     }
                     catch
                     {
                     }
                 }
 
-                inventoryFile.Close();
+                firstCharacterInventoryStreamWriter.Close();
                 Console.WriteLine("Game Save successful\n");
             }
             catch (Exception e)
