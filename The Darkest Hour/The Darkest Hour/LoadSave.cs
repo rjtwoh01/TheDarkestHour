@@ -52,7 +52,7 @@ namespace The_Darkest_Hour
         //        string tempArmor = myDataTable.Rows[position]["Armor"].ToString();
         //        myHero.armor = Int32.Parse(tempArmor);
         //        myHero.profession = myDataTable.Rows[position]["Class"].ToString();
-                
+
         //        //This begins checking different bool values
         //        //Hard Core Check
         //        string tempHardCore = myDataTable.Rows[position]["HardCore"].ToString();
@@ -155,6 +155,7 @@ namespace The_Darkest_Hour
         {
             try
             {
+
                 if (Directory.Exists(@"c:\TheDarkestHour\CharacterSavesAlpha") == false)
                 {
                     Directory.CreateDirectory(@"c:\TheDarkestHour\CharacterSavesAlpha");
@@ -168,7 +169,7 @@ namespace The_Darkest_Hour
                 // difficult problems to debug. 
                 // Please get into the habit of using the using statement on any and all disposable objects (if it has a close method it most likely has a
                 // dispose method).  Visual Stuidio will tell you if an object is IDisposable or not when you try to use the using statement on it.
-                using(StreamWriter firstCharacterStreamWriter = new StreamWriter(@"c:\TheDarkestHour\CharacterSavesAlpha\FirstCharacter.txt"))
+                using (StreamWriter firstCharacterStreamWriter = new StreamWriter(@"c:\TheDarkestHour\CharacterSavesAlpha\FirstCharacter.txt"))
                 {
                     firstCharacterStreamWriter.WriteLine(myHero.Identifier);
                     firstCharacterStreamWriter.WriteLine(myHero.health);
@@ -205,42 +206,49 @@ namespace The_Darkest_Hour
 
                     foreach (Item x in myHero.Inventory)
                     {
-                        try
-                        {
-                            firstCharacterInventoryStreamWriter.WriteLine(x);
-                            //An iteration of what I tried. Tried many things
-                            Item selectedItem = myHero.Inventory.ElementAt(i);
-                            // You used the file variable from up above.  you should have used your InventoryFile object instead.  The first file variable as already closed.
-                            // I went ahead and renamed the character stream writer (note the naming convention) and the inventory stream writer.
-                            // using a very generic word (like file) caused you some confusing when writing this code.  I more applicable name
-                            // like firstCharacterStreamWriter is very specific and helps keeps these kind of scenarios from happening.
-                            firstCharacterInventoryStreamWriter.WriteLine(selectedItem.name);
-                            firstCharacterInventoryStreamWriter.WriteLine(selectedItem.itemType);
-                            firstCharacterInventoryStreamWriter.WriteLine(selectedItem.damage);
-                            firstCharacterInventoryStreamWriter.WriteLine(selectedItem.strength);
-                            firstCharacterInventoryStreamWriter.WriteLine(selectedItem.agility);
-                            firstCharacterInventoryStreamWriter.WriteLine(selectedItem.intelligence);
-                            firstCharacterInventoryStreamWriter.WriteLine(selectedItem.health);
-                            firstCharacterInventoryStreamWriter.WriteLine(selectedItem.goldFind);
-                            firstCharacterInventoryStreamWriter.WriteLine(selectedItem.magicFind);
-                            firstCharacterInventoryStreamWriter.WriteLine(selectedItem.requiredLevel);
-                            firstCharacterInventoryStreamWriter.WriteLine(selectedItem.critChance);
-                            firstCharacterInventoryStreamWriter.WriteLine(selectedItem.critDamage);
-                            firstCharacterInventoryStreamWriter.WriteLine(selectedItem.worth);
-                            i++;
-                        }
-                        catch
-                        {
-                        }
+                        firstCharacterInventoryStreamWriter.WriteLine(x);
+                        //An iteration of what I tried. Tried many things
+                        Item selectedItem = myHero.Inventory.ElementAt(i);
+                        // You used the file variable from up above.  you should have used your InventoryFile object instead.  The first file variable as already closed.
+                        // I went ahead and renamed the character stream writer (note the naming convention) and the inventory stream writer.
+                        // using a very generic word (like file) caused you some confusing when writing this code.  I more applicable name
+                        // like firstCharacterStreamWriter is very specific and helps keeps these kind of scenarios from happening.
+                        firstCharacterInventoryStreamWriter.WriteLine(selectedItem.name);
+                        firstCharacterInventoryStreamWriter.WriteLine(selectedItem.itemType);
+                        firstCharacterInventoryStreamWriter.WriteLine(selectedItem.damage);
+                        firstCharacterInventoryStreamWriter.WriteLine(selectedItem.strength);
+                        firstCharacterInventoryStreamWriter.WriteLine(selectedItem.agility);
+                        firstCharacterInventoryStreamWriter.WriteLine(selectedItem.intelligence);
+                        firstCharacterInventoryStreamWriter.WriteLine(selectedItem.health);
+                        firstCharacterInventoryStreamWriter.WriteLine(selectedItem.goldFind);
+                        firstCharacterInventoryStreamWriter.WriteLine(selectedItem.magicFind);
+                        firstCharacterInventoryStreamWriter.WriteLine(selectedItem.requiredLevel);
+                        firstCharacterInventoryStreamWriter.WriteLine(selectedItem.critChance);
+                        firstCharacterInventoryStreamWriter.WriteLine(selectedItem.critDamage);
+                        firstCharacterInventoryStreamWriter.WriteLine(selectedItem.worth);
+                        i++;
                     }
 
                     firstCharacterInventoryStreamWriter.Close();
                     Console.WriteLine("Game Save successful\n");
                 }
             }
-            catch (Exception e)
+            catch (Exception exc)
             {
+                // Please, please, please get out of the habit of writing empty try/catch statements.  You are hiding the error!
+                // never hide the error.  Sometimes the problem is fixed and then forget to remove the empty try/catch
+                // and then later on it because a huge problem to troubleshoot because add error messages from that function
+                // will never ever be display making it extremely difficult to determine an issue.
+                // Just say no to emtpy try/catch statement (even temporarily)...just don't get into that bad habit.
+                // in most case, you really don't need to use the try/catch statement.  Let the error bubble up and look at it 
+                // in Visual Studio.
+                // Later on, you learn to use a good error handling routine that will streamline the error message you get from your computer
+                // program.
+                // See log4net as an examble: http://stackoverflow.com/questions/7089286/correct-way-of-using-log4net
+                Console.WriteLine("Oh no!  There was an error!  See details below");
+                Console.WriteLine(exc.ToString());
             }
         }
     }
 }
+    
