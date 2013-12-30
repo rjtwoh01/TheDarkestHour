@@ -11,7 +11,6 @@ namespace The_Darkest_Hour.Characters
 {
     public class Player : Character
     {
-        public int mainStat;
         public double critChance = 0;
         public double critDamage = 1;
         public int damage = 10;
@@ -160,32 +159,7 @@ namespace The_Darkest_Hour.Characters
 
         public void UpdateStats()
         {
-            switch (this.profession)
-            {
-                case "Rogue":
-                    damage = (agility * 5) + damage;
-                    break;
-
-                case "Hunter":
-                    damage = (agility * 5) + damage;
-                    break;
-
-                case "Warrior":
-                    damage = (strength * 5) + damage;
-                    break;
-
-                case "Guardian":
-                    damage = (strength * 5) + damage;
-                    break;
-
-                case "Mage":
-                    damage = (intelligence * 5) + damage;
-                    break;
-
-                case "Cleric":
-                    damage = (intelligence * 5) + damage;
-                    break;
-            }
+            this.damage = this.Profession.GetDamageMultipler(this) + damage;
         }
 
         public void DisplayStats(Player myHero)

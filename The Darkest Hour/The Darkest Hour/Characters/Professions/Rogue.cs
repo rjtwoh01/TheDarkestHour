@@ -11,9 +11,14 @@ namespace The_Darkest_Hour.Characters.Professions
     {
         Random rand = new Random();
 
+        public override int GetDamageMultipler(Player myHero)
+        {
+            return myHero.agility * 5;
+        }
+
+
         public override void CreateInitialHero(Player myHero)
         {
-            myHero.mainStat = myHero.agility;
             myHero.mainStatName = "Agility";
             myHero.requiredWeaponType = "Dagger";
             myHero.requiredArmorType = "Leather";
