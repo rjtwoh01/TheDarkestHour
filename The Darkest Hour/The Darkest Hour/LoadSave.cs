@@ -13,12 +13,6 @@ namespace The_Darkest_Hour
 {
     class LoadSave
     {
-        OleDbConnection myConnection;
-        OleDbCommandBuilder myCommandBuilder;
-        OleDbDataAdapter myDataAdapter;
-        DataTable myDataTable = new DataTable();
-        int position = 0;
-
         public static bool SavedGameExists()
         {
             // Could later check for valid saved game files
@@ -50,8 +44,6 @@ namespace The_Darkest_Hour
 
         public void LoadOne(Player myHero)
         {
-            bool done = false;
-            Item item;
             try
             {
                 StreamReader file = new StreamReader(Path.Combine(GameConfigs.PlayerGameFilesLocation,"FirstCharacter.txt"));
