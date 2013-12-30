@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using The_Darkest_Hour.Characters;
 
-namespace The_Darkest_Hour.Items_and_Inventory
+namespace The_Darkest_Hour.Items
 {
     public class Loot
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using The_Darkest_Hour.Items_and_Inventory;
+using The_Darkest_Hour.Items;
 
 namespace The_Darkest_Hour.Characters.Professions
 {

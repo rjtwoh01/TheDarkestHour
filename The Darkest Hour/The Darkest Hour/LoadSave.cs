@@ -7,7 +7,7 @@ using The_Darkest_Hour.Characters;
 using System.Data.OleDb;
 using System.Data;
 using System.IO;
-using The_Darkest_Hour.Items_and_Inventory;
+using The_Darkest_Hour.Items;
 
 namespace The_Darkest_Hour
 {

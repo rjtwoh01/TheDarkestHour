@@ -5,17 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using The_Darkest_Hour.Characters;
 
-namespace The_Darkest_Hour.Items_and_Inventory
+namespace The_Darkest_Hour.Items
 {
-    public class Amulet : Item
+    public class Armor: Item
     {
         public string GetName { get { return this.name; } }
-        public Amulet()
+        public Armor()
         {
             //DoNothing because nothing was passed into the constructor
         }
 
-        public Amulet(string name, string weaponType, int armor, int strength, int agility, int intelligence, int health, double goldFind, double magicFind, int requiredLevel, double critChance, double critDamage, int worth)
+        public Armor(string name, string weaponType, int armor, int strength, int agility, int intelligence, int health, double goldFind, double magicFind, int requiredLevel, double critChance, double critDamage, int worth)
         {
             this.name = name;
             this.itemType = weaponType;
@@ -30,7 +30,7 @@ namespace The_Darkest_Hour.Items_and_Inventory
             this.critChance = critChance;
             this.critDamage = critDamage;
             this.isEquipable = true;
-            this.itemArchType = "Amulet";
+            this.itemArchType = "Armor";
             this.worth = worth;
         }
 
@@ -53,7 +53,6 @@ namespace The_Darkest_Hour.Items_and_Inventory
             if (isEquipped) { sw.WriteLine("Equipped"); }
             return sw.ToString();
         }
-
 
         public override void Equip(Item item, Player myHero)
         {
@@ -95,9 +94,9 @@ namespace The_Darkest_Hour.Items_and_Inventory
         {
             bool isFull;
 
-            if (myHero.AmuletFull)
+            if (myHero.ArmorFull)
             {
-                Console.WriteLine("\nAmulet Slot is full");
+                Console.WriteLine("\nArmor Slot is full");
                 isFull = true;
             }
             else

@@ -101,13 +101,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GeneralGameResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Items and Inventory\Amulet.cs" />
-    <Compile Include="Items and Inventory\Armor.cs" />
-    <Compile Include="Items and Inventory\Helmet.cs" />
-    <Compile Include="Items and Inventory\Item.cs" />
-    <Compile Include="Items and Inventory\Loot.cs" />
-    <Compile Include="Items and Inventory\Potion.cs" />
-    <Compile Include="Items and Inventory\Weapon.cs" />
+    <Compile Include="Items\Amulet.cs" />
+    <Compile Include="Items\Armor.cs" />
+    <Compile Include="Items\Helmet.cs" />
+    <Compile Include="Items\Item.cs" />
+    <Compile Include="Items\Loot.cs" />
+    <Compile Include="Items\Potion.cs" />
+    <Compile Include="Items\Weapon.cs" />
     <Compile Include="LoadSave.cs" />
     <Compile Include="MainGame.cs" />
     <Compile Include="Program.cs" />
@@ -117,7 +117,9 @@
     <None Include="App.config" />
     <None Include="The Darkest Hour_TemporaryKey.pfx" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Locations\" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Characters\Resources\CharacterResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
