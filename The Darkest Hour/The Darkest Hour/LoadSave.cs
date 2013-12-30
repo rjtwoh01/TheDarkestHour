@@ -237,8 +237,8 @@ namespace The_Darkest_Hour
             {
                 // Please, please, please get out of the habit of writing empty try/catch statements.  You are hiding the error!
                 // never hide the error.  Sometimes the problem is fixed and then forget to remove the empty try/catch
-                // and then later on it because a huge problem to troubleshoot because add error messages from that function
-                // will never ever be display making it extremely difficult to determine an issue.
+                // and then later on it becomes a huge problem to troubleshoot because error messages from that function
+                // will never ever be displayed making it extremely difficult to determine an issue.
                 // Just say no to emtpy try/catch statement (even temporarily)...just don't get into that bad habit.
                 // in most case, you really don't need to use the try/catch statement.  Let the error bubble up and look at it 
                 // in Visual Studio.
