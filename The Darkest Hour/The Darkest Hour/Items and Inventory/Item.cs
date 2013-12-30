@@ -8,7 +8,7 @@ using System.IO;
 
 namespace The_Darkest_Hour.Items_and_Inventory
 {
-    class Item
+    public class Item
     {
         public string name, itemType, itemArchType;
         public int damage, strength, agility, intelligence, health, requiredLevel, armor, energyHeal, healthHeal, worth;

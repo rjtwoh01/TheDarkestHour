@@ -8,7 +8,7 @@ using The_Darkest_Hour.Items_and_Inventory;
 
 namespace The_Darkest_Hour.Characters
 {
-    class Player : Character
+    public class Player : Character
     {
         public int mainStat;
         public double critChance = 0;

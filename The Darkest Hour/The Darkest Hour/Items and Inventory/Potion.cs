@@ -7,7 +7,7 @@ using The_Darkest_Hour.Characters;
 
 namespace The_Darkest_Hour.Items_and_Inventory
 {
-    class Potion : Item
+    public class Potion : Item
     {
         public Potion()
         {

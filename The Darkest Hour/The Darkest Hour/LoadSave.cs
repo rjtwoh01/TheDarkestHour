@@ -19,103 +19,12 @@ namespace The_Darkest_Hour
         DataTable myDataTable = new DataTable();
         int position = 0;
 
-        //public void Load(Player myHero, string providedName)
-        //{
-        //    try
-        //    {
-        //        myConnection = new OleDbConnection();
-        //        myConnection.ConnectionString = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = |DataDirectory|\LoadSave.accdb";
-        //        myConnection.Open();
-        //        myDataAdapter = new OleDbDataAdapter("Select * From Characters", myConnection);
-        //        myCommandBuilder = new OleDbCommandBuilder(myDataAdapter);
-        //        myDataAdapter.Fill(myDataTable);
-        //        myConnection.Close();
-
-        //        myHero.Identifier = myDataTable.Rows[position]["CharacterName"].ToString();
-        //        string tempHealth = myDataTable.Rows[position]["Health"].ToString();
-        //        myHero.health = Int32.Parse(tempHealth);
-        //        myHero.maxHealth = myHero.health;
-        //        string tempStat = myDataTable.Rows[position]["MainStat"].ToString();
-        //        myHero.mainStat = Int32.Parse(tempStat);
-        //        string tempCritChance = myDataTable.Rows[position]["CritChance"].ToString();
-        //        myHero.critChance = Int32.Parse(tempCritChance);
-        //        string tempCritDamage = myDataTable.Rows[position]["CritDamage"].ToString();
-        //        myHero.critDamage = Int32.Parse(tempCritDamage);
-        //        string tempDamage = myDataTable.Rows[position]["Damage"].ToString();
-        //        myHero.damage = Int32.Parse(tempDamage);
-        //        string tempLevel = myDataTable.Rows[position]["Level"].ToString();
-        //        myHero.level = Int32.Parse(tempLevel);
-        //        string tempXP = myDataTable.Rows[position]["XP"].ToString();
-        //        myHero.xp = Int32.Parse(tempXP);
-        //        string tempRequiredXP = myDataTable.Rows[position]["RequiredXP"].ToString();
-        //        myHero.requiredXP = Int32.Parse(tempRequiredXP);
-        //        string tempArmor = myDataTable.Rows[position]["Armor"].ToString();
-        //        myHero.armor = Int32.Parse(tempArmor);
-        //        myHero.profession = myDataTable.Rows[position]["Class"].ToString();
-
-        //        //This begins checking different bool values
-        //        //Hard Core Check
-        //        string tempHardCore = myDataTable.Rows[position]["HardCore"].ToString();
-        //        if (tempHardCore == "True")
-        //            myHero.isHardCore = true;
-        //        else
-        //            myHero.isHardCore = false;
-
-        //        //Weapons Slot Check
-        //        string tempWeaponsFull = myDataTable.Rows[position]["WeaponsFull"].ToString();
-        //        if (tempWeaponsFull == "True")
-        //            myHero.WeaponsFull = true;
-        //        else
-        //            myHero.WeaponsFull = false;
-
-        //        //Armor Slot Check
-        //        string tempArmorFull = myDataTable.Rows[position]["ArmorFull"].ToString();
-        //        if (tempArmorFull == "True")
-        //            myHero.ArmorFull = true;
-        //        else
-        //            myHero.ArmorFull = false;
-
-        //        //Amulet Slot Check
-        //        string tempAmuletFull = myDataTable.Rows[position]["AmuletFull"].ToString();
-        //        if (tempAmuletFull == "True")
-        //            myHero.AmuletFull = true;
-        //        else
-        //            myHero.AmuletFull = false;
-
-        //        //Helmet Slot Check
-        //        string tempHelmetFull = myDataTable.Rows[position]["HelmetFull"].ToString();
-        //        if (tempHelmetFull == "True")
-        //            myHero.HelmetFull = true;
-        //        else
-        //            myHero.HelmetFull = false;
-
-        //        //Potions Check
-        //        string tempPotionsFull = myDataTable.Rows[position]["PotionsFull"].ToString();
-        //        if (tempPotionsFull == "True")
-        //            myHero.PotionsFull = true;
-        //        else
-        //            myHero.PotionsFull = false;
-
-        //        //Read in the inventory
-        //        //Re-instate the connection because the inventory is stored in a different database
-        //        myConnection.ConnectionString = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = |DataDirectory|\LoadSave.accdb";
-        //        myConnection.Open();
-        //        myDataAdapter = new OleDbDataAdapter("Select * From Inventory", myConnection);
-        //        myCommandBuilder = new OleDbCommandBuilder(myDataAdapter);
-        //        myDataAdapter.Fill(myDataTable);
-        //        myConnection.Close();
-
-
-
-
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        //Code some error message
-        //    }
-        //}
-
         public void LoadOne(Player myHero)
+        {
+            LoadFromTextFile(myHero);
+        }
+
+        public void LoadFromTextFile(Player myHero)
         {
             bool done = false;
             Item item;
@@ -154,6 +63,46 @@ namespace The_Darkest_Hour
         }
 
         public void SaveOne(Player myHero)
+        {
+            SaveToTextFile(myHero);
+            SaveToXmlFile(myHero);
+        }
+
+        /// <summary>
+        /// Saves character to an xml file
+        /// </summary>
+        /// <param name="myHero"></param>
+        /// <notes>
+        /// I would go with this version:
+        /// 1) Don't need a special program to edit the game file (i.e. access or another database will need that installed)
+        /// 2) Easily portable
+        /// 3) Easily readable by a human
+        /// 4) You don't need to write a special function or a line of code for each property.  As you expand the player class
+        /// this function just keeps working.  you can read up on override the serializes capabilities if you want to do anything
+        /// custom/unique.  But it's a the best/property design in this scenario.  The framework supports it out of the box.
+        /// </notes>
+        public void SaveToXmlFile(Player myHero)
+        {
+            if (Directory.Exists(GameConfigs.PlayerGameFilesLocation) == false)
+            {
+                Directory.CreateDirectory(GameConfigs.PlayerGameFilesLocation);
+            }
+
+            var knownTypes = new Type[] { typeof(Character), typeof(Player), typeof(Item), typeof(Weapon) };
+
+            System.Xml.Serialization.XmlSerializer writer = new System.Xml.Serialization.XmlSerializer(typeof(Player), knownTypes);
+
+            using (System.IO.StreamWriter characterStreamWriter = new System.IO.StreamWriter(Path.Combine(GameConfigs.PlayerGameFilesLocation, "FirstCharacter.xml")))
+            {
+                writer.Serialize(characterStreamWriter, myHero);
+                characterStreamWriter.Close();
+
+                Console.WriteLine("Game Save to xml file successful\n");
+            }
+
+        }
+
+        public void SaveToTextFile(Player myHero)
         {
             try
             {
@@ -224,7 +173,7 @@ namespace The_Darkest_Hour
                     }
 
                     firstCharacterInventoryStreamWriter.Close();
-                    Console.WriteLine("Game Save successful\n");
+                    Console.WriteLine("Game Save to text file successful\n");
                 }
             }
             catch (Exception exc)

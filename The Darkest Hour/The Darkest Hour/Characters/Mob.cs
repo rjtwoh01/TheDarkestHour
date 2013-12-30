@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace The_Darkest_Hour.Characters
 {
-    class Mob : Character
+    public class Mob : Character
     {
         Random rand = new Random();
 

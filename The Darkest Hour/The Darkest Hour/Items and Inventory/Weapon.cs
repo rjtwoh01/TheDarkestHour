@@ -7,7 +7,7 @@ using The_Darkest_Hour.Characters;
 
 namespace The_Darkest_Hour.Items_and_Inventory
 {
-    class Weapon : Item
+    public class Weapon : Item
     {
         public string GetName { get { return this.name; } }
         public Weapon()

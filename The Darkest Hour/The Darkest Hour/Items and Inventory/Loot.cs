@@ -7,7 +7,7 @@ using The_Darkest_Hour.Characters;
 
 namespace The_Darkest_Hour.Items_and_Inventory
 {
-    class Loot
+    public class Loot
     {
         int damage, strength, agility, intelligence, health, requiredLevel, temp, temp2, armor, healAmount, energyIncreased, worth;
         double goldFind, magicFind, critChance, critDamage;
