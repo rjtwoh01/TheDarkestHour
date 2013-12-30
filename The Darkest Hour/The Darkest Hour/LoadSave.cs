@@ -121,7 +121,7 @@ namespace The_Darkest_Hour
             Item item;
             try
             {
-                StreamReader file = new StreamReader(@"c:\TheDarkestHour\CharacterSavesAlpha\FirstCharacter.txt");
+                StreamReader file = new StreamReader(Path.Combine(GameConfigs.PlayerGameFilesLocation,"FirstCharacter.txt"));
                 myHero.Identifier = file.ReadLine();
                 myHero.health = int.Parse(file.ReadLine());
                 myHero.maxHealth = int.Parse(file.ReadLine());
@@ -146,8 +146,10 @@ namespace The_Darkest_Hour
                 //    item = new Item(file.ReadLine());
                 //}
             }
-            catch (Exception e)
+            catch (Exception exc)
             {
+                Console.WriteLine("Oh no!  There was an error!  See details below");
+                Console.WriteLine(exc.ToString());
             }
         }
 
@@ -156,9 +158,9 @@ namespace The_Darkest_Hour
             try
             {
 
-                if (Directory.Exists(@"c:\TheDarkestHour\CharacterSavesAlpha") == false)
+                if (Directory.Exists(GameConfigs.PlayerGameFilesLocation) == false)
                 {
-                    Directory.CreateDirectory(@"c:\TheDarkestHour\CharacterSavesAlpha");
+                    Directory.CreateDirectory(GameConfigs.PlayerGameFilesLocation);
                 }
 
                 // You need to either use a try/finally statement to ensure the the close/displose is called regardless if there is an error or not.
@@ -169,7 +171,7 @@ namespace The_Darkest_Hour
                 // difficult problems to debug. 
                 // Please get into the habit of using the using statement on any and all disposable objects (if it has a close method it most likely has a
                 // dispose method).  Visual Stuidio will tell you if an object is IDisposable or not when you try to use the using statement on it.
-                using (StreamWriter firstCharacterStreamWriter = new StreamWriter(@"c:\TheDarkestHour\CharacterSavesAlpha\FirstCharacter.txt"))
+                using (StreamWriter firstCharacterStreamWriter = new StreamWriter(Path.Combine(GameConfigs.PlayerGameFilesLocation, "FirstCharacter.txt")))
                 {
                     firstCharacterStreamWriter.WriteLine(myHero.Identifier);
                     firstCharacterStreamWriter.WriteLine(myHero.health);
@@ -192,16 +194,8 @@ namespace The_Darkest_Hour
                     firstCharacterStreamWriter.Close();
                 }
 
-
-
-                if (Directory.Exists(@"c:\TheDarkestHour\CharacterSavesAlpha") == false)
+                using (StreamWriter firstCharacterInventoryStreamWriter = new StreamWriter(Path.Combine(GameConfigs.PlayerGameFilesLocation, "FirstCharacterInventory.txt")))
                 {
-                    Directory.CreateDirectory(@"c:\TheDarkestHour\CharacterSavesAlpha");
-                }
-                using (StreamWriter firstCharacterInventoryStreamWriter = new StreamWriter(@"c:\TheDarkestHour\CharacterSavesAlpha\FirstCharacterInventory.txt"))
-                {
-
-                    string check = "true";
                     int i = 0;
 
                     foreach (Item x in myHero.Inventory)

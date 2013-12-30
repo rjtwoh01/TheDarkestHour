@@ -65,6 +65,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -92,6 +93,7 @@
     </Compile>
     <Compile Include="Characters\Rogue.cs" />
     <Compile Include="Characters\Warrior.cs" />
+    <Compile Include="GameConfigs.cs" />
     <Compile Include="GeneralGameResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
