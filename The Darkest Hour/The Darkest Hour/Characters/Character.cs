@@ -11,7 +11,7 @@ namespace The_Darkest_Hour.Characters
     public class Character : GameObject
     {
         public string Identifier;
-        public int strength, agility, damage, intelligence, vitality, defence, magic, gold, experience, health, getDamage, getMagic, getHeal, maxHealth, damageMin, damageMax, magicMin, magicMax, level, energy, xp;
+        public int strength, agility, damage, intelligence, vitality, defence, magic, gold, experience, health, getDamage, getMagic, getHeal, maxHealth, damageMin, damageMax, magicMin, magicMax, level, energy, xp, maxEnergy, levelCap;
     }
 }
 

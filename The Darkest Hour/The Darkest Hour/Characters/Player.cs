@@ -13,13 +13,6 @@ namespace The_Darkest_Hour.Characters
     {
         public double critChance = 0;
         public double critDamage = 1;
-        public int damage = 10;
-        public int level = 1;
-        public int levelCap = 50;
-        public int energy = 1000;
-        public int maxEnergy = 1000;
-        public int health = 20;
-        public int maxHealth = 20;
         public int requiredXP = 100;
         public int armor = 0; //Needs to be implemented
         public int inventoryCap = 40;
@@ -44,7 +37,6 @@ namespace The_Darkest_Hour.Characters
         public bool AmuletFull = false;
         public bool HelmetFull = false;
         public bool PotionsFull = false;
-        public string Identifier;
         public List<Item> Inventory = new List<Item>();
         public Profession Profession;
 
@@ -63,6 +55,15 @@ namespace The_Darkest_Hour.Characters
                 }
 
                 ChooseProfession(hero);
+
+                this.damage = 10;
+                this.level = 1;
+                this.levelCap = 50;
+                this.energy = 1000;
+                this.maxEnergy = 1000;
+                this.health = 20;
+                this.maxHealth = 20;
+
                 Console.Clear();
 
                 Console.WriteLine(CharacterResources.IntroPartOne);

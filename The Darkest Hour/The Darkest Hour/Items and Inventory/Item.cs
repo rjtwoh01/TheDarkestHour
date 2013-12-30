@@ -17,7 +17,7 @@ namespace The_Darkest_Hour.Items_and_Inventory
         public bool isEquipable = false;
         public bool isPotion = false;
 
-        public void Equip(Item item, Player myHero)
+        public virtual void Equip(Item item, Player myHero)
         {
             if (myHero.level >= requiredLevel)
             {
@@ -41,7 +41,7 @@ namespace The_Darkest_Hour.Items_and_Inventory
                 Console.WriteLine("\nYou cannot equip that yet, you do not meet the required level.\n");
         }
 
-        public void DeEquip(Item item, Player myHero)
+        public virtual void DeEquip(Item item, Player myHero)
         {
             this.isEquipped = false;
             myHero.damage -= damage;
@@ -55,7 +55,7 @@ namespace The_Darkest_Hour.Items_and_Inventory
             myHero.WeaponsFull = false;
         }
 
-        public bool SlotCheck(Player myHero)
+        public virtual bool SlotCheck(Player myHero)
         {
             bool isFull = false;
 

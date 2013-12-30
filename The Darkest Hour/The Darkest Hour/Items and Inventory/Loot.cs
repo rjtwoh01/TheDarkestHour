@@ -12,7 +12,6 @@ namespace The_Darkest_Hour.Items_and_Inventory
         int damage, strength, agility, intelligence, health, requiredLevel, temp, temp2, armor, healAmount, energyIncreased, worth;
         double goldFind, magicFind, critChance, critDamage;
         string itemType, itemName;
-        bool isFull;
         Random rand;
         public Loot(Player myHero, Mob mob)
         {
