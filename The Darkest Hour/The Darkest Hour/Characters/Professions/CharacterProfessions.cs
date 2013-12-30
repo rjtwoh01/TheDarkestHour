@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace The_Darkest_Hour.Characters
+namespace The_Darkest_Hour.Characters.Professions
 {
     enum CharacterProfessions
     {

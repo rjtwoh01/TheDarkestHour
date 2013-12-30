@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using The_Darkest_Hour.Characters.Resources;
 using The_Darkest_Hour.Items_and_Inventory;
+using The_Darkest_Hour.Characters.Professions;
 
 namespace The_Darkest_Hour.Characters
 {
@@ -46,6 +47,7 @@ namespace The_Darkest_Hour.Characters
         public bool PotionsFull = false;
         public string Identifier;
         public List<Item> Inventory = new List<Item>();
+        public Profession Profession;
 
         public void Initialize(Player hero)
         {
@@ -83,6 +85,7 @@ namespace The_Darkest_Hour.Characters
                 {
                     string buffer = Console.ReadLine(); //Recieve the input as a public string
                     prof = (CharacterProfessions)Convert.ToInt32(buffer); //Convert it to an public int, using enums for readability in code
+                    // TODO: Remove the profession property when everything reads the Profession property
                     switch (prof)
                     {
                         case CharacterProfessions.Invalid:
@@ -91,26 +94,32 @@ namespace The_Darkest_Hour.Characters
 
                         case CharacterProfessions.Rogue:
                             myHero.profession = Rogue;
+                            myHero.Profession = new Rogue();
                             break;
 
                         case CharacterProfessions.Hunter:
                             myHero.profession = Hunter;
+                            myHero.Profession = new Hunter();
                             break;
 
                         case CharacterProfessions.Warrior:
                             myHero.profession = Warrior;
+                            myHero.Profession = new Warrior();
                             break;
 
                         case CharacterProfessions.Guardian:
                             myHero.profession = Guardian;
+                            myHero.Profession = new Guardian();
                             break;
 
                         case CharacterProfessions.Mage:
                             myHero.profession = Mage;
+                            myHero.Profession = new Mage();
                             break;
 
                         case CharacterProfessions.Cleric:
                             myHero.profession = Cleric;
+                            myHero.Profession = new Cleric();
                             break;
 
                         default:

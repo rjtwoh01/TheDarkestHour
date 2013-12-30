@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace The_Darkest_Hour.Characters
+namespace The_Darkest_Hour.Characters.Professions
 {
-    class Rogue
+    public class Warrior : Profession
     {
         Random rand = new Random();
 
-        public string GetAttack(Player myHero)
+        public override string GetAttack(Player myHero)
         {
             string attackName = "";
             string getUserInput = "";
@@ -20,12 +20,12 @@ namespace The_Darkest_Hour.Characters
             {
                 Console.WriteLine(@"
 Choose your attack:
-1) Subtle Stab - 100% damage, adds 25 energy
-2) Twisting Strike - 500% damage, subtracts 750 energy
-3) Eviscerate -  400% damage, subtrats 500 energy
-4) Surprise Strike - 600% damage, subtracts 900 energy
-5) Dust in the Eyes - 50% damage, subtracts 100 energy, the enemey loses its next turn
-6) Rupture - 1000% damage, subtracts 1,000 energy
+1) Sword Strike - 100% damage, adds 25 energy
+2) Brutal Strike - 500% damage, subtracts 750 energy
+3) Lunge -  400% damage, subtrats 500 energy
+4) Neck Swipe - 600% damage, subtracts 900 energy
+5) Low Cut - 50% damage, subtracts 100 energy, the enemey loses its next turn
+6) Ferocious Strike - 1000% damage, subtracts 1,000 energy
 ");
                 try
                 {
@@ -35,27 +35,27 @@ Choose your attack:
                     switch (userInput)
                     {
                         case 1:
-                            attackName = "Subtle Stab";
+                            attackName = "Sword Strike";
                             break;
 
                         case 2:
-                            attackName = "Twisting Strike";
+                            attackName = "Brutal Strike";
                             break;
 
                         case 3:
-                            attackName = "Eviscerate";
+                            attackName = "Lunge";
                             break;
 
                         case 4:
-                            attackName = "Surprise Strike";
+                            attackName = "Neck Swipe";
                             break;
 
                         case 5:
-                            attackName = "Dust in the Eyes";
+                            attackName = "Low Cut";
                             break;
 
                         case 6:
-                            attackName = "Rupture";
+                            attackName = "Ferocious Strike";
                             break;
 
                         default:
@@ -75,7 +75,7 @@ Choose your attack:
             return attackName;
         }
 
-        public int CalculateDamage(Player myHero, string attack)
+        public override int CalculateDamage(Player myHero, string attack)
         {
             int damage = 0;
             bool CarryOn = true;
@@ -83,14 +83,14 @@ Choose your attack:
 
             switch (attack)
             {
-                case "Subtle Stab":
+                case "Sword Strike":
                     damage = myHero.damage;
                     myHero.energy += 25;
                     if (myHero.energy >= myHero.maxEnergy)
                         myHero.energy = myHero.maxEnergy;
                     break;
 
-                case "Twisting Strike":
+                case "Brutal Strike":
                     if (myHero.energy >= 750)
                     {
                         damage = myHero.damage * 5;
@@ -105,7 +105,7 @@ Choose your attack:
                     }
                     break;
 
-                case "Eviscerate":
+                case "Lunge":
                     if (myHero.energy >= 500)
                     {
                         damage = myHero.damage * 4;
@@ -120,7 +120,7 @@ Choose your attack:
                     }
                     break;
 
-                case "Surprise Strike":
+                case "Neck Swipe":
                     if (myHero.energy >= 900)
                     {
                         damage = myHero.damage * 6;
@@ -135,7 +135,7 @@ Choose your attack:
                     }
                     break;
 
-                case "Dust in the Eyes":
+                case "Low Cut":
                     if (myHero.energy >= 100)
                     {
                         damage = (myHero.damage / 2);
@@ -150,7 +150,7 @@ Choose your attack:
                     }
                     break;
 
-                case "Rupture":
+                case "Ferocious Strike":
                     if (myHero.energy == myHero.maxEnergy)
                     {
                         damage = myHero.damage * 10;
@@ -188,13 +188,6 @@ Choose your attack:
             }
 
             return damage;
-        }
-
-        public void ClearScreen()
-        {
-            Console.WriteLine("\n\nPress enter to continue on...");
-            Console.ReadLine();
-            Console.Clear();
         }
     }
 }

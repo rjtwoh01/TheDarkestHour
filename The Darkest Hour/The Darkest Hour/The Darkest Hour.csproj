@@ -77,23 +77,25 @@
     <Compile Include="Areas\GeneralStore.cs" />
     <Compile Include="Battle.cs" />
     <Compile Include="Characters\Character.cs" />
-    <Compile Include="Characters\CharacterProfessions.cs" />
-    <Compile Include="Characters\Cleric.cs" />
-    <Compile Include="Characters\Guardian.cs" />
-    <Compile Include="Characters\Mage.cs" />
+    <Compile Include="Characters\Professions\CharacterProfessions.cs" />
+    <Compile Include="Characters\Professions\Cleric.cs" />
+    <Compile Include="Characters\Professions\Guardian.cs" />
+    <Compile Include="Characters\Professions\Mage.cs" />
+    <Compile Include="Characters\Professions\Profession.cs" />
     <Compile Include="Characters\Mob.cs" />
     <Compile Include="Characters\Mobs\Bandit.cs" />
     <Compile Include="Characters\Mobs\Skeleton.cs" />
     <Compile Include="Characters\Player.cs" />
-    <Compile Include="Characters\Ranger.cs" />
+    <Compile Include="Characters\Professions\Hunter.cs" />
     <Compile Include="Characters\Resources\CharacterResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CharacterResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Characters\Rogue.cs" />
-    <Compile Include="Characters\Warrior.cs" />
+    <Compile Include="Characters\Professions\Rogue.cs" />
+    <Compile Include="Characters\Professions\Warrior.cs" />
     <Compile Include="GameConfigs.cs" />
+    <Compile Include="GameObject.cs" />
     <Compile Include="GeneralGameResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

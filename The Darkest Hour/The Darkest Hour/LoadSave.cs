@@ -28,9 +28,9 @@ namespace The_Darkest_Hour
         {
             Player myHero;
 
-            var knownTypes = new Type[] { typeof(Character), typeof(Player), typeof(Item), typeof(Weapon), typeof(Armor), typeof(Potion), typeof(Helmet), typeof(Amulet) };
-
-            System.Xml.Serialization.XmlSerializer playerXmlSerializer = new System.Xml.Serialization.XmlSerializer(typeof(Player), knownTypes);
+            //var knownTypes = new Type[] { typeof(Character), typeof(Player), typeof(Item), typeof(Weapon), typeof(Armor), typeof(Potion), typeof(Helmet), typeof(Amulet) };
+            //System.Xml.Serialization.XmlSerializer playerXmlSerializer = new System.Xml.Serialization.XmlSerializer(typeof(Player), knownTypes);
+            System.Xml.Serialization.XmlSerializer playerXmlSerializer = new System.Xml.Serialization.XmlSerializer(typeof(GameObject));
             using (System.IO.StreamReader playerStreamReader = new System.IO.StreamReader(Path.Combine(GameConfigs.PlayerGameFilesLocation, "FirstCharacter.xml")))
             {
                 myHero = new Player();
@@ -67,9 +67,10 @@ namespace The_Darkest_Hour
                 Directory.CreateDirectory(GameConfigs.PlayerGameFilesLocation);
             }
 
-            var knownTypes = new Type[] { typeof(Character), typeof(Player), typeof(Item), typeof(Weapon), typeof(Armor), typeof(Potion), typeof(Helmet), typeof(Amulet) };
+            //var knownTypes = new Type[] { typeof(Character), typeof(Player), typeof(Item), typeof(Weapon), typeof(Armor), typeof(Potion), typeof(Helmet), typeof(Amulet) };
 
-            System.Xml.Serialization.XmlSerializer playerXmlSerialization = new System.Xml.Serialization.XmlSerializer(typeof(Player), knownTypes);
+            //System.Xml.Serialization.XmlSerializer playerXmlSerialization = new System.Xml.Serialization.XmlSerializer(typeof(Player), knownTypes);
+            System.Xml.Serialization.XmlSerializer playerXmlSerialization = new System.Xml.Serialization.XmlSerializer(typeof(GameObject));
 
             using (System.IO.StreamWriter characterStreamWriter = new System.IO.StreamWriter(Path.Combine(GameConfigs.PlayerGameFilesLocation, "FirstCharacter.xml")))
             {
