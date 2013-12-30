@@ -107,8 +107,7 @@ namespace The_Darkest_Hour
                 }
                 else if (answer == "5")
                 {
-                    LoadSave save = new LoadSave();
-                    save.SaveOne(myHero);
+                    LoadSave.SaveCharacter(myHero);
                     ClearScreen();
                 }
                 else if (answer == "6")
