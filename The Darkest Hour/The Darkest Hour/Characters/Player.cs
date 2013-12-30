@@ -133,77 +133,9 @@ namespace The_Darkest_Hour.Characters
                 }
             }
 
-            if (profession == Rogue)
-            {
-                mainStat = agility;
-                mainStatName = "Agility";
-                requiredWeaponType = "Dagger";
-                requiredArmorType = "Leather";
-                Weapon aDagger = new Weapon("Simple Dagger", "Dagger", 5, 0, 2, 0, 2, 0, 0, 1, 0, 0, 5);
-                myHero.Inventory.Add(aDagger);
-                aDagger.Equip(aDagger, myHero);
-                UpdateStats(myHero);
-            }
+            myHero.Profession.CreateInitialHero(myHero);
+            myHero.UpdateStats();
 
-            else if (profession == Hunter)
-            {
-                mainStat = agility;
-                mainStatName = "Agility";
-                requiredWeaponType = "Bow";
-                requiredArmorType = "Leather";
-                Weapon aBow = new Weapon("Simple Bow", "Bow", 5, 0, 2, 0, 2, 0, 0, 1, 0, 0, 5);
-                myHero.Inventory.Add(aBow);
-                aBow.Equip(aBow, myHero);
-                UpdateStats(myHero);
-            }
-
-            else if (profession == Warrior)
-            {
-                mainStat = strength;
-                mainStatName = "Strength";
-                requiredWeaponType = "Sword";
-                requiredArmorType = "Mail";
-                Weapon aSword = new Weapon("Simple Sword", "Sword", 5, 2, 0, 0, 2, 0, 0, 1, 0, 0, 5);
-                myHero.Inventory.Add(aSword);
-                aSword.Equip(aSword, myHero);
-                UpdateStats(myHero);
-            }
-
-            else if (profession == Guardian)
-            {
-                mainStat = strength;
-                mainStatName = "Strength";
-                requiredWeaponType = "Sword";
-                requiredArmorType = "Mail";
-                Weapon aSword = new Weapon("Simple Sword", "Sword", 5, 2, 0, 0, 2, 0, 0, 1, 0, 0, 5);
-                myHero.Inventory.Add(aSword);
-                aSword.Equip(aSword, myHero);
-                UpdateStats(myHero);
-            }
-
-            else if (profession == Mage)
-            {
-                mainStat = intelligence;
-                mainStatName = "Intelligence";
-                requiredWeaponType = "Staff";
-                requiredArmorType = "Cloth";
-                Weapon aStaff = new Weapon("Simple Staff", "Staff", 5, 0, 0, 2, 2, 0, 0, 1, 0, 0, 5);
-                myHero.Inventory.Add(aStaff);
-                aStaff.Equip(aStaff, myHero);
-                UpdateStats(myHero);
-            }
-
-            else if (profession == Cleric)
-            {
-                mainStat = intelligence;
-                mainStatName = "Intelligence";
-                requiredWeaponType = "Staff";
-                requiredArmorType = "Cloth";
-                Weapon aStaff = new Weapon("Simple Staff", "Staff", 5, 0, 0, 2, 2, 0, 0, 1, 0, 0, 5);
-                myHero.Inventory.Add(aStaff);
-                aStaff.Equip(aStaff, myHero);
-                UpdateStats(myHero);
-            }
         }
 
         public int ResetHealth(Player myHero)
@@ -226,9 +158,9 @@ namespace The_Darkest_Hour.Characters
             Console.Clear();
         }
 
-        public void UpdateStats(Player myHero)
+        public void UpdateStats()
         {
-            switch (myHero.profession)
+            switch (this.profession)
             {
                 case "Rogue":
                     damage = (agility * 5) + damage;

@@ -3,12 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using The_Darkest_Hour.Items_and_Inventory;
 
 namespace The_Darkest_Hour.Characters.Professions
 {
     public class Cleric : Profession
     {
         Random rand = new Random();
+
+        public override void CreateInitialHero(Player myHero)
+        {
+            myHero.mainStat = myHero.intelligence;
+            myHero.mainStatName = "Intelligence";
+            myHero.requiredWeaponType = "Staff";
+            myHero.requiredArmorType = "Cloth";
+            Weapon aStaff = new Weapon("Simple Staff", "Staff", 5, 0, 0, 2, 2, 0, 0, 1, 0, 0, 5);
+            myHero.Inventory.Add(aStaff);
+            aStaff.Equip(aStaff, myHero);
+        }
 
         public override string GetAttack(Player myHero)
         {

@@ -3,12 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using The_Darkest_Hour.Items_and_Inventory;
 
 namespace The_Darkest_Hour.Characters.Professions
 {
     public class Guardian : Profession
     {
         Random rand = new Random();
+
+        public override void CreateInitialHero(Player myHero)
+        {
+            myHero.mainStat = myHero.strength;
+            myHero.mainStatName = "Strength";
+            myHero.requiredWeaponType = "Sword";
+            myHero.requiredArmorType = "Mail";
+            Weapon aSword = new Weapon("Simple Sword", "Sword", 5, 2, 0, 0, 2, 0, 0, 1, 0, 0, 5);
+            myHero.Inventory.Add(aSword);
+            aSword.Equip(aSword, myHero);
+        }
+
 
         public override string GetAttack(Player myHero)
         {

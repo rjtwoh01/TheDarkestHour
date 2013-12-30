@@ -3,12 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using The_Darkest_Hour.Items_and_Inventory;
 
 namespace The_Darkest_Hour.Characters.Professions
 {
     public class Hunter : Profession
     {
         Random rand = new Random();
+
+        public override void CreateInitialHero(Player myHero)
+        {
+            myHero.mainStat = myHero.agility;
+            myHero.mainStatName = "Agility";
+            myHero.requiredWeaponType = "Bow";
+            myHero.requiredArmorType = "Leather";
+            Weapon aBow = new Weapon("Simple Bow", "Bow", 5, 0, 2, 0, 2, 0, 0, 1, 0, 0, 5);
+            myHero.Inventory.Add(aBow);
+            aBow.Equip(aBow, myHero);
+        }
+
 
         public override string GetAttack(Player myHero)
         {
