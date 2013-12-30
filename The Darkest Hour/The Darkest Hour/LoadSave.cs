@@ -19,12 +19,36 @@ namespace The_Darkest_Hour
         DataTable myDataTable = new DataTable();
         int position = 0;
 
-        public void LoadOne(Player myHero)
+        public static bool SavedGameExists()
         {
-            LoadFromTextFile(myHero);
+            // Could later check for valid saved game files
+            return System.IO.File.Exists(Path.Combine(GameConfigs.PlayerGameFilesLocation, "FirstCharacter.xml"));        
         }
 
-        public void LoadFromTextFile(Player myHero)
+        public static Player LoadCharacter()
+        {
+            return LoadFromXmlFile();
+        }
+
+        private static Player LoadFromXmlFile()
+        {
+            Player myHero;
+
+            var knownTypes = new Type[] { typeof(Character), typeof(Player), typeof(Item), typeof(Weapon) };
+
+            System.Xml.Serialization.XmlSerializer playerXmlSerializer = new System.Xml.Serialization.XmlSerializer(typeof(Player), knownTypes);
+            using (System.IO.StreamReader playerStreamReader = new System.IO.StreamReader(Path.Combine(GameConfigs.PlayerGameFilesLocation, "FirstCharacter.xml")))
+            {
+                myHero = new Player();
+                myHero = (Player) playerXmlSerializer.Deserialize(playerStreamReader);
+
+                Console.WriteLine("Game Loaded from xml file successfully\n");
+            }
+
+            return myHero;
+        }
+
+        public void LoadOne(Player myHero)
         {
             bool done = false;
             Item item;
@@ -54,12 +78,14 @@ namespace The_Darkest_Hour
                 //{
                 //    item = new Item(file.ReadLine());
                 //}
+
             }
             catch (Exception exc)
             {
                 Console.WriteLine("Oh no!  There was an error!  See details below");
                 Console.WriteLine(exc.ToString());
             }
+
         }
 
         public void SaveOne(Player myHero)
@@ -81,7 +107,7 @@ namespace The_Darkest_Hour
         /// this function just keeps working.  you can read up on override the serializes capabilities if you want to do anything
         /// custom/unique.  But it's a the best/property design in this scenario.  The framework supports it out of the box.
         /// </notes>
-        public void SaveToXmlFile(Player myHero)
+        private void SaveToXmlFile(Player myHero)
         {
             if (Directory.Exists(GameConfigs.PlayerGameFilesLocation) == false)
             {
@@ -90,19 +116,19 @@ namespace The_Darkest_Hour
 
             var knownTypes = new Type[] { typeof(Character), typeof(Player), typeof(Item), typeof(Weapon) };
 
-            System.Xml.Serialization.XmlSerializer writer = new System.Xml.Serialization.XmlSerializer(typeof(Player), knownTypes);
+            System.Xml.Serialization.XmlSerializer playerXmlSerialization = new System.Xml.Serialization.XmlSerializer(typeof(Player), knownTypes);
 
             using (System.IO.StreamWriter characterStreamWriter = new System.IO.StreamWriter(Path.Combine(GameConfigs.PlayerGameFilesLocation, "FirstCharacter.xml")))
             {
-                writer.Serialize(characterStreamWriter, myHero);
+                playerXmlSerialization.Serialize(characterStreamWriter, myHero);
                 characterStreamWriter.Close();
 
-                Console.WriteLine("Game Save to xml file successful\n");
+                Console.WriteLine("Game saved to xml file successfully\n");
             }
 
         }
 
-        public void SaveToTextFile(Player myHero)
+        private void SaveToTextFile(Player myHero)
         {
             try
             {
@@ -173,7 +199,7 @@ namespace The_Darkest_Hour
                     }
 
                     firstCharacterInventoryStreamWriter.Close();
-                    Console.WriteLine("Game Save to text file successful\n");
+                    Console.WriteLine("Game saved to text file successfully\n");
                 }
             }
             catch (Exception exc)
