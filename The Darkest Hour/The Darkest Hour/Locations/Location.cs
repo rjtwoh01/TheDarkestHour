@@ -18,7 +18,7 @@ namespace The_Darkest_Hour.Locations
 
         public void Display()
         {
-            Console.WriteLine(String.Format("You are at {0}.\n\n", this.Name));
+            Console.WriteLine(String.Format("{0}\n\n", this.Name));
 
             Console.WriteLine(this.Description);
 
