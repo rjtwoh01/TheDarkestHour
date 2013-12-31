@@ -14,14 +14,13 @@ namespace The_Darkest_Hour.Locations.Actions
             this.Description = "Invalid Selection";
         }
 
-        public override Location DoAction(Location originalLocation)
+        public override Location DoAction()
         {
-            Location returnData = originalLocation;
+            Location returnData = GameState.CurrentLocation;
 
             Console.WriteLine("\nYou have made an invalid selection.  Please select one of the options above.\n");
-            Console.WriteLine("\n\nPress enter to continue on...");
-            Console.ReadLine();
-            Console.Clear();
+
+            this.ClearScreen();
             
             return returnData;
         }

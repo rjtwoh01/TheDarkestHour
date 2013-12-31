@@ -14,11 +14,13 @@ namespace The_Darkest_Hour.Locations.Actions
             this.Description = "Display Inventory";
         }
 
-        public override Location DoAction(Location originalLocation)
+        public override Location DoAction()
         {
-            Location returnData = originalLocation;
+            Location returnData = GameState.CurrentLocation;
 
             Console.WriteLine("Arena not implemented yet.");
+
+            this.ClearScreen();
 
             return returnData;
         }

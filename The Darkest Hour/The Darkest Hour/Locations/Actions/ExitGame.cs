@@ -15,9 +15,9 @@ namespace The_Darkest_Hour.Locations.Actions
             this.Description = "Exit Game";
         }
 
-        public override Location DoAction(Location originalLocation)
+        public override Location DoAction()
         {
-            Location returnData = originalLocation;
+            Location returnData = GameState.CurrentLocation;
 
             Console.WriteLine("Goodbye!");
 

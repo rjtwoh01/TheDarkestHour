@@ -53,7 +53,9 @@ namespace The_Darkest_Hour
                 myHero = new Player();
                 myHero.Initialize(myHero);
             }
-            
+
+            GameState.Hero = myHero;
+                        
             mob = new Mob();            
 
             Console.WriteLine(myHero.Identifier);
@@ -130,17 +132,17 @@ namespace The_Darkest_Hour
 
         public void DisplayLocations()
         {
-            Location location = GetStartLocation();
+            GameState.CurrentLocation = GetStartLocation();
 
-            location.Display();
-            LocationAction locationAction = location.GetAction();
+            GameState.CurrentLocation.Display();
+            LocationAction locationAction = GameState.CurrentLocation.GetAction();
 
             while(!(locationAction is ExitGame))
             {
-                location = locationAction.DoAction(location);
+                GameState.CurrentLocation = locationAction.DoAction();
 
-                location.Display();
-                locationAction = location.GetAction();
+                GameState.CurrentLocation.Display();
+                locationAction = GameState.CurrentLocation.GetAction();
             }
 
 

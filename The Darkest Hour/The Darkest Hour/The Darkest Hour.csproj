@@ -96,6 +96,7 @@
     <Compile Include="Characters\Professions\Warrior.cs" />
     <Compile Include="GameConfigs.cs" />
     <Compile Include="GameObject.cs" />
+    <Compile Include="GameState.cs" />
     <Compile Include="GeneralGameResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

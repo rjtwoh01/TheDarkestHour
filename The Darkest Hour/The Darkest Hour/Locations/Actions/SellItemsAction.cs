@@ -15,11 +15,13 @@ namespace The_Darkest_Hour.Locations.Actions
         }
 
 
-        public override Location DoAction(Location originalLocation)
+        public override Location DoAction()
         {
-            Location returnData = originalLocation;
+            Location returnData = GameState.CurrentLocation;
 
             Console.WriteLine("Sell Items not implemented yet.");
+
+            this.ClearScreen();
 
             return returnData;
         }
