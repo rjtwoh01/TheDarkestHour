@@ -10,7 +10,7 @@ namespace The_Darkest_Hour.Areas
 {
     class GeneralStore
     {
-        public GeneralStore(Player myHero) 
+        public static void DoGeneralStore() 
         { 
             Console.WriteLine("Welcome to the store, you can sell any of your goods here!\n\n");
 
@@ -18,7 +18,7 @@ namespace The_Darkest_Hour.Areas
 
             do
             {
-                myHero.SellItems();
+                GameState.Hero.SellItems();
                 ClearScreen();
 
                 Console.WriteLine("Want to go again? (1) Yes (2) No");
@@ -35,7 +35,7 @@ namespace The_Darkest_Hour.Areas
             ClearScreen();
         }
 
-        public void ClearScreen()
+        public static void ClearScreen()
         {
             Console.WriteLine("\nPress any key to continue...");
             Console.ReadKey();

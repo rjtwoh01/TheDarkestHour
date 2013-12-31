@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using The_Darkest_Hour.Areas;
 
 namespace The_Darkest_Hour.Locations.Actions
 {
@@ -19,7 +20,7 @@ namespace The_Darkest_Hour.Locations.Actions
         {
             Location returnData = GameState.CurrentLocation;
 
-            Console.WriteLine("Sell Items not implemented yet.");
+            GeneralStore.DoGeneralStore();
 
             this.ClearScreen();
 

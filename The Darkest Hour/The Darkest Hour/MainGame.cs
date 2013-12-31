@@ -22,7 +22,6 @@ namespace The_Darkest_Hour
         Bandit bandit;
         Random rand = new Random();
         int temp = 0;
-        GeneralStore sellStore;
 
         public MainGame()
         {
@@ -111,7 +110,7 @@ namespace The_Darkest_Hour
                 }
                 else if (answer == "4")
                 {
-                    sellStore = new GeneralStore(myHero);
+                    GeneralStore.DoGeneralStore();
                 }
                 else if (answer == "5")
                 {
