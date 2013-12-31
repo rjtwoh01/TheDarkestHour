@@ -13,9 +13,10 @@ namespace The_Darkest_Hour.Locations.Actions
 
         public LoadCharacterAction(string fileName)
         {
+            string displayName = String.Format("{0}", fileName.Replace(".xml",""));
             this.CharacterFileName = fileName;
-            this.Name = String.Format("Load {0}", fileName); ;
-            this.Description = String.Format("Load {0}", fileName);
+            this.Name = displayName;
+            this.Description = displayName;
         }
 
         public override Location DoAction()
