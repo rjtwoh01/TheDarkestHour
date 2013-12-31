@@ -111,10 +111,12 @@
     <Compile Include="Items\Weapon.cs" />
     <Compile Include="LoadSave.cs" />
     <Compile Include="Locations\Actions\ArenaAction.cs" />
+    <Compile Include="Locations\Actions\CreateNewCharacterAction.cs" />
     <Compile Include="Locations\Actions\DisplayInventoryAction.cs" />
     <Compile Include="Locations\Actions\DisplayStatsAction.cs" />
     <Compile Include="Locations\Actions\ExitGame.cs" />
     <Compile Include="Locations\Actions\InvalidSelectionAction.cs" />
+    <Compile Include="Locations\Actions\LoadSavedGameAction.cs" />
     <Compile Include="Locations\Actions\MoveLocationAction.cs" />
     <Compile Include="Locations\Actions\SaveAction.cs" />
     <Compile Include="Locations\Actions\SellItemsAction.cs" />
@@ -123,6 +125,7 @@
     <Compile Include="MainGame.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Towns\StartingArea\InitialGameMenu.cs" />
     <Compile Include="Towns\Town.cs" />
     <Compile Include="Towns\Watertown\Watertown.cs" />
   </ItemGroup>

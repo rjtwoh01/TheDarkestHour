@@ -9,7 +9,7 @@ using The_Darkest_Hour.Characters.Mobs;
 using The_Darkest_Hour.Areas;
 using The_Darkest_Hour.Locations;
 using The_Darkest_Hour.Locations.Actions;
-using The_Darkest_Hour.Towns.Watertown;
+using The_Darkest_Hour.Towns.StartingArea;
 
 namespace The_Darkest_Hour
 {
@@ -17,31 +17,14 @@ namespace The_Darkest_Hour
     {
         public MainGame()
         {
-            if (LoadSave.CheckForLoadSavedGame() == false)
-            {
-                GameState.Hero = new Player();
-                GameState.Hero.Initialize();
-            }
-
-            Console.WriteLine(GameState.Hero.Identifier);
-            GameState.Hero.DisplayProfession();
-            Console.WriteLine("\n\nAnd your inventory is: \n");
-            int i = 1;
-            foreach (Item displayInventory in GameState.Hero.Inventory)
-            {
-                Console.WriteLine(i + ". " + displayInventory);
-                i++;
-            }
-            Console.WriteLine();
-            ClearScreen();
-
             DisplayLocations();
         }
 
         public void DisplayLocations()
         {
-            Watertown watertown = new Watertown();
-            GameState.CurrentLocation = watertown.GetStartingLocation();
+            InitialGameMenu initialGameMenu = new InitialGameMenu();
+            GameState.CurrentLocation = initialGameMenu.GetStartingLocation();
+
 
             GameState.CurrentLocation.Display();
             LocationAction locationAction = GameState.CurrentLocation.GetAction();
