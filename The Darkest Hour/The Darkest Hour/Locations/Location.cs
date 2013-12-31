@@ -25,23 +25,31 @@ namespace The_Darkest_Hour.Locations
 
             char c = 'A';
 
-            Console.WriteLine("\nAdjacent Locations:\n");
-
-            foreach (Location adjacentLocation in this.AdjacentLocations)
+            if ((this.AdjacentLocations!=null) && (this.AdjacentLocations.Count > 0))
             {
+                Console.WriteLine("\nAdjacent Locations:\n");
 
-                Console.WriteLine(String.Format("\t{0}) {1}", c, adjacentLocation.Name));
-                c++;
+                foreach (Location adjacentLocation in this.AdjacentLocations)
+                {
+
+                    Console.WriteLine(String.Format("\t{0}) {1}", c, adjacentLocation.Name));
+                    c++;
+                }
+
             }
 
-            Console.WriteLine("\nActions:\n");
-
-            int i = 0;
-
-            foreach (LocationAction locationAction in this.Actions)
+            if ((this.Actions != null) && (this.Actions.Count > 0))
             {
-                i++;
-                Console.WriteLine(String.Format("\t{0}) {1}", i, locationAction.Name));
+
+                Console.WriteLine("\nActions:\n");
+
+                int i = 0;
+
+                foreach (LocationAction locationAction in this.Actions)
+                {
+                    i++;
+                    Console.WriteLine(String.Format("\t{0}) {1}", i, locationAction.Name));
+                }
             }
         }
 
