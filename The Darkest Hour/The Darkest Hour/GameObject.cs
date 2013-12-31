@@ -29,6 +29,7 @@ namespace The_Darkest_Hour
     [System.Xml.Serialization.XmlInclude(typeof(Potion))]
     [System.Xml.Serialization.XmlInclude(typeof(Helmet))]
     [System.Xml.Serialization.XmlInclude(typeof(Amulet))]
+    [System.Xml.Serialization.XmlInclude(typeof(Accomplishment))]
     public class GameObject
     {
     }

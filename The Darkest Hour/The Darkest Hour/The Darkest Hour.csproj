@@ -74,6 +74,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Characters\Accomplishment.cs" />
     <Compile Include="Areas\GeneralStore.cs" />
     <Compile Include="Battle.cs" />
     <Compile Include="Characters\Character.cs" />
