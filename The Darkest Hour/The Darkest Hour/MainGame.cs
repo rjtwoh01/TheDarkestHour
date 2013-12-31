@@ -14,15 +14,6 @@ namespace The_Darkest_Hour
 {
     class MainGame
     {
-        Player myHero;
-        Mob mob;
-        string userInput;
-        Battle battle = new Battle();
-        Skeleton skeleton;
-        Bandit bandit;
-        Random rand = new Random();
-        int temp = 0;
-
         public MainGame()
         {
             if (LoadSave.SavedGameExists())
@@ -41,27 +32,23 @@ namespace The_Darkest_Hour
                 {
                     if (loadAnswer.ToUpper()[0] == 'Y')
                     {
-                        myHero = LoadSave.LoadCharacter();
+                        GameState.Hero = LoadSave.LoadCharacter();
                     }
                 }
             }
 
             // myHero should be null if not loaded from a saved file (or not loaded successfully);
-            if (myHero == null)
+            if (GameState.Hero == null)
             {
-                myHero = new Player();
-                myHero.Initialize();
+                GameState.Hero = new Player();
+                GameState.Hero.Initialize();
             }
 
-            GameState.Hero = myHero;
-                        
-            mob = new Mob();            
-
-            Console.WriteLine(myHero.Identifier);
-            myHero.DisplayProfession();
+            Console.WriteLine(GameState.Hero.Identifier);
+            GameState.Hero.DisplayProfession();
             Console.WriteLine("\n\nAnd your inventory is: \n");
             int i = 1;
-            foreach (Item displayInventory in myHero.Inventory)
+            foreach (Item displayInventory in GameState.Hero.Inventory)
             {
                 Console.WriteLine(i + ". " + displayInventory);
                 i++;
@@ -70,63 +57,6 @@ namespace The_Darkest_Hour
             ClearScreen();
 
             DisplayLocations();
-
-            return;
-
-            do
-            {
-                skeleton = new Skeleton();
-                bandit = new Bandit();
-                Console.WriteLine("Do you want to go to the arena or quit the game?");
-                Console.WriteLine("(1) Arena \n(2) Display your stats \n(3) Display Inventory \n(4) Sell Items \n(5) Save \n(6) Quit\n");
-                string answer = Console.ReadLine();
-                if (answer == "1")
-                {
-                    temp = rand.Next(1, 3);
-                    if (temp == 1)
-                    {
-                        Console.Clear();
-                        battle.DoBattle(myHero, skeleton);
-                        myHero.ResetHealth();
-                        Console.Clear();
-                    }
-                    else
-                    {
-                        Console.Clear();
-                        battle.DoBattle(myHero, bandit);
-                        myHero.ResetHealth();
-                        Console.Clear();
-                    }
-                }
-                else if (answer == "2")
-                {
-                    myHero.DisplayStats();
-                    ClearScreen();
-                }
-                else if (answer == "3")
-                {
-                    myHero.DisplayInventory();
-                    ClearScreen();
-                }
-                else if (answer == "4")
-                {
-                    GeneralStore.DoGeneralStore();
-                }
-                else if (answer == "5")
-                {
-                    LoadSave.SaveCharacter(myHero);
-                    ClearScreen();
-                }
-                else if (answer == "6")
-                {
-                    userInput = "10";
-                    break;
-                }
-                else
-                {
-                    Console.Clear();
-                }
-            }while(userInput != "10");
         }
 
         public void DisplayLocations()
@@ -143,9 +73,6 @@ namespace The_Darkest_Hour
                 GameState.CurrentLocation.Display();
                 locationAction = GameState.CurrentLocation.GetAction();
             }
-
-
-
         }
 
         public Location GetStartLocation()

@@ -21,6 +21,7 @@ namespace The_Darkest_Hour
     [System.Xml.Serialization.XmlInclude(typeof(Mage))]
     [System.Xml.Serialization.XmlInclude(typeof(Hunter))]
     [System.Xml.Serialization.XmlInclude(typeof(Warrior))]
+    [System.Xml.Serialization.XmlInclude(typeof(Rogue))]
     [System.Xml.Serialization.XmlInclude(typeof(Player))]
     [System.Xml.Serialization.XmlInclude(typeof(Item))]
     [System.Xml.Serialization.XmlInclude(typeof(Weapon))]
