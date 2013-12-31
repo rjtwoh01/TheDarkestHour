@@ -19,7 +19,7 @@ namespace The_Darkest_Hour.Locations.Actions
         {
             Location returnData = new InitialGameMenu().GetStartingLocation();
 
-            this.ClearScreen();
+            this.ClearScreen(false);
 
             return returnData;
         }

@@ -116,6 +116,7 @@
     <Compile Include="Locations\Actions\DisplayStatsAction.cs" />
     <Compile Include="Locations\Actions\ExitGame.cs" />
     <Compile Include="Locations\Actions\InvalidSelectionAction.cs" />
+    <Compile Include="Locations\Actions\LoadCharacterAction.cs" />
     <Compile Include="Locations\Actions\LoadSavedGameAction.cs" />
     <Compile Include="Locations\Actions\MainMenuAction.cs" />
     <Compile Include="Locations\Actions\MoveLocationAction.cs" />

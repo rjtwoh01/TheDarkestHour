@@ -3,36 +3,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using The_Darkest_Hour.Towns;
-using The_Darkest_Hour.Towns.StartingArea;
 
 namespace The_Darkest_Hour.Locations.Actions
 {
-    class LoadSavedGameAction : LocationAction
+    class LoadCharacterAction : LocationAction
     {
-        public LoadSavedGameAction()
+
+        public string CharacterFileName { get; set; }
+
+        public LoadCharacterAction(string fileName)
         {
-            this.Name = "Load Saved Game";
-            this.Description = "Load Saved Game";
+            this.CharacterFileName = fileName;
+            this.Name = String.Format("Load {0}", fileName); ;
+            this.Description = String.Format("Load {0}", fileName);
         }
 
         public override Location DoAction()
         {
-            Location returnData = new InitialGameMenu().GetLoadCharactersMenu();
-
-            this.ClearScreen(false);
-
-            /*
-
             Location returnData = GameState.CurrentLocation;
 
-            if (LoadSave.CheckForLoadSavedGame())
+            GameState.Hero = LoadSave.LoadCharacter(this.CharacterFileName);
+
+            if (GameState.Hero!=null)
             {
                 returnData = GameState.StartingLocation;
             }
 
             this.ClearScreen();
-            */
 
             return returnData;
         }

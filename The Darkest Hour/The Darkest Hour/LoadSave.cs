@@ -8,6 +8,8 @@ using System.Data.OleDb;
 using System.Data;
 using System.IO;
 using The_Darkest_Hour.Items;
+using The_Darkest_Hour.Locations;
+using The_Darkest_Hour.Locations.Actions;
 
 namespace The_Darkest_Hour
 {
@@ -43,10 +45,49 @@ namespace The_Darkest_Hour
             return returnData;
         }
 
+        public static List<LocationAction> GetSavedCharacters()
+        {
+            List<LocationAction> returnData = new List<LocationAction>();
+            LocationAction locationAction;
+
+            DirectoryInfo d = new DirectoryInfo(GameConfigs.PlayerGameFilesLocation);//Assuming Test is your Folder
+            FileInfo[] Files = d.GetFiles("*.xml"); //Getting Text files
+            foreach (FileInfo file in Files)
+            {
+                locationAction = new LoadCharacterAction(file.Name);
+                returnData.Add(locationAction);
+            }
+
+            /*
+            // Put all txt files in root directory into array.
+            string[] characterFileNames = Directory.GetFiles(GameConfigs.PlayerGameFilesLocation, "*.xml");
+
+            foreach (string fileName in characterFileNames)
+            {
+                
+                locationAction = new LoadCharacterAction(fileName);
+                returnData.Add(locationAction);
+            }
+             * */
+
+            return returnData;
+        }
+
         public static bool SavedGameExists()
         {
+            bool returnData=false;
+
+            // Put all txt files in root directory into array.
+            string[] characterFileNames = Directory.GetFiles(GameConfigs.PlayerGameFilesLocation, "*.xml");
+
+            if((characterFileNames!=null) && (characterFileNames.Length>0))
+            {
+                returnData = true;
+            }
+
+            return returnData;
             // Could later check for valid saved game files
-            return System.IO.File.Exists(Path.Combine(GameConfigs.PlayerGameFilesLocation, "FirstCharacter.xml"));        
+            //return System.IO.File.Exists(Path.Combine(GameConfigs.PlayerGameFilesLocation, "FirstCharacter.xml"));        
         }
 
         public static Player LoadCharacter()
@@ -54,14 +95,24 @@ namespace The_Darkest_Hour
             return LoadFromXmlFile();
         }
 
+        public static Player LoadCharacter(string fileName)
+        {
+            return LoadFromXmlFile(fileName);
+        }
+
         private static Player LoadFromXmlFile()
+        {
+            return LoadFromXmlFile("FirstCharacter.xml");
+        }
+
+        private static Player LoadFromXmlFile(string fileName)
         {
             Player myHero;
 
             //var knownTypes = new Type[] { typeof(Character), typeof(Player), typeof(Item), typeof(Weapon), typeof(Armor), typeof(Potion), typeof(Helmet), typeof(Amulet) };
             //System.Xml.Serialization.XmlSerializer playerXmlSerializer = new System.Xml.Serialization.XmlSerializer(typeof(Player), knownTypes);
             System.Xml.Serialization.XmlSerializer playerXmlSerializer = new System.Xml.Serialization.XmlSerializer(typeof(GameObject));
-            using (System.IO.StreamReader playerStreamReader = new System.IO.StreamReader(Path.Combine(GameConfigs.PlayerGameFilesLocation, "FirstCharacter.xml")))
+            using (System.IO.StreamReader playerStreamReader = new System.IO.StreamReader(Path.Combine(GameConfigs.PlayerGameFilesLocation, fileName)))
             {
                 myHero = new Player();
                 myHero = (Player) playerXmlSerializer.Deserialize(playerStreamReader);

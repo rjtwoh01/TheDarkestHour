@@ -13,10 +13,19 @@ namespace The_Darkest_Hour.Locations
 
         public abstract Location DoAction();
 
+
         public void ClearScreen()
         {
-            Console.WriteLine("\n\nPress enter to continue on...");
-            Console.ReadLine();
+            ClearScreen(true);
+        }
+
+        public void ClearScreen(bool promptToMoveOn)
+        {
+            if (promptToMoveOn)
+            {
+                Console.WriteLine("\n\nPress enter to continue on...");
+                Console.ReadLine();
+            }
             Console.Clear();
         }
 

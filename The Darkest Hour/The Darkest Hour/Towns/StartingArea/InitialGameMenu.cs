@@ -12,12 +12,46 @@ namespace The_Darkest_Hour.Towns.StartingArea
     class InitialGameMenu : Town
     {
         private Location _LoadSaveGameMenu;
+        private Location _LoadCharactersMenu;
 
         public override Location GetStartingLocation()
         {
             return GetLoadSaveGameMenu();
         }
 
+
+
+
+        public Location GetLoadCharactersMenu()
+        {
+            Location returnData;
+            LocationAction locationAction;
+
+            if (_LoadCharactersMenu == null)
+            {
+
+                returnData = new Location();
+                returnData.Name = "Load Character";
+                returnData.Description = "Please choose a character to load.";
+
+                _LoadCharactersMenu = returnData;
+
+                List<LocationAction> locationActions = LoadSave.GetSavedCharacters();
+
+                locationAction = new MainMenuAction();
+                locationActions.Add(locationAction);
+
+                returnData.Actions = locationActions;
+
+            }
+            else
+            {
+                returnData = _LoadCharactersMenu;
+            }
+
+
+            return returnData;
+        }
 
 
         public Location GetLoadSaveGameMenu()

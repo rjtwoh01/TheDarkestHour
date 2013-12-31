@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using The_Darkest_Hour.Characters;
-using The_Darkest_Hour.Towns.Watertown;
+using The_Darkest_Hour.Towns;
 
 namespace The_Darkest_Hour.Locations.Actions
 {
@@ -25,7 +25,7 @@ namespace The_Darkest_Hour.Locations.Actions
 
             this.ClearScreen();
 
-            returnData = new Watertown().GetStartingLocation();
+            returnData = GameState.StartingLocation;
 
             return returnData;
         }
