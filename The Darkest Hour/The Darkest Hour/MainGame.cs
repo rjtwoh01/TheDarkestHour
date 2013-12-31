@@ -17,29 +17,7 @@ namespace The_Darkest_Hour
     {
         public MainGame()
         {
-            if (LoadSave.SavedGameExists())
-            {
-                // TODO: Later, save characters to individual files
-                // and present a list of characters to load and pick from those.
-                Console.WriteLine("Do you want to load a previously saved character?");
-                Console.WriteLine("(Y)es \n(N)o\n");
-                string loadAnswer = Console.ReadLine();
-                // Pretty much any answer that begins with Y will be accepted as yes.
-                // everything else is treated as a No.
-                // This design allows for mistakes but in this case it's no big deal if you load
-                // from a saved file.
-                // In other situations you may want to be more strigent to checking 100% accuracy of the input.
-                if ((loadAnswer != null) && (loadAnswer.Length > 0))
-                {
-                    if (loadAnswer.ToUpper()[0] == 'Y')
-                    {
-                        GameState.Hero = LoadSave.LoadCharacter();
-                    }
-                }
-            }
-
-            // myHero should be null if not loaded from a saved file (or not loaded successfully);
-            if (GameState.Hero == null)
+            if (LoadSave.CheckForLoadSavedGame() == false)
             {
                 GameState.Hero = new Player();
                 GameState.Hero.Initialize();
