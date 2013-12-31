@@ -281,7 +281,7 @@ Name:           Level:          Health:           Damage:
 
             try
             {
-                Console.WriteLine("\n\nDo you want to use any of the items in your inventory?");
+                Console.WriteLine("\n\nDo you want to sell any of the items in your inventory?");
                 Console.WriteLine("(1) Yes (2) No\n");
                 string answer = Console.ReadLine();
                 int answerParsed = Int32.Parse(answer);
