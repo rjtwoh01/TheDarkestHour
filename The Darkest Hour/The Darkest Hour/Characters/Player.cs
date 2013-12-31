@@ -40,21 +40,21 @@ namespace The_Darkest_Hour.Characters
         public List<Item> Inventory = new List<Item>();
         public Profession Profession;
 
-        public void Initialize(Player hero)
+        public void Initialize()
         {
-            if (hero.Identifier == null || hero.Identifier == "" || hero.Identifier == " ")
+            if (this.Identifier == null || this.Identifier == "" || this.Identifier == " ")
             {
                 Console.WriteLine(CharacterResources.EnterCharacterName);
-                hero.Identifier = Console.ReadLine();
+                this.Identifier = Console.ReadLine();
                 Console.Clear();
-                if (hero.Identifier == null || hero.Identifier == "" || hero.Identifier == " ")
+                if (this.Identifier == null || this.Identifier == "" || this.Identifier == " ")
                 {
                     Console.WriteLine(CharacterResources.EnterCharacterName);
-                    hero.Identifier = Console.ReadLine();
+                    this.Identifier = Console.ReadLine();
                     Console.Clear();
                 }
 
-                ChooseProfession(hero);
+                ChooseProfession();
 
                 this.damage = 10;
                 this.level = 1;
@@ -75,7 +75,7 @@ namespace The_Darkest_Hour.Characters
             }
         }
 
-        private void ChooseProfession(Player myHero)
+        private void ChooseProfession()
         {
             CharacterProfessions prof;
             if (profession == null)
@@ -93,33 +93,33 @@ namespace The_Darkest_Hour.Characters
                             break;
 
                         case CharacterProfessions.Rogue:
-                            myHero.profession = Rogue;
-                            myHero.Profession = new Rogue();
+                            this.profession = Rogue;
+                            this.Profession = new Rogue();
                             break;
 
                         case CharacterProfessions.Hunter:
-                            myHero.profession = Hunter;
-                            myHero.Profession = new Hunter();
+                            this.profession = Hunter;
+                            this.Profession = new Hunter();
                             break;
 
                         case CharacterProfessions.Warrior:
-                            myHero.profession = Warrior;
-                            myHero.Profession = new Warrior();
+                            this.profession = Warrior;
+                            this.Profession = new Warrior();
                             break;
 
                         case CharacterProfessions.Guardian:
-                            myHero.profession = Guardian;
-                            myHero.Profession = new Guardian();
+                            this.profession = Guardian;
+                            this.Profession = new Guardian();
                             break;
 
                         case CharacterProfessions.Mage:
-                            myHero.profession = Mage;
-                            myHero.Profession = new Mage();
+                            this.profession = Mage;
+                            this.Profession = new Mage();
                             break;
 
                         case CharacterProfessions.Cleric:
-                            myHero.profession = Cleric;
-                            myHero.Profession = new Cleric();
+                            this.profession = Cleric;
+                            this.Profession = new Cleric();
                             break;
 
                         default:
@@ -133,22 +133,22 @@ namespace The_Darkest_Hour.Characters
                 }
             }
 
-            myHero.Profession.CreateInitialHero(myHero);
-            myHero.UpdateStats();
+            this.Profession.CreateInitialHero(this);
+            this.UpdateStats();
 
         }
 
-        public int ResetHealth(Player myHero)
+        public int ResetHealth()
         {
-            myHero.health = myHero.maxHealth;
-            myHero.energy = 1000;
-            return myHero.health;
+            this.health = this.maxHealth;
+            this.energy = 1000;
+            return this.health;
         }
 
-        public void DisplayProfession(Player myHero)
+        public void DisplayProfession()
         {
-            Console.WriteLine(myHero.profession);
-            Console.WriteLine("Main stat is: {0}", myHero.mainStatName);
+            Console.WriteLine(this.profession);
+            Console.WriteLine("Main stat is: {0}", this.mainStatName);
         }
 
         public void ClearScreen()
@@ -163,7 +163,7 @@ namespace The_Darkest_Hour.Characters
             this.damage = this.Profession.GetDamageMultipler(this) + damage;
         }
 
-        public void DisplayStats(Player myHero)
+        public void DisplayStats()
         {
             Console.WriteLine(@"
 *************************************************************************
@@ -186,14 +186,14 @@ Name:           Level:          Health:           Damage:
 -------------------------------------------------------------------------
 {11} / {12}                         {13}
 *************************************************************************
-", myHero.Identifier, myHero.level, myHero.health, myHero.damage, myHero.armor, myHero.strength, myHero.agility, myHero.intelligence, myHero.critChance, myHero.critDamage, myHero.goldFind, myHero.xp, myHero.requiredXP, myHero.gold);
+", this.Identifier, this.level, this.health, this.damage, this.armor, this.strength, this.agility, this.intelligence, this.critChance, this.critDamage, this.goldFind, this.xp, this.requiredXP, this.gold);
         }
 
-        public void DisplayInventory(Player myHero)
+        public void DisplayInventory()
         {
             Console.WriteLine();
             int i = 1;
-            foreach (Item displayItems in myHero.Inventory)
+            foreach (Item displayItems in this.Inventory)
             {
                 Console.WriteLine(i + ". " + displayItems);
                 i++;
@@ -212,25 +212,25 @@ Name:           Level:          Health:           Damage:
                     int selected = Int32.Parse(answer);
                     selected -= 1;
 
-                    Item selectedItem = myHero.Inventory.ElementAt(selected);
+                    Item selectedItem = this.Inventory.ElementAt(selected);
 
                     //Console.WriteLine("\nYou Selected: {0}", selectedItem);
 
                     if (selectedItem.isEquipable)
                     {
-                        if (selectedItem.itemType == myHero.requiredArmorType || selectedItem.itemType == myHero.requiredWeaponType || selectedItem.itemType == myHero.requiredAmuletType)
+                        if (selectedItem.itemType == this.requiredArmorType || selectedItem.itemType == this.requiredWeaponType || selectedItem.itemType == this.requiredAmuletType)
                         {
                             if (selectedItem.isEquipped)
                             {
-                                selectedItem.DeEquip(selectedItem, myHero);
+                                selectedItem.DeEquip(selectedItem, this);
                             }
                             else
                             {
-                                if (myHero.level >= selectedItem.requiredLevel)
+                                if (this.level >= selectedItem.requiredLevel)
                                 {
-                                    bool isFull = selectedItem.SlotCheck(myHero);
+                                    bool isFull = selectedItem.SlotCheck(this);
                                     if (!isFull)
-                                        selectedItem.Equip(selectedItem, myHero);
+                                        selectedItem.Equip(selectedItem, this);
                                 }
                                 else
                                 {
@@ -244,20 +244,20 @@ Name:           Level:          Health:           Damage:
 
                     if (selectedItem.isPotion)
                     {
-                        myHero.health += selectedItem.healthHeal;
-                        if (myHero.health >= myHero.maxHealth)
-                            myHero.health = myHero.maxHealth;
-                        myHero.energy += selectedItem.energyHeal;
-                        if (myHero.energy >= myHero.maxEnergy)
-                            myHero.energy = myHero.maxEnergy;
+                        this.health += selectedItem.healthHeal;
+                        if (this.health >= this.maxHealth)
+                            this.health = this.maxHealth;
+                        this.energy += selectedItem.energyHeal;
+                        if (this.energy >= this.maxEnergy)
+                            this.energy = this.maxEnergy;
 
                         Console.WriteLine("\nYou use {0}", selectedItem.name);
                         if (selectedItem.healthHeal > 0)
-                            Console.WriteLine("{0} heals you for {1}. \nYou now have {2} health", selectedItem.name, selectedItem.healthHeal, myHero.health);
+                            Console.WriteLine("{0} heals you for {1}. \nYou now have {2} health", selectedItem.name, selectedItem.healthHeal, this.health);
                         if (selectedItem.energyHeal > 0)
-                            Console.WriteLine("{0} increases your energy by {1}. \nYou now have {2} energy", selectedItem.name, selectedItem.energyHeal, myHero.energy);
+                            Console.WriteLine("{0} increases your energy by {1}. \nYou now have {2} energy", selectedItem.name, selectedItem.energyHeal, this.energy);
 
-                        myHero.Inventory.Remove(selectedItem);
+                        this.Inventory.Remove(selectedItem);
                     }
                 }
             }
@@ -268,11 +268,11 @@ Name:           Level:          Health:           Damage:
             }
         }
 
-        public void SellItems(Player myHero)
+        public void SellItems()
         {
             Console.WriteLine();
             int i = 1;
-            foreach (Item displayItems in myHero.Inventory)
+            foreach (Item displayItems in this.Inventory)
             {
                 Console.WriteLine(i + ". " + displayItems);
                 i++;
@@ -291,16 +291,16 @@ Name:           Level:          Health:           Damage:
                     int selected = Int32.Parse(answer);
                     selected -= 1;
 
-                    Item selectedItem = myHero.Inventory.ElementAt(selected);
+                    Item selectedItem = this.Inventory.ElementAt(selected);
 
-                    myHero.gold += selectedItem.worth;
-                    if (myHero.gold >= myHero.maxGold)
-                        myHero.gold = myHero.maxGold;
+                    this.gold += selectedItem.worth;
+                    if (this.gold >= this.maxGold)
+                        this.gold = this.maxGold;
 
                     Console.WriteLine("\nYou sold {0} for {1} gold!", selectedItem.name, selectedItem.worth);
-                    Console.WriteLine("You now have {0} gold!", myHero.gold);
+                    Console.WriteLine("You now have {0} gold!", this.gold);
 
-                    myHero.Inventory.Remove(selectedItem);
+                    this.Inventory.Remove(selectedItem);
                 }
             }
 
@@ -310,62 +310,62 @@ Name:           Level:          Health:           Damage:
             }
         }
 
-        public void GetLevel(Player myHero)
+        public void GetLevel()
         {
-            if (myHero.level < levelCap)
+            if (this.level < levelCap)
             {
-                myHero.requiredXP = CalculateXPNeeded(myHero);
+                this.requiredXP = CalculateXPNeeded();
 
-                if (myHero.xp >= myHero.requiredXP)
+                if (this.xp >= this.requiredXP)
                 {
-                    int leftOverXP = myHero.xp - myHero.requiredXP;
-                    myHero.level += 1;
-                    AddToStats(myHero, 10);
-                    myHero.xp = 0 + leftOverXP;
-                    int newXPRequired = CalculateXPNeeded(myHero);
-                    myHero.requiredXP = newXPRequired;
-                    Console.WriteLine("Congratulations! You leveled!\nYou're now level {0}!\nYou have {1} of {2} xp needed for level {3}", myHero.level, myHero.xp, myHero.requiredXP, (myHero.level + 1));
+                    int leftOverXP = this.xp - this.requiredXP;
+                    this.level += 1;
+                    this.AddToStats(10);
+                    this.xp = 0 + leftOverXP;
+                    int newXPRequired = CalculateXPNeeded();
+                    this.requiredXP = newXPRequired;
+                    Console.WriteLine("Congratulations! You leveled!\nYou're now level {0}!\nYou have {1} of {2} xp needed for level {3}", this.level, this.xp, this.requiredXP, (this.level + 1));
                 }
 
 
                 else
                 {
-                    Console.WriteLine("{0}'s level: {1}", myHero.Identifier, myHero.level);
-                    Console.WriteLine("You have {0} of {1} xp needed for level {2}.\n", myHero.xp, myHero.requiredXP, (myHero.level + 1));
+                    Console.WriteLine("{0}'s level: {1}", this.Identifier, this.level);
+                    Console.WriteLine("You have {0} of {1} xp needed for level {2}.\n", this.xp, this.requiredXP, (this.level + 1));
                 }
             }
 
             else
             {
-                myHero.level = myHero.levelCap;
-                myHero.xp = 0;
+                this.level = this.levelCap;
+                this.xp = 0;
             }
         }
 
-        private void AddToStats(Player myHero, int numberAddedToStats)
+        private void AddToStats(int numberAddedToStats)
         {
-            myHero.damage += numberAddedToStats;
-            myHero.strength += numberAddedToStats;
-            myHero.agility += numberAddedToStats;
-            myHero.intelligence += numberAddedToStats;
-            myHero.health += numberAddedToStats;
+            this.damage += numberAddedToStats;
+            this.strength += numberAddedToStats;
+            this.agility += numberAddedToStats;
+            this.intelligence += numberAddedToStats;
+            this.health += numberAddedToStats;
         }
 
-        private int CalculateXPNeeded(Player myHero)
+        private int CalculateXPNeeded()
         {
             int xpNeeded = 0;
-            int playerLevel = myHero.level;
+            int playerLevel = this.level;
 
-            if (myHero.level == 1)
+            if (this.level == 1)
                 xpNeeded = 100;
-            if (myHero.level >= 2)
+            if (this.level >= 2)
             {
                 xpNeeded = 100 + (playerLevel * (int)Math.Exp(2));
             }
-            if (myHero.level == levelCap)
+            if (this.level == levelCap)
             {
                 xpNeeded = 0;
-                myHero.xp = 0;
+                this.xp = 0;
             }
 
             return xpNeeded;

@@ -51,7 +51,7 @@ namespace The_Darkest_Hour
             if (myHero == null)
             {
                 myHero = new Player();
-                myHero.Initialize(myHero);
+                myHero.Initialize();
             }
 
             GameState.Hero = myHero;
@@ -59,7 +59,7 @@ namespace The_Darkest_Hour
             mob = new Mob();            
 
             Console.WriteLine(myHero.Identifier);
-            myHero.DisplayProfession(myHero);
+            myHero.DisplayProfession();
             Console.WriteLine("\n\nAnd your inventory is: \n");
             int i = 1;
             foreach (Item displayInventory in myHero.Inventory)
@@ -88,25 +88,25 @@ namespace The_Darkest_Hour
                     {
                         Console.Clear();
                         battle.DoBattle(myHero, skeleton);
-                        myHero.ResetHealth(myHero);
+                        myHero.ResetHealth();
                         Console.Clear();
                     }
                     else
                     {
                         Console.Clear();
                         battle.DoBattle(myHero, bandit);
-                        myHero.ResetHealth(myHero);
+                        myHero.ResetHealth();
                         Console.Clear();
                     }
                 }
                 else if (answer == "2")
                 {
-                    myHero.DisplayStats(myHero);
+                    myHero.DisplayStats();
                     ClearScreen();
                 }
                 else if (answer == "3")
                 {
-                    myHero.DisplayInventory(myHero);
+                    myHero.DisplayInventory();
                     ClearScreen();
                 }
                 else if (answer == "4")

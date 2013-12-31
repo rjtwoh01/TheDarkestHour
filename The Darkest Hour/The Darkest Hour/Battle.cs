@@ -93,7 +93,7 @@ namespace The_Darkest_Hour
                 {
                     battleInProgress = true;
                     hasFled = false;
-                    myHero.DisplayInventory(myHero);
+                    myHero.DisplayInventory();
                     ClearScreen();
                 }
 
@@ -109,7 +109,7 @@ namespace The_Darkest_Hour
             mob.ResetHealth(mob);
             if (playerLost)
             {
-                myHero.ResetHealth(myHero);
+                myHero.ResetHealth();
                 Console.WriteLine("The battle is over and you lost. Better luck next time ya idiot.");
                 playerLost = false;
             }
@@ -118,7 +118,7 @@ namespace The_Darkest_Hour
                 Console.WriteLine("The battle is over and you emerge victorious! Hail to the hero!");
                 loot = new Loot(myHero, mob);
                 myHero.xp += mob.xp;
-                myHero.GetLevel(myHero);
+                myHero.GetLevel();
                 mobLost = false;
             }
             else if (hasFled)

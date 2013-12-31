@@ -18,7 +18,7 @@ namespace The_Darkest_Hour.Locations.Actions
         {
             Location returnData = GameState.CurrentLocation;
 
-            Console.WriteLine("Display Stats not implemented yet.");
+            GameState.Hero.DisplayStats();
 
             this.ClearScreen();
 

@@ -18,7 +18,7 @@ namespace The_Darkest_Hour.Locations.Actions
         {
             Location returnData = GameState.CurrentLocation;
 
-            Console.WriteLine("Arena not implemented yet.");
+            GameState.Hero.DisplayInventory();
 
             this.ClearScreen();
 

@@ -18,7 +18,7 @@ namespace The_Darkest_Hour.Areas
 
             do
             {
-                myHero.SellItems(myHero);
+                myHero.SellItems();
                 ClearScreen();
 
                 Console.WriteLine("Want to go again? (1) Yes (2) No");
