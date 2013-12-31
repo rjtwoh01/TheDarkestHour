@@ -37,12 +37,5 @@ namespace The_Darkest_Hour
                 locationAction = GameState.CurrentLocation.GetAction();
             }
         }
-
-        public void ClearScreen()
-        {
-            Console.WriteLine("\n\nPress enter to continue on...");
-            Console.ReadLine();
-            Console.Clear();
-        }
     }
 }

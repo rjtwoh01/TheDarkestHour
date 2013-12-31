@@ -16,35 +16,6 @@ namespace The_Darkest_Hour
     class LoadSave
     {
 
-        public static bool CheckForLoadSavedGame()
-        {
-            bool returnData = false;
-
-            if (LoadSave.SavedGameExists())
-            {
-                // TODO: Later, save characters to individual files
-                // and present a list of characters to load and pick from those.
-                Console.WriteLine("Do you want to load a previously saved character?");
-                Console.WriteLine("(Y)es \n(N)o\n");
-                string loadAnswer = Console.ReadLine();
-                // Pretty much any answer that begins with Y will be accepted as yes.
-                // everything else is treated as a No.
-                // This design allows for mistakes but in this case it's no big deal if you load
-                // from a saved file.
-                // In other situations you may want to be more strigent to checking 100% accuracy of the input.
-                if ((loadAnswer != null) && (loadAnswer.Length > 0))
-                {
-                    if (loadAnswer.ToUpper()[0] == 'Y')
-                    {
-                        GameState.Hero = LoadSave.LoadCharacter();
-                        returnData = true;
-                    }
-                }
-            }
-
-            return returnData;
-        }
-
         public static List<LocationAction> GetSavedCharacters()
         {
             List<LocationAction> returnData = new List<LocationAction>();
@@ -57,18 +28,6 @@ namespace The_Darkest_Hour
                 locationAction = new LoadCharacterAction(file.Name);
                 returnData.Add(locationAction);
             }
-
-            /*
-            // Put all txt files in root directory into array.
-            string[] characterFileNames = Directory.GetFiles(GameConfigs.PlayerGameFilesLocation, "*.xml");
-
-            foreach (string fileName in characterFileNames)
-            {
-                
-                locationAction = new LoadCharacterAction(fileName);
-                returnData.Add(locationAction);
-            }
-             * */
 
             return returnData;
         }
@@ -86,13 +45,6 @@ namespace The_Darkest_Hour
             }
 
             return returnData;
-            // Could later check for valid saved game files
-            //return System.IO.File.Exists(Path.Combine(GameConfigs.PlayerGameFilesLocation, "FirstCharacter.xml"));        
-        }
-
-        public static Player LoadCharacter()
-        {
-            return LoadFromXmlFile();
         }
 
         public static Player LoadCharacter(string fileName)
@@ -100,17 +52,10 @@ namespace The_Darkest_Hour
             return LoadFromXmlFile(fileName);
         }
 
-        private static Player LoadFromXmlFile()
-        {
-            return LoadFromXmlFile("FirstCharacter.xml");
-        }
-
         private static Player LoadFromXmlFile(string fileName)
         {
             Player myHero;
 
-            //var knownTypes = new Type[] { typeof(Character), typeof(Player), typeof(Item), typeof(Weapon), typeof(Armor), typeof(Potion), typeof(Helmet), typeof(Amulet) };
-            //System.Xml.Serialization.XmlSerializer playerXmlSerializer = new System.Xml.Serialization.XmlSerializer(typeof(Player), knownTypes);
             System.Xml.Serialization.XmlSerializer playerXmlSerializer = new System.Xml.Serialization.XmlSerializer(typeof(GameObject));
             using (System.IO.StreamReader playerStreamReader = new System.IO.StreamReader(Path.Combine(GameConfigs.PlayerGameFilesLocation, fileName)))
             {
@@ -143,7 +88,6 @@ namespace The_Darkest_Hour
         /// </notes>
         private static void SaveToXmlFile(Player myHero)
         {
-            SaveToXmlFile(myHero, "FirstCharacter.xml");
             SaveToXmlFile(myHero, GetCharacterFileName(myHero));
         }
 
@@ -154,9 +98,6 @@ namespace The_Darkest_Hour
                 Directory.CreateDirectory(GameConfigs.PlayerGameFilesLocation);
             }
 
-            //var knownTypes = new Type[] { typeof(Character), typeof(Player), typeof(Item), typeof(Weapon), typeof(Armor), typeof(Potion), typeof(Helmet), typeof(Amulet) };
-
-            //System.Xml.Serialization.XmlSerializer playerXmlSerialization = new System.Xml.Serialization.XmlSerializer(typeof(Player), knownTypes);
             System.Xml.Serialization.XmlSerializer playerXmlSerialization = new System.Xml.Serialization.XmlSerializer(typeof(GameObject));
 
             using (System.IO.StreamWriter characterStreamWriter = new System.IO.StreamWriter(Path.Combine(GameConfigs.PlayerGameFilesLocation, fileName)))
@@ -164,7 +105,7 @@ namespace The_Darkest_Hour
                 playerXmlSerialization.Serialize(characterStreamWriter, myHero);
                 characterStreamWriter.Close();
 
-                Console.WriteLine("Game saved to xml file successfully\n");
+                Console.WriteLine("Game saved successfully\n");
             }
 
         }

@@ -22,18 +22,6 @@ namespace The_Darkest_Hour.Locations.Actions
 
             this.ClearScreen(false);
 
-            /*
-
-            Location returnData = GameState.CurrentLocation;
-
-            if (LoadSave.CheckForLoadSavedGame())
-            {
-                returnData = GameState.StartingLocation;
-            }
-
-            this.ClearScreen();
-            */
-
             return returnData;
         }
 
