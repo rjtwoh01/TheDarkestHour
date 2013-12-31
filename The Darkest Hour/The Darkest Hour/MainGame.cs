@@ -7,6 +7,8 @@ using The_Darkest_Hour.Characters;
 using The_Darkest_Hour.Items;
 using The_Darkest_Hour.Characters.Mobs;
 using The_Darkest_Hour.Areas;
+using The_Darkest_Hour.Locations;
+using The_Darkest_Hour.Locations.Actions;
 
 namespace The_Darkest_Hour
 {
@@ -65,7 +67,11 @@ namespace The_Darkest_Hour
             }
             Console.WriteLine();
             ClearScreen();
-            
+
+            DisplayLocations();
+
+            return;
+
             do
             {
                 skeleton = new Skeleton();
@@ -120,6 +126,58 @@ namespace The_Darkest_Hour
                     Console.Clear();
                 }
             }while(userInput != "10");
+        }
+
+        public void DisplayLocations()
+        {
+            Location location = GetStartLocation();
+
+            location.Display();
+            LocationAction locationAction = location.GetAction();
+
+            while(!(locationAction is ExitGame))
+            {
+                location = locationAction.DoAction(location);
+
+                location.Display();
+                locationAction = location.GetAction();
+            }
+
+
+
+        }
+
+        public Location GetStartLocation()
+        {
+            Location returnData;
+
+            returnData = new Location();
+            returnData.Name = "Town Center";
+            returnData.Description = "Do you want to go to the arena or quit the game?";
+
+            List<LocationAction> locationActions = new List<LocationAction>();
+
+            LocationAction locationAction = new ArenaAction();
+            locationActions.Add(locationAction);
+
+            locationAction = new DisplayStatsAction();
+            locationActions.Add(locationAction);
+
+            locationAction = new DisplayInventoryAction();
+            locationActions.Add(locationAction);
+
+            locationAction = new SellItemsAction();
+            locationActions.Add(locationAction);
+
+            locationAction = new SaveAction();
+            locationActions.Add(locationAction);
+
+            locationAction = new ExitGame();
+            locationActions.Add(locationAction);
+
+            returnData.Actions = locationActions;
+
+            return returnData;
         }
 
         public void ClearScreen()
