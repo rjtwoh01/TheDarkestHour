@@ -12,8 +12,8 @@ namespace The_Darkest_Hour.Locations.Actions
     {
         public ArenaAction()
         {
-            this.Name = "Arena";
-            this.Description = "Arena";
+            this.Name = "Battle Monster";
+            this.Description = "Battle Monster";
         }
 
         public override Location DoAction()

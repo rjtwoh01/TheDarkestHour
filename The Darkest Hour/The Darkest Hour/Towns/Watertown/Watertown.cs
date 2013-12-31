@@ -56,6 +56,45 @@ namespace The_Darkest_Hour.Towns.Watertown
             return returnData;
         }
 
+        public Location GetInn()
+        {
+            Location returnData;
+
+            if (_Inn == null)
+            {
+
+                returnData = new Location();
+                returnData.Name = "Prancing Pony";
+                returnData.Description = "You belly up to the bar!";
+
+                _Inn = returnData;
+
+                List<LocationAction> locationActions = new List<LocationAction>();
+
+                LocationAction locationAction = new SaveAction();
+                locationActions.Add(locationAction);
+
+                locationAction = new ExitGame();
+                locationActions.Add(locationAction);
+
+                returnData.Actions = locationActions;
+
+                List<Location> adjacentLocations = new List<Location>();
+
+                adjacentLocations.Add(GetTownCenter());
+
+                returnData.AdjacentLocations = adjacentLocations;
+
+
+            }
+            else
+            {
+                returnData = _Arena;
+            }
+
+            return returnData;
+        }
+
 
         public Location GetTownCenter()
         {
@@ -73,9 +112,6 @@ namespace The_Darkest_Hour.Towns.Watertown
 
                 List<LocationAction> locationActions = new List<LocationAction>();
 
-//                LocationAction locationAction = new ArenaAction();
-//                locationActions.Add(locationAction);
-
                 locationAction = new DisplayStatsAction();
                 locationActions.Add(locationAction);
 
@@ -83,9 +119,6 @@ namespace The_Darkest_Hour.Towns.Watertown
                 locationActions.Add(locationAction);
 
                 locationAction = new SellItemsAction();
-                locationActions.Add(locationAction);
-
-                locationAction = new SaveAction();
                 locationActions.Add(locationAction);
 
                 locationAction = new ExitGame();
@@ -96,6 +129,7 @@ namespace The_Darkest_Hour.Towns.Watertown
                 List<Location> adjacentLocations = new List<Location>();
 
                 adjacentLocations.Add(GetArena());
+                adjacentLocations.Add(GetInn());
 
                 returnData.AdjacentLocations = adjacentLocations;
 
