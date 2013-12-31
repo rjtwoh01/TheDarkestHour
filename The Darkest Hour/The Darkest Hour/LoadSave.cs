@@ -116,7 +116,7 @@ namespace The_Darkest_Hour
 
             char[] arr = myHero.Identifier.ToCharArray();
 
-            arr = Array.FindAll<char>(arr, (c => (char.IsLetterOrDigit(c))));
+            arr = Array.FindAll<char>(arr, (c => (char.IsLetterOrDigit(c) || char.IsWhiteSpace(c))));
 
             returnData.Append(arr);
             returnData.Append(".xml");
