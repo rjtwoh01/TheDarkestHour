@@ -93,5 +93,18 @@ namespace The_Darkest_Hour.Towns.StartingArea
 
             return returnData;
         }
+
+        private static InitialGameMenu _InitialGameMenu;
+
+        public static InitialGameMenu GetTownInstance()
+        {
+            if(_InitialGameMenu==null)
+            {
+                _InitialGameMenu = new InitialGameMenu();
+
+            }
+
+            return _InitialGameMenu;
+        }
     }
 }

@@ -22,7 +22,7 @@ namespace The_Darkest_Hour
 
         public void DisplayLocations()
         {
-            InitialGameMenu initialGameMenu = new InitialGameMenu();
+            InitialGameMenu initialGameMenu = InitialGameMenu.GetTownInstance();
             GameState.CurrentLocation = initialGameMenu.GetStartingLocation();
 
 
@@ -31,7 +31,14 @@ namespace The_Darkest_Hour
 
             while(!(locationAction is ExitGame))
             {
-                GameState.CurrentLocation = locationAction.DoAction();
+                // TODO: might add a check to see if the newLocation
+                // is the same the current if so, don't set the previous.
+                // There might be some situation where we lose the previous location. 
+                // when doing actions that say in the same location (in fact, I'm almost
+                // positive this will be an issue).
+                Location newLocation = locationAction.DoAction(); ;
+                GameState.PreviousLocation = GameState.CurrentLocation;
+                GameState.CurrentLocation = newLocation;
 
                 GameState.CurrentLocation.Display();
                 locationAction = GameState.CurrentLocation.GetAction();

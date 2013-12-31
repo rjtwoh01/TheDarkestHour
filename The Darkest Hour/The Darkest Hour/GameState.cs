@@ -16,13 +16,14 @@ namespace The_Darkest_Hour
         public static Player Hero { get; set; }
         public static Location CurrentLocation { get; set; }
         public static Location UpcomingLocation { get; set; }
+        public static Location PreviousLocation { get; set; }
         public static Town StartingTown
         {
             get
             {
                 if (_StartingTown == null)
                 {
-                    _StartingTown = new The_Darkest_Hour.Towns.Watertown.Watertown();
+                    _StartingTown = The_Darkest_Hour.Towns.Watertown.Watertown.GetTownInstance();
                 }
 
                 return _StartingTown;

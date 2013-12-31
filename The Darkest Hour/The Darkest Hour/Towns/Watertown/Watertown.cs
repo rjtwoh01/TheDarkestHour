@@ -5,11 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using The_Darkest_Hour.Locations;
 using The_Darkest_Hour.Locations.Actions;
+using The_Darkest_Hour.Characters;
 
 namespace The_Darkest_Hour.Towns.Watertown
 {
     class Watertown : Town
     {
+
+        #region Instance Properties and Methods
         private Location _Arena;
         private Location _TownCenter;
         private Location _Inn;
@@ -98,7 +101,8 @@ namespace The_Darkest_Hour.Towns.Watertown
             return returnData;
         }
 
-
+        // TODO: Probably should change the design of the GetTownCenter, etc..
+        // to public Get properties as this is exactly how they are operating.
         public Location GetTownCenter()
         {
             Location returnData;
@@ -136,6 +140,9 @@ namespace The_Darkest_Hour.Towns.Watertown
 
                 adjacentLocations.Add(GetArena());
                 adjacentLocations.Add(GetInn());
+                // TODO: Will eventually check to see if they have heard the Sewer King rumor.
+                // And then only display the sewer entrance.
+                adjacentLocations.Add(WatertownSewer.GetTownInstance().GetStartingLocation());
 
                 returnData.AdjacentLocations = adjacentLocations;
 
@@ -149,5 +156,38 @@ namespace The_Darkest_Hour.Towns.Watertown
 
             return returnData;
         }
+
+        #endregion
+
+        #region Static Properties and Methods
+        private static WatertownAccomplishments _WatertownAccomplishments;
+
+        public static WatertownAccomplishments GetWatertownAccomplishments()
+        {
+            if (_WatertownAccomplishments != null)
+            {
+                _WatertownAccomplishments = new WatertownAccomplishments();
+
+                Accomplishment accomplishment = new Accomplishment();
+                accomplishment.NameSpace = "Watertown";
+                accomplishment.Name = "Has Heard the Sewer King Rumor";
+                accomplishment.Description = "Has heard the rumor of the sewer king.   Tales of gold and rewards in the Watertown sewer.";
+            }
+
+            return _WatertownAccomplishments;
+        }
+
+        private static Watertown _Watertown;
+
+        public static Watertown GetTownInstance()
+        {
+            if (_Watertown == null)
+            {
+                _Watertown = new Watertown();
+            }
+
+            return _Watertown;
+        }
+        #endregion
     }
 }

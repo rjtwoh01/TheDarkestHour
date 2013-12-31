@@ -20,7 +20,7 @@ namespace The_Darkest_Hour.Characters
         /// namespace then it's accomplishments will be different from other area's 
         /// accomplishments.
         /// </remarks>
-        public string Namespace { get; set; }
+        public string NameSpace { get; set; }
 
         /// <summary>
         /// The name of the accomplishment
@@ -44,7 +44,7 @@ namespace The_Darkest_Hour.Characters
         {
             bool returnData = false;
 
-            if (other.Namespace.Equals(this.Namespace))
+            if (other.NameSpace.Equals(this.NameSpace))
             {
                 if (other.Name.Equals(this.Name))
                 {
@@ -68,7 +68,7 @@ namespace The_Darkest_Hour.Characters
             // If other is not a valid object reference, this instance is greater. 
             if (other == null) return 1;
 
-            returnData = this.Namespace.CompareTo(other.Namespace);
+            returnData = this.NameSpace.CompareTo(other.NameSpace);
             if(returnData == 0)
             {
                 // It's the same namespace.  So now, just use the 
@@ -77,6 +77,23 @@ namespace The_Darkest_Hour.Characters
             }
 
             return returnData;
+        }
+
+        public int CompareTo(string nameSpace, string name)
+        {
+            int returnData;
+            // If other is not a valid object reference, this instance is greater. 
+            if (nameSpace == null) return 1;
+
+            returnData = this.NameSpace.CompareTo(nameSpace);
+            if (returnData == 0)
+            {
+                // It's the same namespace.  So now, just use the 
+                // name to sort witin the same namespace
+                returnData = this.Name.CompareTo(name);
+            }
+
+            return returnData;     
         }
     }
 }
