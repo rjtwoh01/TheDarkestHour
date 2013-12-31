@@ -18,6 +18,8 @@ namespace The_Darkest_Hour.Locations.Actions
         {
             Location returnData = GameState.CurrentLocation;
 
+            this.ClearScreen(false);
+
             GameState.Hero.DisplayInventory();
 
             this.ClearScreen();
