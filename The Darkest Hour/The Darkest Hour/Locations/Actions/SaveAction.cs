@@ -18,7 +18,7 @@ namespace The_Darkest_Hour.Locations.Actions
         {
             Location returnData = GameState.CurrentLocation;
 
-            Console.WriteLine("Sell Items not implemented yet.");
+            LoadSave.SaveCharacter(GameState.Hero);
 
             this.ClearScreen();
 
