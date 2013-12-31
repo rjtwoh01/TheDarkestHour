@@ -9,6 +9,7 @@ using The_Darkest_Hour.Characters.Mobs;
 using The_Darkest_Hour.Areas;
 using The_Darkest_Hour.Locations;
 using The_Darkest_Hour.Locations.Actions;
+using The_Darkest_Hour.Towns.Watertown;
 
 namespace The_Darkest_Hour
 {
@@ -61,7 +62,8 @@ namespace The_Darkest_Hour
 
         public void DisplayLocations()
         {
-            GameState.CurrentLocation = GetStartLocation();
+            Watertown watertown = new Watertown();
+            GameState.CurrentLocation = watertown.GetStartingLocation();
 
             GameState.CurrentLocation.Display();
             LocationAction locationAction = GameState.CurrentLocation.GetAction();
@@ -73,39 +75,6 @@ namespace The_Darkest_Hour
                 GameState.CurrentLocation.Display();
                 locationAction = GameState.CurrentLocation.GetAction();
             }
-        }
-
-        public Location GetStartLocation()
-        {
-            Location returnData;
-
-            returnData = new Location();
-            returnData.Name = "Town Center";
-            returnData.Description = "Do you want to go to the arena or quit the game?";
-
-            List<LocationAction> locationActions = new List<LocationAction>();
-
-            LocationAction locationAction = new ArenaAction();
-            locationActions.Add(locationAction);
-
-            locationAction = new DisplayStatsAction();
-            locationActions.Add(locationAction);
-
-            locationAction = new DisplayInventoryAction();
-            locationActions.Add(locationAction);
-
-            locationAction = new SellItemsAction();
-            locationActions.Add(locationAction);
-
-            locationAction = new SaveAction();
-            locationActions.Add(locationAction);
-
-            locationAction = new ExitGame();
-            locationActions.Add(locationAction);
-
-            returnData.Actions = locationActions;
-
-            return returnData;
         }
 
         public void ClearScreen()

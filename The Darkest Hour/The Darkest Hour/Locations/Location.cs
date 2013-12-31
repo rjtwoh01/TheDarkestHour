@@ -14,16 +14,32 @@ namespace The_Darkest_Hour.Locations
 
         public List<LocationAction> Actions { get; set; }
 
+        public List<Location> AdjacentLocations { get; set; }
+
         public void Display()
         {
             Console.WriteLine(this.Description);
+
+
+            char c = 'A';
+
+            Console.WriteLine("\nAdjacent Locations:\n");
+
+            foreach (Location adjacentLocation in this.AdjacentLocations)
+            {
+
+                Console.WriteLine(String.Format("\t{0}) {1}", c, adjacentLocation.Name));
+                c++;
+            }
+
+            Console.WriteLine("\nActions:\n");
 
             int i = 0;
 
             foreach (LocationAction locationAction in this.Actions)
             {
                 i++;
-                Console.WriteLine(String.Format("{0}) {1}", i, locationAction.Name));
+                Console.WriteLine(String.Format("\t{0}) {1}", i, locationAction.Name));
             }
         }
 
