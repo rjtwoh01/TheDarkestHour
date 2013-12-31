@@ -49,9 +49,12 @@ namespace The_Darkest_Hour.Locations
 
             string answer = Console.ReadLine();
             int actionIndex;
+            char locationIndexChar;
+            int locationIndexInt;
 
             if ((answer != null) && (answer.Length > 0))
             {
+                answer = answer.ToUpper();
                 try
                 {
                     actionIndex = Int32.Parse(answer);
@@ -67,7 +70,21 @@ namespace The_Darkest_Hour.Locations
                 }
                 catch
                 {
-                    returnData = new InvalidSelectionAction();
+                    // TODO: This is poor way to check for the results (by catching an exception)
+                    locationIndexChar = Char.Parse(answer);
+                    int aValue = (int)'A';
+                    int maxAnswerInt = aValue + this.AdjacentLocations.Count-1;
+                    char maxAnswer = (char) maxAnswerInt;
+                    if ((locationIndexChar < 'A') || (locationIndexChar > maxAnswer))
+                    {
+                        returnData = new InvalidSelectionAction();
+                    }
+                    else
+                    {
+                        locationIndexInt = Convert.ToInt32(locationIndexChar) - aValue;
+                        GameState.UpcomingLocation = this.AdjacentLocations[locationIndexInt];
+                        returnData = new MoveLocationAction();
+                    }
                 }                
             }
             else

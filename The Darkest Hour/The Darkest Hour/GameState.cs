@@ -12,5 +12,6 @@ namespace The_Darkest_Hour
     {
         public static Player Hero { get; set; }
         public static Location CurrentLocation { get; set; }
+        public static Location UpcomingLocation { get; set; }
     }
 }
