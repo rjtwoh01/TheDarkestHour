@@ -22,12 +22,11 @@ namespace The_Darkest_Hour.Locations
 
             Console.WriteLine(this.Description);
 
-
-            char c = 'A';
-
             if ((this.AdjacentLocations!=null) && (this.AdjacentLocations.Count > 0))
             {
                 Console.WriteLine("\nAdjacent Locations:\n");
+
+                char c = 'A';
 
                 foreach (Location adjacentLocation in this.AdjacentLocations)
                 {
