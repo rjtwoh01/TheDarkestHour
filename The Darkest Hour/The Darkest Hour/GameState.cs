@@ -12,7 +12,7 @@ namespace The_Darkest_Hour
     class GameState
     {
         private static Town _StartingTown;
-
+        private static Random _NumberGenerator;
         public static Player Hero { get; set; }
         public static Location CurrentLocation { get; set; }
         public static Location UpcomingLocation { get; set; }
@@ -38,5 +38,20 @@ namespace The_Darkest_Hour
                 return StartingTown.GetStartingLocation();
             }
         }
+
+        public static Random NumberGenerator
+        {
+            get
+            {
+                if (_NumberGenerator == null)
+                {
+                    _NumberGenerator = new Random();
+                }
+
+                return _NumberGenerator;
+            }
+
+        }
+
     }
 }

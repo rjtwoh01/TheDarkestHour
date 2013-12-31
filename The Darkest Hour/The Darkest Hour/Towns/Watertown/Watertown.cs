@@ -16,10 +16,44 @@ namespace The_Darkest_Hour.Towns.Watertown
         private Location _Arena;
         private Location _TownCenter;
         private Location _Inn;
+        private List<Rumor> _InnKeepersRumors;
+
+        private List<Rumor> InnKeepersRumors
+        {
+            get
+            {
+                if (_InnKeepersRumors == null)
+                {
+                    _InnKeepersRumors = new List<Rumor>();
+
+                    Rumor rumor = new Rumor("Sewer King", "There are tales of a Sewer King with hoards of riches and gold.  The entrance to the sewers can be found in the Town Center.");
+                    rumor.Accomplishment = Watertown.GetWatertownAccomplishments().Find(x => x.Name.Contains("Sewer King"));
+                    rumor.OnHeardRumor += this.HeardSewerKingRumor;
+                    _InnKeepersRumors.Add(rumor);
+                    _InnKeepersRumors.Add(new Rumor("Not Much", "Not much happening around here these days."));
+                    _InnKeepersRumors.Add(new Rumor("Stay awhile", "Stay a while and listen to our bard play music and sing songs of great tales."));
+                }
+
+                return _InnKeepersRumors;
+            }
+        }
 
         public override Location GetStartingLocation()
         {
             return GetTownCenter();
+        }
+
+        public void HeardSewerKingRumor()
+        {
+            // TODO: need to keep duplicate accomplishments from happening.
+            Accomplishment accomplishment = Watertown.GetWatertownAccomplishments().Find(x => x.Name.Contains("Sewer King"));
+            GameState.Hero.Accomplishments.Add(accomplishment);
+
+            // Reload the TownCenter so it will open up the sewer
+            // TODO: this is not working.  Currently, you need to save your character and reload the game for this to work
+            // So, just need to handle the memory management a little better so I can easily flush out a cached location.
+            _TownCenter = null;
+            _TownCenter = GetTownCenter();
         }
 
         public Location GetArena()
@@ -74,7 +108,12 @@ namespace The_Darkest_Hour.Towns.Watertown
 
                 List<LocationAction> locationActions = new List<LocationAction>();
 
-                LocationAction locationAction = new SaveAction();
+
+                LocationAction locationAction = new RumorAction("Bartender",this.InnKeepersRumors);
+                locationActions.Add(locationAction);
+
+
+                locationAction = new SaveAction();
                 locationActions.Add(locationAction);
 
                 locationAction = new MainMenuAction();
@@ -140,9 +179,12 @@ namespace The_Darkest_Hour.Towns.Watertown
 
                 adjacentLocations.Add(GetArena());
                 adjacentLocations.Add(GetInn());
-                // TODO: Will eventually check to see if they have heard the Sewer King rumor.
-                // And then only display the sewer entrance.
-                adjacentLocations.Add(WatertownSewer.GetTownInstance().GetStartingLocation());
+
+                Accomplishment sewerKingAccomplishment = Watertown.GetWatertownAccomplishments().Find(x => x.Name.Contains("Sewer King"));
+                if (GameState.Hero.Accomplishments.Contains(sewerKingAccomplishment))
+                {
+                    adjacentLocations.Add(WatertownSewer.GetTownInstance().GetStartingLocation());
+                }
 
                 returnData.AdjacentLocations = adjacentLocations;
 
@@ -155,7 +197,7 @@ namespace The_Darkest_Hour.Towns.Watertown
 
 
             return returnData;
-        }
+        }      
 
         #endregion
 
@@ -164,7 +206,7 @@ namespace The_Darkest_Hour.Towns.Watertown
 
         public static WatertownAccomplishments GetWatertownAccomplishments()
         {
-            if (_WatertownAccomplishments != null)
+            if (_WatertownAccomplishments == null)
             {
                 _WatertownAccomplishments = new WatertownAccomplishments();
 
@@ -172,6 +214,9 @@ namespace The_Darkest_Hour.Towns.Watertown
                 accomplishment.NameSpace = "Watertown";
                 accomplishment.Name = "Has Heard the Sewer King Rumor";
                 accomplishment.Description = "Has heard the rumor of the sewer king.   Tales of gold and rewards in the Watertown sewer.";
+                _WatertownAccomplishments.Add(accomplishment);
+
+                // TODO: Can add more accomplishments here;
             }
 
             return _WatertownAccomplishments;
