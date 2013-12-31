@@ -74,6 +74,9 @@ namespace The_Darkest_Hour.Towns.Watertown
                 LocationAction locationAction = new SaveAction();
                 locationActions.Add(locationAction);
 
+                locationAction = new MainMenuAction();
+                locationActions.Add(locationAction);
+
                 locationAction = new ExitGame();
                 locationActions.Add(locationAction);
 
@@ -119,6 +122,9 @@ namespace The_Darkest_Hour.Towns.Watertown
                 locationActions.Add(locationAction);
 
                 locationAction = new SellItemsAction();
+                locationActions.Add(locationAction);
+
+                locationAction = new MainMenuAction();
                 locationActions.Add(locationAction);
 
                 locationAction = new ExitGame();
