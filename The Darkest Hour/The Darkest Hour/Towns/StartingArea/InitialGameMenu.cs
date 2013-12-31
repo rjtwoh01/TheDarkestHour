@@ -45,6 +45,9 @@ namespace The_Darkest_Hour.Towns.StartingArea
                     locationActions.Add(locationAction);
                 }
 
+                locationAction = new ExitGame();
+                locationActions.Add(locationAction);
+
                 returnData.Actions = locationActions;
 
             }
