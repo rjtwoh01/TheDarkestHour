@@ -17,6 +17,7 @@ namespace The_Darkest_Hour.Towns.Watertown
         private Location _TownCenter;
         private Location _Inn;
         private List<Rumor> _InnKeepersRumors;
+        private List<Rumor> _InnGuestRomors;
 
         private List<Rumor> InnKeepersRumors
         {
@@ -38,6 +39,28 @@ namespace The_Darkest_Hour.Towns.Watertown
             }
         }
 
+        private List<Rumor> InnGuestRumors
+        {
+            get
+            {
+                if (_InnGuestRomors == null)
+                {
+                    _InnGuestRomors = new List<Rumor>();
+
+                    Rumor guestRumor = new Rumor("Bandit Captain", "I can't seem to get supplies out of Watertown here. My caravans keep being attacked by a group of bandits. If you're looking for work, you should find and slay their leader. It would do everyone here a great deal of good.");
+                    guestRumor.Accomplishment = Watertown.GetWatertownAccomplishments().Find(x => x.Name.Contains("SBandit Captain"));
+                    guestRumor.OnHeardRumor += this.HeardBanditCaptainRumor;
+                    _InnGuestRomors.Add(guestRumor);
+                    _InnGuestRomors.Add(new Rumor("Life's Hard", "It's hard to make it as a traveling minstrel. Come to think of it, I think it's starting to get close to the time that I need to get moving away from here."));
+                    _InnGuestRomors.Add(new Rumor("Riches", "This town may not look it from the outside, but there is a great big market here. You can get plenty rich while here. Lot's of trade."));
+
+                }
+
+                return _InnGuestRomors;
+            }
+            
+        }
+
         public override Location GetStartingLocation()
         {
             return GetTownCenter();
@@ -52,6 +75,19 @@ namespace The_Darkest_Hour.Towns.Watertown
             // Reload the TownCenter so it will open up the sewer
             // TODO: this is not working.  Currently, you need to save your character and reload the game for this to work
             // So, just need to handle the memory management a little better so I can easily flush out a cached location.
+            _TownCenter = null;
+            _TownCenter = GetTownCenter();
+        }
+
+        public void HeardBanditCaptainRumor()
+        {
+            // TODO: Need to keep duplicate accomplishments from happening (SEE ABOVE METHOD)
+            Accomplishment accomplishment = Watertown.GetWatertownAccomplishments().Find(x => x.Name.Contains("Bandit Captain"));
+            GameState.Hero.Accomplishments.Add(accomplishment);
+
+            //Reload the TownCenter so it will open up the forest
+            // TODO: this is not working.  Currently, you need to save your character and reload the game for this to work
+            // So, just need to handle the memory management a little better so I can easily flush out a cached location. (COPIED FROM SEWER KING)
             _TownCenter = null;
             _TownCenter = GetTownCenter();
         }
@@ -112,6 +148,9 @@ namespace The_Darkest_Hour.Towns.Watertown
                 LocationAction locationAction = new RumorAction("Bartender",this.InnKeepersRumors);
                 locationActions.Add(locationAction);
 
+                //Adding rumors from guest in the inn
+                LocationAction guestLocationAction = new RumorAction("Guest", this.InnGuestRumors);
+                locationActions.Add(guestLocationAction);
 
                 locationAction = new SaveAction();
                 locationActions.Add(locationAction);
@@ -184,6 +223,11 @@ namespace The_Darkest_Hour.Towns.Watertown
                 if (GameState.Hero.Accomplishments.Contains(sewerKingAccomplishment))
                 {
                     adjacentLocations.Add(WatertownSewer.GetTownInstance().GetStartingLocation());
+                }
+                Accomplishment banditCaptainAccomplishment = Watertown.GetWatertownAccomplishments().Find(x => x.Name.Contains("Bandit Captain"));
+                if (GameState.Hero.Accomplishments.Contains(banditCaptainAccomplishment))
+                {
+                    adjacentLocations.Add(WaterTownForest.GetTownInstance().GetStartingLocation());
                 }
 
                 returnData.AdjacentLocations = adjacentLocations;
