@@ -38,22 +38,17 @@ namespace The_Darkest_Hour
                 // positive this will be an issue).
 
                 // Call any pre action events
-                if (locationAction.OnPreAction != null)
-                {
-                    locationAction.OnPreAction();
-                }
-                LocationDefinition newLocation = locationAction.DoAction(); ;
+                locationAction.DoPreAction();
 
+                // Do Action
+                LocationDefinition newLocation = locationAction.DoAction(); ;
                 
+                // Move Location State
                 GameState.PreviousLocation = GameState.CurrentLocation;
                 GameState.CurrentLocation = newLocation;
 
-
                 // Call any post action events
-                if (locationAction.OnPostAction != null)
-                {
-                    locationAction.OnPostAction();
-                }
+                locationAction.DoPostAction();
 
 
                 GameState.CurrentLocation.LocationInstance.Display();

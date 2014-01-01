@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace The_Darkest_Hour.Locations
 {
-    public delegate void PreActionHandler();
-    public delegate void PostActionHandler();
+    public delegate void PreActionHandler(object sender, EventArgs e);
+    public delegate void PostActionHandler(object sender, EventArgs e);
 
     abstract class LocationAction
     {
@@ -16,18 +16,35 @@ namespace The_Darkest_Hour.Locations
 
         public abstract LocationDefinition DoAction();
 
-        public PreActionHandler OnPreAction = null;
-        public PostActionHandler OnPostAction = null;
+        public event PreActionHandler PreAction;
+        public event PostActionHandler PostAction ;
 
-        public void PreAction()
+        public virtual void OnPreAction(EventArgs e)
         {
-            OnPreAction();
+            if (PreAction != null)
+            {
+                PreAction(this, e);
+            }
         }
 
-        public void PostAction()
+        public virtual void OnPostAction(EventArgs e)
         {
-            OnPostAction();
+            if (PostAction != null)
+            {
+                PostAction(this, e);
+            }
         }
+
+        public virtual void DoPreAction()
+        {
+            OnPreAction(EventArgs.Empty);
+        }
+
+        public virtual void DoPostAction()
+        {
+            OnPostAction(EventArgs.Empty);
+        }
+
 
         public void ClearScreen()
         {
