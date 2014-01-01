@@ -31,25 +31,21 @@ namespace The_Darkest_Hour
 
             while(!(locationAction is ExitGame))
             {
-                // TODO: might add a check to see if the newLocation
-                // is the same the current if so, don't set the previous.
-                // There might be some situation where we lose the previous location. 
-                // when doing actions that say in the same location (in fact, I'm almost
-                // positive this will be an issue).
-
                 // Call any pre action events
                 locationAction.DoPreAction();
 
                 // Do Action
                 LocationDefinition newLocation = locationAction.DoAction(); ;
                 
-                // Move Location State
-                GameState.PreviousLocation = GameState.CurrentLocation;
+                // Move Location State (only if different
+                if (!GameState.PreviousLocation.LocationKey.Equals(GameState.CurrentLocation.LocationKey))
+                {
+                    GameState.PreviousLocation = GameState.CurrentLocation;
+                }
                 GameState.CurrentLocation = newLocation;
 
                 // Call any post action events
                 locationAction.DoPostAction();
-
 
                 GameState.CurrentLocation.LocationInstance.Display();
                 locationAction = GameState.CurrentLocation.LocationInstance.GetAction();
