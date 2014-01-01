@@ -36,9 +36,25 @@ namespace The_Darkest_Hour
                 // There might be some situation where we lose the previous location. 
                 // when doing actions that say in the same location (in fact, I'm almost
                 // positive this will be an issue).
+
+                // Call any pre action events
+                if (locationAction.OnPreAction != null)
+                {
+                    locationAction.OnPreAction();
+                }
                 LocationDefinition newLocation = locationAction.DoAction(); ;
+
+                
                 GameState.PreviousLocation = GameState.CurrentLocation;
                 GameState.CurrentLocation = newLocation;
+
+
+                // Call any post action events
+                if (locationAction.OnPostAction != null)
+                {
+                    locationAction.OnPostAction();
+                }
+
 
                 GameState.CurrentLocation.LocationInstance.Display();
                 locationAction = GameState.CurrentLocation.LocationInstance.GetAction();
