@@ -20,6 +20,7 @@ namespace The_Darkest_Hour.Locations.Actions
         {
             LocationDefinition returnData = GameState.CurrentLocation;
 
+            GameState.ResetGame();
             GameState.Hero = new Player();
             GameState.Hero.Initialize();
 

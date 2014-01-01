@@ -23,6 +23,7 @@ namespace The_Darkest_Hour.Locations.Actions
         {
             LocationDefinition returnData = GameState.CurrentLocation;
 
+            GameState.ResetGame();
             GameState.Hero = LoadSave.LoadCharacter(this.CharacterFileName);
 
             if (GameState.Hero!=null)

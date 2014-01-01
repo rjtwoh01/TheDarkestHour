@@ -117,5 +117,17 @@ namespace The_Darkest_Hour
 
         }
 
+        /// <summary>
+        /// Will reset the game to it's initial state.
+        /// </summary>
+        public static void ResetGame()
+        {
+            _GameLocations = null;
+            Hero = null;
+            CurrentLocation = null;
+            UpcomingLocation = null;
+            PreviousLocation = null;
+        }
+
     }
 }
