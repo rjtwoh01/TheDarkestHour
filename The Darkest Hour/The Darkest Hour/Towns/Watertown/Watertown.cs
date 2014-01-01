@@ -44,21 +44,13 @@ namespace The_Darkest_Hour.Towns.Watertown
             returnData.Actions = locationActions;
 
             // Adjacent Locations
-            Dictionary<string, LocationDefinition> adjacentLocationKeys = new Dictionary<string, LocationDefinition>();
+            Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
 
             LocationDefinition locationDefinition = GetTownCenterDefinition();
 
-            adjacentLocationKeys.Add(locationDefinition.LocationKey, locationDefinition);
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            returnData.AdjacentLocationKeys = adjacentLocationKeys;
-
-            /*
-            List<Location> adjacentLocations = new List<Location>();
-
-            adjacentLocations.Add(GetTownCenter());
-
-            returnData.AdjacentLocations = adjacentLocations;                 
-            */
+            returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
 
             return returnData;
         }
@@ -116,21 +108,13 @@ namespace The_Darkest_Hour.Towns.Watertown
             returnData.Actions = locationActions;
 
             // Adjacent Locations
-            Dictionary<string, LocationDefinition> adjacentLocationKeys = new Dictionary<string, LocationDefinition>();
+            Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
 
             LocationDefinition locationDefinition = GetTownCenterDefinition();
 
-            adjacentLocationKeys.Add(locationDefinition.LocationKey, locationDefinition);
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            returnData.AdjacentLocationKeys = adjacentLocationKeys;
-
-            /*
-            List<Location> adjacentLocations = new List<Location>();
-
-            adjacentLocations.Add(GetTownCenter());
-
-            returnData.AdjacentLocations = adjacentLocations;
-            */
+            returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
 
             return returnData;
         }
@@ -192,45 +176,29 @@ namespace The_Darkest_Hour.Towns.Watertown
 
 
             // Adjacent Locations
-            Dictionary<string, LocationDefinition> adjacentLocationKeys = new Dictionary<string, LocationDefinition>();
+            Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
 
             LocationDefinition locationDefinition = GetArenaDefinition();
-            adjacentLocationKeys.Add(locationDefinition.LocationKey, locationDefinition);
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
             locationDefinition = GetInnDefinition();
-            adjacentLocationKeys.Add(locationDefinition.LocationKey, locationDefinition);
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            returnData.AdjacentLocationKeys = adjacentLocationKeys;
+            returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
                         
             Accomplishment sewerKingAccomplishment = Watertown.GetWatertownAccomplishments().Find(x => x.Name.Contains("Sewer King"));
             if (GameState.Hero.Accomplishments.Contains(sewerKingAccomplishment))
             {
                 locationDefinition = WatertownSewer.GetTownInstance().GetSewerEntranceDefinition();
-                adjacentLocationKeys.Add(locationDefinition.LocationKey, locationDefinition);
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
             }
 
             Accomplishment banditCaptainAccomplishment = Watertown.GetWatertownAccomplishments().Find(x => x.Name.Contains("Bandit Captain"));
             if (GameState.Hero.Accomplishments.Contains(banditCaptainAccomplishment))
             {
                 locationDefinition = WatertownForest.GetTownInstance().GetForestEntranceDefinition();
-                adjacentLocationKeys.Add(locationDefinition.LocationKey, locationDefinition);
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
             }
-
-
-            /*
-            List<Location> adjacentLocations = new List<Location>();
-
-            adjacentLocations.Add(GetArena());
-            adjacentLocations.Add(GetInn());
-
-            Accomplishment sewerKingAccomplishment = Watertown.GetWatertownAccomplishments().Find(x => x.Name.Contains("Sewer King"));
-            if (GameState.Hero.Accomplishments.Contains(sewerKingAccomplishment))
-            {
-                adjacentLocations.Add(WatertownSewer.GetTownInstance().GetStartingLocation());
-            }
-
-            returnData.AdjacentLocations = adjacentLocations;
-            */
 
             return returnData;
         }
@@ -275,8 +243,7 @@ namespace The_Darkest_Hour.Towns.Watertown
                     _InnKeepersRumors = new List<Rumor>();
 
                     Rumor rumor = new Rumor("Sewer King", "There are tales of a Sewer King with hoards of riches and gold.  The entrance to the sewers can be found in the Town Center.");
-                    rumor.Accomplishment = Watertown.GetWatertownAccomplishments().Find(x => x.Name.Contains("Sewer King"));
-                    rumor.OnHeardRumor += this.HeardSewerKingRumor;
+                    rumor.OnHeardRumor = this.HeardSewerKingRumor;
                     _InnKeepersRumors.Add(rumor);
                     _InnKeepersRumors.Add(new Rumor("Not Much", "Not much happening around here these days."));
                     _InnKeepersRumors.Add(new Rumor("Stay awhile", "Stay a while and listen to our bard play music and sing songs of great tales."));
@@ -295,11 +262,6 @@ namespace The_Darkest_Hour.Towns.Watertown
 
             // Reload the TownCenter so it will open up the sewer
             Location.ResetLocation(TOWN_CENTER_KEY);
-
-            // TODO: this is not working.  Currently, you need to save your character and reload the game for this to work
-            // So, just need to handle the memory management a little better so I can easily flush out a cached location.
-            //_TownCenter = null;
-            //_TownCenter = GetTownCenter();
         }
 
         #endregion
@@ -316,8 +278,7 @@ namespace The_Darkest_Hour.Towns.Watertown
                     _InnGuestRumors = new List<Rumor>();
 
                     Rumor guestRumor = new Rumor("Bandit Captain", "I can't seem to get supplies out of Watertown here. My caravans keep being attacked by a group of bandits. If you're looking for work, you should find and slay their leader. It would do everyone here a great deal of good.");
-                    guestRumor.Accomplishment = Watertown.GetWatertownAccomplishments().Find(x => x.Name.Contains("Bandit Captain"));
-                    guestRumor.OnHeardRumor += this.HeardBanditCaptainRumor;
+                    guestRumor.OnHeardRumor = this.HeardBanditCaptainRumor;
                     _InnGuestRumors.Add(guestRumor);
                     _InnGuestRumors.Add(new Rumor("Life's Hard", "It's hard to make it as a traveling minstrel. Come to think of it, I think it's starting to get close to the time that I need to get moving away from here."));
                     _InnGuestRumors.Add(new Rumor("Riches", "This town may not look it from the outside, but there is a great big market here. You can get plenty rich while here. Lot's of trade."));

@@ -37,15 +37,6 @@ namespace The_Darkest_Hour.Locations.Actions
                 {
                     this.Rumors[rumorIndex].OnHeardRumor();
                 }
-
-                /*
-                if (this.Rumors[rumorIndex].Accomplishment != null)
-                {
-                    // TODO: need to keep duplicate accomplishments from happening.
-                    GameState.Hero.Accomplishments.Add(this.Rumors[rumorIndex].Accomplishment);
-                }
-                 * */
-
             }
             else
             {

@@ -25,7 +25,6 @@ namespace The_Darkest_Hour
             InitialGameMenu initialGameMenu = InitialGameMenu.GetTownInstance();
             GameState.CurrentLocation = initialGameMenu.GetStartingLocationDefinition();
 
-
             GameState.CurrentLocation.LocationInstance.Display();
             LocationAction locationAction = GameState.CurrentLocation.LocationInstance.GetAction();
 
@@ -36,12 +35,7 @@ namespace The_Darkest_Hour
 
                 // Do Action
                 LocationDefinition newLocation = locationAction.DoAction(); ;
-                
-                // Move Location State (only if different
-                if (!GameState.PreviousLocation.LocationKey.Equals(GameState.CurrentLocation.LocationKey))
-                {
-                    GameState.PreviousLocation = GameState.CurrentLocation;
-                }
+     
                 GameState.CurrentLocation = newLocation;
 
                 // Call any post action events

@@ -30,7 +30,6 @@ namespace The_Darkest_Hour
         public static Player Hero { get; set; }
         public static LocationDefinition CurrentLocation { get; set; }
         public static LocationDefinition UpcomingLocation { get; set; }
-        public static LocationDefinition PreviousLocation { get; set; }
 
         public static Town StartingTown
         {
@@ -75,7 +74,7 @@ namespace The_Darkest_Hour
         }
 
         /// <summary>
-        /// 
+        /// Holds the game loaded game locations
         /// </summary>
         /// <remarks>
         /// This is the single source of loaded game locations.
@@ -120,13 +119,13 @@ namespace The_Darkest_Hour
         /// <summary>
         /// Will reset the game to it's initial state.
         /// </summary>
+        /// <remarks>Typically used when loading a new character.</remarks>
         public static void ResetGame()
         {
             _GameLocations = null;
             Hero = null;
             CurrentLocation = null;
             UpcomingLocation = null;
-            PreviousLocation = null;
         }
 
     }

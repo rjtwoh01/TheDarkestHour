@@ -15,14 +15,22 @@ namespace The_Darkest_Hour
 {
     class LoadSave
     {
-
+        /// <summary>
+        /// Gets the list of saved characters
+        /// </summary>
+        /// <returns></returns>
+        /// <remarks>
+        /// Eventually if would be nice to 
+        /// (1) Check for only valid game files
+        /// (2) Get the name of the character too (maybe level as well)
+        /// </remarks>
         public static List<LocationAction> GetSavedCharacters()
         {
             List<LocationAction> returnData = new List<LocationAction>();
             LocationAction locationAction;
 
-            DirectoryInfo d = new DirectoryInfo(GameConfigs.PlayerGameFilesLocation);//Assuming Test is your Folder
-            FileInfo[] Files = d.GetFiles("*.xml"); //Getting Text files
+            DirectoryInfo d = new DirectoryInfo(GameConfigs.PlayerGameFilesLocation);
+            FileInfo[] Files = d.GetFiles("*.xml");
             foreach (FileInfo file in Files)
             {
                 locationAction = new LoadCharacterAction(file.Name);
@@ -32,6 +40,11 @@ namespace The_Darkest_Hour
             return returnData;
         }
 
+        /// <summary>
+        /// Checks if any saved game files exists.
+        /// </summary>
+        /// <returns></returns>
+        /// <remarks>Does not validate if they are valid game files.  Only checks if they are xml files.</remarks>
         public static bool SavedGameExists()
         {
             bool returnData=false;
@@ -110,6 +123,11 @@ namespace The_Darkest_Hour
 
         }
 
+        /// <summary>
+        /// Returns a valid file name for a character
+        /// </summary>
+        /// <param name="myHero"></param>
+        /// <returns></returns>
         public static string GetCharacterFileName(Player myHero)
         {
             StringBuilder returnData = new StringBuilder();

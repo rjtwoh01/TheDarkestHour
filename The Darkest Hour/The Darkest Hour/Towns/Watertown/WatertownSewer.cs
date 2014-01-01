@@ -33,13 +33,13 @@ namespace The_Darkest_Hour.Towns.Watertown
             returnData.Description = "Mud and slime and poopoo.  What a nasty place. (no actions yet)";
 
             // Adjacent Locations
-            Dictionary<string, LocationDefinition> adjacentLocationKeys = new Dictionary<string, LocationDefinition>();
+            Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
 
             LocationDefinition locationDefinition = Watertown.GetTownInstance().GetTownCenterDefinition();
 
-            adjacentLocationKeys.Add(locationDefinition.LocationKey, locationDefinition);
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            returnData.AdjacentLocationKeys = adjacentLocationKeys;
+            returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
 
             return returnData;
         }

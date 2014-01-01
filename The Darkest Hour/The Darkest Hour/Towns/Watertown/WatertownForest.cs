@@ -31,13 +31,13 @@ namespace The_Darkest_Hour.Towns.Watertown
             returnData.Description = "A dense yet surprisingly bright forest. You can hear the laughter of the bandits off in the distance (no actions yet).";
 
             // Adjacent Locations
-            Dictionary<string, LocationDefinition> adjacentLocationKeys = new Dictionary<string, LocationDefinition>();
+            Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
 
             LocationDefinition locationDefinition = Watertown.GetTownInstance().GetTownCenterDefinition();
 
-            adjacentLocationKeys.Add(locationDefinition.LocationKey, locationDefinition);
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            returnData.AdjacentLocationKeys = adjacentLocationKeys;
+            returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
 
             return returnData;
 

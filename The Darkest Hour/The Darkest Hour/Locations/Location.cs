@@ -74,7 +74,7 @@ namespace The_Darkest_Hour.Locations
 
         public List<LocationAction> Actions { get; set; }
 
-        public Dictionary<string, LocationDefinition> AdjacentLocationKeys { get; set; }
+        public Dictionary<string, LocationDefinition> AdjacentLocationDefinitions { get; set; }
 
         public void Display()
         {
@@ -82,13 +82,13 @@ namespace The_Darkest_Hour.Locations
 
             Console.WriteLine(this.Description);
 
-            if ((this.AdjacentLocationKeys != null) && (this.AdjacentLocationKeys.Count > 0))
+            if ((this.AdjacentLocationDefinitions != null) && (this.AdjacentLocationDefinitions.Count > 0))
             {
                 Console.WriteLine("\nAdjacent Locations:\n");
 
                 char c = 'A';
 
-                foreach (LocationDefinition locationDefinition in this.AdjacentLocationKeys.Values)
+                foreach (LocationDefinition locationDefinition in this.AdjacentLocationDefinitions.Values)
                 {
 
                     Console.WriteLine(String.Format("\t{0}) {1}", c, locationDefinition.Name));
@@ -142,7 +142,7 @@ namespace The_Darkest_Hour.Locations
                     // TODO: This is poor way to check for the results (by catching an exception)
                     locationIndexChar = Char.Parse(answer);
                     int aValue = (int)'A';
-                    int maxAnswerInt = aValue + this.AdjacentLocationKeys.Count-1;
+                    int maxAnswerInt = aValue + this.AdjacentLocationDefinitions.Count-1;
                     char maxAnswer = (char) maxAnswerInt;
                     if ((locationIndexChar < 'A') || (locationIndexChar > maxAnswer))
                     {
@@ -153,7 +153,7 @@ namespace The_Darkest_Hour.Locations
                         locationIndexInt = Convert.ToInt32(locationIndexChar) - aValue;
                         //GameState.UpcomingLocation = this.AdjacentLocations[locationIndexInt];
                         
-                        GameState.UpcomingLocation = this.AdjacentLocationKeys.Values.ElementAt(locationIndexInt);
+                        GameState.UpcomingLocation = this.AdjacentLocationDefinitions.Values.ElementAt(locationIndexInt);
 
 
                         returnData = new MoveLocationAction();
