@@ -81,11 +81,6 @@ namespace The_Darkest_Hour.Towns.StartingArea
             locationAction = new CreateNewCharacterAction();
             locationActions.Add(locationAction);
 
-            // TODO: There should be a defect where if a new game is started
-            // and there is no saved games and then you save a game, this menu
-            // option will be hidden until the game is reloaded.
-            // To fix, just remove this location from the Game Locations
-            // when someone saves.
             if (LoadSave.SavedGameExists())
             {
                 locationAction = new LoadSavedGameAction();

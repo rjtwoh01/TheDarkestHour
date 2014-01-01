@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using The_Darkest_Hour.Towns.StartingArea;
 
 namespace The_Darkest_Hour.Locations.Actions
 {
@@ -19,6 +20,9 @@ namespace The_Darkest_Hour.Locations.Actions
             LocationDefinition returnData = GameState.CurrentLocation;
 
             LoadSave.SaveCharacter(GameState.Hero);
+
+            // Reload the Game Menu location
+            Location.ResetLocation(InitialGameMenu.GAME_MENU_KEY);
 
             this.ClearScreen();
 
