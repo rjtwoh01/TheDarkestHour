@@ -29,7 +29,7 @@ namespace The_Darkest_Hour.Locations.Actions
 
             if ((this.Rumors != null) && (this.Rumors.Count > 0))
             {
-                int rumorIndex = GameState.NumberGenerator.Next(0, Rumors.Count - 1);
+                int rumorIndex = GameState.NumberGenerator.Next(0, Rumors.Count);
 
                 Console.WriteLine(String.Format("{0} says '{1}'", this.NpcName, this.Rumors[rumorIndex].DisplayText));
 

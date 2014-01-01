@@ -100,6 +100,9 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationAction locationAction = new RumorAction("Bartender", this.InnKeepersRumors);
             locationActions.Add(locationAction);
 
+            //Adding rumors from guest in the inn
+            LocationAction guestLocationAction = new RumorAction("Guest", this.InnGuestRumors);
+            locationActions.Add(guestLocationAction);
 
             locationAction = new SaveAction();
             locationActions.Add(locationAction);
@@ -206,6 +209,13 @@ namespace The_Darkest_Hour.Towns.Watertown
                 adjacentLocationKeys.Add(locationDefinition.LocationKey, locationDefinition);
             }
 
+            Accomplishment banditCaptainAccomplishment = Watertown.GetWatertownAccomplishments().Find(x => x.Name.Contains("Bandit Captain"));
+            if (GameState.Hero.Accomplishments.Contains(banditCaptainAccomplishment))
+            {
+                locationDefinition = WatertownForest.GetTownInstance().GetForestEntranceDefinition();
+                adjacentLocationKeys.Add(locationDefinition.LocationKey, locationDefinition);
+            }
+
 
             /*
             List<Location> adjacentLocations = new List<Location>();
@@ -253,6 +263,7 @@ namespace The_Darkest_Hour.Towns.Watertown
 
         #region Rumors
 
+        #region Inn Keeper's Rumors
         private List<Rumor> _InnKeepersRumors;
 
         private List<Rumor> InnKeepersRumors
@@ -291,6 +302,44 @@ namespace The_Darkest_Hour.Towns.Watertown
             //_TownCenter = GetTownCenter();
         }
 
+        #endregion
+
+        #region Inn Guest's Rumors
+        private List<Rumor> _InnGuestRumors;
+
+        private List<Rumor> InnGuestRumors
+        {
+            get
+            {
+                if (_InnGuestRumors == null)
+                {
+                    _InnGuestRumors = new List<Rumor>();
+
+                    Rumor guestRumor = new Rumor("Bandit Captain", "I can't seem to get supplies out of Watertown here. My caravans keep being attacked by a group of bandits. If you're looking for work, you should find and slay their leader. It would do everyone here a great deal of good.");
+                    guestRumor.Accomplishment = Watertown.GetWatertownAccomplishments().Find(x => x.Name.Contains("Bandit Captain"));
+                    guestRumor.OnHeardRumor += this.HeardBanditCaptainRumor;
+                    _InnGuestRumors.Add(guestRumor);
+                    _InnGuestRumors.Add(new Rumor("Life's Hard", "It's hard to make it as a traveling minstrel. Come to think of it, I think it's starting to get close to the time that I need to get moving away from here."));
+                    _InnGuestRumors.Add(new Rumor("Riches", "This town may not look it from the outside, but there is a great big market here. You can get plenty rich while here. Lot's of trade."));
+
+                }
+
+                return _InnGuestRumors;
+            }
+            
+        }
+
+        public void HeardBanditCaptainRumor()
+        {
+            // TODO: Need to keep duplicate accomplishments from happening (SEE ABOVE METHOD)
+            Accomplishment accomplishment = Watertown.GetWatertownAccomplishments().Find(x => x.Name.Contains("Bandit Captain"));
+            GameState.Hero.Accomplishments.Add(accomplishment);
+
+            // Reload the TownCenter so it will open up the forest
+            Location.ResetLocation(TOWN_CENTER_KEY);
+        }
+
+        #endregion
 
         #endregion
 
@@ -307,6 +356,12 @@ namespace The_Darkest_Hour.Towns.Watertown
                 accomplishment.NameSpace = "Watertown";
                 accomplishment.Name = "Has Heard the Sewer King Rumor";
                 accomplishment.Description = "Has heard the rumor of the sewer king.   Tales of gold and rewards in the Watertown sewer.";
+                _WatertownAccomplishments.Add(accomplishment);
+
+                accomplishment = new Accomplishment();
+                accomplishment.NameSpace = "Watertown";
+                accomplishment.Name = "Has Heard the Bandit Captain Rumor";
+                accomplishment.Description = "Has heard the rumor of the bandit captain.   Tales of gold and rewards in the Watertown Forest.";
                 _WatertownAccomplishments.Add(accomplishment);
 
                 // TODO: Can add more accomplishments here;

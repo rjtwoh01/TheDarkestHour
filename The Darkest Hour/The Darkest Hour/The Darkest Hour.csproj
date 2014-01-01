@@ -135,7 +135,7 @@
     <Compile Include="Towns\Town.cs" />
     <Compile Include="Towns\Watertown\Watertown.cs" />
     <Compile Include="Towns\Watertown\WatertownAccomplishments.cs" />
-    <Compile Include="Towns\Watertown\WaterTownForest.cs" />
+    <Compile Include="Towns\Watertown\WatertownForest.cs" />
     <Compile Include="Towns\Watertown\WatertownSewer.cs" />
   </ItemGroup>
   <ItemGroup>
