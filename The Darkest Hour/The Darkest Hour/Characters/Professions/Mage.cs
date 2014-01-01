@@ -9,6 +9,9 @@ namespace The_Darkest_Hour.Characters.Professions
 {
     public class Mage : Profession
     {
+
+        public override string Name { get { return "Mage"; } }
+
         Random rand = new Random();
 
         public override int GetDamageMultipler(Player myHero)

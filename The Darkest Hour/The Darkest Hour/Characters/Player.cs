@@ -19,13 +19,6 @@ namespace The_Darkest_Hour.Characters
         public int maxGold = 1000000;
         public double magicFind;
         public double goldFind;
-        public string Rogue = "Rogue";
-        public string Hunter = "Hunter";
-        public string Warrior = "Warrior";
-        public string Guardian = "Guardian";
-        public string Mage = "Mage";
-        public string Cleric = "Cleric";
-        public string profession = null;
         public string mainStatName;
         public string requiredWeaponType;
         public string requiredArmorType;
@@ -79,7 +72,7 @@ namespace The_Darkest_Hour.Characters
         private void ChooseProfession()
         {
             CharacterProfessions prof;
-            if (profession == null)
+            if (this.Profession == null)
             {
                 Console.WriteLine(CharacterResources.ChooseProfession); //Ask the player what profession they want to be
                 try
@@ -94,32 +87,26 @@ namespace The_Darkest_Hour.Characters
                             break;
 
                         case CharacterProfessions.Rogue:
-                            this.profession = Rogue;
                             this.Profession = new Rogue();
                             break;
 
                         case CharacterProfessions.Hunter:
-                            this.profession = Hunter;
                             this.Profession = new Hunter();
                             break;
 
                         case CharacterProfessions.Warrior:
-                            this.profession = Warrior;
                             this.Profession = new Warrior();
                             break;
 
                         case CharacterProfessions.Guardian:
-                            this.profession = Guardian;
                             this.Profession = new Guardian();
                             break;
 
                         case CharacterProfessions.Mage:
-                            this.profession = Mage;
                             this.Profession = new Mage();
                             break;
 
                         case CharacterProfessions.Cleric:
-                            this.profession = Cleric;
                             this.Profession = new Cleric();
                             break;
 
@@ -148,7 +135,7 @@ namespace The_Darkest_Hour.Characters
 
         public void DisplayProfession()
         {
-            Console.WriteLine(this.profession);
+            Console.WriteLine(this.Profession.Name);
             Console.WriteLine("Main stat is: {0}", this.mainStatName);
         }
 
