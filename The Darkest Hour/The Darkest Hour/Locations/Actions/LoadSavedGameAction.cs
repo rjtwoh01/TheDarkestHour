@@ -16,9 +16,9 @@ namespace The_Darkest_Hour.Locations.Actions
             this.Description = "Load Saved Game";
         }
 
-        public override Location DoAction()
+        public override LocationDefinition DoAction()
         {
-            Location returnData = new InitialGameMenu().GetLoadCharactersMenu();
+            LocationDefinition returnData = new InitialGameMenu().GetLoadCharactersMenuDefinition();
 
             this.ClearScreen(false);
 

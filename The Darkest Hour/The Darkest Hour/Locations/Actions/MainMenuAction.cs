@@ -15,9 +15,9 @@ namespace The_Darkest_Hour.Locations.Actions
             this.Description = "Main Menu";
         }
 
-        public override Location DoAction()
+        public override LocationDefinition DoAction()
         {
-            Location returnData = new InitialGameMenu().GetStartingLocation();
+            LocationDefinition returnData = new InitialGameMenu().GetStartingLocationDefinition();
 
             this.ClearScreen(false);
 

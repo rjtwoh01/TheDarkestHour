@@ -13,6 +13,6 @@ namespace The_Darkest_Hour.Towns
     /// </summary>
     abstract class Town : GameObject
     {
-        public abstract Location GetStartingLocation();
+        public abstract LocationDefinition GetStartingLocationDefinition();
     }
 }

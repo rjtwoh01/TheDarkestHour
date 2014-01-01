@@ -10,51 +10,65 @@ namespace The_Darkest_Hour.Towns.Watertown
 {
     class WatertownSewer : Town
     {
-        private Location _SewerEntrance;
 
-        public override Location GetStartingLocation()
+        #region Location Keys
+
+        public const string ENTRANCE_KEY = "WatertownSewer.Entrance";
+
+        #endregion
+
+        #region Locations
+
+        public override LocationDefinition GetStartingLocationDefinition()
         {
-            return GetSewerEntrance();
+            return GetSewerEntranceDefinition();
         }
 
-        public Location GetSewerEntrance()
+        public Location LoadSewerEntrance()
         {
             Location returnData;
 
-            if (_SewerEntrance == null)
-            {
+            returnData = new Location();
+            returnData.Name = "Watertown Sewer Entrance";
+            returnData.Description = "Mud and slime and poopoo.  What a nasty place. (no actions yet)";
 
-                returnData = new Location();
-                returnData.Name = "Watertown Sewer Entrance";
-                returnData.Description = "Mud and slime and poopoo.  What a nasty place. (no actions yet)";
+            // Adjacent Locations
+            Dictionary<string, LocationDefinition> adjacentLocationKeys = new Dictionary<string, LocationDefinition>();
 
-                _SewerEntrance = returnData;
+            LocationDefinition locationDefinition = Watertown.GetTownInstance().GetTownCenterDefinition();
 
-                /*
-                List<LocationAction> locationActions = new List<LocationAction>();
+            adjacentLocationKeys.Add(locationDefinition.LocationKey, locationDefinition);
 
-
-                LocationAction locationAction = new ExitGame();
-                locationActions.Add(locationAction);                 
-
-                returnData.Actions = locationActions;
-                */
-
-                List<Location> adjacentLocations = new List<Location>();
-                Watertown watertown = Watertown.GetTownInstance();
-                adjacentLocations.Add(watertown.GetTownCenter());
-
-                returnData.AdjacentLocations = adjacentLocations;
-            }
-            else
-            {
-                returnData = _SewerEntrance;
-            }
-
+            returnData.AdjacentLocationKeys = adjacentLocationKeys;
 
             return returnData;
         }
 
+
+        public LocationDefinition GetSewerEntranceDefinition()
+        {
+            LocationDefinition returnData = new LocationDefinition();
+            string locationKey = ENTRANCE_KEY;
+
+            if (Location.LocationExists(locationKey))
+            {
+                returnData = Location.GetLocation(locationKey);
+            }
+            else
+            {
+                returnData.LocationKey = locationKey;
+                returnData.Name = "Watertown Sewer Entrance";
+                returnData.DoLoadLocation = LoadSewerEntrance;
+
+                Location.AddLocation(returnData);
+            }
+
+            return returnData;
+        }
+
+        #endregion
+
+        #region Get Town Instance
 
         private static WatertownSewer _WatertownSewer;
 
@@ -67,5 +81,8 @@ namespace The_Darkest_Hour.Towns.Watertown
 
             return _WatertownSewer;
         }
+
+        #endregion
+
     }
 }

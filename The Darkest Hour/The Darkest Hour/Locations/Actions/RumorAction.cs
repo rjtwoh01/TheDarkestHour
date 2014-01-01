@@ -21,9 +21,9 @@ namespace The_Darkest_Hour.Locations.Actions
             this.Description = String.Format("Talk with {0} to get the latest news.", npcName); ;
         }
 
-        public override Location DoAction()
+        public override LocationDefinition DoAction()
         {
-            Location returnData = GameState.CurrentLocation;
+            LocationDefinition returnData = GameState.CurrentLocation;
 
             this.ClearScreen(false);
 

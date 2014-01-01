@@ -14,9 +14,9 @@ namespace The_Darkest_Hour.Locations.Actions
             this.Description = "Move Location";
         }
 
-        public override Location DoAction()
+        public override LocationDefinition DoAction()
         {
-            Location returnData = GameState.UpcomingLocation;
+            LocationDefinition returnData = GameState.UpcomingLocation;
 
             Console.WriteLine(String.Format("\nYou are moving to {0}.",GameState.UpcomingLocation.Name));
 

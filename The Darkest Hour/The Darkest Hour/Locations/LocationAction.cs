@@ -11,7 +11,7 @@ namespace The_Darkest_Hour.Locations
         public string Name { get; set; }
         public string Description { get; set; }
 
-        public abstract Location DoAction();
+        public abstract LocationDefinition DoAction();
 
 
         public void ClearScreen()

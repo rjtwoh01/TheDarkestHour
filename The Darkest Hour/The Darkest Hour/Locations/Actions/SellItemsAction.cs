@@ -16,9 +16,9 @@ namespace The_Darkest_Hour.Locations.Actions
         }
 
 
-        public override Location DoAction()
+        public override LocationDefinition DoAction()
         {
-            Location returnData = GameState.CurrentLocation;
+            LocationDefinition returnData = GameState.CurrentLocation;
 
             GeneralStore.DoGeneralStore();
 

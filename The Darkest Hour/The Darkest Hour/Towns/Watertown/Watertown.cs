@@ -11,13 +11,249 @@ namespace The_Darkest_Hour.Towns.Watertown
 {
     class Watertown : Town
     {
+        #region Location Keys
 
-        #region Instance Properties and Methods
-        private Location _Arena;
-        private Location _TownCenter;
-        private Location _Inn;
+        public const string ARENA_KEY = "Watertown.Arena";
+        public const string TOWN_CENTER_KEY = "Watertown.TownCenter";
+        public const string INN_KEY = "Watertown.Inn";
+
+        #endregion
+
+        #region Locations
+
+        public override LocationDefinition GetStartingLocationDefinition()
+        {
+            return GetTownCenterDefinition();
+        }
+
+        public Location LoadArena()
+        {
+            Location returnData;
+            LocationAction locationAction;
+
+            returnData = new Location();
+            returnData.Name = "Watertown Arena";
+            returnData.Description = "Prepare to Die!";
+
+            // Location Actions
+            List<LocationAction> locationActions = new List<LocationAction>();
+
+            locationAction = new ArenaAction();
+            locationActions.Add(locationAction);
+
+            returnData.Actions = locationActions;
+
+            // Adjacent Locations
+            Dictionary<string, LocationDefinition> adjacentLocationKeys = new Dictionary<string, LocationDefinition>();
+
+            LocationDefinition locationDefinition = GetTownCenterDefinition();
+
+            adjacentLocationKeys.Add(locationDefinition.LocationKey, locationDefinition);
+
+            returnData.AdjacentLocationKeys = adjacentLocationKeys;
+
+            /*
+            List<Location> adjacentLocations = new List<Location>();
+
+            adjacentLocations.Add(GetTownCenter());
+
+            returnData.AdjacentLocations = adjacentLocations;                 
+            */
+
+            return returnData;
+        }
+
+
+        public LocationDefinition GetArenaDefinition()
+        {
+            LocationDefinition returnData = new LocationDefinition();
+            string locationKey = ARENA_KEY;
+
+            if (Location.LocationExists(locationKey))
+            {
+                returnData = Location.GetLocation(locationKey);
+            }
+            else
+            {
+                returnData.LocationKey = locationKey;
+                returnData.Name = "Watertown Arena";
+                returnData.DoLoadLocation = LoadArena;
+
+                Location.AddLocation(returnData);
+            }
+
+            return returnData;
+        }
+
+        public Location LoadInn()
+        {
+            Location returnData;
+
+
+            returnData = new Location();
+            returnData.Name = "Prancing Pony";
+            returnData.Description = "You belly up to the bar!";
+
+            // Location Actions
+            List<LocationAction> locationActions = new List<LocationAction>();
+
+            LocationAction locationAction = new RumorAction("Bartender", this.InnKeepersRumors);
+            locationActions.Add(locationAction);
+
+
+            locationAction = new SaveAction();
+            locationActions.Add(locationAction);
+
+            locationAction = new MainMenuAction();
+            locationActions.Add(locationAction);
+
+            locationAction = new ExitGame();
+            locationActions.Add(locationAction);
+
+            returnData.Actions = locationActions;
+
+            // Adjacent Locations
+            Dictionary<string, LocationDefinition> adjacentLocationKeys = new Dictionary<string, LocationDefinition>();
+
+            LocationDefinition locationDefinition = GetTownCenterDefinition();
+
+            adjacentLocationKeys.Add(locationDefinition.LocationKey, locationDefinition);
+
+            returnData.AdjacentLocationKeys = adjacentLocationKeys;
+
+            /*
+            List<Location> adjacentLocations = new List<Location>();
+
+            adjacentLocations.Add(GetTownCenter());
+
+            returnData.AdjacentLocations = adjacentLocations;
+            */
+
+            return returnData;
+        }
+
+
+        public LocationDefinition GetInnDefinition()
+        {
+            LocationDefinition returnData = new LocationDefinition();
+            string locationKey = INN_KEY;
+
+            if (Location.LocationExists(locationKey))
+            {
+                returnData = Location.GetLocation(locationKey);
+            }
+            else
+            {
+                returnData.LocationKey = locationKey;
+                returnData.Name = "Prancing Pony";
+                returnData.DoLoadLocation = LoadInn;
+
+                Location.AddLocation(returnData);
+            }
+
+            return returnData;
+
+
+        }
+
+        public Location LoadTownCenter()
+        {
+            Location returnData;
+            LocationAction locationAction;
+
+
+            returnData = new Location();
+            returnData.Name = "Watertown Town Center";
+            returnData.Description = "Welcome to the cozy Watertown Town Center.";
+
+            // Location Actions
+            List<LocationAction> locationActions = new List<LocationAction>();
+
+            locationAction = new DisplayStatsAction();
+            locationActions.Add(locationAction);
+
+            locationAction = new DisplayInventoryAction();
+            locationActions.Add(locationAction);
+
+            locationAction = new SellItemsAction();
+            locationActions.Add(locationAction);
+
+            locationAction = new MainMenuAction();
+            locationActions.Add(locationAction);
+
+            locationAction = new ExitGame();
+            locationActions.Add(locationAction);
+
+            returnData.Actions = locationActions;
+
+
+
+            // Adjacent Locations
+            Dictionary<string, LocationDefinition> adjacentLocationKeys = new Dictionary<string, LocationDefinition>();
+
+            LocationDefinition locationDefinition = GetArenaDefinition();
+            adjacentLocationKeys.Add(locationDefinition.LocationKey, locationDefinition);
+
+            locationDefinition = GetInnDefinition();
+            adjacentLocationKeys.Add(locationDefinition.LocationKey, locationDefinition);
+
+            returnData.AdjacentLocationKeys = adjacentLocationKeys;
+                        
+            Accomplishment sewerKingAccomplishment = Watertown.GetWatertownAccomplishments().Find(x => x.Name.Contains("Sewer King"));
+            if (GameState.Hero.Accomplishments.Contains(sewerKingAccomplishment))
+            {
+                locationDefinition = WatertownSewer.GetTownInstance().GetSewerEntranceDefinition();
+                adjacentLocationKeys.Add(locationDefinition.LocationKey, locationDefinition);
+            }
+
+
+            /*
+            List<Location> adjacentLocations = new List<Location>();
+
+            adjacentLocations.Add(GetArena());
+            adjacentLocations.Add(GetInn());
+
+            Accomplishment sewerKingAccomplishment = Watertown.GetWatertownAccomplishments().Find(x => x.Name.Contains("Sewer King"));
+            if (GameState.Hero.Accomplishments.Contains(sewerKingAccomplishment))
+            {
+                adjacentLocations.Add(WatertownSewer.GetTownInstance().GetStartingLocation());
+            }
+
+            returnData.AdjacentLocations = adjacentLocations;
+            */
+
+            return returnData;
+        }
+
+
+        // TODO: Probably should change the design of the GetTownCenter, etc..
+        // to public Get properties as this is exactly how they are operating.
+        public LocationDefinition GetTownCenterDefinition()
+        {
+            LocationDefinition returnData = new LocationDefinition();
+            string locationKey = TOWN_CENTER_KEY;
+
+            if (Location.LocationExists(locationKey))
+            {
+                returnData = Location.GetLocation(locationKey);
+            }
+            else
+            {
+                returnData.LocationKey = locationKey;
+                returnData.Name = "Watertown Town Center";
+                returnData.DoLoadLocation = LoadTownCenter;
+
+                Location.AddLocation(returnData);
+            }
+
+            return returnData;
+        }      
+
+        #endregion
+
+        #region Rumors
+
         private List<Rumor> _InnKeepersRumors;
-        private List<Rumor> _InnGuestRomors;
 
         private List<Rumor> InnKeepersRumors
         {
@@ -39,32 +275,6 @@ namespace The_Darkest_Hour.Towns.Watertown
             }
         }
 
-        private List<Rumor> InnGuestRumors
-        {
-            get
-            {
-                if (_InnGuestRomors == null)
-                {
-                    _InnGuestRomors = new List<Rumor>();
-
-                    Rumor guestRumor = new Rumor("Bandit Captain", "I can't seem to get supplies out of Watertown here. My caravans keep being attacked by a group of bandits. If you're looking for work, you should find and slay their leader. It would do everyone here a great deal of good.");
-                    guestRumor.Accomplishment = Watertown.GetWatertownAccomplishments().Find(x => x.Name.Contains("SBandit Captain"));
-                    guestRumor.OnHeardRumor += this.HeardBanditCaptainRumor;
-                    _InnGuestRomors.Add(guestRumor);
-                    _InnGuestRomors.Add(new Rumor("Life's Hard", "It's hard to make it as a traveling minstrel. Come to think of it, I think it's starting to get close to the time that I need to get moving away from here."));
-                    _InnGuestRomors.Add(new Rumor("Riches", "This town may not look it from the outside, but there is a great big market here. You can get plenty rich while here. Lot's of trade."));
-
-                }
-
-                return _InnGuestRomors;
-            }
-            
-        }
-
-        public override Location GetStartingLocation()
-        {
-            return GetTownCenter();
-        }
 
         public void HeardSewerKingRumor()
         {
@@ -73,179 +283,18 @@ namespace The_Darkest_Hour.Towns.Watertown
             GameState.Hero.Accomplishments.Add(accomplishment);
 
             // Reload the TownCenter so it will open up the sewer
+            Location.ResetLocation(TOWN_CENTER_KEY);
+
             // TODO: this is not working.  Currently, you need to save your character and reload the game for this to work
             // So, just need to handle the memory management a little better so I can easily flush out a cached location.
-            _TownCenter = null;
-            _TownCenter = GetTownCenter();
+            //_TownCenter = null;
+            //_TownCenter = GetTownCenter();
         }
 
-        public void HeardBanditCaptainRumor()
-        {
-            // TODO: Need to keep duplicate accomplishments from happening (SEE ABOVE METHOD)
-            Accomplishment accomplishment = Watertown.GetWatertownAccomplishments().Find(x => x.Name.Contains("Bandit Captain"));
-            GameState.Hero.Accomplishments.Add(accomplishment);
-
-            //Reload the TownCenter so it will open up the forest
-            // TODO: this is not working.  Currently, you need to save your character and reload the game for this to work
-            // So, just need to handle the memory management a little better so I can easily flush out a cached location. (COPIED FROM SEWER KING)
-            _TownCenter = null;
-            _TownCenter = GetTownCenter();
-        }
-
-        public Location GetArena()
-        {
-            Location returnData;
-
-            if (_Arena == null)
-            {
-
-                returnData = new Location();
-                returnData.Name = "Watertown Arena";
-                returnData.Description = "Prepare to Die!";
-
-                _Arena = returnData;
-
-                List<LocationAction> locationActions = new List<LocationAction>();
-
-                LocationAction locationAction = new ArenaAction();
-                locationActions.Add(locationAction);
-
-                returnData.Actions = locationActions;
-
-
-                List<Location> adjacentLocations = new List<Location>();
-
-                adjacentLocations.Add(GetTownCenter());
-
-                returnData.AdjacentLocations = adjacentLocations;
-
-
-            }
-            else
-            {
-                returnData = _Arena;
-            }
-
-            return returnData;
-        }
-
-        public Location GetInn()
-        {
-            Location returnData;
-
-            if (_Inn == null)
-            {
-
-                returnData = new Location();
-                returnData.Name = "Prancing Pony";
-                returnData.Description = "You belly up to the bar!";
-
-                _Inn = returnData;
-
-                List<LocationAction> locationActions = new List<LocationAction>();
-
-
-                LocationAction locationAction = new RumorAction("Bartender",this.InnKeepersRumors);
-                locationActions.Add(locationAction);
-
-                //Adding rumors from guest in the inn
-                LocationAction guestLocationAction = new RumorAction("Guest", this.InnGuestRumors);
-                locationActions.Add(guestLocationAction);
-
-                locationAction = new SaveAction();
-                locationActions.Add(locationAction);
-
-                locationAction = new MainMenuAction();
-                locationActions.Add(locationAction);
-
-                locationAction = new ExitGame();
-                locationActions.Add(locationAction);
-
-                returnData.Actions = locationActions;
-
-                List<Location> adjacentLocations = new List<Location>();
-
-                adjacentLocations.Add(GetTownCenter());
-
-                returnData.AdjacentLocations = adjacentLocations;
-
-
-            }
-            else
-            {
-                returnData = _Arena;
-            }
-
-            return returnData;
-        }
-
-        // TODO: Probably should change the design of the GetTownCenter, etc..
-        // to public Get properties as this is exactly how they are operating.
-        public Location GetTownCenter()
-        {
-            Location returnData;
-            LocationAction locationAction;
-
-            if (_TownCenter == null)
-            {
-
-                returnData = new Location();
-                returnData.Name = "Watertown Town Center";
-                returnData.Description = "Welcome to the cozy Watertown Town Center.";
-
-                _TownCenter = returnData;
-
-                List<LocationAction> locationActions = new List<LocationAction>();
-
-                locationAction = new DisplayStatsAction();
-                locationActions.Add(locationAction);
-
-                locationAction = new DisplayInventoryAction();
-                locationActions.Add(locationAction);
-
-                locationAction = new SellItemsAction();
-                locationActions.Add(locationAction);
-
-                locationAction = new MainMenuAction();
-                locationActions.Add(locationAction);
-
-                locationAction = new ExitGame();
-                locationActions.Add(locationAction);
-
-                returnData.Actions = locationActions;
-
-                List<Location> adjacentLocations = new List<Location>();
-
-                adjacentLocations.Add(GetArena());
-                adjacentLocations.Add(GetInn());
-
-                Accomplishment sewerKingAccomplishment = Watertown.GetWatertownAccomplishments().Find(x => x.Name.Contains("Sewer King"));
-                if (GameState.Hero.Accomplishments.Contains(sewerKingAccomplishment))
-                {
-                    adjacentLocations.Add(WatertownSewer.GetTownInstance().GetStartingLocation());
-                }
-                Accomplishment banditCaptainAccomplishment = Watertown.GetWatertownAccomplishments().Find(x => x.Name.Contains("Bandit Captain"));
-                if (GameState.Hero.Accomplishments.Contains(banditCaptainAccomplishment))
-                {
-                    adjacentLocations.Add(WaterTownForest.GetTownInstance().GetStartingLocation());
-                }
-
-                returnData.AdjacentLocations = adjacentLocations;
-
-
-            }
-            else
-            {
-                returnData = _TownCenter;
-            }
-
-
-            return returnData;
-        }      
 
         #endregion
 
-        #region Static Properties and Methods
+        #region Accomplishments
         private static WatertownAccomplishments _WatertownAccomplishments;
 
         public static WatertownAccomplishments GetWatertownAccomplishments()
@@ -266,6 +315,10 @@ namespace The_Darkest_Hour.Towns.Watertown
             return _WatertownAccomplishments;
         }
 
+#endregion
+
+        #region Get Town Instance
+
         private static Watertown _Watertown;
 
         public static Watertown GetTownInstance()
@@ -278,5 +331,6 @@ namespace The_Darkest_Hour.Towns.Watertown
             return _Watertown;
         }
         #endregion
+
     }
 }

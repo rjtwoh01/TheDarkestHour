@@ -16,9 +16,9 @@ namespace The_Darkest_Hour.Locations.Actions
             this.Description = "Create New Character";
         }
 
-        public override Location DoAction()
+        public override LocationDefinition DoAction()
         {
-            Location returnData = GameState.CurrentLocation;
+            LocationDefinition returnData = GameState.CurrentLocation;
 
             GameState.Hero = new Player();
             GameState.Hero.Initialize();

@@ -14,9 +14,9 @@ namespace The_Darkest_Hour.Locations.Actions
             this.Description = "Invalid Selection";
         }
 
-        public override Location DoAction()
+        public override LocationDefinition DoAction()
         {
-            Location returnData = GameState.CurrentLocation;
+            LocationDefinition returnData = GameState.CurrentLocation;
 
             Console.WriteLine("\nYou have made an invalid selection.  Please select one of the options above.\n");
 

@@ -14,9 +14,9 @@ namespace The_Darkest_Hour.Locations.Actions
             this.Description = "Save";
         }
 
-        public override Location DoAction()
+        public override LocationDefinition DoAction()
         {
-            Location returnData = GameState.CurrentLocation;
+            LocationDefinition returnData = GameState.CurrentLocation;
 
             LoadSave.SaveCharacter(GameState.Hero);
 

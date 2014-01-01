@@ -7,14 +7,74 @@ using The_Darkest_Hour.Locations.Actions;
 
 namespace The_Darkest_Hour.Locations
 {
-    class Location
+    class Location : GameObject
     {
+        public static void ResetLocation(LocationDefinition locationDefinition)
+        {
+            ResetLocation(locationDefinition.LocationKey);
+        }
+
+        public static void ResetLocation(string locationKey)
+        {
+            if (LocationExists(locationKey))
+            {
+                GetLocation(locationKey).ResetLocationInstance();
+            }
+        }
+
+        public static bool LocationExists(LocationDefinition locationDefinition)
+        {
+            return LocationExists(locationDefinition.LocationKey);
+        }
+
+        public static bool LocationExists(string locationKey)
+        {
+            return GameState.GameLocations.ContainsKey(locationKey);
+        }
+
+        public static LocationDefinition GetLocation(LocationDefinition locationDefinition)
+        {
+            return GetLocation(locationDefinition.LocationKey);
+        }
+
+        public static LocationDefinition GetLocation(string locationKey)
+        {
+            return GameState.GameLocations[locationKey];
+        }
+
+        public static bool RemoveLocation(LocationDefinition locationDefinition)
+        {
+            return RemoveLocation(locationDefinition.LocationKey);
+        }
+
+        public static bool RemoveLocation(string locationKey)
+        {
+            return GameState.GameLocations.Remove(locationKey);
+        }
+
+        public static void AddLocation(LocationDefinition locationDefinition)
+        {
+            AddLocation(locationDefinition.LocationKey, locationDefinition);
+        }
+        public static void AddLocation(string locationKey, LocationDefinition locationDefinition)
+        {
+            if (Location.LocationExists(locationKey))
+            {
+                Location.RemoveLocation(locationKey);
+            }
+
+            GameState.GameLocations.Add(locationKey, locationDefinition);
+        }
+
+
+
+
         public string Name { get; set; }
         public string Description { get; set; }
 
         public List<LocationAction> Actions { get; set; }
 
-        public List<Location> AdjacentLocations { get; set; }
+        public Dictionary<string, LocationDefinition> AdjacentLocationKeys { get; set; }
 
         public void Display()
         {
@@ -22,16 +82,16 @@ namespace The_Darkest_Hour.Locations
 
             Console.WriteLine(this.Description);
 
-            if ((this.AdjacentLocations!=null) && (this.AdjacentLocations.Count > 0))
+            if ((this.AdjacentLocationKeys != null) && (this.AdjacentLocationKeys.Count > 0))
             {
                 Console.WriteLine("\nAdjacent Locations:\n");
 
                 char c = 'A';
 
-                foreach (Location adjacentLocation in this.AdjacentLocations)
+                foreach (LocationDefinition locationDefinition in this.AdjacentLocationKeys.Values)
                 {
 
-                    Console.WriteLine(String.Format("\t{0}) {1}", c, adjacentLocation.Name));
+                    Console.WriteLine(String.Format("\t{0}) {1}", c, locationDefinition.Name));
                     c++;
                 }
 
@@ -82,7 +142,7 @@ namespace The_Darkest_Hour.Locations
                     // TODO: This is poor way to check for the results (by catching an exception)
                     locationIndexChar = Char.Parse(answer);
                     int aValue = (int)'A';
-                    int maxAnswerInt = aValue + this.AdjacentLocations.Count-1;
+                    int maxAnswerInt = aValue + this.AdjacentLocationKeys.Count-1;
                     char maxAnswer = (char) maxAnswerInt;
                     if ((locationIndexChar < 'A') || (locationIndexChar > maxAnswer))
                     {
@@ -91,7 +151,11 @@ namespace The_Darkest_Hour.Locations
                     else
                     {
                         locationIndexInt = Convert.ToInt32(locationIndexChar) - aValue;
-                        GameState.UpcomingLocation = this.AdjacentLocations[locationIndexInt];
+                        //GameState.UpcomingLocation = this.AdjacentLocations[locationIndexInt];
+                        
+                        GameState.UpcomingLocation = this.AdjacentLocationKeys.Values.ElementAt(locationIndexInt);
+
+
                         returnData = new MoveLocationAction();
                     }
                 }                
