@@ -39,7 +39,7 @@ namespace The_Darkest_Hour.Characters
         public bool PotionsFull = false;
         public List<Item> Inventory = new List<Item>();
         public Profession Profession;
-        public List<Accomplishment> Accomplishments = new List<Accomplishment>();
+        public Accomplishments Accomplishments = new Accomplishments();
 
         public void Initialize()
         {

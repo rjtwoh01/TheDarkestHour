@@ -305,13 +305,13 @@ namespace The_Darkest_Hour.Towns.Watertown
         #endregion
 
         #region Accomplishments
-        private static WatertownAccomplishments _WatertownAccomplishments;
+        private static Accomplishments _WatertownAccomplishments;
 
-        public static WatertownAccomplishments GetWatertownAccomplishments()
+        public static Accomplishments GetWatertownAccomplishments()
         {
             if (_WatertownAccomplishments == null)
             {
-                _WatertownAccomplishments = new WatertownAccomplishments();
+                _WatertownAccomplishments = new Accomplishments();
 
                 Accomplishment accomplishment = new Accomplishment();
                 accomplishment.NameSpace = "Watertown";

@@ -77,6 +77,7 @@
     <Compile Include="Characters\Accomplishment.cs" />
     <Compile Include="Areas\GeneralStore.cs" />
     <Compile Include="Battle.cs" />
+    <Compile Include="Characters\Accomplishments.cs" />
     <Compile Include="Characters\Character.cs" />
     <Compile Include="Characters\Professions\CharacterProfessions.cs" />
     <Compile Include="Characters\Professions\Cleric.cs" />
@@ -134,7 +135,6 @@
     <Compile Include="Towns\StartingArea\InitialGameMenu.cs" />
     <Compile Include="Towns\Town.cs" />
     <Compile Include="Towns\Watertown\Watertown.cs" />
-    <Compile Include="Towns\Watertown\WatertownAccomplishments.cs" />
     <Compile Include="Towns\Watertown\WatertownForest.cs" />
     <Compile Include="Towns\Watertown\WatertownSewer.cs" />
   </ItemGroup>
