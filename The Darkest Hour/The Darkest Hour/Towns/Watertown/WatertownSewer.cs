@@ -50,9 +50,9 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition returnData = new LocationDefinition();
             string locationKey = ENTRANCE_KEY;
 
-            if (Location.LocationExists(locationKey))
+            if (LocationHandler.LocationExists(locationKey))
             {
-                returnData = Location.GetLocation(locationKey);
+                returnData = LocationHandler.GetLocation(locationKey);
             }
             else
             {
@@ -60,7 +60,7 @@ namespace The_Darkest_Hour.Towns.Watertown
                 returnData.Name = "Watertown Sewer Entrance";
                 returnData.DoLoadLocation = LoadSewerEntrance;
 
-                Location.AddLocation(returnData);
+                LocationHandler.AddLocation(returnData);
             }
 
             return returnData;

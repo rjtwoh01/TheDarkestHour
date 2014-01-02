@@ -22,7 +22,7 @@ namespace The_Darkest_Hour.Locations.Actions
             LoadSave.SaveCharacter(GameState.Hero);
 
             // Reload the Game Menu location
-            Location.ResetLocation(InitialGameMenu.GAME_MENU_KEY);
+            LocationHandler.ResetLocation(InitialGameMenu.GAME_MENU_KEY);
 
             this.ClearScreen();
 

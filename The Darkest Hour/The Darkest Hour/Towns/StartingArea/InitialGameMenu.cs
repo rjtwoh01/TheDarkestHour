@@ -50,9 +50,9 @@ namespace The_Darkest_Hour.Towns.StartingArea
             LocationDefinition returnData = new LocationDefinition();
             string locationKey = LOAD_CHARACTER_MENU_KEY;
 
-            if (Location.LocationExists(locationKey))
+            if (LocationHandler.LocationExists(locationKey))
             {
-                returnData = Location.GetLocation(locationKey);
+                returnData = LocationHandler.GetLocation(locationKey);
             }
             else
             {
@@ -61,7 +61,7 @@ namespace The_Darkest_Hour.Towns.StartingArea
                 returnData.Name = "Load Character";
                 returnData.DoLoadLocation = LoadLoadCharacterMenu;
 
-                Location.AddLocation(returnData);
+                LocationHandler.AddLocation(returnData);
             }
 
             return returnData;
@@ -102,9 +102,9 @@ namespace The_Darkest_Hour.Towns.StartingArea
 
             string locationKey = GAME_MENU_KEY;
 
-            if (Location.LocationExists(locationKey))
+            if (LocationHandler.LocationExists(locationKey))
             {
-                returnData = Location.GetLocation(locationKey);
+                returnData = LocationHandler.GetLocation(locationKey);
             }
             else
             {
@@ -112,7 +112,7 @@ namespace The_Darkest_Hour.Towns.StartingArea
                 returnData.Name = "Game Menu";
                 returnData.DoLoadLocation = LoadGameMenu;
 
-                Location.AddLocation(returnData);
+                LocationHandler.AddLocation(returnData);
             }
 
             return returnData;

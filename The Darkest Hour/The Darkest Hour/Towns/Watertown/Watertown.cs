@@ -61,9 +61,9 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition returnData = new LocationDefinition();
             string locationKey = ARENA_KEY;
 
-            if (Location.LocationExists(locationKey))
+            if (LocationHandler.LocationExists(locationKey))
             {
-                returnData = Location.GetLocation(locationKey);
+                returnData = LocationHandler.GetLocation(locationKey);
             }
             else
             {
@@ -71,7 +71,7 @@ namespace The_Darkest_Hour.Towns.Watertown
                 returnData.Name = "Watertown Arena";
                 returnData.DoLoadLocation = LoadArena;
 
-                Location.AddLocation(returnData);
+                LocationHandler.AddLocation(returnData);
             }
 
             return returnData;
@@ -125,9 +125,9 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition returnData = new LocationDefinition();
             string locationKey = INN_KEY;
 
-            if (Location.LocationExists(locationKey))
+            if (LocationHandler.LocationExists(locationKey))
             {
-                returnData = Location.GetLocation(locationKey);
+                returnData = LocationHandler.GetLocation(locationKey);
             }
             else
             {
@@ -135,7 +135,7 @@ namespace The_Darkest_Hour.Towns.Watertown
                 returnData.Name = "Prancing Pony";
                 returnData.DoLoadLocation = LoadInn;
 
-                Location.AddLocation(returnData);
+                LocationHandler.AddLocation(returnData);
             }
 
             return returnData;
@@ -211,9 +211,9 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition returnData = new LocationDefinition();
             string locationKey = TOWN_CENTER_KEY;
 
-            if (Location.LocationExists(locationKey))
+            if (LocationHandler.LocationExists(locationKey))
             {
-                returnData = Location.GetLocation(locationKey);
+                returnData = LocationHandler.GetLocation(locationKey);
             }
             else
             {
@@ -221,7 +221,7 @@ namespace The_Darkest_Hour.Towns.Watertown
                 returnData.Name = "Watertown Town Center";
                 returnData.DoLoadLocation = LoadTownCenter;
 
-                Location.AddLocation(returnData);
+                LocationHandler.AddLocation(returnData);
             }
 
             return returnData;
@@ -261,7 +261,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             GameState.Hero.Accomplishments.Add(accomplishment);
 
             // Reload the TownCenter so it will open up the sewer
-            Location.ResetLocation(TOWN_CENTER_KEY);
+            LocationHandler.ResetLocation(TOWN_CENTER_KEY);
         }
 
         #endregion
@@ -297,7 +297,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             GameState.Hero.Accomplishments.Add(accomplishment);
 
             // Reload the TownCenter so it will open up the forest
-            Location.ResetLocation(TOWN_CENTER_KEY);
+            LocationHandler.ResetLocation(TOWN_CENTER_KEY);
         }
 
         #endregion

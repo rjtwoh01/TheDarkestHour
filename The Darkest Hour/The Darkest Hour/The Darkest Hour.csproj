@@ -129,6 +129,7 @@
     <Compile Include="Locations\Location.cs" />
     <Compile Include="Locations\LocationAction.cs" />
     <Compile Include="Locations\LocationDefinition.cs" />
+    <Compile Include="Locations\LocationHandler.cs" />
     <Compile Include="Locations\LocationState.cs" />
     <Compile Include="Locations\LocationStates.cs" />
     <Compile Include="MainGame.cs" />
