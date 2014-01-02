@@ -8,6 +8,15 @@ using The_Darkest_Hour.Characters;
 
 namespace The_Darkest_Hour.Locations.Actions
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <remarks>
+    /// Could probably make a generic Combat Action passing in a collection
+    /// of mobs to fight.  (see rumor action as an example).
+    /// Also.  Need a way to pass back if all of the MOBs were defeated or 
+    /// not.
+    /// </remarks>
     class ForestFightAction : LocationAction
     {
         public ForestFightAction()
