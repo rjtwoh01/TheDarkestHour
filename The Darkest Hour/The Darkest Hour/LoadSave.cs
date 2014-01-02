@@ -180,12 +180,12 @@ namespace The_Darkest_Hour
                 Directory.CreateDirectory(Path.Combine(GameConfigs.PlayerGameFilesLocation, directoryName));
             }
 
-            System.Xml.Serialization.XmlSerializer playerXmlSerialization = new System.Xml.Serialization.XmlSerializer(typeof(LocationState));
+            System.Xml.Serialization.XmlSerializer locationStateXmlSerialization = new System.Xml.Serialization.XmlSerializer(typeof(LocationState));
 
-            using (System.IO.StreamWriter characterStreamWriter = new System.IO.StreamWriter(Path.Combine(GameConfigs.PlayerGameFilesLocation, directoryName, fileName)))
+            using (System.IO.StreamWriter locationStateStreamWriter = new System.IO.StreamWriter(Path.Combine(GameConfigs.PlayerGameFilesLocation, directoryName, fileName)))
             {
-                playerXmlSerialization.Serialize(characterStreamWriter, gameObject);
-                characterStreamWriter.Close();
+                locationStateXmlSerialization.Serialize(locationStateStreamWriter, gameObject);
+                locationStateStreamWriter.Close();
 
                 Console.WriteLine(String.Format("{0} saved successfully", fileName));
             }
