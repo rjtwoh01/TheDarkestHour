@@ -37,9 +37,15 @@ namespace The_Darkest_Hour.Locations.Actions
 
             Console.Clear();
             battle.DoBattle(GameState.Hero, mob);
+            //Eventually going to remove this and have an option to rest
+            //in the inn to reset your health. Otherwise you'll have to rely
+            //on potions to reset your health
             GameState.Hero.ResetHealth();
 
-            this.ClearScreen();
+            //Commented this out for a smoother experience. The battle code contains
+            //a clear screen so there may be no need for double clear screen
+            //will check to verify later
+            //this.ClearScreen();
 
             return returnData;
         }
