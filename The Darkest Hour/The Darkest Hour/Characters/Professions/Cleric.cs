@@ -39,7 +39,7 @@ namespace The_Darkest_Hour.Characters.Professions
             {
                 Console.WriteLine(@"
 Choose your attack:
-1) Smite - 100% damage, adds 25 energy
+1) Smite - 100% damage, adds 200 energy
 2) Holy Strike - 500% damage, subtracts 750 energy
 3) Expulsing Light -  400% damage, subtrats 500 energy
 4) Wrath - 600% damage, subtracts 900 energy
@@ -104,7 +104,7 @@ Choose your attack:
             {
                 case "Smite":
                     damage = myHero.damage;
-                    myHero.energy += 25;
+                    myHero.energy += 200;
                     if (myHero.energy >= myHero.maxEnergy)
                         myHero.energy = myHero.maxEnergy;
                     break;

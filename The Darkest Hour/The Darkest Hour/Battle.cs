@@ -34,7 +34,7 @@ namespace The_Darkest_Hour
                 answer = InitialQuestion(myHero, mob);
                 if (answer == "Attack")
                 {
-                    {
+                    do{
                         attack = myHero.Profession.GetAttack(myHero);
                         playerDamage = myHero.Profession.CalculateDamage(myHero, attack);
                         if (playerDamage == 0)
