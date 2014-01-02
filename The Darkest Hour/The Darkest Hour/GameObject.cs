@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using The_Darkest_Hour.Characters;
 using The_Darkest_Hour.Characters.Professions;
 using The_Darkest_Hour.Items;
+using The_Darkest_Hour.Locations;
 
 namespace The_Darkest_Hour
 {
@@ -30,6 +31,7 @@ namespace The_Darkest_Hour
     [System.Xml.Serialization.XmlInclude(typeof(Helmet))]
     [System.Xml.Serialization.XmlInclude(typeof(Amulet))]
     [System.Xml.Serialization.XmlInclude(typeof(Accomplishment))]
+    [System.Xml.Serialization.XmlInclude(typeof(LocationState))]
     public class GameObject
     {
     }

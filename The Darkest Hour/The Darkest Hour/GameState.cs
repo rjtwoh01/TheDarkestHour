@@ -27,6 +27,7 @@ namespace The_Darkest_Hour
         private static Random _NumberGenerator;
 
         private static Dictionary<string, LocationDefinition> _GameLocations;
+        private static LocationStates _GameLocationStates;
         public static Player Hero { get; set; }
         public static LocationDefinition CurrentLocation { get; set; }
         public static LocationDefinition UpcomingLocation { get; set; }
@@ -115,6 +116,20 @@ namespace The_Darkest_Hour
             }
 
         }
+
+        public static LocationStates GameLocationStates
+        {
+            get
+            {
+                if (_GameLocationStates == null)
+                {
+                    _GameLocationStates = new LocationStates();
+                }
+
+                return _GameLocationStates;
+            }
+        }
+
 
         /// <summary>
         /// Will reset the game to it's initial state.
