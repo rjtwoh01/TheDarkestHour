@@ -15,6 +15,8 @@ namespace The_Darkest_Hour.Towns.Watertown
 
         public const string ENTRANCE_KEY = "WatertownSewer.Entrance";
 
+        public const string VISITED_SEWER_STATE = "VisitedSewer";
+
         #endregion
 
         #region Locations
@@ -40,6 +42,8 @@ namespace The_Darkest_Hour.Towns.Watertown
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
+
+            LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, VISITED_SEWER_STATE, true);
 
             return returnData;
         }

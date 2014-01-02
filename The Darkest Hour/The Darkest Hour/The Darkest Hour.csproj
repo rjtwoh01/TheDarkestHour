@@ -96,6 +96,7 @@
     </Compile>
     <Compile Include="Characters\Professions\Rogue.cs" />
     <Compile Include="Characters\Professions\Warrior.cs" />
+    <Compile Include="Common\SerializableDictionary.cs" />
     <Compile Include="GameConfigs.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="GameState.cs" />

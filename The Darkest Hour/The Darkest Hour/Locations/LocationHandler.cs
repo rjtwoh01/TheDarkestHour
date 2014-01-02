@@ -14,15 +14,16 @@ namespace The_Darkest_Hour.Locations
         public static object GetLocationStateValue(string locationStateKey, string LocationStateName)
         {
             object returnData;
+            LocationState locationState = GetLocationState(locationStateKey);
 
-            if (GameState.GameLocationStates[locationStateKey].ContainsKey(LocationStateName))
+            if (locationState.ContainsKey(LocationStateName))
             {
-                returnData = GameState.GameLocationStates[locationStateKey][LocationStateName];
+                returnData = locationState[LocationStateName];
             }
             else
             {
-                GameState.GameLocationStates[locationStateKey].Add(LocationStateName, null);
-                returnData = GameState.GameLocationStates[locationStateKey][LocationStateName];
+                locationState.Add(LocationStateName, null);
+                returnData = locationState[LocationStateName];
             }
 
             return returnData;
@@ -31,13 +32,15 @@ namespace The_Darkest_Hour.Locations
 
         public static void SetLocationStateValue(string locationStateKey, string LocationStateName, object locationStateValue)
         {
-            if (GameState.GameLocationStates[locationStateKey].ContainsKey(LocationStateName))
+            LocationState locationState = GetLocationState(locationStateKey);
+
+            if (locationState.ContainsKey(LocationStateName))
             {
-                GameState.GameLocationStates[locationStateKey][LocationStateName] = locationStateValue;
+                locationState[LocationStateName] = locationStateValue;
             }
             else
             {
-                GameState.GameLocationStates[locationStateKey].Add(LocationStateName, locationStateValue);
+                locationState.Add(LocationStateName, locationStateValue);
             }
         }
 
@@ -48,17 +51,7 @@ namespace The_Darkest_Hour.Locations
 
         public static bool LocationStateExists(string locationStateKey)
         {
-            return GameState.GameLocations.ContainsKey(locationStateKey);
-        }
-
-        public static void AddLocationState(string locationStateKey, LocationState locationState)
-        {
-            if (LocationHandler.LocationExists(locationStateKey))
-            {
-                LocationHandler.RemoveLocation(locationStateKey);
-            }
-
-            GameState.GameLocationStates.Add(locationStateKey, locationState);
+            return GameState.GameLocationStates.ContainsKey(locationStateKey);
         }
 
         public static LocationState GetLocationState(string locationStateKey)
