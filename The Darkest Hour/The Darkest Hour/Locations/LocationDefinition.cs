@@ -18,7 +18,7 @@ namespace The_Darkest_Hour.Locations
 
         public LoadLocationHandler DoLoadLocation;
 
-        private Location _LocationInstance = null;
+        //private Location _LocationInstance = null;
 
         public Location LocationInstance
         {
@@ -47,7 +47,7 @@ namespace The_Darkest_Hour.Locations
 
         public void ResetLocationInstance()
         {
-            _LocationInstance = null;
+            //_LocationInstance = null;
         }
 
         public LocationDefinition()
