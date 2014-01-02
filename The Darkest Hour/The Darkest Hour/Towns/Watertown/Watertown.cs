@@ -97,6 +97,9 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationAction guestLocationAction = new RumorAction("Guest", this.InnGuestRumors);
             locationActions.Add(guestLocationAction);
 
+            locationAction = new RestAction(5);
+            locationActions.Add(locationAction);
+
             locationAction = new SaveAction();
             locationActions.Add(locationAction);
 

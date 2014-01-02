@@ -128,6 +128,7 @@
     <Compile Include="Locations\Actions\LoadSavedGameAction.cs" />
     <Compile Include="Locations\Actions\MainMenuAction.cs" />
     <Compile Include="Locations\Actions\MoveLocationAction.cs" />
+    <Compile Include="Locations\Actions\RestAction.cs" />
     <Compile Include="Locations\Actions\RumorAction.cs" />
     <Compile Include="Locations\Actions\SaveAction.cs" />
     <Compile Include="Locations\Actions\SellItemsAction.cs" />
