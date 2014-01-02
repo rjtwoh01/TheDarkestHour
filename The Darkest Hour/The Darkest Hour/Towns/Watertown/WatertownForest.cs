@@ -28,6 +28,8 @@ namespace The_Darkest_Hour.Towns.Watertown
             return GetForestEntranceDefinition();
         }
 
+        #region Location Side Area
+
         public Location LoadSideArea()
         {
             Location returnData;
@@ -44,6 +46,31 @@ namespace The_Darkest_Hour.Towns.Watertown
 
             return returnData;
         }
+
+        public LocationDefinition GetSideAreaDefinition()
+        {
+            LocationDefinition returnData = new LocationDefinition();
+            string locationKey = SIDE_AREA_KEY;
+
+            if (LocationHandler.LocationExists(locationKey))
+            {
+                returnData = LocationHandler.GetLocation(locationKey);
+            }
+            else
+            {
+                returnData.LocationKey = locationKey;
+                returnData.Name = "Watertown Forest Side Area";
+                returnData.DoLoadLocation = LoadSideArea;
+
+                LocationHandler.AddLocation(returnData);
+            }
+
+            return returnData;
+        }
+
+        #endregion
+
+        #region Location Straight
 
         public Location LoadStraight()
         {
@@ -81,6 +108,32 @@ namespace The_Darkest_Hour.Towns.Watertown
             return returnData;
         }
 
+        public LocationDefinition GetStraightDefinition()
+        {
+            LocationDefinition returnData = new LocationDefinition();
+            string locationKey = STRAIGHT_AHEAD_KEY;
+
+            if (LocationHandler.LocationExists(locationKey))
+            {
+                returnData = LocationHandler.GetLocation(locationKey);
+            }
+            else
+            {
+                returnData.LocationKey = locationKey;
+                returnData.Name = "Watertown Forest Straight Path";
+                returnData.DoLoadLocation = LoadStraight;
+
+                LocationHandler.AddLocation(returnData);
+            }
+
+            return returnData;
+        }
+
+
+        #endregion
+
+        #region Location Clearing
+
         public Location LoadClearing()
         {
             Location returnData = new Location();
@@ -107,6 +160,30 @@ namespace The_Darkest_Hour.Towns.Watertown
             return returnData;
         }
 
+        public LocationDefinition GetClearingDefinition()
+        {
+            LocationDefinition returnData = new LocationDefinition();
+            string locationKey = CLEARING_KEY;
+
+            if (LocationHandler.LocationExists(locationKey))
+            {
+                returnData = LocationHandler.GetLocation(locationKey);
+            }
+            else
+            {
+                returnData.LocationKey = locationKey;
+                returnData.Name = "Watertown Forest Clearing";
+                returnData.DoLoadLocation = LoadClearing;
+
+                LocationHandler.AddLocation(returnData);
+            }
+
+            return returnData;
+        }
+
+        #endregion
+
+        #region Location Entrance
 
         public Location LoadForestEntrance()
         {
@@ -133,70 +210,6 @@ namespace The_Darkest_Hour.Towns.Watertown
 
         }
 
-
-        public LocationDefinition GetSideAreaDefinition()
-        {
-            LocationDefinition returnData = new LocationDefinition();
-            string locationKey = SIDE_AREA_KEY;
-
-            if (LocationHandler.LocationExists(locationKey))
-            {
-                returnData = LocationHandler.GetLocation(locationKey);
-            }
-            else
-            {
-                returnData.LocationKey = locationKey;
-                returnData.Name = "Watertown Forest Side Area";
-                returnData.DoLoadLocation = LoadSideArea;
-
-                LocationHandler.AddLocation(returnData);
-            }
-
-            return returnData;
-        }
-
-        public LocationDefinition GetStraightDefinition()
-        {
-            LocationDefinition returnData = new LocationDefinition();
-            string locationKey = STRAIGHT_AHEAD_KEY;
-
-            if (LocationHandler.LocationExists(locationKey))
-            {
-                returnData = LocationHandler.GetLocation(locationKey);
-            }
-            else
-            {
-                returnData.LocationKey = locationKey;
-                returnData.Name = "Watertown Forest Straight Path";
-                returnData.DoLoadLocation = LoadStraight;
-
-                LocationHandler.AddLocation(returnData);
-            }
-
-            return returnData;
-        }
-
-        public LocationDefinition GetClearingDefinition()
-        {
-            LocationDefinition returnData = new LocationDefinition();
-            string locationKey = CLEARING_KEY;
-
-            if (LocationHandler.LocationExists(locationKey))
-            {
-                returnData = LocationHandler.GetLocation(locationKey);
-            }
-            else
-            {
-                returnData.LocationKey = locationKey;
-                returnData.Name = "Watertown Forest Clearing";
-                returnData.DoLoadLocation = LoadClearing;
-
-                LocationHandler.AddLocation(returnData);
-            }
-
-            return returnData;
-        }
-
         public LocationDefinition GetForestEntranceDefinition()
         {
             LocationDefinition returnData = new LocationDefinition();
@@ -217,6 +230,8 @@ namespace The_Darkest_Hour.Towns.Watertown
 
             return returnData;
         }
+
+        #endregion
 
         #endregion
 
