@@ -67,6 +67,7 @@ namespace The_Darkest_Hour.Locations
                 if (LoadSave.SavedLocationStateExists(locationStateKey))
                 {
                     returnData = LoadSave.LoadLocationState(locationStateKey);
+                    GameState.GameLocationStates.Add(locationStateKey, returnData);
                 }
                 else
                 {

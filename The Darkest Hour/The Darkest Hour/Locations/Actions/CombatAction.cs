@@ -37,8 +37,8 @@ namespace The_Darkest_Hour.Locations.Actions
             this.Mobs = mobs;
             if ((mobs != null) && (mobs.Count > 0))
             {
-                this.Name = String.Format("Fight {0} {0}", mobs.Count,mobName);
-                this.Description = String.Format("Fight {0} {0}", mobs.Count, mobName);
+                this.Name = String.Format("Fight {0} {1}", mobs.Count,mobName);
+                this.Description = String.Format("Fight {0} {1}", mobs.Count, mobName);
             }
             else
             {
@@ -58,7 +58,7 @@ namespace The_Darkest_Hour.Locations.Actions
             Console.Clear();
             if (Mobs != null)
             {
-                for (int i = 0; i <= Mobs.Count; i++)
+                for (int i = 0; i < Mobs.Count; i++)
                 {
                     tempResult = battle.DoBattle(GameState.Hero, Mobs[i]);
 

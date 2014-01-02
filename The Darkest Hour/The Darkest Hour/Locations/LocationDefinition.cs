@@ -24,6 +24,9 @@ namespace The_Darkest_Hour.Locations
         {
             get
             {
+                return DoLoadLocation();
+
+                /*
                 if (_LocationInstance == null)
                 {
                     if (DoLoadLocation != null)
@@ -38,6 +41,7 @@ namespace The_Darkest_Hour.Locations
                 }
 
                 return _LocationInstance;
+                */
             }
         }
 
