@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using The_Darkest_Hour.Locations;
 using The_Darkest_Hour.Locations.Actions;
 using The_Darkest_Hour.Characters.Mobs;
+using The_Darkest_Hour.Characters.Mobs.Bosses;
 using The_Darkest_Hour.Characters;
 using The_Darkest_Hour.Combat;
 
@@ -22,6 +23,7 @@ namespace The_Darkest_Hour.Towns.Watertown
         public const string STRAIGHT_AHEAD_KEY = "WatertownForest.Straight";
         public const string CLEARING_KEY = "WatertownForest.Clearing";
         public const string DEFEATED_STRAIGHT_BANDITS_KEY = "DefeatedStraightBandits";
+        public const string DEFEATED_BANDIT_CAPTAIN_KEY = "DefeatedBanditCaptain";
 
         #endregion
 
@@ -88,7 +90,6 @@ namespace The_Darkest_Hour.Towns.Watertown
             else
                 returnData.Description = "The dead bodies of bandits lay strewn across the ground.";
 
-            LocationAction locationAction;
             // Location Actions
             List<LocationAction> locationActions = new List<LocationAction>();
 
@@ -150,7 +151,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForest.DEFEATED_STRAIGHT_BANDITS_KEY, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload the forest straight path
                 LocationHandler.ResetLocation(DEFEATED_STRAIGHT_BANDITS_KEY);
 
             }
@@ -162,22 +163,37 @@ namespace The_Darkest_Hour.Towns.Watertown
         public Location LoadClearing()
         {
             Location returnData = new Location();
-            returnData.Name = "Watertown Forest Clearing";
-            if (!GameState.Hero.CanMoveTwo)
+            returnData.Name = "Forest Clearing";
+            bool defeatedBanditCaptain = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForest.DEFEATED_BANDIT_CAPTAIN_KEY));
+            if (!defeatedBanditCaptain)
             {
                 returnData.Description = "The Bandit Captain stands in the clearing and stares at you, daring you to challenge him. \nYou can't fight him yet. He is not implemented into the game";
             }
             else
                 returnData.Description = "The Bandit Captain lays dead in the clearing";
 
+            // Location Actions
+            List<LocationAction> locationActions = new List<LocationAction>();
+
+            if (!defeatedBanditCaptain)
+            {
+                List<Mob> banditCaptain = new List<Mob>();
+                banditCaptain.Add(new BanditCaptain());
+                CombatAction combatAction = new CombatAction("Bandit Captain", banditCaptain);
+                combatAction.PostCombat += BanditCaptainResults;
+                locationActions.Add(combatAction);
+                returnData.Actions = locationActions;
+            }
+
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
 
             LocationDefinition locationDefinition = WatertownForest.GetTownInstance().GetStraightDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            if (GameState.Hero.CanMoveTwo)
+            if (defeatedBanditCaptain)
             {
                 locationDefinition = Watertown.GetTownInstance().GetTownCenterDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
             }
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
@@ -197,13 +213,25 @@ namespace The_Darkest_Hour.Towns.Watertown
             else
             {
                 returnData.LocationKey = locationKey;
-                returnData.Name = "Watertown Forest Clearing";
+                returnData.Name = "Forest Clearing";
                 returnData.DoLoadLocation = LoadClearing;
 
                 LocationHandler.AddLocation(returnData);
             }
 
             return returnData;
+        }
+
+        public void BanditCaptainResults(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForest.DEFEATED_BANDIT_CAPTAIN_KEY, true);
+
+                // Reload the forest clearing
+                LocationHandler.ResetLocation(DEFEATED_BANDIT_CAPTAIN_KEY);
+
+            }
         }
 
         #endregion
