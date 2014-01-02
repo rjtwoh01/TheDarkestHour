@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace The_Darkest_Hour.Combat
 {
-    public enum CombatResult
+    public class CombatEventArgs : EventArgs
     {
-        NoResults = 0,
-        PlayerVictory = 1,
-        PlayerLoss = 2,
-        PlayerFled = 4
+        public CombatResult CombatResults { get; set; }
     }
 }

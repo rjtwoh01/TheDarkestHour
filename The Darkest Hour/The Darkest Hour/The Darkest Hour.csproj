@@ -76,6 +76,7 @@
   <ItemGroup>
     <Compile Include="Characters\Accomplishment.cs" />
     <Compile Include="Areas\GeneralStore.cs" />
+    <Compile Include="Characters\Mobs\SewerRat.cs" />
     <Compile Include="Combat\Battle.cs" />
     <Compile Include="Characters\Accomplishments.cs" />
     <Compile Include="Characters\Character.cs" />
@@ -96,6 +97,7 @@
     </Compile>
     <Compile Include="Characters\Professions\Rogue.cs" />
     <Compile Include="Characters\Professions\Warrior.cs" />
+    <Compile Include="Combat\CombatEventArgs.cs" />
     <Compile Include="Combat\CombatResults.cs" />
     <Compile Include="Common\SerializableDictionary.cs" />
     <Compile Include="GameConfigs.cs" />
@@ -115,6 +117,7 @@
     <Compile Include="Items\Weapon.cs" />
     <Compile Include="LoadSave.cs" />
     <Compile Include="Locations\Actions\ArenaAction.cs" />
+    <Compile Include="Locations\Actions\CombatAction.cs" />
     <Compile Include="Locations\Actions\CreateNewCharacterAction.cs" />
     <Compile Include="Locations\Actions\DisplayInventoryAction.cs" />
     <Compile Include="Locations\Actions\DisplayStatsAction.cs" />
