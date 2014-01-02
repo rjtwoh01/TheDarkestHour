@@ -138,6 +138,7 @@ namespace The_Darkest_Hour
         public static void ResetGame()
         {
             _GameLocations = null;
+            _GameLocationStates = null;
             Hero = null;
             CurrentLocation = null;
             UpcomingLocation = null;
