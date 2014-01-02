@@ -9,12 +9,13 @@ namespace The_Darkest_Hour.Locations.Actions
     class LoadCharacterAction : LocationAction
     {
 
-        public string CharacterFileName { get; set; }
+        public string CharacterDirectoryName { get; set; }
 
-        public LoadCharacterAction(string fileName)
+        public LoadCharacterAction(string directoryName)
         {
-            string displayName = String.Format("{0}", fileName.Replace(".xml",""));
-            this.CharacterFileName = fileName;
+            //string displayName = String.Format("{0}", fileName.Replace(".xml",""));
+            string displayName = directoryName.Substring(10);
+            this.CharacterDirectoryName = directoryName;
             this.Name = displayName;
             this.Description = displayName;
         }
@@ -24,7 +25,7 @@ namespace The_Darkest_Hour.Locations.Actions
             LocationDefinition returnData = GameState.CurrentLocation;
 
             GameState.ResetGame();
-            GameState.Hero = LoadSave.LoadCharacter(this.CharacterFileName);
+            GameState.Hero = LoadSave.LoadCharacter(this.CharacterDirectoryName);
 
             if (GameState.Hero!=null)
             {

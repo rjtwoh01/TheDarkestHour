@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace The_Darkest_Hour.Locations
 {
-    class LocationState : GameObject
+    public class LocationState : GameObject
     {
         public string Name { get; set; }
-        public string Value { get; set; }
+        public Object Value { get; set; }
     }
 }

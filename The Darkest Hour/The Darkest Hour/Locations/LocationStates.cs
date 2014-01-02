@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace The_Darkest_Hour.Locations
 {
-    class LocationStates : Dictionary<string,LocationState>
+    public class LocationStates : Dictionary<string,LocationState>
     {
     }
 }

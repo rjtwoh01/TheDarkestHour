@@ -30,10 +30,11 @@ namespace The_Darkest_Hour
             LocationAction locationAction;
 
             DirectoryInfo d = new DirectoryInfo(GameConfigs.PlayerGameFilesLocation);
-            FileInfo[] Files = d.GetFiles("*.xml");
-            foreach (FileInfo file in Files)
+            DirectoryInfo[] characterDirectories = d.GetDirectories("Character *");
+
+            foreach (DirectoryInfo characterDirectory in characterDirectories)
             {
-                locationAction = new LoadCharacterAction(file.Name);
+                locationAction = new LoadCharacterAction(characterDirectory.Name);
                 returnData.Add(locationAction);
             }
 
@@ -49,10 +50,9 @@ namespace The_Darkest_Hour
         {
             bool returnData=false;
 
-            // Put all txt files in root directory into array.
-            string[] characterFileNames = Directory.GetFiles(GameConfigs.PlayerGameFilesLocation, "*.xml");
+            string[] characterDirectories = Directory.GetDirectories(GameConfigs.PlayerGameFilesLocation, "Character *");
 
-            if((characterFileNames!=null) && (characterFileNames.Length>0))
+            if ((characterDirectories != null) && (characterDirectories.Length > 0))
             {
                 returnData = true;
             }
@@ -60,17 +60,17 @@ namespace The_Darkest_Hour
             return returnData;
         }
 
-        public static Player LoadCharacter(string fileName)
+        public static Player LoadCharacter(string directoryName)
         {
-            return LoadFromXmlFile(fileName);
+            return LoadFromXmlFile(directoryName);
         }
 
-        private static Player LoadFromXmlFile(string fileName)
+        private static Player LoadFromXmlFile(string directoryName)
         {
             Player myHero;
 
             System.Xml.Serialization.XmlSerializer playerXmlSerializer = new System.Xml.Serialization.XmlSerializer(typeof(GameObject));
-            using (System.IO.StreamReader playerStreamReader = new System.IO.StreamReader(Path.Combine(GameConfigs.PlayerGameFilesLocation, fileName)))
+            using (System.IO.StreamReader playerStreamReader = new System.IO.StreamReader(Path.Combine(GameConfigs.PlayerGameFilesLocation, directoryName, "Character.xml")))
             {
                 myHero = new Player();
                 myHero = (Player) playerXmlSerializer.Deserialize(playerStreamReader);
@@ -101,19 +101,19 @@ namespace The_Darkest_Hour
         /// </notes>
         private static void SaveToXmlFile(Player myHero)
         {
-            SaveToXmlFile(myHero, GetCharacterFileName(myHero));
+            SaveToXmlFile(myHero, GetCharacterDirectoryName(myHero));
         }
 
-        private static void SaveToXmlFile(Player myHero, string fileName)
+        private static void SaveToXmlFile(Player myHero, string directoryName)
         {
-            if (Directory.Exists(GameConfigs.PlayerGameFilesLocation) == false)
+            if (Directory.Exists(Path.Combine(GameConfigs.PlayerGameFilesLocation,directoryName)) == false)
             {
-                Directory.CreateDirectory(GameConfigs.PlayerGameFilesLocation);
+                Directory.CreateDirectory(Path.Combine(GameConfigs.PlayerGameFilesLocation,directoryName));
             }
 
             System.Xml.Serialization.XmlSerializer playerXmlSerialization = new System.Xml.Serialization.XmlSerializer(typeof(GameObject));
 
-            using (System.IO.StreamWriter characterStreamWriter = new System.IO.StreamWriter(Path.Combine(GameConfigs.PlayerGameFilesLocation, fileName)))
+            using (System.IO.StreamWriter characterStreamWriter = new System.IO.StreamWriter(Path.Combine(GameConfigs.PlayerGameFilesLocation, directoryName, "Character.xml")))
             {
                 playerXmlSerialization.Serialize(characterStreamWriter, myHero);
                 characterStreamWriter.Close();
@@ -128,7 +128,7 @@ namespace The_Darkest_Hour
         /// </summary>
         /// <param name="myHero"></param>
         /// <returns></returns>
-        public static string GetCharacterFileName(Player myHero)
+        public static string GetCharacterDirectoryName(Player myHero)
         {
             StringBuilder returnData = new StringBuilder();
 
@@ -136,8 +136,8 @@ namespace The_Darkest_Hour
 
             arr = Array.FindAll<char>(arr, (c => (char.IsLetterOrDigit(c) || char.IsWhiteSpace(c))));
 
+            returnData.Append("Character ");
             returnData.Append(arr);
-            returnData.Append(".xml");
 
             return returnData.ToString();
         }
