@@ -9,7 +9,42 @@ namespace The_Darkest_Hour.Locations
     class LocationHandler
     {
 
-        #region Location State Static Methods
+        #region Location State Values (Static Methods)
+
+        public static object GetLocationStateValue(string locationStateKey, string LocationStateName)
+        {
+            object returnData;
+
+            if (GameState.GameLocationStates[locationStateKey].ContainsKey(LocationStateName))
+            {
+                returnData = GameState.GameLocationStates[locationStateKey][LocationStateName];
+            }
+            else
+            {
+                GameState.GameLocationStates[locationStateKey].Add(LocationStateName, null);
+                returnData = GameState.GameLocationStates[locationStateKey][LocationStateName];
+            }
+
+            return returnData;
+           
+        }
+
+        public static void SetLocationStateValue(string locationStateKey, string LocationStateName, object locationStateValue)
+        {
+            if (GameState.GameLocationStates[locationStateKey].ContainsKey(LocationStateName))
+            {
+                GameState.GameLocationStates[locationStateKey][LocationStateName] = locationStateValue;
+            }
+            else
+            {
+                GameState.GameLocationStates[locationStateKey].Add(LocationStateName, locationStateValue);
+            }
+        }
+
+
+        #endregion 
+
+        #region Location State (Static Methods)
 
         public static bool LocationStateExists(string locationStateKey)
         {
@@ -49,7 +84,7 @@ namespace The_Darkest_Hour.Locations
 
         #endregion
 
-        #region Location Static Methods
+        #region Location (Static Methods)
 
         public static void ResetLocation(LocationDefinition locationDefinition)
         {

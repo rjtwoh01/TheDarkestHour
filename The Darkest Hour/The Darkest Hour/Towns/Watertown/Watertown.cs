@@ -17,6 +17,7 @@ namespace The_Darkest_Hour.Towns.Watertown
         public const string TOWN_CENTER_KEY = "Watertown.TownCenter";
         public const string INN_KEY = "Watertown.Inn";
 
+        public const string LOCATION_STATE_KEY = "Watertown";
         #endregion
 
         #region Locations
