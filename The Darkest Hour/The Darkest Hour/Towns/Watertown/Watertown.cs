@@ -233,36 +233,31 @@ namespace The_Darkest_Hour.Towns.Watertown
         #region Rumors
 
         #region Inn Keeper's Rumors
-        private List<Rumor> _InnKeepersRumors;
 
         private List<Rumor> InnKeepersRumors
         {
             get
             {
-                if (_InnKeepersRumors == null)
+                List<Rumor> returnData = new List<Rumor>();
+
+                bool visitedSewers = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownSewer.VISITED_SEWER_STATE));
+                Rumor rumor;
+
+                if (visitedSewers)
                 {
-                    _InnKeepersRumors = new List<Rumor>();
-
-                    bool visitedSewers = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownSewer.VISITED_SEWER_STATE));
-                    Rumor rumor;
-
-                    if (visitedSewers)
-                    {
-                        rumor = new Rumor("Visisted Sewers", "I've heard you've been down to the sewers.  Have you found the Sewer King yet?");
-                    }
-                    else
-                    {
-                        rumor = new Rumor("Sewer King", "There are tales of a Sewer King with hoards of riches and gold.  The entrance to the sewers can be found in the Town Center.");
-                        rumor.OnHeardRumor = this.HeardSewerKingRumor;
-                    }
-
-                    _InnKeepersRumors.Add(rumor);
-
-                    _InnKeepersRumors.Add(new Rumor("Not Much", "Not much happening around here these days."));
-                    _InnKeepersRumors.Add(new Rumor("Stay awhile", "Stay a while and listen to our bard play music and sing songs of great tales."));
+                    rumor = new Rumor("Visisted Sewers", "I've heard you've been down to the sewers.  Have you found the Sewer King yet?");
+                }
+                else
+                {
+                    rumor = new Rumor("Sewer King", "There are tales of a Sewer King with hoards of riches and gold.  The entrance to the sewers can be found in the Town Center.");
+                    rumor.OnHeardRumor = this.HeardSewerKingRumor;
                 }
 
-                return _InnKeepersRumors;
+                returnData.Add(rumor);
+
+                returnData.Add(new Rumor("Not Much", "Not much happening around here these days."));
+                returnData.Add(new Rumor("Stay awhile", "Stay a while and listen to our bard play music and sing songs of great tales."));
+                return returnData;
             }
         }
 

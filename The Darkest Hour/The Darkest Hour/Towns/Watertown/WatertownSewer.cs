@@ -44,6 +44,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
 
             LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, VISITED_SEWER_STATE, true);
+            LocationHandler.ResetLocation(Watertown.INN_KEY); // Need to reload Inn so that new conversation can be set.
 
             return returnData;
         }
