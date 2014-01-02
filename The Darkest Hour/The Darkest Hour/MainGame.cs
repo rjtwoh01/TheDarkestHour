@@ -30,16 +30,10 @@ namespace The_Darkest_Hour
 
             while(!(locationAction is ExitGame))
             {
-                // Call any pre action events
-                locationAction.DoPreAction();
-
                 // Do Action
                 LocationDefinition newLocation = locationAction.DoAction(); ;
      
                 GameState.CurrentLocation = newLocation;
-
-                // Call any post action events
-                locationAction.DoPostAction();
 
                 GameState.CurrentLocation.LocationInstance.Display();
                 locationAction = GameState.CurrentLocation.LocationInstance.GetAction();
