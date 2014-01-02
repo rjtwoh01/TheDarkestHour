@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using The_Darkest_Hour.Locations;
 using The_Darkest_Hour.Locations.Actions;
+using The_Darkest_Hour.Characters.Mobs;
+using The_Darkest_Hour.Characters;
+using The_Darkest_Hour.Combat;
 
 namespace The_Darkest_Hour.Towns.Watertown
 {
@@ -18,10 +21,12 @@ namespace The_Darkest_Hour.Towns.Watertown
         public const string SIDE_AREA_KEY = "WatertownForest.Side";
         public const string STRAIGHT_AHEAD_KEY = "WatertownForest.Straight";
         public const string CLEARING_KEY = "WatertownForest.Clearing";
+        public const string DEFEATED_STRAIGHT_BANDITS_KEY = "DefeatedStraightBandits";
 
         #endregion
 
         #region Locations
+
 
         public override LocationDefinition GetStartingLocationDefinition()
         {
@@ -76,7 +81,9 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             Location returnData = new Location();
             returnData.Name = "Watertown Forest Straight Path";
-            if (!GameState.Hero.CanMove)
+            bool defeatedBandits = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForest.DEFEATED_STRAIGHT_BANDITS_KEY));
+
+            if (!defeatedBandits)
                 returnData.Description = "You walk forward on the path and encounter bandits. You must conquer them to move on";
             else
                 returnData.Description = "The dead bodies of bandits lay strewn across the ground.";
@@ -85,10 +92,17 @@ namespace The_Darkest_Hour.Towns.Watertown
             // Location Actions
             List<LocationAction> locationActions = new List<LocationAction>();
 
-            if (!GameState.Hero.CanMove)
+            if (!defeatedBandits)
             {
-                locationAction = new ForestFightAction();
-                locationActions.Add(locationAction);
+                List<Mob> bandits = new List<Mob>();
+                bandits.Add(new Bandit());
+                bandits.Add(new Bandit());
+                bandits.Add(new Bandit());
+                bandits.Add(new Bandit());
+
+                CombatAction combatAction = new CombatAction("Bandits",bandits);
+                combatAction.PostCombat += StraightBanditResults;
+                locationActions.Add(combatAction);
                 returnData.Actions = locationActions;
             }
 
@@ -98,9 +112,10 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = WatertownForest.GetTownInstance().GetForestEntranceDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            if (GameState.Hero.CanMove)
+            if (defeatedBandits)
             {
                 locationDefinition = WatertownForest.GetTownInstance().GetClearingDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
             }
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
@@ -129,7 +144,17 @@ namespace The_Darkest_Hour.Towns.Watertown
             return returnData;
         }
 
+        public void StraightBanditResults(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForest.DEFEATED_STRAIGHT_BANDITS_KEY, true);
 
+                // Reload the Sewer Coordior so it will open up the sewer
+                LocationHandler.ResetLocation(DEFEATED_STRAIGHT_BANDITS_KEY);
+
+            }
+        }
         #endregion
 
         #region Location Clearing
