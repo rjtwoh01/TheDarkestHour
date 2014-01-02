@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using The_Darkest_Hour.Characters.Mobs;
 using The_Darkest_Hour.Characters;
+using The_Darkest_Hour.Combat;
 
 namespace The_Darkest_Hour.Locations.Actions
 {

@@ -76,7 +76,7 @@
   <ItemGroup>
     <Compile Include="Characters\Accomplishment.cs" />
     <Compile Include="Areas\GeneralStore.cs" />
-    <Compile Include="Battle.cs" />
+    <Compile Include="Combat\Battle.cs" />
     <Compile Include="Characters\Accomplishments.cs" />
     <Compile Include="Characters\Character.cs" />
     <Compile Include="Characters\Professions\CharacterProfessions.cs" />

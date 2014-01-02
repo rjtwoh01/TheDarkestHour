@@ -7,7 +7,7 @@ using The_Darkest_Hour.Characters;
 using The_Darkest_Hour.Items;
 using The_Darkest_Hour.Characters.Professions;
 
-namespace The_Darkest_Hour
+namespace The_Darkest_Hour.Combat
 {
     class Battle
     {
