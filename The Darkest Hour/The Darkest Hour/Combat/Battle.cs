@@ -25,8 +25,9 @@ namespace The_Darkest_Hour.Combat
         bool mobLost = false;
         bool hasFled = false;
 
-        public void DoBattle(Player myHero, Mob mob)
+        public CombatResult DoBattle(Player myHero, Mob mob)
         {
+            CombatResult returnData = CombatResult.NoResults;
             bool battleInProgress = true;
 
             do
@@ -49,6 +50,7 @@ namespace The_Darkest_Hour.Combat
                         mob.health = 0;
                         mobLost = true;
                         battleInProgress = false;
+                        returnData = CombatResult.PlayerVictory;
                     }
                     else
                     {
@@ -62,6 +64,7 @@ namespace The_Darkest_Hour.Combat
                                 myHero.health = 0;
                                 playerLost = true;
                                 battleInProgress = false;
+                                returnData = CombatResult.PlayerLoss;
                             }
                         }
                     }
@@ -99,6 +102,7 @@ namespace The_Darkest_Hour.Combat
                 {
                     battleInProgress = false;
                     hasFled = true;
+                    returnData = CombatResult.PlayerFled;
                     break;
                 }
 
@@ -126,6 +130,8 @@ namespace The_Darkest_Hour.Combat
             }
 
             ClearScreen();
+
+            return returnData;
 
         }
 
