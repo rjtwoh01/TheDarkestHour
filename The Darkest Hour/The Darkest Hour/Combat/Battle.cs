@@ -120,6 +120,7 @@ namespace The_Darkest_Hour.Combat
                 Console.WriteLine("The battle is over and you emerge victorious! Hail to the hero!");
                 loot = new Loot(myHero, mob);
                 myHero.xp += mob.xp;
+                myHero.gold += mob.gold;
                 myHero.GetLevel();
                 mobLost = false;
             }
