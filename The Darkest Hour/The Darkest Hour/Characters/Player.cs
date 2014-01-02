@@ -33,8 +33,6 @@ namespace The_Darkest_Hour.Characters
         public List<Item> Inventory = new List<Item>();
         public Profession Profession;
         public Accomplishments Accomplishments = new Accomplishments();
-        public bool CanMove = false; //Temp Solution
-        public bool CanMoveTwo = false; //Temp Solution
 
         public void Initialize()
         {
