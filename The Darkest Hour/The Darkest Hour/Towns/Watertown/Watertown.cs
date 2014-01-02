@@ -279,15 +279,15 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             get
             {
-                    List<Rumor> returnData = new List<Rumor>();
+                List<Rumor> returnData = new List<Rumor>();
 
-                    Rumor guestRumor = new Rumor("Bandit Captain", "I can't seem to get supplies out of Watertown here. My caravans keep being attacked by a group of bandits. If you're looking for work, you should find and slay their leader. It would do everyone here a great deal of good.");
-                    guestRumor.OnHeardRumor = this.HeardBanditCaptainRumor;
-                    returnData.Add(guestRumor);
-                    returnData.Add(new Rumor("Life's Hard", "It's hard to make it as a traveling minstrel. Come to think of it, I think it's starting to get close to the time that I need to get moving away from here."));
-                    returnData.Add(new Rumor("Riches", "This town may not look it from the outside, but there is a great big market here. You can get plenty rich while here. Lot's of trade."));
+                Rumor guestRumor = new Rumor("Bandit Captain", "I can't seem to get supplies out of Watertown here. My caravans keep being attacked by a group of bandits. If you're looking for work, you should find and slay their leader. It would do everyone here a great deal of good.");
+                guestRumor.OnHeardRumor = this.HeardBanditCaptainRumor;
+                returnData.Add(guestRumor);
+                returnData.Add(new Rumor("Life's Hard", "It's hard to make it as a traveling minstrel. Come to think of it, I think it's starting to get close to the time that I need to get moving away from here."));
+                returnData.Add(new Rumor("Riches", "This town may not look it from the outside, but there is a great big market here. You can get plenty rich while here. Lot's of trade."));
 
-                    return returnData;
+                return returnData;
             }
             
         }
