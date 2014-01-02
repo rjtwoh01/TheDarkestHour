@@ -61,6 +61,18 @@ namespace The_Darkest_Hour
             return returnData;
         }
 
+        public static bool SavedLocationStateExists(string locationStateKey)
+        {
+            bool returnData = false;
+            string fileName = GetLocationStateFileName(locationStateKey);
+            string characterDirectory = GetCharacterDirectoryName(GameState.Hero);
+
+            returnData = File.Exists(Path.Combine(GameConfigs.PlayerGameFilesLocation,characterDirectory,fileName));
+
+            return returnData;
+        }
+
+
         public static Player LoadCharacter(string directoryName)
         {
             return LoadFromXmlFile(directoryName);
@@ -82,6 +94,30 @@ namespace The_Darkest_Hour
 
             return myHero;
         }
+
+        public static LocationState LoadLocationState(string locationStateKey)
+        {
+            return LoadLocationStateFromXmlFile(locationStateKey);
+        }
+
+
+        private static LocationState LoadLocationStateFromXmlFile(string locationStateKey)
+        {
+            LocationState returnData;
+            string fileName = GetLocationStateFileName(locationStateKey);
+            string characterDirectory = GetCharacterDirectoryName(GameState.Hero);
+
+
+            System.Xml.Serialization.XmlSerializer locationStateXmlSerializer = new System.Xml.Serialization.XmlSerializer(typeof(LocationState));
+            using (System.IO.StreamReader locationStateStreamReader = new System.IO.StreamReader(Path.Combine(GameConfigs.PlayerGameFilesLocation, characterDirectory, fileName)))
+            {
+                returnData = new LocationState();
+                returnData = (LocationState)locationStateXmlSerializer.Deserialize(locationStateStreamReader);
+            }
+
+            return returnData;
+        }
+
 
         public static void SaveCharacter(Player myHero)
         {

@@ -64,12 +64,15 @@ namespace The_Darkest_Hour.Locations
             }
             else
             {
-                // TODO: When saving Game Location States is implemented
-                // then this method should check if the game location state
-                // saved file exists.  If so, it should load the file
-                // otherwise it should create a new LocationStates file.
-                returnData = new LocationState();
-                GameState.GameLocationStates.Add(locationStateKey, returnData);
+                if (LoadSave.SavedLocationStateExists(locationStateKey))
+                {
+                    returnData = LoadSave.LoadLocationState(locationStateKey);
+                }
+                else
+                {
+                    returnData = new LocationState();
+                    GameState.GameLocationStates.Add(locationStateKey, returnData);
+                }
             }
 
             return returnData;
