@@ -76,6 +76,7 @@
   <ItemGroup>
     <Compile Include="Characters\Accomplishment.cs" />
     <Compile Include="Areas\GeneralStore.cs" />
+    <Compile Include="Characters\Mobs\Bosses\BanditCaptain.cs" />
     <Compile Include="Characters\Mobs\SewerRat.cs" />
     <Compile Include="Combat\Battle.cs" />
     <Compile Include="Characters\Accomplishments.cs" />
@@ -144,6 +145,7 @@
     <Compile Include="Towns\StartingArea\InitialGameMenu.cs" />
     <Compile Include="Towns\Town.cs" />
     <Compile Include="Towns\Watertown\Watertown.cs" />
+    <Compile Include="Towns\Watertown\WatertownBanditCave.cs" />
     <Compile Include="Towns\Watertown\WatertownForest.cs" />
     <Compile Include="Towns\Watertown\WatertownSewer.cs" />
   </ItemGroup>

@@ -14,7 +14,6 @@ namespace The_Darkest_Hour.Towns.Watertown
 {
     class WatertownForest : Town
     {
-        public bool ClearedPath = false;
 
         #region Location Keys
 
@@ -24,6 +23,8 @@ namespace The_Darkest_Hour.Towns.Watertown
         public const string CLEARING_KEY = "WatertownForest.Clearing";
         public const string DEFEATED_STRAIGHT_BANDITS_KEY = "DefeatedStraightBandits";
         public const string DEFEATED_BANDIT_CAPTAIN_KEY = "DefeatedBanditCaptain";
+
+        public const string DEFEATED_CAPTAIN_STATE = "DefeatedCaptain";
 
         #endregion
 
@@ -42,7 +43,14 @@ namespace The_Darkest_Hour.Towns.Watertown
             Location returnData;
             returnData = new Location();
             returnData.Name = "Watertown Forest Side Area";
-            returnData.Description = "You move off to a little side area you saw. There is nothing here but more trees.";
+            Accomplishment banditCaveAccomplishment = Watertown.GetWatertownAccomplishments().Find(x => x.Name.Contains("Bandit Cave"));
+
+            if (!(GameState.Hero.Accomplishments.Contains(banditCaveAccomplishment)))
+            {
+                returnData.Description = "You move off to a little side area you saw. There is nothing here but more trees.";
+            }
+            else
+                returnData.Description = "Now that you were told of the cave's existence, you can spot it hiding behind some trees.";
 
             //Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
@@ -50,6 +58,12 @@ namespace The_Darkest_Hour.Towns.Watertown
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
+
+            if (GameState.Hero.Accomplishments.Contains(banditCaveAccomplishment))
+            {
+                locationDefinition = WatertownBanditCave.GetTownInstance().GetStartingLocationDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
 
             return returnData;
         }
@@ -194,6 +208,9 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 locationDefinition = Watertown.GetTownInstance().GetTownCenterDefinition();
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+
+                LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, DEFEATED_CAPTAIN_STATE, true);
+                LocationHandler.ResetLocation(Watertown.INN_KEY); // Need to reload Inn so that new conversation can be set.
             }
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
@@ -258,6 +275,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
+
 
             return returnData;
 

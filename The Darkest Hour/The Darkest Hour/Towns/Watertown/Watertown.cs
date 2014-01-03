@@ -282,11 +282,22 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             get
             {
+                bool defeatedCaptain = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForest.DEFEATED_CAPTAIN_STATE));
+
                 List<Rumor> returnData = new List<Rumor>();
 
-                Rumor guestRumor = new Rumor("Bandit Captain", "I can't seem to get supplies out of Watertown here. My caravans keep being attacked by a group of bandits. If you're looking for work, you should find and slay their leader. It would do everyone here a great deal of good.");
-                guestRumor.OnHeardRumor = this.HeardBanditCaptainRumor;
-                returnData.Add(guestRumor);
+                if (!defeatedCaptain)
+                {
+                    Rumor guestRumor = new Rumor("Bandit Captain", "I can't seem to get supplies out of Watertown here. My caravans keep being attacked by a group of bandits. If you're looking for work, you should find and slay their leader. It would do everyone here a great deal of good.");
+                    guestRumor.OnHeardRumor = this.HeardBanditCaptainRumor;
+                    returnData.Add(guestRumor);
+                }
+                else
+                {
+                    Rumor guestRumor = new Rumor("Bandit Cave", "Good, thanks for defeating their captain. However, his right hand man is still out there. Find their cave and and slay the lieutenant.");
+                    guestRumor.OnHeardRumor = this.HeardBanditCaveRumor;
+                    returnData.Add(guestRumor);
+                }
                 returnData.Add(new Rumor("Life's Hard", "It's hard to make it as a traveling minstrel. Come to think of it, I think it's starting to get close to the time that I need to get moving away from here."));
                 returnData.Add(new Rumor("Riches", "This town may not look it from the outside, but there is a great big market here. You can get plenty rich while here. Lot's of trade."));
 
@@ -299,6 +310,15 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             // TODO: Need to keep duplicate accomplishments from happening (SEE ABOVE METHOD)
             Accomplishment accomplishment = Watertown.GetWatertownAccomplishments().Find(x => x.Name.Contains("Bandit Captain"));
+            GameState.Hero.Accomplishments.Add(accomplishment);
+
+            // Reload the TownCenter so it will open up the forest
+            LocationHandler.ResetLocation(TOWN_CENTER_KEY);
+        }
+
+        public void HeardBanditCaveRumor()
+        {
+            Accomplishment accomplishment = Watertown.GetWatertownAccomplishments().Find(x => x.Name.Contains("Bandit Cave"));
             GameState.Hero.Accomplishments.Add(accomplishment);
 
             // Reload the TownCenter so it will open up the forest
