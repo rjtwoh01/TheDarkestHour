@@ -65,6 +65,8 @@ namespace The_Darkest_Hour.Towns.Watertown
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
             }
 
+            returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
+
             return returnData;
         }
 

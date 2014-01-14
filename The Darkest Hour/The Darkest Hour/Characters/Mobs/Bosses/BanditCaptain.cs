@@ -10,10 +10,10 @@ namespace The_Darkest_Hour.Characters.Mobs.Bosses
     {
         public BanditCaptain()
         {
-            this.damageMin = 5;
-            this.damageMax = 12;
-            this.health = 200;
-            this.maxHealth = 200;
+            this.damageMin = 3;
+            this.damageMax = 10;
+            this.health = 75;
+            this.maxHealth = 75;
             this.level = 2;
             this.gold = 50;
             this.xp = 100;

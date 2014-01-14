@@ -337,6 +337,10 @@ Name:           Level:          Health:           Damage:
             this.agility += numberAddedToStats;
             this.intelligence += numberAddedToStats;
             this.health += numberAddedToStats;
+            this.maxHealth += numberAddedToStats;
+
+            this.energy = this.energy;
+            this.health = this.maxHealth;
         }
 
         private int CalculateXPNeeded()

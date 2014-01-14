@@ -60,6 +60,7 @@ namespace The_Darkest_Hour.Locations.Actions
             {
                 for (int i = 0; i < Mobs.Count; i++)
                 {
+                    Mobs[i].Scale();
                     tempResult = battle.DoBattle(GameState.Hero, Mobs[i]);
 
                     if (tempResult == CombatResult.PlayerFled)
