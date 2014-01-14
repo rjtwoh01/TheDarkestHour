@@ -194,7 +194,8 @@ namespace The_Darkest_Hour.Towns.Watertown
                 locationDefinition = Watertown.GetTownInstance().GetTownCenterDefinition();
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
-                //Going to have to alter rumors based off what happened
+                LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, DEFEATED_LIEUTENANT_KEY, true);
+                LocationHandler.ResetLocation(Watertown.INN_KEY); // Need to reload Inn so that new conversation can be set.
             }
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;

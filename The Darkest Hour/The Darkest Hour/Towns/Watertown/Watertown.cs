@@ -283,6 +283,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             get
             {
                 bool defeatedCaptain = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForest.DEFEATED_CAPTAIN_STATE));
+                bool defeatedLieutenant = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownBanditCave.DEFEATED_LIEUTENANT_KEY));
 
                 List<Rumor> returnData = new List<Rumor>();
 
@@ -292,9 +293,15 @@ namespace The_Darkest_Hour.Towns.Watertown
                     guestRumor.OnHeardRumor = this.HeardBanditCaptainRumor;
                     returnData.Add(guestRumor);
                 }
-                else
+                else if (!defeatedLieutenant)
                 {
                     Rumor guestRumor = new Rumor("Bandit Cave", "Good, thanks for defeating their captain. However, his right hand man is still out there. Find their cave and and slay the lieutenant.");
+                    guestRumor.OnHeardRumor = this.HeardBanditCaveRumor;
+                    returnData.Add(guestRumor);
+                }
+                else
+                {
+                    Rumor guestRumor = new Rumor("Deeper Cave", "It is such a relief that the bandits are no longer a threat! Come back later and I may have something else to tell you. (THIS QUEST CHAIN IS A WIP AND HAS NOT BEEN FURTHER IMPLEMENTED!!)");
                     guestRumor.OnHeardRumor = this.HeardBanditCaveRumor;
                     returnData.Add(guestRumor);
                 }
