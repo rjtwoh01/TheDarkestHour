@@ -14,7 +14,7 @@ namespace The_Darkest_Hour.Characters.Mobs.Bosses
             this.damageMax = 10;
             this.health = 75;
             this.maxHealth = 75;
-            this.level = 2;
+            this.level = 1;
             this.gold = 50;
             this.xp = 100;
             this.Identifier = "Bandit Captain";

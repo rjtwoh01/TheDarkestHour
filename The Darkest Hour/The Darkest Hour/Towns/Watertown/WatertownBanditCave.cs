@@ -18,7 +18,9 @@ namespace The_Darkest_Hour.Towns.Watertown
 
         public const string ENTRANCE_KEY = "WatertownBanditCave.Entrance";
         public const string HALLWAY_KEY = "WatertownBanditCave.Hallway";
+        public const string LAIR_KEY = "WatertownBanditCave.Lair";
         public const string DEFEATED_HALLWAY_BANDITS_KEY = "DefeatedHallwayBandits";
+        public const string DEFEATED_LIEUTENANT_KEY = "DefeatedBanditLieutenant";
         
 
         #endregion
@@ -51,9 +53,6 @@ namespace The_Darkest_Hour.Towns.Watertown
             return returnData;
 
         }
-    #endregion
-
-        #region Hallway
 
         public LocationDefinition GetCaveEntranceDefinition()
         {
@@ -76,6 +75,10 @@ namespace The_Darkest_Hour.Towns.Watertown
             return returnData;
         }
 
+    #endregion
+
+        #region Hallway
+
         public Location CaveHallway()
         {
             Location returnData;
@@ -83,9 +86,9 @@ namespace The_Darkest_Hour.Towns.Watertown
             returnData = new Location();
             returnData.Name = "Bandit Hallway";
 
-            if (defeatedBandits)
+            if (!defeatedBandits)
             {
-                returnData.Description = "A long hallway. Your path is blocked by bandits.";
+                returnData.Description = "A long hallway, dead bandits lay on the ground.";
 
                 // Location Actions
                 List<LocationAction> locationActions = new List<LocationAction>();
@@ -95,7 +98,7 @@ namespace The_Darkest_Hour.Towns.Watertown
                 bandits.Add(new Bandit());
 
                 CombatAction combatAction = new CombatAction("Bandits", bandits);
-                //combatAction.PostCombat += StraightBanditResults;
+                combatAction.PostCombat += HallwayResults;
                 locationActions.Add(combatAction);
                 returnData.Actions = locationActions;
             }
@@ -108,8 +111,12 @@ namespace The_Darkest_Hour.Towns.Watertown
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
             LocationDefinition locationDefinition = WatertownBanditCave.GetTownInstance().GetCaveEntranceDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            if (defeatedBandits)
+            {
+                locationDefinition = WatertownBanditCave.GetTownInstance().GetLairDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
             returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
-
 
             return returnData;
         }
@@ -140,6 +147,88 @@ namespace The_Darkest_Hour.Towns.Watertown
                 returnData.LocationKey = locationKey;
                 returnData.Name = "Bandit Cave Hallway";
                 returnData.DoLoadLocation = CaveHallway;
+
+                LocationHandler.AddLocation(returnData);
+            }
+
+            return returnData;
+        }
+
+        #endregion
+
+        #region FinalRoom
+
+        public Location Lair()
+        {
+            Location returnData;
+            bool defeatedLieutenant = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownBanditCave.DEFEATED_LIEUTENANT_KEY));
+            returnData = new Location();
+            returnData.Name = "Lieutenant's Lair";
+
+            if (!defeatedLieutenant)
+            {
+                returnData.Description = "A large room, furnished with expensive decorations. The Lieutenant stands in the middle of the room";
+
+                // Location Actions
+                List<LocationAction> locationActions = new List<LocationAction>();
+
+                List<Mob> bandits = new List<Mob>();
+                bandits.Add(new BanditLieutenant());
+
+                CombatAction combatAction = new CombatAction("Bandit Lieutenant", bandits);
+                combatAction.PostCombat += LairResults;
+                locationActions.Add(combatAction);
+                returnData.Actions = locationActions;
+            }
+            else
+            {
+                returnData.Description = "A large ornate room. The Bandit Lieutenant lays dead in the middle of the room. There's a book shelf against the left hand wall that seems out of place. You wonder why it's there...";
+            }
+
+            // Adjacent Locations
+            Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
+            LocationDefinition locationDefinition = WatertownBanditCave.GetTownInstance().GetCaveHallwayDefinition();
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            if (defeatedLieutenant)
+            {
+                locationDefinition = Watertown.GetTownInstance().GetTownCenterDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+
+                //Going to have to alter rumors based off what happened
+            }
+
+            returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
+
+
+            return returnData;
+        }
+
+        public void LairResults(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownBanditCave.DEFEATED_LIEUTENANT_KEY, true);
+
+                // Reload the forest straight path
+                LocationHandler.ResetLocation(DEFEATED_LIEUTENANT_KEY);
+
+            }
+        }
+
+        public LocationDefinition GetLairDefinition()
+        {
+            LocationDefinition returnData = new LocationDefinition();
+            string locationKey = LAIR_KEY;
+
+            if (LocationHandler.LocationExists(locationKey))
+            {
+                returnData = LocationHandler.GetLocation(locationKey);
+            }
+            else
+            {
+                returnData.LocationKey = locationKey;
+                returnData.Name = "Lieutenant's Lair";
+                returnData.DoLoadLocation = Lair;
 
                 LocationHandler.AddLocation(returnData);
             }

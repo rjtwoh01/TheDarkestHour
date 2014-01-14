@@ -77,6 +77,7 @@
     <Compile Include="Characters\Accomplishment.cs" />
     <Compile Include="Areas\GeneralStore.cs" />
     <Compile Include="Characters\Mobs\Bosses\BanditCaptain.cs" />
+    <Compile Include="Characters\Mobs\Bosses\BanditLieutenant.cs" />
     <Compile Include="Characters\Mobs\SewerRat.cs" />
     <Compile Include="Combat\Battle.cs" />
     <Compile Include="Characters\Accomplishments.cs" />
