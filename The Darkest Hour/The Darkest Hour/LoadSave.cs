@@ -51,11 +51,18 @@ namespace The_Darkest_Hour
         {
             bool returnData=false;
 
-            string[] characterDirectories = Directory.GetDirectories(GameConfigs.PlayerGameFilesLocation, "Character *");
-
-            if ((characterDirectories != null) && (characterDirectories.Length > 0))
+            try
             {
-                returnData = true;
+                string[] characterDirectories = Directory.GetDirectories(GameConfigs.PlayerGameFilesLocation, "Character *");
+
+                if ((characterDirectories != null) && (characterDirectories.Length > 0))
+                {
+                    returnData = true;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("No saved games");
             }
 
             return returnData;
@@ -75,19 +82,19 @@ namespace The_Darkest_Hour
 
         public static Player LoadCharacter(string directoryName)
         {
-            return LoadFromXmlFile(directoryName);
+                return LoadFromXmlFile(directoryName);
         }
 
         private static Player LoadFromXmlFile(string directoryName)
         {
-            Player myHero;
+            Player myHero = new Player();
+
             string fileName = GetCharacterFileName();
 
             System.Xml.Serialization.XmlSerializer playerXmlSerializer = new System.Xml.Serialization.XmlSerializer(typeof(GameObject));
             using (System.IO.StreamReader playerStreamReader = new System.IO.StreamReader(Path.Combine(GameConfigs.PlayerGameFilesLocation, directoryName, fileName)))
             {
-                myHero = new Player();
-                myHero = (Player) playerXmlSerializer.Deserialize(playerStreamReader);
+                myHero = (Player)playerXmlSerializer.Deserialize(playerStreamReader);
 
                 Console.WriteLine("Game Loaded from xml file successfully\n");
             }
