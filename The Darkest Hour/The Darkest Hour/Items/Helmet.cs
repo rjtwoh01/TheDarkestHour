@@ -69,7 +69,7 @@ namespace The_Darkest_Hour.Items
                 myHero.goldFind += goldFind;
                 myHero.critChance += critChance;
                 myHero.critDamage += critDamage;
-                myHero.WeaponsFull = true;
+                myHero.HelmetFull = true;
 
                 if (myHero.critChance > 1)
                     myHero.critChance = 1;
