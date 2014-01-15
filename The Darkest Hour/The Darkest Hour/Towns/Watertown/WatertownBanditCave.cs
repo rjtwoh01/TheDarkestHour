@@ -88,7 +88,7 @@ namespace The_Darkest_Hour.Towns.Watertown
 
             if (!defeatedBandits)
             {
-                returnData.Description = "A long hallway, dead bandits lay on the ground.";
+                returnData.Description = "A long hallway. Your path is blocked by bandits.";
 
                 // Location Actions
                 List<LocationAction> locationActions = new List<LocationAction>();
@@ -104,7 +104,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             }
             else
             {
-                returnData.Description = "A long hallway. Your path is blocked by bandits.";
+                returnData.Description = "A long hallway, dead bandits lay on the ground.";
             }
 
             // Adjacent Locations
