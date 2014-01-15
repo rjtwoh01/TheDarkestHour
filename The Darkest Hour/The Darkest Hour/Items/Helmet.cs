@@ -88,7 +88,7 @@ namespace The_Darkest_Hour.Items
             myHero.health -= health;
             myHero.magicFind -= magicFind;
             myHero.goldFind -= goldFind;
-            myHero.WeaponsFull = false;
+            myHero.HelmetFull = false;
         }
 
         public override bool SlotCheck(Player myHero)
