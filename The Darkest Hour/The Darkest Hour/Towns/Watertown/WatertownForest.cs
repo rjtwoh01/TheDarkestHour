@@ -183,7 +183,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             bool defeatedBanditCaptain = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForest.DEFEATED_BANDIT_CAPTAIN_KEY));
             if (!defeatedBanditCaptain)
             {
-                returnData.Description = "The Bandit Captain stands in the clearing and stares at you, daring you to challenge him. \nYou can't fight him yet. He is not implemented into the game";
+                returnData.Description = "The Bandit Captain stands in the clearing and stares at you, daring you to challenge him.";
             }
             else
                 returnData.Description = "The Bandit Captain lays dead in the clearing";

@@ -36,6 +36,7 @@ namespace The_Darkest_Hour.Locations.Actions
                 mob = new Bandit();
             }
 
+            mob.Scale();
             Console.Clear();
             battle.DoBattle(GameState.Hero, mob);
             //Eventually going to remove this and have an option to rest
