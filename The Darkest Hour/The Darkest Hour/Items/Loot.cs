@@ -13,64 +13,64 @@ namespace The_Darkest_Hour.Items
         double goldFind, magicFind, critChance, critDamage;
         string itemType, itemName;
         Random rand;
-        public Loot(Player myHero, Mob mob)
+        public Loot(Mob mob)
         {
             if (mob.level >= 1 && mob.level <= 5)
             {
-                LevelsOneToFiveLoot(myHero);
+                LevelsOneToFiveLoot();
             }
             if (mob.level >= 6 && mob.level <= 50)
             {
-                LevelsSixToTenLoot(myHero);
+                LevelsSixToTenLoot();
             }
         }
 
-        public void LevelsOneToFiveLoot(Player myHero)
+        public void LevelsOneToFiveLoot()
         {
             rand = new Random();
             temp = rand.Next(1, 7);
             switch (temp)
             {
                 case 1:
-                    LevelsOneToFiveGetWeapon(myHero);
+                    LevelsOneToFiveGetWeapon();
                     break;
                 case 2:
-                    LevelsOneToFiveGetArmor(myHero);
+                    LevelsOneToFiveGetArmor();
                     break;
                 case 3:
-                    LevelsOneToFiveGetHelmet(myHero);
+                    LevelsOneToFiveGetHelmet();
                     break;
                 case 4:
-                    LevelsOneToFiveGetAmulet(myHero);
+                    LevelsOneToFiveGetAmulet();
                     break;
                 case 5:
-                    LevelsOneToFiveGetPotion(myHero);
+                    LevelsOneToFiveGetPotion();
                     break;
                 default:
                     break;
             }
         }
 
-        public void LevelsSixToTenLoot(Player myHero)
+        public void LevelsSixToTenLoot()
         {
             rand = new Random();
             temp = rand.Next(1, 7);
             switch (temp)
             {
                 case 1:
-                    LevelsSixToTenGetWeapon(myHero);
+                    LevelsSixToTenGetWeapon();
                     break;
                 case 2:
-                    LevelsSixToTenGetArmor(myHero);
+                    LevelsSixToTenGetArmor();
                     break;
                 case 3:
-                    LevelsSixToTenGetHelmet(myHero);
+                    LevelsSixToTenGetHelmet();
                     break;
                 case 4:
-                    LevelsSixToTenGetAmulet(myHero);
+                    LevelsSixToTenGetAmulet();
                     break;
                 case 5:
-                    LevelsSixToTenGetPotion(myHero);
+                    LevelsSixToTenGetPotion();
                     break;
                 default:
                     break;
@@ -78,7 +78,7 @@ namespace The_Darkest_Hour.Items
         }
 
 
-        public void LevelsOneToFiveGetWeapon(Player myHero)
+        public void LevelsOneToFiveGetWeapon()
         {
             rand = new Random();
 
@@ -254,8 +254,8 @@ namespace The_Darkest_Hour.Items
                 case "Sword":
                     aSword = new Weapon(itemName, itemType, damage, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
                     Console.WriteLine("You loot {0}", itemName);
-                    if (myHero.Inventory.Count < myHero.inventoryCap)
-                        myHero.Inventory.Add(aSword);
+                    if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
+                        GameState.Hero.Inventory.Add(aSword);
                     else
                         Console.WriteLine("Unfortunately you don't have enough space to store {0} and it will lay forever abandoned and forgotten", itemName);
                     break;
@@ -263,8 +263,8 @@ namespace The_Darkest_Hour.Items
                 case "Bow":
                     aBow = new Weapon(itemName, itemType, damage, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
                     Console.WriteLine("You loot {0}", itemName);
-                    if (myHero.Inventory.Count < myHero.inventoryCap)
-                        myHero.Inventory.Add(aBow);
+                    if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
+                        GameState.Hero.Inventory.Add(aBow);
                     else
                         Console.WriteLine("Unfortunately you don't have enough space to store {0} and it will lay forever abandoned and forgotten", itemName);
                     break;
@@ -272,8 +272,8 @@ namespace The_Darkest_Hour.Items
                 case "Staff":
                     aStaff = new Weapon(itemName, itemType, damage, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
                     Console.WriteLine("You loot {0}", itemName);
-                    if (myHero.Inventory.Count < myHero.inventoryCap)
-                        myHero.Inventory.Add(aStaff);
+                    if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
+                        GameState.Hero.Inventory.Add(aStaff);
                     else
                         Console.WriteLine("Unfortunately you don't have enough space to store {0} and it will lay forever abandoned and forgotten", itemName);
                     break;
@@ -281,8 +281,8 @@ namespace The_Darkest_Hour.Items
                 case "Wand":
                     aWand = new Weapon(itemName, itemType, damage, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
                     Console.WriteLine("You loot {0}", itemName);
-                    if (myHero.Inventory.Count < myHero.inventoryCap)
-                        myHero.Inventory.Add(aWand);
+                    if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
+                        GameState.Hero.Inventory.Add(aWand);
                     else
                         Console.WriteLine("Unfortunately you don't have enough space to store {0} and it will lay forever abandoned and forgotten", itemName);
                     break;
@@ -290,8 +290,8 @@ namespace The_Darkest_Hour.Items
                 case "Dagger":
                     aDagger = new Weapon(itemName, itemType, damage, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
                     Console.WriteLine("You loot {0}", itemName);
-                    if (myHero.Inventory.Count < myHero.inventoryCap)
-                        myHero.Inventory.Add(aDagger);
+                    if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
+                        GameState.Hero.Inventory.Add(aDagger);
                     else
                         Console.WriteLine("Unfortunately you don't have enough space to store {0} and it will lay forever abandoned and forgotten", itemName);
                     break;
@@ -299,8 +299,8 @@ namespace The_Darkest_Hour.Items
                 case "Axe":
                     aAxe = new Weapon(itemName, itemType, damage, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
                     Console.WriteLine("You loot {0}", itemName);
-                    if (myHero.Inventory.Count < myHero.inventoryCap)
-                        myHero.Inventory.Add(aAxe);
+                    if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
+                        GameState.Hero.Inventory.Add(aAxe);
                     else
                         Console.WriteLine("Unfortunately you don't have enough space to store {0} and it will lay forever abandoned and forgotten", itemName);
                     break;
@@ -311,7 +311,7 @@ namespace The_Darkest_Hour.Items
             }
         }
 
-        public void LevelsOneToFiveGetArmor(Player myHero)
+        public void LevelsOneToFiveGetArmor()
         {
             rand = new Random();
 
@@ -360,13 +360,13 @@ namespace The_Darkest_Hour.Items
 
             aArmor = new Armor(itemName, itemType, armor, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
             Console.WriteLine("You loot {0}", itemName);
-            if (myHero.Inventory.Count < myHero.inventoryCap)
-                myHero.Inventory.Add(aArmor);
+            if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
+                GameState.Hero.Inventory.Add(aArmor);
             else
                 Console.WriteLine("Unfortunately you don't have enough space to store {0} and it will lay forever abandoned and forgotten", itemName);
         }
 
-        public void LevelsOneToFiveGetHelmet(Player myHero)
+        public void LevelsOneToFiveGetHelmet()
         {
             rand = new Random();
 
@@ -414,13 +414,13 @@ namespace The_Darkest_Hour.Items
 
             aHelmet = new Helmet(itemName, itemType, armor, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
             Console.WriteLine("You loot {0}", itemName);
-            if (myHero.Inventory.Count < myHero.inventoryCap)
-                myHero.Inventory.Add(aHelmet);
+            if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
+                GameState.Hero.Inventory.Add(aHelmet);
             else
                 Console.WriteLine("Unfortunately you don't have enough space to store {0} and it will lay forever abandoned and forgotten", itemName);
         }
 
-        public void LevelsOneToFiveGetAmulet(Player myHero)
+        public void LevelsOneToFiveGetAmulet()
         {
             rand = new Random();
 
@@ -466,13 +466,13 @@ namespace The_Darkest_Hour.Items
 
             aAmulet = new Amulet(itemName, itemType, armor, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
             Console.WriteLine("You loot {0}", itemName);
-            if (myHero.Inventory.Count < myHero.inventoryCap)
-                myHero.Inventory.Add(aAmulet);
+            if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
+                GameState.Hero.Inventory.Add(aAmulet);
             else
                 Console.WriteLine("Unfortunately you don't have enough space to store {0} and it will lay forever abandoned and forgotten", itemName);
         }
 
-        public void LevelsOneToFiveGetPotion(Player myHero)
+        public void LevelsOneToFiveGetPotion()
         {
             rand = new Random();
 
@@ -489,13 +489,13 @@ namespace The_Darkest_Hour.Items
 
             aPotion = new Potion(potionName, healAmount, energyIncreased, requiredLevel, itemType, worth);
             Console.WriteLine("You loot {0}", potionName);
-            if (myHero.Inventory.Count < myHero.inventoryCap)
-                myHero.Inventory.Add(aPotion);
+            if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
+                GameState.Hero.Inventory.Add(aPotion);
             else
                 Console.WriteLine("Unfortunately you don't have enough space to store {0} and it will lay forever abandoned and forgotten", itemName);
         }
 
-        public void LevelsSixToTenGetWeapon(Player myHero)
+        public void LevelsSixToTenGetWeapon()
         {
             rand = new Random();
 
@@ -671,8 +671,8 @@ namespace The_Darkest_Hour.Items
                 case "Sword":
                     aSword = new Weapon(itemName, itemType, damage, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
                     Console.WriteLine("You loot {0}", itemName);
-                    if (myHero.Inventory.Count < myHero.inventoryCap)
-                        myHero.Inventory.Add(aSword);
+                    if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
+                        GameState.Hero.Inventory.Add(aSword);
                     else
                         Console.WriteLine("Unfortunately you don't have enough space to store {0} and it will lay forever abandoned and forgotten", itemName);
                     break;
@@ -680,8 +680,8 @@ namespace The_Darkest_Hour.Items
                 case "Bow":
                     aBow = new Weapon(itemName, itemType, damage, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
                     Console.WriteLine("You loot {0}", itemName);
-                    if (myHero.Inventory.Count < myHero.inventoryCap)
-                        myHero.Inventory.Add(aBow);
+                    if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
+                        GameState.Hero.Inventory.Add(aBow);
                     else
                         Console.WriteLine("Unfortunately you don't have enough space to store {0} and it will lay forever abandoned and forgotten", itemName);
                     break;
@@ -689,8 +689,8 @@ namespace The_Darkest_Hour.Items
                 case "Staff":
                     aStaff = new Weapon(itemName, itemType, damage, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
                     Console.WriteLine("You loot {0}", itemName);
-                    if (myHero.Inventory.Count < myHero.inventoryCap)
-                        myHero.Inventory.Add(aStaff);
+                    if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
+                        GameState.Hero.Inventory.Add(aStaff);
                     else
                         Console.WriteLine("Unfortunately you don't have enough space to store {0} and it will lay forever abandoned and forgotten", itemName);
                     break;
@@ -698,8 +698,8 @@ namespace The_Darkest_Hour.Items
                 case "Wand":
                     aWand = new Weapon(itemName, itemType, damage, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
                     Console.WriteLine("You loot {0}", itemName);
-                    if (myHero.Inventory.Count < myHero.inventoryCap)
-                        myHero.Inventory.Add(aWand);
+                    if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
+                        GameState.Hero.Inventory.Add(aWand);
                     else
                         Console.WriteLine("Unfortunately you don't have enough space to store {0} and it will lay forever abandoned and forgotten", itemName);
                     break;
@@ -707,8 +707,8 @@ namespace The_Darkest_Hour.Items
                 case "Dagger":
                     aDagger = new Weapon(itemName, itemType, damage, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
                     Console.WriteLine("You loot {0}", itemName);
-                    if (myHero.Inventory.Count < myHero.inventoryCap)
-                        myHero.Inventory.Add(aDagger);
+                    if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
+                        GameState.Hero.Inventory.Add(aDagger);
                     else
                         Console.WriteLine("Unfortunately you don't have enough space to store {0} and it will lay forever abandoned and forgotten", itemName);
                     break;
@@ -716,8 +716,8 @@ namespace The_Darkest_Hour.Items
                 case "Axe":
                     aAxe = new Weapon(itemName, itemType, damage, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
                     Console.WriteLine("You loot {0}", itemName);
-                    if (myHero.Inventory.Count < myHero.inventoryCap)
-                        myHero.Inventory.Add(aAxe);
+                    if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
+                        GameState.Hero.Inventory.Add(aAxe);
                     else
                         Console.WriteLine("Unfortunately you don't have enough space to store {0} and it will lay forever abandoned and forgotten", itemName);
                     break;
@@ -728,7 +728,7 @@ namespace The_Darkest_Hour.Items
             }
         }
 
-        public void LevelsSixToTenGetArmor(Player myHero)
+        public void LevelsSixToTenGetArmor()
         {
             rand = new Random();
 
@@ -777,13 +777,13 @@ namespace The_Darkest_Hour.Items
 
             aArmor = new Armor(itemName, itemType, armor, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
             Console.WriteLine("You loot {0}", itemName);
-            if (myHero.Inventory.Count < myHero.inventoryCap)
-                myHero.Inventory.Add(aArmor);
+            if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
+                GameState.Hero.Inventory.Add(aArmor);
             else
                 Console.WriteLine("Unfortunately you don't have enough space to store {0} and it will lay forever abandoned and forgotten", itemName);
         }
 
-        public void LevelsSixToTenGetHelmet(Player myHero)
+        public void LevelsSixToTenGetHelmet()
         {
             rand = new Random();
 
@@ -831,13 +831,13 @@ namespace The_Darkest_Hour.Items
 
             aHelmet = new Helmet(itemName, itemType, armor, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
             Console.WriteLine("You loot {0}", itemName);
-            if (myHero.Inventory.Count < myHero.inventoryCap)
-                myHero.Inventory.Add(aHelmet);
+            if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
+                GameState.Hero.Inventory.Add(aHelmet);
             else
                 Console.WriteLine("Unfortunately you don't have enough space to store {0} and it will lay forever abandoned and forgotten", itemName);
         }
 
-        public void LevelsSixToTenGetAmulet(Player myHero)
+        public void LevelsSixToTenGetAmulet()
         {
             rand = new Random();
 
@@ -883,13 +883,13 @@ namespace The_Darkest_Hour.Items
 
             aAmulet = new Amulet(itemName, itemType, armor, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
             Console.WriteLine("You loot {0}", itemName);
-            if (myHero.Inventory.Count < myHero.inventoryCap)
-                myHero.Inventory.Add(aAmulet);
+            if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
+                GameState.Hero.Inventory.Add(aAmulet);
             else
                 Console.WriteLine("Unfortunately you don't have enough space to store {0} and it will lay forever abandoned and forgotten", itemName);
         }
 
-        public void LevelsSixToTenGetPotion(Player myHero)
+        public void LevelsSixToTenGetPotion()
         {
             rand = new Random();
 
@@ -906,8 +906,8 @@ namespace The_Darkest_Hour.Items
 
             aPotion = new Potion(potionName, healAmount, energyIncreased, requiredLevel, itemType, worth);
             Console.WriteLine("You loot {0}", potionName);
-            if (myHero.Inventory.Count < myHero.inventoryCap)
-                myHero.Inventory.Add(aPotion);
+            if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
+                GameState.Hero.Inventory.Add(aPotion);
             else
                 Console.WriteLine("Unfortunately you don't have enough space to store {0} and it will lay forever abandoned and forgotten", itemName);
         }
