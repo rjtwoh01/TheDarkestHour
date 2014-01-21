@@ -62,7 +62,9 @@ namespace The_Darkest_Hour
             }
             catch (Exception e)
             {
-                Console.WriteLine("No saved games");
+                Console.WriteLine("\nNo saved games due to:");
+                Console.WriteLine(e.Message);
+                Console.WriteLine();
             }
 
             return returnData;
