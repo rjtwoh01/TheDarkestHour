@@ -125,6 +125,7 @@
     <Compile Include="Items\Item.cs" />
     <Compile Include="Items\Loot.cs" />
     <Compile Include="Items\Potion.cs" />
+    <Compile Include="Items\VendoredItems.cs" />
     <Compile Include="Items\Weapon.cs" />
     <Compile Include="LoadSave.cs" />
     <Compile Include="Locations\Actions\ArenaAction.cs" />
