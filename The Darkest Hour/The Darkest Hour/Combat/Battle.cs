@@ -118,7 +118,7 @@ namespace The_Darkest_Hour.Combat
             else if (mobLost)
             {
                 Console.WriteLine("The battle is over and you emerge victorious! Hail to the hero!");
-                loot = new Loot(myHero, mob);
+                loot = new Loot(mob);
                 myHero.xp += mob.xp;
                 myHero.gold += mob.gold;
                 myHero.GetLevel();
