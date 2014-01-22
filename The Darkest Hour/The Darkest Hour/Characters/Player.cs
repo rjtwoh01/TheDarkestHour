@@ -274,7 +274,7 @@ Name:           Level:          Health:           Damage:
                 int answerParsed = Int32.Parse(answer);
                 if (answerParsed == 1)
                 {
-                    Console.WriteLine("\nWhich item do you want to use?\n");
+                    Console.WriteLine("\nWhich item do you want to sell?\n");
                     answer = Console.ReadLine();
                     int selected = Int32.Parse(answer);
                     selected -= 1;

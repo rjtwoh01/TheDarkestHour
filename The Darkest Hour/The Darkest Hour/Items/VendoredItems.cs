@@ -16,14 +16,14 @@ namespace The_Darkest_Hour.Items
 
         public VendoredItems()
         {
-            if (GameState.Hero.level >= 1 && GameState.Hero.level <= 5)
-            {
-                LevelsOneToFiveLoot();
-            }
-            if (GameState.Hero.level >= 6 && GameState.Hero.level <= 50)
-            {
-                LevelsSixToTenLoot();
-            }
+            //if (GameState.Hero.level >= 1 && GameState.Hero.level <= 5)
+            //{
+            //    LevelsOneToFiveLoot();
+            //}
+            //if (GameState.Hero.level >= 6 && GameState.Hero.level <= 50)
+            //{
+            //    LevelsSixToTenLoot();
+            //}
         }
 
         public void LevelsOneToFiveLoot()
@@ -84,12 +84,7 @@ namespace The_Darkest_Hour.Items
 
             rand = new Random();
 
-            Weapon aSword;
-            Weapon aBow;
-            Weapon aStaff;
-            Weapon aAxe;
-            Weapon aDagger;
-            Weapon aWand;
+            Weapon aWeapon;
 
             List<string> SwordNames = new List<string>();
             SwordNames.Add("Slightly Broken Sword");
@@ -251,42 +246,10 @@ namespace The_Darkest_Hour.Items
             critDamage = 0;
             worth = rand.Next(1, 11);
 
-            switch (itemType)
-            {
-                case "Sword":
-                    aSword = new Weapon(itemName, itemType, damage, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
-                    returnData = aSword;
-                    break;
 
-                case "Bow":
-                    aBow = new Weapon(itemName, itemType, damage, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
-                    returnData = aBow;
-                    break;
-
-                case "Staff":
-                    aStaff = new Weapon(itemName, itemType, damage, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
-                    returnData = aStaff;
-                    break;
-
-                case "Wand":
-                    aWand = new Weapon(itemName, itemType, damage, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
-                    returnData = aWand;
-                    break;
-
-                case "Dagger":
-                    aDagger = new Weapon(itemName, itemType, damage, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
-                    returnData = aDagger;
-                    break;
-
-                case "Axe":
-                    aAxe = new Weapon(itemName, itemType, damage, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
-                    returnData = aAxe;
-                    break;
-
-                default:
-                    Console.WriteLine("\nUh Oh, something went wrong.\n");
-                    break;
-            }
+            aWeapon = new Weapon(itemName, itemType, damage, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
+            returnData = aWeapon;
+                    
 
             return returnData;
         }

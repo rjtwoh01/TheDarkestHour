@@ -166,7 +166,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             locationAction = new DisplayInventoryAction();
             locationActions.Add(locationAction);
 
-            locationAction = new SellItemsAction();
+            locationAction = new StoreAction();
             locationActions.Add(locationAction);
 
             locationAction = new MainMenuAction();

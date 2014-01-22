@@ -7,12 +7,12 @@ using The_Darkest_Hour.Areas;
 
 namespace The_Darkest_Hour.Locations.Actions
 {
-    class SellItemsAction : LocationAction
+    class StoreAction : LocationAction
     {
-        public SellItemsAction()
+        public StoreAction()
         {
-            this.Name = "Sell Items";
-            this.Description = "Sell Items";
+            this.Name = "Store";
+            this.Description = "Store";
         }
 
 

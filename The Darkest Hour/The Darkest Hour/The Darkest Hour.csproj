@@ -142,7 +142,7 @@
     <Compile Include="Locations\Actions\RestAction.cs" />
     <Compile Include="Locations\Actions\RumorAction.cs" />
     <Compile Include="Locations\Actions\SaveAction.cs" />
-    <Compile Include="Locations\Actions\SellItemsAction.cs" />
+    <Compile Include="Locations\Actions\StoreAction.cs" />
     <Compile Include="Locations\Location.cs" />
     <Compile Include="Locations\LocationAction.cs" />
     <Compile Include="Locations\LocationDefinition.cs" />
