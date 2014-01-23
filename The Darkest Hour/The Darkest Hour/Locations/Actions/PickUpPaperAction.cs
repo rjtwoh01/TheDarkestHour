@@ -6,21 +6,19 @@ using System.Threading.Tasks;
 
 namespace The_Darkest_Hour.Locations.Actions
 {
-    class DisplayStatsAction : LocationAction
+    class PickUpPaperAction : LocationAction
     {
-        public DisplayStatsAction()
+        public PickUpPaperAction()
         {
-            this.Name = "Display Stats";
-            this.Description = "Display Stats";
+            this.Name = "Pick Up Papers";
+            this.Description = "Pick Up Papers";
         }
 
         public override LocationDefinition DoAction()
         {
             LocationDefinition returnData = GameState.CurrentLocation;
 
-            this.ClearScreen(false);
-
-            GameState.Hero.DisplayStats();
+            Console.WriteLine("\nYou pick up the papers.\n");
 
             this.ClearScreen();
 

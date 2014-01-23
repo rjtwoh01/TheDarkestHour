@@ -110,6 +110,8 @@
     <Compile Include="Characters\Professions\Warrior.cs" />
     <Compile Include="Combat\CombatEventArgs.cs" />
     <Compile Include="Combat\CombatResults.cs" />
+    <Compile Include="Common\PaperReadEventArgs.cs" />
+    <Compile Include="Common\PaperReadResults.cs" />
     <Compile Include="Common\SerializableDictionary.cs" />
     <Compile Include="GameConfigs.cs" />
     <Compile Include="GameObject.cs" />
@@ -139,6 +141,8 @@
     <Compile Include="Locations\Actions\LoadSavedGameAction.cs" />
     <Compile Include="Locations\Actions\MainMenuAction.cs" />
     <Compile Include="Locations\Actions\MoveLocationAction.cs" />
+    <Compile Include="Locations\Actions\PickUpPaperAction.cs" />
+    <Compile Include="Locations\Actions\ReadPapersAction.cs" />
     <Compile Include="Locations\Actions\RestAction.cs" />
     <Compile Include="Locations\Actions\RumorAction.cs" />
     <Compile Include="Locations\Actions\SaveAction.cs" />
@@ -157,6 +161,7 @@
     <Compile Include="Towns\Town.cs" />
     <Compile Include="Towns\Watertown\Watertown.cs" />
     <Compile Include="Towns\Watertown\WatertownBanditCave.cs" />
+    <Compile Include="Towns\Watertown\WatertownBanditCaveDeeper.cs" />
     <Compile Include="Towns\Watertown\WatertownForest.cs" />
     <Compile Include="Towns\Watertown\WatertownSewer.cs" />
   </ItemGroup>

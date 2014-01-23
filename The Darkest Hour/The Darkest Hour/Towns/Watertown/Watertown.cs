@@ -301,8 +301,8 @@ namespace The_Darkest_Hour.Towns.Watertown
                 }
                 else
                 {
-                    Rumor guestRumor = new Rumor("Deeper Cave", "It is such a relief that the bandits are no longer a threat! Come back later and I may have something else to tell you. (THIS QUEST CHAIN IS A WIP AND HAS NOT BEEN FURTHER IMPLEMENTED!!)");
-                    guestRumor.OnHeardRumor = this.HeardBanditCaveRumor;
+                    Rumor guestRumor = new Rumor("Deeper Cave", "It is such a relief that the bandits are no longer a threat! You know, I've heard rumors that the caves in that forest have many secret and hidden rooms. Maybe you could return to the cave and see if the bandits took advantage of any such room. You may find somethig interesting.");
+                    guestRumor.OnHeardRumor = this.HeardHiddenRoomRumor;
                     returnData.Add(guestRumor);
                 }
                 returnData.Add(new Rumor("Life's Hard", "It's hard to make it as a traveling minstrel. Come to think of it, I think it's starting to get close to the time that I need to get moving away from here."));
@@ -328,7 +328,16 @@ namespace The_Darkest_Hour.Towns.Watertown
             Accomplishment accomplishment = Watertown.GetWatertownAccomplishments().Find(x => x.Name.Contains("Bandit Cave"));
             GameState.Hero.Accomplishments.Add(accomplishment);
 
-            // Reload the TownCenter so it will open up the forest
+            // Reload the TownCenter so it will open up the cave
+            LocationHandler.ResetLocation(TOWN_CENTER_KEY);
+        }
+
+        public void HeardHiddenRoomRumor()
+        {
+            Accomplishment accomplishment = Watertown.GetWatertownAccomplishments().Find(x => x.Name.Contains("Hidden Room"));
+            GameState.Hero.Accomplishments.Add(accomplishment);
+
+            // Reload the TownCenter so it will open up the hidden room
             LocationHandler.ResetLocation(TOWN_CENTER_KEY);
         }
 
@@ -354,7 +363,13 @@ namespace The_Darkest_Hour.Towns.Watertown
                 accomplishment = new Accomplishment();
                 accomplishment.NameSpace = "Watertown";
                 accomplishment.Name = "Has Heard the Bandit Captain Rumor";
-                accomplishment.Description = "Has heard the rumor of the bandit captain.   Tales of gold and rewards in the Watertown Forest.";
+                accomplishment.Description = "Has heard the rumor of the bandit cave.";
+                _WatertownAccomplishments.Add(accomplishment);
+
+                accomplishment = new Accomplishment();
+                accomplishment.NameSpace = "Watertown";
+                accomplishment.Name = "Has Heard the Hidden Room Rumor";
+                accomplishment.Description = "Has heard the rumor of the bandit hidden room.";
                 _WatertownAccomplishments.Add(accomplishment);
 
                 // TODO: Can add more accomplishments here;

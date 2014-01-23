@@ -156,7 +156,7 @@ namespace The_Darkest_Hour.Towns.Watertown
 
         #endregion
 
-        #region FinalRoom
+        #region Lair
 
         public Location Lair()
         {
@@ -164,6 +164,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             bool defeatedLieutenant = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownBanditCave.DEFEATED_LIEUTENANT_KEY));
             returnData = new Location();
             returnData.Name = "Lieutenant's Lair";
+            Accomplishment hiddenRoomAccomplishment = Watertown.GetWatertownAccomplishments().Find(x => x.Name.Contains("Hidden Room"));
 
             if (!defeatedLieutenant)
             {
@@ -189,6 +190,11 @@ namespace The_Darkest_Hour.Towns.Watertown
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
             LocationDefinition locationDefinition = WatertownBanditCave.GetTownInstance().GetCaveHallwayDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            if (GameState.Hero.Accomplishments.Contains(hiddenRoomAccomplishment))
+            {
+                locationDefinition = WatertownBanditCaveDeeper.GetTownInstance().GetStartingLocationDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
             if (defeatedLieutenant)
             {
                 locationDefinition = Watertown.GetTownInstance().GetTownCenterDefinition();
@@ -256,7 +262,5 @@ namespace The_Darkest_Hour.Towns.Watertown
         }
 
         #endregion
-
-
     }
 }
