@@ -12,7 +12,7 @@ namespace The_Darkest_Hour.Areas
     {
         public static void DoGeneralStore() 
         {
-            Console.WriteLine("Welcome to the store, you can sell any of your goods here!");
+            Console.WriteLine("\nWelcome to the store, you can sell any of your goods here!");
             Console.WriteLine("Or if you're interested, we have some mighty fine goods to buy here!\n\n");
 
             bool goAgain = false;
