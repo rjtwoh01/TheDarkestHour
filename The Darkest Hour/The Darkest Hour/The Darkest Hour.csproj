@@ -144,7 +144,6 @@
     <Compile Include="Locations\Actions\LoadSavedGameAction.cs" />
     <Compile Include="Locations\Actions\MainMenuAction.cs" />
     <Compile Include="Locations\Actions\MoveLocationAction.cs" />
-    <Compile Include="Locations\Actions\PickUpPaperAction.cs" />
     <Compile Include="Locations\Actions\ReadPapersAction.cs" />
     <Compile Include="Locations\Actions\RestAction.cs" />
     <Compile Include="Locations\Actions\RumorAction.cs" />
