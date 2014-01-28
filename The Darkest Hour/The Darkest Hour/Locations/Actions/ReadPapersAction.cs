@@ -42,6 +42,8 @@ namespace The_Darkest_Hour.Locations.Actions
 
             Console.WriteLine(_text);
 
+            _PaperResults = PaperReadResults.Read;
+
             PaperReadEventArgs paperEventArgs = new PaperReadEventArgs();
             paperEventArgs.PaperResults = _PaperResults;
 

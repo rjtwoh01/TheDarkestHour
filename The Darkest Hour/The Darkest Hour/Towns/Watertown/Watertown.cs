@@ -97,6 +97,10 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationAction guestLocationAction = new RumorAction("Guest", this.InnGuestRumors);
             locationActions.Add(guestLocationAction);
 
+            //Adding rumors from constable in the inn
+            LocationAction constableLocationAction = new RumorAction("Town Constable", this.ConstableRumors);
+            locationActions.Add(constableLocationAction);
+
             locationAction = new RestAction(5);
             locationActions.Add(locationAction);
 
@@ -284,6 +288,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 bool defeatedCaptain = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForest.DEFEATED_CAPTAIN_STATE));
                 bool defeatedLieutenant = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownBanditCave.DEFEATED_LIEUTENANT_KEY));
+                bool defeatedSupplyCaptain = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownBanditCaveDeeper.DEFEATED_BANDIT_SUPPLY_CAPTAIN_KEY));
 
                 List<Rumor> returnData = new List<Rumor>();
 
@@ -313,6 +318,28 @@ namespace The_Darkest_Hour.Towns.Watertown
             
         }
 
+        private List<Rumor> ConstableRumors
+        {
+            get
+            {
+                bool defeatedSupplyCaptain = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownBanditCaveDeeper.DEFEATED_BANDIT_SUPPLY_CAPTAIN_KEY));
+
+                List<Rumor> returnData = new List<Rumor>();
+
+                if (defeatedSupplyCaptain)
+                {
+                    Rumor constablerRumor = new Rumor("Bandit Murder", "So you discovered a crime scene? This will take some serious investigating. Bandits don't usually turn on eachother, so if they did that's worrisome. And if it's a law abiding citizen we need to know. Come back to me later, I may have a plan of action then. THIS QUEST CHAIN IS NOT COMPLETE. WILL BE CONTINUED IN LATER ALPHA PATCHES.");
+                    constablerRumor.OnHeardRumor = this.HeardBanditCaptainRumor;
+                    returnData.Add(constablerRumor);
+                }
+                returnData.Add(new Rumor("Look Out", "If you see any crime, please report it to me."));
+                returnData.Add(new Rumor("Need Anything", "If you need anything, just shout. I'll help however I can."));
+
+                return returnData;
+            }
+            
+        }
+
         public void HeardBanditCaptainRumor()
         {
             // TODO: Need to keep duplicate accomplishments from happening (SEE ABOVE METHOD)
@@ -335,6 +362,15 @@ namespace The_Darkest_Hour.Towns.Watertown
         public void HeardHiddenRoomRumor()
         {
             Accomplishment accomplishment = Watertown.GetWatertownAccomplishments().Find(x => x.Name.Contains("Hidden Room"));
+            GameState.Hero.Accomplishments.Add(accomplishment);
+
+            // Reload the TownCenter so it will open up the hidden room
+            LocationHandler.ResetLocation(TOWN_CENTER_KEY);
+        }
+
+        public void HeardMurderRumor()
+        {
+            Accomplishment accomplishment = Watertown.GetWatertownAccomplishments().Find(x => x.Name.Contains("Bandit Murder"));
             GameState.Hero.Accomplishments.Add(accomplishment);
 
             // Reload the TownCenter so it will open up the hidden room
@@ -370,6 +406,12 @@ namespace The_Darkest_Hour.Towns.Watertown
                 accomplishment.NameSpace = "Watertown";
                 accomplishment.Name = "Has Heard the Hidden Room Rumor";
                 accomplishment.Description = "Has heard the rumor of the bandit hidden room.";
+                _WatertownAccomplishments.Add(accomplishment);
+
+                accomplishment = new Accomplishment();
+                accomplishment.NameSpace = "Watertown";
+                accomplishment.Name = "Has Heard Bandit Murder Rumor";
+                accomplishment.Description = "Has heard the rumor of the bandit murder.";
                 _WatertownAccomplishments.Add(accomplishment);
 
                 // TODO: Can add more accomplishments here;

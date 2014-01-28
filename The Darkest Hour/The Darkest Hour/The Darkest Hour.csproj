@@ -87,6 +87,7 @@
     <Compile Include="Areas\GeneralStore.cs" />
     <Compile Include="Characters\Mobs\Bosses\BanditCaptain.cs" />
     <Compile Include="Characters\Mobs\Bosses\BanditLieutenant.cs" />
+    <Compile Include="Characters\Mobs\Bosses\BanditSupplyCaptain.cs" />
     <Compile Include="Characters\Mobs\SewerRat.cs" />
     <Compile Include="Combat\Battle.cs" />
     <Compile Include="Characters\Accomplishments.cs" />
@@ -113,6 +114,8 @@
     <Compile Include="Common\PaperReadEventArgs.cs" />
     <Compile Include="Common\PaperReadResults.cs" />
     <Compile Include="Common\SerializableDictionary.cs" />
+    <Compile Include="Common\TakeItemEventArgs.cs" />
+    <Compile Include="Common\TakeItemResults.cs" />
     <Compile Include="GameConfigs.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="GameState.cs" />
@@ -147,6 +150,7 @@
     <Compile Include="Locations\Actions\RumorAction.cs" />
     <Compile Include="Locations\Actions\SaveAction.cs" />
     <Compile Include="Locations\Actions\StoreAction.cs" />
+    <Compile Include="Locations\Actions\TakeItemAction.cs" />
     <Compile Include="Locations\Location.cs" />
     <Compile Include="Locations\LocationAction.cs" />
     <Compile Include="Locations\LocationDefinition.cs" />
