@@ -187,7 +187,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             Location returnData;
             returnData = new Location();
             returnData.Name = "Storage Room";
-            returnData.Description = "A small and dirty jail cell. It stinks of decaying flesh. And something horrid and rotten.";
+            returnData.Description = "A small room full of boxes and loose supplies.";
             string itemName = "Rope";
             _takeRope = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownBanditCaveDeeper.TAKE_ROPE_KEY));
 
