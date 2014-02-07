@@ -136,6 +136,7 @@
     <Compile Include="Items\VendoredItems.cs" />
     <Compile Include="Items\Weapon.cs" />
     <Compile Include="LoadSave.cs" />
+    <Compile Include="Locations\Actions\AffixSwapperAction.cs" />
     <Compile Include="Locations\Actions\ArenaAction.cs" />
     <Compile Include="Locations\Actions\CombatAction.cs" />
     <Compile Include="Locations\Actions\CreateNewCharacterAction.cs" />

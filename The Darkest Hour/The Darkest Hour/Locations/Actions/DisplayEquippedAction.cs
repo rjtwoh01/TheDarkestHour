@@ -26,6 +26,5 @@ namespace The_Darkest_Hour.Locations.Actions
 
             return returnData;
         }
-
     }
 }
