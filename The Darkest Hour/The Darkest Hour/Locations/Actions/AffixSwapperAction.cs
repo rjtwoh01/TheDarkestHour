@@ -20,19 +20,7 @@ namespace The_Darkest_Hour.Locations.Actions
 
             this.ClearScreen(false);
 
-            Console.WriteLine("Do you wish to fix up an item you have (1) equipped or (2) in your inventory?");
-            string answer = Console.ReadLine();
-            do
-            {
-                if (answer == "1")
-                {
-                    GameState.Hero.EquippedAffixSwap();
-                }
-                else
-                {
-                    GameState.Hero.InventoryAffixSwap();
-                }
-            } while (answer != "1" && answer != "2");
+            GameState.Hero.AffixSwap();
 
             this.ClearScreen();
 

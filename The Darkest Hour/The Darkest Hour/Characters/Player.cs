@@ -353,18 +353,15 @@ Name:           Level:          Health:           Damage:
             }
         }
 
-        public void EquippedAffixSwap()
+        public void AffixSwap()
         {
             Item selectedItem;
             Console.WriteLine();
             int i = 1;
             foreach (Item displayItems in this.Inventory)
             {
-                if (displayItems.isEquipped)
-                {
-                    Console.WriteLine(i + ". " + displayItems);
-                    i++;
-                }
+                Console.WriteLine(i + ". " + displayItems);
+                i++;
             }
 
             try
@@ -375,210 +372,121 @@ Name:           Level:          Health:           Damage:
                 int answerParsed = Int32.Parse(answer);
                 if (answerParsed == 1)
                 {
-                    Console.WriteLine("\nWhich item do you want to change an affix of?\n");
-                    answer = Console.ReadLine();
-                    int selected = Int32.Parse(answer);
-                    selected -= 1;
+                    do
+                    {
+                        Console.WriteLine("\nWhich item do you want to change an affix of?\n");
+                        answer = Console.ReadLine();
+                        int selected = Int32.Parse(answer);
+                        selected -= 1;
+
+                        selectedItem = this.Inventory.ElementAt(selected);
+
+                        if (selectedItem.isPotion == true)
+                        {
+                            Console.WriteLine("\nSorry, we can't swap out affixes on a potion.\n");
+                        }
+                    } while (selectedItem.isPotion == true);
 
                     ClearScreen(false);
 
-                    selectedItem = this.Inventory.ElementAt(selected);
-
-                    Console.WriteLine("\nYou Selected: {0}", selectedItem);
-
-                    bool success = false;
+                    int cost = selectedItem.worth * 5;
+                    string costAnswer = "";
 
                     do
                     {
-                        Console.WriteLine("Which affix do you want to swap out? (ENTER FULL NAME OF THE AFFIX. CORRECTLY!)");
-                        string affixAnswer = Console.ReadLine();
-                        affixAnswer = affixAnswer.ToLower();
-                        switch (affixAnswer)
+                        Console.WriteLine("This will cost {0} gold and you have {1} gold. Do you wish to proceed (1) Yes (2) No?", cost, this.gold);
+                        costAnswer = Console.ReadLine();
+                        if (this.gold >= cost)
                         {
-                            case "strength":
-                                selectedItem.strength = 0;
-                                break;
-                            case "intelligence":
-                                selectedItem.intelligence = 0;
-                                break;
-                            case "agility":
-                                selectedItem.agility = 0;
-                                break;
-                            default:
-                                Console.WriteLine("\nYou entered an invalid affix. Try again.\n");
-                                break;
-                        }
+                            this.gold -= cost;
+                            Console.WriteLine("You now have {0} gold", this.gold);
 
-                        int value = 0;
+                            Console.WriteLine("\nYou Selected: {0}", selectedItem);
 
-                        //GameState.NumberGenerator
-                        Random rand = new Random();
-                        if (this.level < 10)
-                        {
-                            value = rand.Next(1, 11);
-                        }
-                        if (this.level > 10)
-                        {
-                            value = rand.Next(5, 16);
-                        }
+                            bool success = false;
 
-                        bool secondSuccess = false;
-
-                        do
-                        {
-                            int itemAffix = rand.Next(0, 3);
-
-                            switch (itemAffix)
+                            do
                             {
-                                case 0:
-                                    if (affixAnswer != "strength")
+                                Console.WriteLine("Which affix do you want to swap out? (ENTER FULL NAME OF THE AFFIX. CORRECTLY!)");
+                                string affixAnswer = Console.ReadLine();
+                                affixAnswer = affixAnswer.ToLower();
+                                switch (affixAnswer)
+                                {
+                                    case "strength":
+                                        selectedItem.strength = 0;
+                                        break;
+                                    case "intelligence":
+                                        selectedItem.intelligence = 0;
+                                        break;
+                                    case "agility":
+                                        selectedItem.agility = 0;
+                                        break;
+                                    default:
+                                        Console.WriteLine("\nYou entered an invalid affix. Try again.\n");
+                                        break;
+                                }
+
+                                int value = 0;
+
+                                //GameState.NumberGenerator
+                                Random rand = new Random();
+                                if (this.level < 10)
+                                {
+                                    value = rand.Next(1, 11);
+                                }
+                                if (this.level >= 10)
+                                {
+                                    value = rand.Next(5, 16);
+                                }
+
+                                bool secondSuccess = false;
+
+                                do
+                                {
+                                    int itemAffix = rand.Next(0, 3);
+
+                                    switch (itemAffix)
                                     {
-                                        selectedItem.strength += value;
-                                        Console.WriteLine("{0} got {1} added to it's {2}, it now has {3} {2}", selectedItem.name, value, affixAnswer, selectedItem.strength, affixAnswer);
-                                        secondSuccess = true;
+                                        case 0:
+                                            if (affixAnswer != "strength")
+                                            {
+                                                selectedItem.strength += value;
+                                                Console.WriteLine("\n{0} got {1} added to it's strength, it now has {2} strength", selectedItem.name, value, selectedItem.strength);
+                                                secondSuccess = true;
+                                            }
+                                            break;
+                                        case 1:
+                                            if (affixAnswer != "intelligence")
+                                            {
+                                                selectedItem.intelligence += value;
+                                                Console.WriteLine("\n{0} got {1} added to it's intelligence, it now has {2} intelligence", selectedItem.name, value, selectedItem.intelligence);
+                                                secondSuccess = true;
+                                            }
+                                            break;
+                                        case 2:
+                                            if (affixAnswer != "agility")
+                                            {
+                                                selectedItem.agility += value;
+                                                Console.WriteLine("\n{0} got {1} added to it's agility, it now has {2} agility", selectedItem.name, value, selectedItem.agility);
+                                                secondSuccess = true;
+                                            }
+                                            break;
+                                        default:
+                                            break;
                                     }
-                                    break;
-                                case 1:
-                                    if (affixAnswer != "intelligence")
-                                    {
-                                        selectedItem.intelligence += value;
-                                        Console.WriteLine("{0} got {1} added to it's {2}, it now has {3} {2}", selectedItem.name, value, affixAnswer, selectedItem.intelligence, affixAnswer);
-                                        secondSuccess = true;
-                                    }
-                                    break;
-                                case 2:
-                                    if (affixAnswer != "agility")
-                                    {
-                                        selectedItem.agility += value;
-                                        Console.WriteLine("{0} got {1} added to it's {2}, it now has {3} {2}", selectedItem.name, value, affixAnswer, selectedItem.agility, affixAnswer);
-                                        secondSuccess = true;
-                                    }
-                                    break;
-                                default:
-                                    break;
-                            }
-                        } while (!secondSuccess);
+                                } while (!secondSuccess);
 
-                        this.ClearScreen();
-                    } while (!success);
-
-                }
-            }
-
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-        }
-
-        public void InventoryAffixSwap()
-        {
-            Item selectedItem;
-            Console.WriteLine();
-            int i = 1;
-            foreach (Item displayItems in this.Inventory)
-            {
-                if (!displayItems.isEquipped)
-                {
-                    Console.WriteLine(i + ". " + displayItems);
-                    i++;
-                }
-            }
-
-            try
-            {
-                Console.WriteLine("\n\nDo you want to replace an affix of any item in your inventory?");
-                Console.WriteLine("(1) Yes (2) No\n");
-                string answer = Console.ReadLine();
-                int answerParsed = Int32.Parse(answer);
-                if (answerParsed == 1)
-                {
-                    Console.WriteLine("\nWhich item do you want to change an affix of?\n");
-                    answer = Console.ReadLine();
-                    int selected = Int32.Parse(answer);
-                    selected -= 1;
-
-                    ClearScreen(false);
-
-                    selectedItem = this.Inventory.ElementAt(selected);
-
-                    Console.WriteLine("\nYou Selected: {0}", selectedItem);
-
-                    bool success = false;
-
-                    do
-                    {
-                        Console.WriteLine("Which affix do you want to swap out? (ENTER FULL NAME OF THE AFFIX. CORRECTLY!)");
-                        string affixAnswer = Console.ReadLine();
-                        affixAnswer = affixAnswer.ToLower();
-                        switch (affixAnswer)
-                        {
-                            case "strength":
-                                selectedItem.strength = 0;
-                                break;
-                            case "intelligence":
-                                selectedItem.intelligence = 0;
-                                break;
-                            case "agility":
-                                selectedItem.agility = 0;
-                                break;
-                            default:
-                                Console.WriteLine("\nYou entered an invalid affix. Try again.\n");
-                                break;
+                                this.ClearScreen();
+                                success = true;
+                            } while (!success);
                         }
-
-                        int value = 0;
-
-                        //GameState.NumberGenerator
-                        Random rand = new Random();
-                        if (this.level < 10)
+                        else
                         {
-                            value = rand.Next(1, 11);
+                            Console.WriteLine("You don't have enough money. Try again.");
+                            costAnswer = "";
                         }
-                        if (this.level > 10)
-                        {
-                            value = rand.Next(5, 16);
-                        }
-
-                        bool secondSuccess = false;
-
-                        do
-                        {
-                            int itemAffix = rand.Next(0, 3);
-
-                            switch (itemAffix)
-                            {
-                                case 0:
-                                    if (affixAnswer != "strength")
-                                    {
-                                        selectedItem.strength += value;
-                                        Console.WriteLine("{0} got {1} added to it's {2}, it now has {3} {2}", selectedItem.name, value, affixAnswer, selectedItem.strength, affixAnswer);
-                                        secondSuccess = true;
-                                    }
-                                    break;
-                                case 1:
-                                    if (affixAnswer != "intelligence")
-                                    {
-                                        selectedItem.intelligence += value;
-                                        Console.WriteLine("{0} got {1} added to it's {2}, it now has {3} {2}", selectedItem.name, value, affixAnswer, selectedItem.intelligence, affixAnswer);
-                                        secondSuccess = true;
-                                    }
-                                    break;
-                                case 2:
-                                    if (affixAnswer != "agility")
-                                    {
-                                        selectedItem.agility += value;
-                                        Console.WriteLine("{0} got {1} added to it's {2}, it now has {3} {2}", selectedItem.name, value, affixAnswer, selectedItem.agility, affixAnswer);
-                                        secondSuccess = true;
-                                    }
-                                    break;
-                                default:
-                                    break;
-                            }
-                        } while (!secondSuccess);
-
-                        this.ClearScreen();
-                    } while (!success);
+                        ClearScreen();
+                    } while (costAnswer != "1" && costAnswer != "2");
 
                 }
             }
