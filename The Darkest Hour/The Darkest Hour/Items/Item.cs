@@ -118,7 +118,5 @@ namespace The_Darkest_Hour.Items
 
             return isFull;
         }
-
-
     }
 }

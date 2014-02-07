@@ -97,7 +97,7 @@ namespace The_Darkest_Hour.Items
 
             if (myHero.WeaponsFull)
             {
-                Console.WriteLine("\nArmor Slot is full");
+                Console.WriteLine("\nWeapon Slot is full");
                 isFull = true;
             }
             else

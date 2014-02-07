@@ -453,6 +453,9 @@ Name:           Level:          Health:           Damage:
                     Console.WriteLine("\nYou sold {0} for {1} gold!", selectedItem.name, selectedItem.worth);
                     Console.WriteLine("You now have {0} gold!", this.gold);
 
+                    if (selectedItem.isEquipped)
+                        selectedItem.DeEquip(selectedItem, this);
+
                     this.Inventory.Remove(selectedItem);
                 }
             }
