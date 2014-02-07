@@ -29,6 +29,7 @@ namespace The_Darkest_Hour.Combat
         {
             CombatResult returnData = CombatResult.NoResults;
             bool battleInProgress = true;
+            GameState.Hero.isInCombat = true;
 
             do
             {
@@ -90,11 +91,51 @@ namespace The_Darkest_Hour.Combat
                     ClearScreen();
                 }
 
+
+                /// <summary>
+                /// Added code here to prevent the user for immediately going again after using their potion. 
+                /// The mob has to attack after it for challenge.
+                /// This is not the best implementation for the solution, but it's fine for now
+                /// Need to come back later and work on something better
+                /// Maybe have the mob's attack be its own method. Only problem is all the variables
+                /// That the main battle method needs to work with. Maybe have thos be variables avaliable to the whole class?
+                /// Not sure yet. Will look into later.
+                /// </summary>
                 else if (answer == "Inventory")
                 {
                     battleInProgress = true;
                     hasFled = false;
                     myHero.DisplayInventory();
+                    if (GameState.Hero.usedPotionCombat)
+                    {
+                        if (mob.health <= 0)
+                        {
+                            mob.health = 0;
+                            mobLost = true;
+                            battleInProgress = false;
+                            returnData = CombatResult.PlayerVictory;
+                        }
+                        else
+                        {
+                            if (attack != "Distracting Shot" && attack != "Frozen" && attack != "Dust in the Eyes" && attack != "Low Cut" && attack != "Block" && attack != "Blinding Light")
+                            {
+                                mobDamage = mob.GetDamage(mob);
+                                myHero.health -= mobDamage;
+                                if (myHero.health <= 0)
+                                {
+                                    //If player is HC, add code here to delete the character
+                                    myHero.health = 0;
+                                    playerLost = true;
+                                    battleInProgress = false;
+                                    returnData = CombatResult.PlayerLoss;
+                                }
+                            }
+
+                            Console.WriteLine("\n{0} attacks you for {1} damage.", mob.Identifier, mobDamage);
+                            Console.WriteLine("{0} has {1} health left.\n\n", myHero.Identifier, myHero.health);
+                        }
+                        GameState.Hero.usedPotionCombat = false;
+                    }
                     ClearScreen();
                 }
 
@@ -132,6 +173,8 @@ namespace The_Darkest_Hour.Combat
 
             ClearScreen();
 
+            GameState.Hero.isInCombat = false;
+
             return returnData;
 
         }
@@ -149,7 +192,7 @@ Name:           Level:          Health:        Energy:
 ", myHero.Identifier, myHero.level, myHero.health, myHero.energy, mob.Identifier, mob.level, mob.health, mob.energy);
         }
 
-        public string InitialQuestion(Player myHero, Mob mob)
+        private string InitialQuestion(Player myHero, Mob mob)
         {
             string answer = "";
             do
@@ -180,6 +223,11 @@ Do you want to:
         {
             Console.WriteLine("\n\nPress enter to continue on...");
             Console.ReadLine();
+            Console.Clear();
+        }
+
+        public void ClearScreen(bool noMessage)
+        {
             Console.Clear();
         }
     }

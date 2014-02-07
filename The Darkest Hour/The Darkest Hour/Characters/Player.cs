@@ -30,6 +30,8 @@ namespace The_Darkest_Hour.Characters
         public bool AmuletFull = false;
         public bool HelmetFull = false;
         public bool PotionsFull = false;
+        public bool usedPotionCombat = false;
+        public bool isInCombat = false;
         public List<Item> Inventory = new List<Item>();
         public Profession Profession;
         public Accomplishments Accomplishments = new Accomplishments();
@@ -48,8 +50,6 @@ namespace The_Darkest_Hour.Characters
                     Console.Clear();
                 }
 
-                ChooseProfession();
-
                 this.damage = 10;
                 this.level = 1;
                 this.levelCap = 50;
@@ -57,6 +57,8 @@ namespace The_Darkest_Hour.Characters
                 this.maxEnergy = 1000;
                 this.health = 20;
                 this.maxHealth = 20;
+
+                ChooseProfession();
 
                 Console.Clear();
 
@@ -239,6 +241,8 @@ Name:           Level:          Health:           Damage:
                         if (this.energy >= this.maxEnergy)
                             this.energy = this.maxEnergy;
 
+                        ClearScreen(false);
+
                         Console.WriteLine("\nYou use {0}", selectedItem.name);
                         if (selectedItem.healthHeal > 0)
                             Console.WriteLine("{0} heals you for {1}. \nYou now have {2} health", selectedItem.name, selectedItem.healthHeal, this.health);
@@ -246,6 +250,9 @@ Name:           Level:          Health:           Damage:
                             Console.WriteLine("{0} increases your energy by {1}. \nYou now have {2} energy", selectedItem.name, selectedItem.energyHeal, this.energy);
 
                         this.Inventory.Remove(selectedItem);
+
+                        if (this.isInCombat)
+                            this.usedPotionCombat = true;
                     }
                 }
             }
@@ -361,6 +368,11 @@ Name:           Level:          Health:           Damage:
             }
 
             return xpNeeded;
+        }
+
+        private void ClearScreen(bool noMessage)
+        {
+            Console.Clear();
         }
     }
 }

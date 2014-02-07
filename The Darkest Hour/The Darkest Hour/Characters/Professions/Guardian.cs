@@ -40,7 +40,7 @@ namespace The_Darkest_Hour.Characters.Professions
             {
                 Console.WriteLine(@"
 Choose your attack:
-1) Simple Stab - 100% damage, adds 200 energy
+1) Simple Stab - 100% damage, adds 250 energy
 2) Shield Bash - 500% damage, subtracts 750 energy
 3) Determined Strike -  400% damage, subtrats 500 energy
 4) Overpower - 600% damage, subtracts 900 energy
@@ -105,7 +105,7 @@ Choose your attack:
             {
                 case "Simple Stab":
                     damage = myHero.damage;
-                    myHero.energy += 200;
+                    myHero.energy += 250;
                     if (myHero.energy >= myHero.maxEnergy)
                         myHero.energy = myHero.maxEnergy;
                     break;

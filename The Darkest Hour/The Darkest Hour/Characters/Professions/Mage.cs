@@ -42,7 +42,7 @@ namespace The_Darkest_Hour.Characters.Professions
             {
                 Console.WriteLine(@"
 Choose your attack:
-1) Energy Missile - 100% damage, adds 200 energy
+1) Energy Missile - 100% damage, adds 250 energy
 2) Fire Ball - 500% damage, subtracts 750 energy
 3) Ice Blast -  400% damage, subtrats 500 energy
 4) Howling Winds - 600% damage, subtracts 900 energy
@@ -107,7 +107,7 @@ Choose your attack:
             {
                 case "Energy Missile":
                     damage = myHero.damage;
-                    myHero.energy += 200;
+                    myHero.energy += 250;
                     if (myHero.energy >= myHero.maxEnergy)
                         myHero.energy = myHero.maxEnergy;
                     break;
