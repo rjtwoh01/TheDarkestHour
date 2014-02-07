@@ -139,6 +139,7 @@
     <Compile Include="Locations\Actions\ArenaAction.cs" />
     <Compile Include="Locations\Actions\CombatAction.cs" />
     <Compile Include="Locations\Actions\CreateNewCharacterAction.cs" />
+    <Compile Include="Locations\Actions\DisplayEquippedAction.cs" />
     <Compile Include="Locations\Actions\DisplayInventoryAction.cs" />
     <Compile Include="Locations\Actions\DisplayStatsAction.cs" />
     <Compile Include="Locations\Actions\ExitGame.cs" />
