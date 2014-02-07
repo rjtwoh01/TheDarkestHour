@@ -27,6 +27,7 @@ namespace The_Darkest_Hour.Towns.Watertown
         public const string TAKE_ROPE_KEY = "TakeRope";
         public const string TAKE_WOOD_KEY = "TakeWood";
         public const string TAKE_SAW_KEY = "TakeSaw";
+        public const string BUILD_LADDER_KEY = "BuildLadder";
         public const string DEFEATED_HIDEOUT_BANDITS_KEY = "DefeatedHideoutBandits";
         public const string DEFEATED_HALLWAY_BANDITS_KEY = "DefeatedDeeperHallwayBandits";
         public const string DEFEATED_BANDIT_SUPPLY_CAPTAIN_KEY = "DefatedBanditSupplyCaptain";
@@ -70,6 +71,8 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 returnData.Description = "A study lined with bookshelves. A desk was pushed up against the wall with paper scattered across the floor. There is a pool of blood where the desk used to be.";
             }
+            else
+                returnData.Description = "A study lined with bookshelves with a desk in the middle of the room. There are papers scattered about the desk.";
 
             // Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
@@ -137,6 +140,18 @@ namespace The_Darkest_Hour.Towns.Watertown
             returnData = new Location();
             returnData.Name = "Jail Cell";
             returnData.Description = "A small and dirty jail cell. It stinks of decaying flesh. And something horrid and rotten.";
+            bool ladder = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownBanditCaveDeeper.BUILD_LADDER_KEY));
+
+
+            if (_takeRope && _takeSaw && _takeWood && !ladder)
+            {
+                List<LocationAction> locationActions = new List<LocationAction>();
+                TakeItemAction itemAction = new TakeItemAction("Build Ladder");
+                locationActions.Add(itemAction);
+                itemAction.PostItem += LadderResult;
+                returnData.Actions = locationActions;
+    
+            }
 
             // Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
@@ -145,7 +160,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             locationDefinition = WatertownBanditCaveDeeper.GetTownInstance().GetHideoutDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            if (_takeRope && _takeSaw && _takeWood)
+            if (ladder)
             {
                 locationDefinition = WatertownBanditCaveDeeper.GetTownInstance().GetStartingLocationDefinition();
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
@@ -155,6 +170,17 @@ namespace The_Darkest_Hour.Towns.Watertown
 
             return returnData;
 
+        }
+
+        public void LadderResult(object sender, TakeItemEventArgs itemEventArgs)
+        {
+            if (itemEventArgs.ItemResults == TakeItemResults.Taken)
+            {
+                LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownBanditCaveDeeper.BUILD_LADDER_KEY, true);
+
+                // Reload the forest straight path
+                LocationHandler.ResetLocation(BUILD_LADDER_KEY);
+            }
         }
 
         public LocationDefinition GetJailCellDefinition()

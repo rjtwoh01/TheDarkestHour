@@ -45,10 +45,10 @@ namespace The_Darkest_Hour.Characters
             if (GameState.Hero.level >= 10)
             {
                 this.level = GameState.Hero.level;
-                this.health = this.health + (this.level * 7);
-                this.maxHealth = this.maxHealth + (this.level * 7);
-                this.damageMin = this.damageMin + (this.level * 5);
-                this.damageMax = this.damageMax + (this.level * 5);
+                this.health = this.health + (this.level * 6);
+                this.maxHealth = this.maxHealth + (this.level * 6);
+                this.damageMin = this.damageMin + (this.level * 3);
+                this.damageMax = this.damageMax + (this.level * 3);
                 this.gold = this.gold + (this.level / 2);
                 this.xp = this.xp + (this.level / 2);
             }

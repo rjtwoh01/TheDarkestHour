@@ -8,6 +8,7 @@ using The_Darkest_Hour.Locations.Actions;
 using The_Darkest_Hour.Combat;
 using The_Darkest_Hour.Characters;
 using The_Darkest_Hour.Characters.Mobs;
+using The_Darkest_Hour.Characters.Mobs.Bosses;
 
 namespace The_Darkest_Hour.Towns.Watertown
 {
@@ -22,6 +23,7 @@ namespace The_Darkest_Hour.Towns.Watertown
 
         public const string VISITED_SEWER_STATE = "VisitedSewer";
         public const string DEFEATED_ENTRANCE_CORRIDOR_SEWER_RATS = "DefeatedCorridorSewerRats";
+        public const string DEFEATED_SEWER_KING = "DefeteadSewerKing";
 
         #endregion
 
@@ -180,17 +182,45 @@ namespace The_Darkest_Hour.Towns.Watertown
         public Location LoadSewerEntranceFinal()
         {
             Location returnData;
-
+            bool defeatedSewerKing = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownSewer.DEFEATED_SEWER_KING));
             returnData = new Location();
             returnData.Name = "Sewer Entrance Corridor Final";
-            returnData.Description = "The corridor ends here but the mud and slime and poopoo continues (yuck!).  There is a door on the left and right.";
+
+            if (defeatedSewerKing)
+            {
+                returnData.Description = "The corridor ends here but the mud and slime and poopoo continues (yuck!)."; //There is a door to the right and left (add back in later)
+            }
+            // Location Actions
+            List<LocationAction> locationActions = new List<LocationAction>();
+
+            if (!defeatedSewerKing)
+            {
+                returnData.Description = "The corridor ends here but the mud and slime and poopoo continues (yuck!). The Sewer King stands in the middle of the room";
+
+                List<Mob> sewerKing = new List<Mob>();
+                sewerKing.Add(new SewerKing());
+
+
+                CombatAction combatAction = new CombatAction("Sewer King", sewerKing);
+                combatAction.PostCombat += SewerKingResults;
+                locationActions.Add(combatAction);
+                returnData.Actions = locationActions;
+            }
 
             // Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
 
             LocationDefinition locationDefinition = GetSewerEntranceCorridorDefinition();
-
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+
+            if (defeatedSewerKing)
+            {
+                locationDefinition = Watertown.GetTownInstance().GetTownCenterDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+
+                LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, DEFEATED_SEWER_KING, true);
+                LocationHandler.ResetLocation(Watertown.INN_KEY); // Need to reload Inn so that new conversation can be set.
+            }
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
 
@@ -217,6 +247,18 @@ namespace The_Darkest_Hour.Towns.Watertown
             }
 
             return returnData;
+        }
+
+        public void SewerKingResults(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownSewer.DEFEATED_SEWER_KING, true);
+
+                // Reload the Sewer Coordior so it will open up the sewer
+                LocationHandler.ResetLocation(ENTRANCE_FINAL_KEY);
+
+            }
         }
 
 

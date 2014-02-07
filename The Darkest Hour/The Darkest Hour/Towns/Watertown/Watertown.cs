@@ -254,9 +254,14 @@ namespace The_Darkest_Hour.Towns.Watertown
                 List<Rumor> returnData = new List<Rumor>();
 
                 bool visitedSewers = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownSewer.VISITED_SEWER_STATE));
+                bool defeatedSewerKing = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownSewer.DEFEATED_SEWER_KING));
                 Rumor rumor;
 
-                if (visitedSewers)
+                if (defeatedSewerKing)
+                {
+                    rumor = new Rumor("Defeated Sewer King", "Congratulations on defeating that monster! Come back later and I'll have more info about treasures in the sewer (THIS QUEST LINE IS NOT COMPLETE!).");
+                }
+                else if (visitedSewers)
                 {
                     rumor = new Rumor("Visisted Sewers", "I've heard you've been down to the sewers.  Have you found the Sewer King yet?");
                 }
