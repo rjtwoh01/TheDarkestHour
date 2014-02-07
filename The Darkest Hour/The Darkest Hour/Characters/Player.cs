@@ -429,21 +429,21 @@ Name:           Level:          Health:           Damage:
                                 int value = 0;
 
                                 //GameState.NumberGenerator
-                                Random rand = new Random();
+                                
                                 if (this.level < 10)
                                 {
-                                    value = rand.Next(1, 11);
+                                    value = GameState.NumberGenerator.Next(0, 11);
                                 }
                                 if (this.level >= 10)
                                 {
-                                    value = rand.Next(5, 16);
+                                    value = GameState.NumberGenerator.Next(5, 16);
                                 }
 
                                 bool secondSuccess = false;
 
                                 do
                                 {
-                                    int itemAffix = rand.Next(0, 3);
+                                    int itemAffix = GameState.NumberGenerator.Next(0, 3);
 
                                     switch (itemAffix)
                                     {

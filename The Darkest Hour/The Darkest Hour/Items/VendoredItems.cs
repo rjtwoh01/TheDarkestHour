@@ -29,7 +29,7 @@ namespace The_Darkest_Hour.Items
         public void LevelsOneToFiveLoot()
         {
             rand = new Random();
-            temp = rand.Next(1, 7);
+            temp = GameState.NumberGenerator.Next(1, 7);
             switch (temp)
             {
                 case 1:
@@ -55,7 +55,7 @@ namespace The_Darkest_Hour.Items
         public void LevelsSixToTenLoot()
         {
             rand = new Random();
-            temp = rand.Next(1, 7);
+            temp = GameState.NumberGenerator.Next(1, 7);
             switch (temp)
             {
                 case 1:
@@ -116,8 +116,8 @@ namespace The_Darkest_Hour.Items
             DaggerNames.Add("Rusty Dagger");
             DaggerNames.Add("Chipped Dagger");
 
-            temp = rand.Next(1, 7);
-            temp2 = rand.Next(1, 4);
+            temp = GameState.NumberGenerator.Next(1, 7);
+            temp2 = GameState.NumberGenerator.Next(1, 4);
 
             switch (temp)
             {
@@ -234,17 +234,17 @@ namespace The_Darkest_Hour.Items
                     break;
             }
 
-            damage = rand.Next(1, 11);
-            strength = rand.Next(0, 11);
-            agility = rand.Next(0, 11);
-            intelligence = rand.Next(0, 11);
-            health = rand.Next(0, 11);
-            requiredLevel = rand.Next(1, 6);
+            damage = GameState.NumberGenerator.Next(1, 11);
+            strength = GameState.NumberGenerator.Next(0, 11);
+            agility = GameState.NumberGenerator.Next(0, 11);
+            intelligence = GameState.NumberGenerator.Next(0, 11);
+            health = GameState.NumberGenerator.Next(0, 11);
+            requiredLevel = GameState.NumberGenerator.Next(1, 6);
             goldFind = 0;
             magicFind = 0;
             critChance = 0;
             critDamage = 0;
-            worth = rand.Next(1, 11);
+            worth = GameState.NumberGenerator.Next(1, 11);
 
 
             aWeapon = new Weapon(itemName, itemType, damage, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
@@ -268,7 +268,7 @@ namespace The_Darkest_Hour.Items
             ArmorNames.Add("Patched Robes");
 
 
-            temp = rand.Next(1, 4);
+            temp = GameState.NumberGenerator.Next(1, 4);
 
             switch (temp)
             {
@@ -291,17 +291,17 @@ namespace The_Darkest_Hour.Items
 
             
 
-            armor = rand.Next(1, 11);
-            strength = rand.Next(0, 11);
-            agility = rand.Next(0, 11);
-            intelligence = rand.Next(0, 11);
-            health = rand.Next(0, 11);
-            requiredLevel = rand.Next(1, 6);
+            armor = GameState.NumberGenerator.Next(1, 11);
+            strength = GameState.NumberGenerator.Next(0, 11);
+            agility = GameState.NumberGenerator.Next(0, 11);
+            intelligence = GameState.NumberGenerator.Next(0, 11);
+            health = GameState.NumberGenerator.Next(0, 11);
+            requiredLevel = GameState.NumberGenerator.Next(1, 6);
             goldFind = 0;
             magicFind = 0;
             critChance = 0;
             critDamage = 0;
-            worth = rand.Next(1, 11);
+            worth = GameState.NumberGenerator.Next(1, 11);
 
             aArmor = new Armor(itemName, itemType, armor, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
             returnData = aArmor;
@@ -322,7 +322,7 @@ namespace The_Darkest_Hour.Items
             HelmetNames.Add("Patched Hat");
 
 
-            temp = rand.Next(1, 4);
+            temp = GameState.NumberGenerator.Next(1, 4);
 
             switch (temp)
             {
@@ -344,17 +344,17 @@ namespace The_Darkest_Hour.Items
             }
 
 
-            armor = rand.Next(1, 11);
-            strength = rand.Next(0, 11);
-            agility = rand.Next(0, 11);
-            intelligence = rand.Next(0, 11);
-            health = rand.Next(0, 11);
-            requiredLevel = rand.Next(1, 6);
+            armor = GameState.NumberGenerator.Next(1, 11);
+            strength = GameState.NumberGenerator.Next(0, 11);
+            agility = GameState.NumberGenerator.Next(0, 11);
+            intelligence = GameState.NumberGenerator.Next(0, 11);
+            health = GameState.NumberGenerator.Next(0, 11);
+            requiredLevel = GameState.NumberGenerator.Next(1, 6);
             goldFind = 0;
             magicFind = 0;
             critChance = 0;
             critDamage = 0;
-            worth = rand.Next(1, 11);
+            worth = GameState.NumberGenerator.Next(1, 11);
 
             aHelmet = new Helmet(itemName, itemType, armor, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
             returnData = aHelmet;
@@ -375,7 +375,7 @@ namespace The_Darkest_Hour.Items
             AmuletNames.Add("Rusted Amulet");
 
 
-            temp = rand.Next(1, 4);
+            temp = GameState.NumberGenerator.Next(1, 4);
 
             switch (temp)
             {
@@ -395,17 +395,17 @@ namespace The_Darkest_Hour.Items
 
             itemType = "Amulet";
 
-            armor = rand.Next(1, 11);
-            strength = rand.Next(0, 11);
-            agility = rand.Next(0, 11);
-            intelligence = rand.Next(0, 11);
-            health = rand.Next(0, 11);
-            requiredLevel = rand.Next(1, 6);
+            armor = GameState.NumberGenerator.Next(1, 11);
+            strength = GameState.NumberGenerator.Next(0, 11);
+            agility = GameState.NumberGenerator.Next(0, 11);
+            intelligence = GameState.NumberGenerator.Next(0, 11);
+            health = GameState.NumberGenerator.Next(0, 11);
+            requiredLevel = GameState.NumberGenerator.Next(1, 6);
             goldFind = 0;
             magicFind = 0;
             critChance = 0;
             critDamage = 0;
-            worth = rand.Next(1, 11);
+            worth = GameState.NumberGenerator.Next(1, 11);
 
             aAmulet = new Amulet(itemName, itemType, armor, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
             returnData = aAmulet;
@@ -424,10 +424,10 @@ namespace The_Darkest_Hour.Items
 
             itemType = "Potion";
 
-            healAmount = rand.Next(1, 11);
-            energyIncreased = rand.Next(1, 251);
+            healAmount = GameState.NumberGenerator.Next(1, 11);
+            energyIncreased = GameState.NumberGenerator.Next(1, 251);
             requiredLevel = 1;
-            worth = rand.Next(1, 11);
+            worth = GameState.NumberGenerator.Next(1, 11);
 
             aPotion = new Potion(potionName, healAmount, energyIncreased, requiredLevel, itemType, worth);
             returnData = aPotion;
@@ -472,8 +472,8 @@ namespace The_Darkest_Hour.Items
             DaggerNames.Add("Dull Dagger");
             DaggerNames.Add("Old Dagger");
 
-            temp = rand.Next(1, 7);
-            temp2 = rand.Next(1, 4);
+            temp = GameState.NumberGenerator.Next(1, 7);
+            temp2 = GameState.NumberGenerator.Next(1, 4);
 
             switch (temp)
             {
@@ -590,17 +590,17 @@ namespace The_Darkest_Hour.Items
                     break;
             }
 
-            damage = rand.Next(5, 16);
-            strength = rand.Next(0, 16);
-            agility = rand.Next(0, 16);
-            intelligence = rand.Next(0, 16);
-            health = rand.Next(0, 16);
-            requiredLevel = rand.Next(1, 11);
+            damage = GameState.NumberGenerator.Next(5, 16);
+            strength = GameState.NumberGenerator.Next(0, 16);
+            agility = GameState.NumberGenerator.Next(0, 16);
+            intelligence = GameState.NumberGenerator.Next(0, 16);
+            health = GameState.NumberGenerator.Next(0, 16);
+            requiredLevel = GameState.NumberGenerator.Next(1, 11);
             goldFind = 0;
             magicFind = 0;
             critChance = 0;
             critDamage = 0;
-            worth = rand.Next(5, 16);
+            worth = GameState.NumberGenerator.Next(5, 16);
 
             
             aWeapon = new Weapon(itemName, itemType, damage, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
@@ -622,7 +622,7 @@ namespace The_Darkest_Hour.Items
             ArmorNames.Add("Old Robes");
 
 
-            temp = rand.Next(1, 4);
+            temp = GameState.NumberGenerator.Next(1, 4);
 
             switch (temp)
             {
@@ -645,17 +645,17 @@ namespace The_Darkest_Hour.Items
 
 
 
-            armor = rand.Next(5, 16);
-            strength = rand.Next(0, 16);
-            agility = rand.Next(0, 16);
-            intelligence = rand.Next(0, 16);
-            health = rand.Next(0, 16);
-            requiredLevel = rand.Next(5, 11);
+            armor = GameState.NumberGenerator.Next(5, 16);
+            strength = GameState.NumberGenerator.Next(0, 16);
+            agility = GameState.NumberGenerator.Next(0, 16);
+            intelligence = GameState.NumberGenerator.Next(0, 16);
+            health = GameState.NumberGenerator.Next(0, 16);
+            requiredLevel = GameState.NumberGenerator.Next(5, 11);
             goldFind = 0;
             magicFind = 0;
             critChance = 0;
             critDamage = 0;
-            worth = rand.Next(1, 16);
+            worth = GameState.NumberGenerator.Next(1, 16);
 
             aArmor = new Armor(itemName, itemType, armor, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
             returnData = aArmor;
@@ -676,7 +676,7 @@ namespace The_Darkest_Hour.Items
             HelmetNames.Add("Old Hat");
 
 
-            temp = rand.Next(1, 4);
+            temp = GameState.NumberGenerator.Next(1, 4);
 
             switch (temp)
             {
@@ -698,17 +698,17 @@ namespace The_Darkest_Hour.Items
             }
 
 
-            armor = rand.Next(5, 16);
-            strength = rand.Next(0, 16);
-            agility = rand.Next(0, 16);
-            intelligence = rand.Next(0, 16);
-            health = rand.Next(0, 16);
-            requiredLevel = rand.Next(5, 11);
+            armor = GameState.NumberGenerator.Next(5, 16);
+            strength = GameState.NumberGenerator.Next(0, 16);
+            agility = GameState.NumberGenerator.Next(0, 16);
+            intelligence = GameState.NumberGenerator.Next(0, 16);
+            health = GameState.NumberGenerator.Next(0, 16);
+            requiredLevel = GameState.NumberGenerator.Next(5, 11);
             goldFind = 0;
             magicFind = 0;
             critChance = 0;
             critDamage = 0;
-            worth = rand.Next(1, 11);
+            worth = GameState.NumberGenerator.Next(1, 11);
 
             aHelmet = new Helmet(itemName, itemType, armor, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
             returnData = aHelmet;
@@ -729,7 +729,7 @@ namespace The_Darkest_Hour.Items
             AmuletNames.Add("Old Amulet");
 
 
-            temp = rand.Next(1, 4);
+            temp = GameState.NumberGenerator.Next(1, 4);
 
             switch (temp)
             {
@@ -749,17 +749,17 @@ namespace The_Darkest_Hour.Items
 
             itemType = "Amulet";
 
-            armor = rand.Next(5, 16);
-            strength = rand.Next(0, 16);
-            agility = rand.Next(0, 16);
-            intelligence = rand.Next(0, 16);
-            health = rand.Next(0, 16);
-            requiredLevel = rand.Next(5, 11);
+            armor = GameState.NumberGenerator.Next(5, 16);
+            strength = GameState.NumberGenerator.Next(0, 16);
+            agility = GameState.NumberGenerator.Next(0, 16);
+            intelligence = GameState.NumberGenerator.Next(0, 16);
+            health = GameState.NumberGenerator.Next(0, 16);
+            requiredLevel = GameState.NumberGenerator.Next(5, 11);
             goldFind = 0;
             magicFind = 0;
             critChance = 0;
             critDamage = 0;
-            worth = rand.Next(1, 16);
+            worth = GameState.NumberGenerator.Next(1, 16);
 
             aAmulet = new Amulet(itemName, itemType, armor, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
             returnData = aAmulet;
@@ -778,10 +778,10 @@ namespace The_Darkest_Hour.Items
 
             itemType = "Potion";
 
-            healAmount = rand.Next(5, 16);
-            energyIncreased = rand.Next(100, 451);
+            healAmount = GameState.NumberGenerator.Next(5, 16);
+            energyIncreased = GameState.NumberGenerator.Next(100, 451);
             requiredLevel = 1;
-            worth = rand.Next(1, 16);
+            worth = GameState.NumberGenerator.Next(1, 16);
 
             aPotion = new Potion(potionName, healAmount, energyIncreased, requiredLevel, itemType, worth);
             returnData = aPotion;
