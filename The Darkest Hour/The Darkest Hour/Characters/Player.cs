@@ -185,11 +185,8 @@ Name:           Level:          Health:           Damage:
             int i = 1;
             foreach (Item displayItems in this.Inventory)
             {
-                if (!displayItems.isEquipped)
-                {
-                    Console.WriteLine(i + ". " + displayItems);
-                    i++;
-                }
+                Console.WriteLine(i + ". " + displayItems);
+                i++;
             }
 
             try
@@ -277,79 +274,6 @@ Name:           Level:          Health:           Damage:
                     Console.WriteLine(i + ". " + displayItems);
                     i++;
                 }
-            }
-
-            try
-            {
-                Console.WriteLine("\n\nDo you want to use any of the items in your inventory?");
-                Console.WriteLine("(1) Yes (2) No\n");
-                string answer = Console.ReadLine();
-                int answerParsed = Int32.Parse(answer);
-                if (answerParsed == 1)
-                {
-                    Console.WriteLine("\nWhich item do you want to use?\n");
-                    answer = Console.ReadLine();
-                    int selected = Int32.Parse(answer);
-                    selected -= 1;
-
-                    Item selectedItem = this.Inventory.ElementAt(selected);
-
-                    //Console.WriteLine("\nYou Selected: {0}", selectedItem);
-
-                    if (selectedItem.isEquipable)
-                    {
-                        if (selectedItem.itemType == this.requiredArmorType || selectedItem.itemType == this.requiredWeaponType || selectedItem.itemType == this.requiredAmuletType)
-                        {
-                            if (selectedItem.isEquipped)
-                            {
-                                selectedItem.DeEquip(selectedItem, this);
-                            }
-                            else
-                            {
-                                if (this.level >= selectedItem.requiredLevel)
-                                {
-                                    bool isFull = selectedItem.SlotCheck(this);
-                                    if (!isFull)
-                                        selectedItem.Equip(selectedItem, this);
-                                }
-                                else
-                                {
-                                    Console.WriteLine("You're not high enough level");
-                                }
-                            }
-                        }
-                        else
-                            Console.WriteLine("You cannot use that item.");
-                    }
-
-                    if (selectedItem.isPotion)
-                    {
-                        this.health += selectedItem.healthHeal;
-                        if (this.health >= this.maxHealth)
-                            this.health = this.maxHealth;
-                        this.energy += selectedItem.energyHeal;
-                        if (this.energy >= this.maxEnergy)
-                            this.energy = this.maxEnergy;
-
-                        ClearScreen(false);
-
-                        Console.WriteLine("\nYou use {0}", selectedItem.name);
-                        if (selectedItem.healthHeal > 0)
-                            Console.WriteLine("{0} heals you for {1}. \nYou now have {2} health", selectedItem.name, selectedItem.healthHeal, this.health);
-                        if (selectedItem.energyHeal > 0)
-                            Console.WriteLine("{0} increases your energy by {1}. \nYou now have {2} energy", selectedItem.name, selectedItem.energyHeal, this.energy);
-
-                        this.Inventory.Remove(selectedItem);
-
-                        if (this.isInCombat)
-                            this.usedPotionCombat = true;
-                    }
-                }
-            }
-
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
             }
         }
 
