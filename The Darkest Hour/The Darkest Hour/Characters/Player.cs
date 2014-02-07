@@ -353,9 +353,9 @@ Name:           Level:          Health:           Damage:
             }
         }
 
-        public Item EquippedAffixSwap()
+        public void EquippedAffixSwap()
         {
-            Item selectedItem = new Item();
+            Item selectedItem;
             Console.WriteLine();
             int i = 1;
             foreach (Item displayItems in this.Inventory)
@@ -469,13 +469,11 @@ Name:           Level:          Health:           Damage:
             {
                 Console.WriteLine(e.Message);
             }
-
-            return selectedItem;
         }
 
-        public Item InventoryAffixSwap()
+        public void InventoryAffixSwap()
         {
-            Item selectedItem = new Item();
+            Item selectedItem;
             Console.WriteLine();
             int i = 1;
             foreach (Item displayItems in this.Inventory)
@@ -589,8 +587,6 @@ Name:           Level:          Health:           Damage:
             {
                 Console.WriteLine(e.Message);
             }
-
-            return selectedItem;
         }
 
         public void SellItems()

@@ -173,6 +173,9 @@ namespace The_Darkest_Hour.Towns.Watertown
             locationAction = new DisplayEquippedAction();
             locationActions.Add(locationAction);
 
+            locationAction = new AffixSwapperAction();
+            locationActions.Add(locationAction);
+
             locationAction = new StoreAction();
             locationActions.Add(locationAction);
 
