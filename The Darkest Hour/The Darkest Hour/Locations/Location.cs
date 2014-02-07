@@ -83,23 +83,32 @@ namespace The_Darkest_Hour.Locations
                 catch
                 {
                     // TODO: This is poor way to check for the results (by catching an exception)
-                    locationIndexChar = Char.Parse(answer);
-                    int aValue = (int)'A';
-                    int maxAnswerInt = aValue + this.AdjacentLocationDefinitions.Count-1;
-                    char maxAnswer = (char) maxAnswerInt;
-                    if ((locationIndexChar < 'A') || (locationIndexChar > maxAnswer))
+                    try
                     {
-                        returnData = new InvalidSelectionAction();
+                        locationIndexChar = Char.Parse(answer);
+                        int aValue = (int)'A';
+                        int maxAnswerInt = aValue + this.AdjacentLocationDefinitions.Count - 1;
+                        char maxAnswer = (char)maxAnswerInt;
+                        if ((locationIndexChar < 'A') || (locationIndexChar > maxAnswer))
+                        {
+                            returnData = new InvalidSelectionAction();
+                        }
+                        else
+                        {
+                            locationIndexInt = Convert.ToInt32(locationIndexChar) - aValue;
+                            //GameState.UpcomingLocation = this.AdjacentLocations[locationIndexInt];
+
+                            GameState.UpcomingLocation = this.AdjacentLocationDefinitions.Values.ElementAt(locationIndexInt);
+
+
+                            returnData = new MoveLocationAction();
+                        }
                     }
-                    else
+                    catch (Exception e)
                     {
-                        locationIndexInt = Convert.ToInt32(locationIndexChar) - aValue;
-                        //GameState.UpcomingLocation = this.AdjacentLocations[locationIndexInt];
-                        
-                        GameState.UpcomingLocation = this.AdjacentLocationDefinitions.Values.ElementAt(locationIndexInt);
-
-
-                        returnData = new MoveLocationAction();
+                        Console.WriteLine("You entered something invalid.\n");
+                        Console.WriteLine(e.Message + "\n");
+                        returnData = new InvalidSelectionAction();
                     }
                 }                
             }
