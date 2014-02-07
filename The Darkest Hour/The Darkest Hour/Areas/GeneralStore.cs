@@ -92,13 +92,26 @@ namespace The_Darkest_Hour.Areas
                         itemsToBuy.Add(aAmulet);
                         itemsToBuy.Add(aPotion);
                     }
-                    if (GameState.Hero.level >= 6 && GameState.Hero.level <= 50)
+                    if (GameState.Hero.level >= 6 && GameState.Hero.level <= 10)
                     {
                         aWeapon = vendor.LevelsSixToTenGetWeapon();
                         aArmor = vendor.LevelsSixToTenGetArmor();
                         aHelmet = vendor.LevelsSixToTenGetHelmet();
                         aAmulet = vendor.LevelsSixToTenGetAmulet();
                         aPotion = vendor.LevelsSixToTenGetPotion();
+                        itemsToBuy.Add(aWeapon);
+                        itemsToBuy.Add(aArmor);
+                        itemsToBuy.Add(aHelmet);
+                        itemsToBuy.Add(aAmulet);
+                        itemsToBuy.Add(aPotion);
+                    }
+                    if (GameState.Hero.level >= 11 && GameState.Hero.level <= 50)
+                    {
+                        aWeapon = vendor.LevelsElevenToFifteenGetWeapon();
+                        aArmor = vendor.LevelsElevenToFifteenGetArmor();
+                        aHelmet = vendor.LevelsElevenToFifteenGetHelmet();
+                        aAmulet = vendor.LevelsElevenToFifteenGetAmulet();
+                        aPotion = vendor.LevelsElevenToFifteenGetPotion();
                         itemsToBuy.Add(aWeapon);
                         itemsToBuy.Add(aArmor);
                         itemsToBuy.Add(aHelmet);

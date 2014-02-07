@@ -25,9 +25,13 @@ namespace The_Darkest_Hour.Items
             {
                 LevelsOneToFiveLoot();
             }
-            if (mob.level >= 6 && mob.level <= 50)
+            if (mob.level >= 6 && mob.level <= 10)
             {
                 LevelsSixToTenLoot();
+            }
+            if (mob.level >= 11 && mob.level <= 50)
+            {
+                LevelsElevelToFifteenLoot();
             }
         }
 
@@ -77,6 +81,32 @@ namespace The_Darkest_Hour.Items
                     break;
                 case 5:
                     LevelsSixToTenGetPotion();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public void LevelsElevelToFifteenLoot()
+        {
+            rand = new Random();
+            temp = GameState.NumberGenerator.Next(1, 7);
+            switch (temp)
+            {
+                case 1:
+                    LevelsElevelToFifteenGetWeapon();
+                    break;
+                case 2:
+                    LevelsElevelToFifteenGetArmor();
+                    break;
+                case 3:
+                    LevelsElevelToFifteenGetHelmet();
+                    break;
+                case 4:
+                    LevelsElevelToFifteenGetAmulet();
+                    break;
+                case 5:
+                    LevelsElevelToFifteenGetPotion();
                     break;
                 default:
                     break;
@@ -1237,7 +1267,7 @@ namespace The_Darkest_Hour.Items
             }
 
 
-            damage = GameState.NumberGenerator.Next(10, 26);
+            armor = GameState.NumberGenerator.Next(10, 26);
             strength = GameState.NumberGenerator.Next(0, 26);
             agility = GameState.NumberGenerator.Next(0, 26);
             intelligence = GameState.NumberGenerator.Next(0, 26);
@@ -1289,7 +1319,7 @@ namespace The_Darkest_Hour.Items
 
             itemType = "Amulet";
 
-            damage = GameState.NumberGenerator.Next(10, 26);
+            armor = GameState.NumberGenerator.Next(10, 26);
             strength = GameState.NumberGenerator.Next(0, 26);
             agility = GameState.NumberGenerator.Next(0, 26);
             intelligence = GameState.NumberGenerator.Next(0, 26);
