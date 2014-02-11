@@ -15,7 +15,7 @@ namespace The_Darkest_Hour.Characters
         public double critDamage = 1;
         public int requiredXP = 100;
         public int armor = 0; //Needs to be implemented
-        public int inventoryCap = 45;
+        public int inventoryCap = 50;
         public int maxGold = 1000000;
         public double magicFind;
         public double goldFind;
@@ -33,6 +33,7 @@ namespace The_Darkest_Hour.Characters
         public bool usedPotionCombat = false;
         public bool isInCombat = false;
         public List<Item> Inventory = new List<Item>();
+        public List<Item> EquippedItems = new List<Item>();
         public Profession Profession;
         public Accomplishments Accomplishments = new Accomplishments();
 
@@ -220,7 +221,11 @@ Name:           Level:          Health:           Damage:
                                 {
                                     bool isFull = selectedItem.SlotCheck(this);
                                     if (!isFull)
+                                    {
                                         selectedItem.Equip(selectedItem, this);
+                                        this.EquippedItems.Add(selectedItem);
+                                        this.Inventory.Remove(selectedItem);
+                                    }
                                 }
                                 else
                                 {
@@ -267,13 +272,55 @@ Name:           Level:          Health:           Damage:
         {
             Console.WriteLine();
             int i = 1;
-            foreach (Item displayItems in this.Inventory)
+            foreach (Item displayItems in this.EquippedItems)
             {
-                if (displayItems.isEquipped)
+                Console.WriteLine(i + ". " + displayItems);
+                i++;
+            }
+            try
+            {
+                Console.WriteLine("\n\nDo you want to use any of your equipped items?");
+                Console.WriteLine("(1) Yes (2) No\n");
+                string answer = Console.ReadLine();
+                int answerParsed = Int32.Parse(answer);
+                if (answerParsed == 1)
                 {
-                    Console.WriteLine(i + ". " + displayItems);
-                    i++;
+                    Console.WriteLine("\nWhich item do you want to use?\n");
+                    answer = Console.ReadLine();
+                    int selected = Int32.Parse(answer);
+                    selected -= 1;
+
+                    Item selectedItem = this.Inventory.ElementAt(selected);
+
+                    //Console.WriteLine("\nYou Selected: {0}", selectedItem);
+
+                    if (selectedItem.isEquipable)
+                    {
+                        if (selectedItem.itemType == this.requiredArmorType || selectedItem.itemType == this.requiredWeaponType || selectedItem.itemType == this.requiredAmuletType)
+                        {
+                            if (selectedItem.isEquipped)
+                            {
+                                if (Inventory.Count < inventoryCap)
+                                {
+                                    selectedItem.DeEquip(selectedItem, this);
+                                    Inventory.Add(selectedItem);
+                                    EquippedItems.Remove(selectedItem);
+                                }
+                                else
+                                {
+                                    Console.WriteLine("You do not have enough room in your inventory. Go sell something first.");
+                                }
+                            }
+                        }
+                        else
+                            Console.WriteLine("You cannot use that item.");
+                    }
                 }
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
             }
         }
 
