@@ -58,6 +58,7 @@ namespace The_Darkest_Hour.Combat
                         if (attack != "Distracting Shot" && attack != "Frozen" && attack != "Dust in the Eyes" && attack != "Low Cut" && attack != "Block" && attack != "Blinding Light")
                         {
                             mobDamage = mob.GetDamage(mob);
+                            mobDamage -= myHero.armor;
                             myHero.health -= mobDamage;
                             if (myHero.health <= 0)
                             {
@@ -120,6 +121,7 @@ namespace The_Darkest_Hour.Combat
                             if (attack != "Distracting Shot" && attack != "Frozen" && attack != "Dust in the Eyes" && attack != "Low Cut" && attack != "Block" && attack != "Blinding Light")
                             {
                                 mobDamage = mob.GetDamage(mob);
+                                mobDamage -= myHero.armor;
                                 myHero.health -= mobDamage;
                                 if (myHero.health <= 0)
                                 {
