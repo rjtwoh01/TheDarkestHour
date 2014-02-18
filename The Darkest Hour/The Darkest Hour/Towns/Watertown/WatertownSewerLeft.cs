@@ -18,6 +18,7 @@ namespace The_Darkest_Hour.Towns.Watertown
         #region Location Keys
 
         public const string ENTRANCE_KEY = "WatertownSewerLeft.Entrance";
+        public const string ROOM_TWO_KEY = "WatertownSewerLeft.RoomTwo";
         public const string DEFEATED_FIRST_ROOM_RATS = "DefeatedFirstRoomRats";
 
         #endregion
@@ -29,7 +30,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             return GetSewerLeftEntranceDefinition();
         }
 
-        #region Sewer Entrance
+        #region Sewer Left Entrance
 
         public Location LoadSewerLeftEntrance()
         {
@@ -70,8 +71,8 @@ namespace The_Darkest_Hour.Towns.Watertown
 
             if (defeatedSewerRats)
             {
-                //ToDo
-                //Add code to move further
+                locationDefinition = WatertownSewerLeft.GetTownInstance().GetRoomTwoDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
             }
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
@@ -105,6 +106,77 @@ namespace The_Darkest_Hour.Towns.Watertown
                 returnData.LocationKey = locationKey;
                 returnData.Name = "Watertown Sewer Left";
                 returnData.DoLoadLocation = LoadSewerLeftEntrance;
+
+                LocationHandler.AddLocation(returnData);
+            }
+
+            return returnData;
+        }
+
+        #endregion
+
+        #region Room 2
+
+        public Location LoadRoomTwo()
+        {
+            Location returnData;
+            bool tookGold = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownSewerLeft.DEFEATED_FIRST_ROOM_RATS));
+
+            returnData = new Location();
+            returnData.Name = "Yucky Room";
+            returnData.Description = "Mud and slime and poopoo.  What a nasty place.";
+
+            //Actions
+
+            if (tookGold == false)
+            {
+
+                // Location Actions
+                List<LocationAction> locationActions = new List<LocationAction>();
+
+                
+
+                returnData.Actions = locationActions;
+            }
+
+            // Adjacent Locations
+            Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
+
+            // Town Center
+            LocationDefinition locationDefinition = WatertownSewer.GetTownInstance().GetSewerEntranceFinalDefinition();
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+
+            returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
+
+            return returnData;
+        }
+
+        public void RoomTwoGold(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownSewerLeft.DEFEATED_FIRST_ROOM_RATS, true);
+
+                // Reload the Sewer Coordior so it will open up the sewer
+                LocationHandler.ResetLocation(ENTRANCE_KEY);
+
+            }
+        }
+
+        public LocationDefinition GetRoomTwoDefinition()
+        {
+            LocationDefinition returnData = new LocationDefinition();
+            string locationKey = ROOM_TWO_KEY;
+
+            if (LocationHandler.LocationExists(locationKey))
+            {
+                returnData = LocationHandler.GetLocation(locationKey);
+            }
+            else
+            {
+                returnData.LocationKey = locationKey;
+                returnData.Name = "Yucky Room";
+                returnData.DoLoadLocation = LoadRoomTwo;
 
                 LocationHandler.AddLocation(returnData);
             }
