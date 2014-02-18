@@ -215,6 +215,11 @@ namespace The_Darkest_Hour.Towns.Watertown
 
             if (defeatedSewerKing)
             {
+                //Sewer Left
+                locationDefinition = WatertownSewerLeft.GetTownInstance().GetStartingLocationDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+                
+                //Town
                 locationDefinition = Watertown.GetTownInstance().GetTownCenterDefinition();
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 

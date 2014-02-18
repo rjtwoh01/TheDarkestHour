@@ -173,6 +173,7 @@
     <Compile Include="Towns\Watertown\WatertownBanditCaveDeeper.cs" />
     <Compile Include="Towns\Watertown\WatertownForest.cs" />
     <Compile Include="Towns\Watertown\WatertownSewer.cs" />
+    <Compile Include="Towns\Watertown\WatertownSewerLeft.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
