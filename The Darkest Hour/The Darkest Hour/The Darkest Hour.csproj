@@ -117,6 +117,8 @@
     <Compile Include="Combat\CombatResults.cs" />
     <Compile Include="Common\PaperReadEventArgs.cs" />
     <Compile Include="Common\PaperReadResults.cs" />
+    <Compile Include="Common\PickUpGoldEventArgs.cs" />
+    <Compile Include="Common\PickUpGoldResults.cs" />
     <Compile Include="Common\SerializableDictionary.cs" />
     <Compile Include="Common\TakeItemEventArgs.cs" />
     <Compile Include="Common\TakeItemResults.cs" />
@@ -150,6 +152,7 @@
     <Compile Include="Locations\Actions\LoadSavedGameAction.cs" />
     <Compile Include="Locations\Actions\MainMenuAction.cs" />
     <Compile Include="Locations\Actions\MoveLocationAction.cs" />
+    <Compile Include="Locations\Actions\PickUpGoldAction.cs" />
     <Compile Include="Locations\Actions\ReadPapersAction.cs" />
     <Compile Include="Locations\Actions\RestAction.cs" />
     <Compile Include="Locations\Actions\RumorAction.cs" />
