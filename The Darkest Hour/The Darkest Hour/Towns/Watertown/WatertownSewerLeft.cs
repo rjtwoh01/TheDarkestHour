@@ -9,6 +9,7 @@ using The_Darkest_Hour.Combat;
 using The_Darkest_Hour.Characters;
 using The_Darkest_Hour.Characters.Mobs;
 using The_Darkest_Hour.Characters.Mobs.Bosses;
+using The_Darkest_Hour.Common;
 
 namespace The_Darkest_Hour.Towns.Watertown
 {
@@ -20,6 +21,7 @@ namespace The_Darkest_Hour.Towns.Watertown
         public const string ENTRANCE_KEY = "WatertownSewerLeft.Entrance";
         public const string ROOM_TWO_KEY = "WatertownSewerLeft.RoomTwo";
         public const string DEFEATED_FIRST_ROOM_RATS = "DefeatedFirstRoomRats";
+        public const string TOOK_GOLD_KEY = "TookRoomTwoGold";
 
         #endregion
 
@@ -120,7 +122,7 @@ namespace The_Darkest_Hour.Towns.Watertown
         public Location LoadRoomTwo()
         {
             Location returnData;
-            bool tookGold = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownSewerLeft.DEFEATED_FIRST_ROOM_RATS));
+            bool tookGold = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownSewerLeft.TOOK_GOLD_KEY));
 
             returnData = new Location();
             returnData.Name = "Yucky Room";
@@ -130,12 +132,10 @@ namespace The_Darkest_Hour.Towns.Watertown
 
             if (tookGold == false)
             {
-
-                // Location Actions
                 List<LocationAction> locationActions = new List<LocationAction>();
-
-                
-
+                PickUpGoldAction itemAction = new PickUpGoldAction(50);
+                locationActions.Add(itemAction);
+                itemAction.PostItem += RoomTwoGold;
                 returnData.Actions = locationActions;
             }
 
@@ -151,14 +151,14 @@ namespace The_Darkest_Hour.Towns.Watertown
             return returnData;
         }
 
-        public void RoomTwoGold(object sender, CombatEventArgs combatEventArgs)
+        public void RoomTwoGold(object sender, PickUpGoldEventArgs goldEventArgs)
         {
-            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            if (goldEventArgs.GoldResults == PickUpGoldResults.Taken)
             {
-                LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownSewerLeft.DEFEATED_FIRST_ROOM_RATS, true);
+                LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownSewerLeft.TOOK_GOLD_KEY, true);
 
                 // Reload the Sewer Coordior so it will open up the sewer
-                LocationHandler.ResetLocation(ENTRANCE_KEY);
+                LocationHandler.ResetLocation(ROOM_TWO_KEY);
 
             }
         }
