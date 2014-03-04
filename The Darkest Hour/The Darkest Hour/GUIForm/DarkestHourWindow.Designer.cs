@@ -1,4 +1,4 @@
-﻿namespace The_Darkest_Hour.Windows.UI
+﻿namespace The_Darkest_Hour
 {
     partial class DarkestHourWindow
     {
@@ -28,12 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // DarkestHourWindow
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(784, 565);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximumSize = new System.Drawing.Size(1280, 768);
+            this.MinimumSize = new System.Drawing.Size(800, 600);
+            this.Name = "DarkestHourWindow";
             this.Text = "The Darkest Hour";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
     }
 }
-

@@ -79,6 +79,8 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -122,6 +124,12 @@
     <Compile Include="Common\SerializableDictionary.cs" />
     <Compile Include="Common\TakeItemEventArgs.cs" />
     <Compile Include="Common\TakeItemResults.cs" />
+    <Compile Include="GUIForm\DarkestHourWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIForm\DarkestHourWindow.Designer.cs">
+      <DependentUpon>DarkestHourWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="GameConfigs.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="GameState.cs" />
@@ -189,6 +197,9 @@
     <EmbeddedResource Include="Characters\Resources\CharacterResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>CharacterResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIForm\DarkestHourWindow.resx">
+      <DependentUpon>DarkestHourWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GeneralGameResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

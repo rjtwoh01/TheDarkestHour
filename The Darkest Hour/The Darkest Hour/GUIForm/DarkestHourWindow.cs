@@ -7,12 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using The_Darkest_Hour.Characters;
-using The_Darkest_Hour.Characters.Professions;
-using The_Darkest_Hour.Items;
-using The_Darkest_Hour.Locations;
 
-namespace CodeReference
+namespace The_Darkest_Hour
 {
     public partial class DarkestHourWindow : Form
     {
