@@ -124,6 +124,7 @@
     <Compile Include="Common\SerializableDictionary.cs" />
     <Compile Include="Common\TakeItemEventArgs.cs" />
     <Compile Include="Common\TakeItemResults.cs" />
+    <Compile Include="GUIForm\BarControl.cs" />
     <Compile Include="GUIForm\DarkestHourWindow.cs">
       <SubType>Form</SubType>
     </Compile>
