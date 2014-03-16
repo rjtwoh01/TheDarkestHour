@@ -117,6 +117,8 @@
     <Compile Include="Characters\Professions\Warrior.cs" />
     <Compile Include="Combat\CombatEventArgs.cs" />
     <Compile Include="Combat\CombatResults.cs" />
+    <Compile Include="Common\ChestEventArgs.cs" />
+    <Compile Include="Common\ChestResults.cs" />
     <Compile Include="Common\PaperReadEventArgs.cs" />
     <Compile Include="Common\PaperReadResults.cs" />
     <Compile Include="Common\PickUpGoldEventArgs.cs" />
@@ -168,6 +170,7 @@
     <Compile Include="Locations\Actions\SaveAction.cs" />
     <Compile Include="Locations\Actions\StoreAction.cs" />
     <Compile Include="Locations\Actions\TakeItemAction.cs" />
+    <Compile Include="Locations\Actions\TreasureChestAction.cs" />
     <Compile Include="Locations\Location.cs" />
     <Compile Include="Locations\LocationAction.cs" />
     <Compile Include="Locations\LocationDefinition.cs" />

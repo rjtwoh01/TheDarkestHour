@@ -20,8 +20,11 @@ namespace The_Darkest_Hour.Towns.Watertown
 
         public const string ENTRANCE_KEY = "WatertownSewerLeft.Entrance";
         public const string ROOM_TWO_KEY = "WatertownSewerLeft.RoomTwo";
+        public const string ROOM_THREE_KEY = "WatertownSewerLeft.RoomThree";
         public const string DEFEATED_FIRST_ROOM_RATS = "DefeatedFirstRoomRats";
         public const string TOOK_GOLD_KEY = "TookRoomTwoGold";
+        public const string OPENED_CHEST_ROOM_THREE = "OpenedChestInRoomThree";
+
 
         #endregion
 
@@ -143,7 +146,9 @@ namespace The_Darkest_Hour.Towns.Watertown
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
 
             // Town Center
-            LocationDefinition locationDefinition = WatertownSewer.GetTownInstance().GetSewerEntranceFinalDefinition();
+            LocationDefinition locationDefinition = WatertownSewerLeft.GetTownInstance().GetSewerLeftEntranceDefinition();
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            locationDefinition = WatertownSewerLeft.GetTownInstance().GetRoomThreeDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
@@ -177,6 +182,75 @@ namespace The_Darkest_Hour.Towns.Watertown
                 returnData.LocationKey = locationKey;
                 returnData.Name = "Yucky Room";
                 returnData.DoLoadLocation = LoadRoomTwo;
+
+                LocationHandler.AddLocation(returnData);
+            }
+
+            return returnData;
+        }
+
+        #endregion
+
+        #region Room 3
+
+        public Location LoadRoomThree()
+        {
+            Location returnData;
+            bool openedChest = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownSewerLeft.OPENED_CHEST_ROOM_THREE));
+
+            returnData = new Location();
+            returnData.Name = "Plain Room";
+            returnData.Description = "Mud and slime and poopoo.  What a nasty place.";
+
+            //Actions
+
+            if (openedChest == false)
+            {
+                List<LocationAction> locationActions = new List<LocationAction>();
+                TreasureChestAction itemAction = new TreasureChestAction(5);
+                locationActions.Add(itemAction);
+                itemAction.PostItem += RoomThreeChest;
+                returnData.Actions = locationActions;
+            }
+
+            // Adjacent Locations
+            Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
+
+            // Town Center
+            LocationDefinition locationDefinition = WatertownSewerLeft.GetTownInstance().GetRoomTwoDefinition();
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+
+            returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
+
+            return returnData;
+        }
+
+        public void RoomThreeChest(object sender, ChestEventArgs chestEventArgs)
+        {
+            if (chestEventArgs.ChestResults == ChestResults.Taken)
+            {
+                LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownSewerLeft.OPENED_CHEST_ROOM_THREE, true);
+
+                // Reload the Sewer Coordior so it will open up the sewer
+                LocationHandler.ResetLocation(ROOM_THREE_KEY);
+
+            }
+        }
+
+        public LocationDefinition GetRoomThreeDefinition()
+        {
+            LocationDefinition returnData = new LocationDefinition();
+            string locationKey = ROOM_THREE_KEY;
+
+            if (LocationHandler.LocationExists(locationKey))
+            {
+                returnData = LocationHandler.GetLocation(locationKey);
+            }
+            else
+            {
+                returnData.LocationKey = locationKey;
+                returnData.Name = "Plain Room";
+                returnData.DoLoadLocation = LoadRoomThree;
 
                 LocationHandler.AddLocation(returnData);
             }

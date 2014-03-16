@@ -16,7 +16,22 @@ namespace The_Darkest_Hour.Items
 
         public Loot()
         {
-            //Just have this constructor here for store sells. It will do nothing but it will prevent the compiler from whining when we don't initiate the class without an argument
+        }
+
+        public void SelectLoot()
+        {
+            if (GameState.Hero.level >= 1 && GameState.Hero.level <= 5)
+            {
+                LevelsOneToFiveLoot();
+            }
+            if (GameState.Hero.level >= 6 && GameState.Hero.level <= 10)
+            {
+                LevelsSixToTenLoot();
+            }
+            if (GameState.Hero.level >= 11 && GameState.Hero.level <= 50)
+            {
+                LevelsElevelToFifteenLoot();
+            }
         }
 
         public Loot(Mob mob)
