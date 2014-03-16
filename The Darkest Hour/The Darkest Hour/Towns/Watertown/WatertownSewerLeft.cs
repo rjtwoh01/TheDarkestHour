@@ -21,7 +21,7 @@ namespace The_Darkest_Hour.Towns.Watertown
         public const string ENTRANCE_KEY = "WatertownSewerLeft.Entrance";
         public const string ROOM_TWO_KEY = "WatertownSewerLeft.RoomTwo";
         public const string ROOM_THREE_KEY = "WatertownSewerLeft.RoomThree";
-        public const string HALLWAY_KEY = "WatertownSewerLeft.RoomThree";
+        public const string HALLWAY_KEY = "WatertownSewerLeft.Hallway";
         public const string ROOM_FOUR_KEY = "WatertownSewerLeft.RoomFour";
         public const string DEFEATED_FIRST_ROOM_RATS = "DefeatedFirstRoomRats";
         public const string TOOK_GOLD_KEY = "TookRoomTwoGold";
@@ -48,13 +48,12 @@ namespace The_Darkest_Hour.Towns.Watertown
 
             returnData = new Location();
             returnData.Name = "Watertown Sewer Left";
-            returnData.Description = "Mud and slime and poopoo.  What a nasty place.";
 
             //Actions
 
             if (defeatedSewerRats == false)
             {
-
+                returnData.Description = "Mud and slime and poopoo.  What a nasty place. A vicious pack of sewer rats impeede your progress";
                 // Location Actions
                 List<LocationAction> locationActions = new List<LocationAction>();
 
@@ -70,6 +69,8 @@ namespace The_Darkest_Hour.Towns.Watertown
 
                 returnData.Actions = locationActions;
             }
+            if (defeatedSewerRats)
+                returnData.Description = "Mud and slime and poopoo.  What a nasty place. A pack of sewer rats lay dead on the floor.";
 
             // Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
@@ -133,18 +134,20 @@ namespace The_Darkest_Hour.Towns.Watertown
 
             returnData = new Location();
             returnData.Name = "Yucky Room";
-            returnData.Description = "Mud and slime and poopoo.  What a nasty place.";
 
             //Actions
 
             if (tookGold == false)
             {
+                returnData.Description = "Mud and slime and poopoo.  What a nasty place. A bag of gold lays forgotten on the floor";
                 List<LocationAction> locationActions = new List<LocationAction>();
                 PickUpGoldAction itemAction = new PickUpGoldAction(50);
                 locationActions.Add(itemAction);
                 itemAction.PostItem += RoomTwoGold;
                 returnData.Actions = locationActions;
             }
+            if (tookGold)
+                returnData.Description = "Mud and slime and poopoo.  What a nasty place. An empty bag of gold lays forgotten on the floor";
 
             // Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
@@ -204,18 +207,21 @@ namespace The_Darkest_Hour.Towns.Watertown
 
             returnData = new Location();
             returnData.Name = "Plain Room";
-            returnData.Description = "Mud and slime and poopoo.  What a nasty place.";
 
             //Actions
 
             if (openedChest == false)
             {
+                returnData.Description = "Mud and slime and poopoo.  What a nasty place. A treasure chest sits against a wall.";
                 List<LocationAction> locationActions = new List<LocationAction>();
                 TreasureChestAction itemAction = new TreasureChestAction(5);
                 locationActions.Add(itemAction);
                 itemAction.PostItem += RoomThreeChest;
                 returnData.Actions = locationActions;
             }
+            
+            if (openedChest)
+                returnData.Description = "Mud and slime and poopoo.  What a nasty place. An opened treasure chest sits against a wall.";
 
             // Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
@@ -275,13 +281,12 @@ namespace The_Darkest_Hour.Towns.Watertown
 
             returnData = new Location();
             returnData.Name = "Hallway";
-            returnData.Description = "Mud and slime and poopoo.  What a nasty place.";
 
             //Actions
 
             if (defeatedSewerRats == false)
             {
-
+                returnData.Description = "Mud and slime and poopoo.  What a nasty place. Sewer Rats block your path";
                 // Location Actions
                 List<LocationAction> locationActions = new List<LocationAction>();
 
@@ -295,6 +300,9 @@ namespace The_Darkest_Hour.Towns.Watertown
 
                 returnData.Actions = locationActions;
             }
+
+            if (defeatedSewerRats)
+                returnData.Description = "Mud and slime and poopoo.  What a nasty place. Sewer Rats lay dead at your feet";
 
             // Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
@@ -318,10 +326,10 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
             {
-                LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownSewerLeft.DEFEATED_FIRST_ROOM_RATS, true);
+                LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownSewerLeft.DEFEATED_HALLWAY_RATS, true);
 
                 // Reload the Sewer Coordior so it will open up the sewer
-                LocationHandler.ResetLocation(ENTRANCE_KEY);
+                LocationHandler.ResetLocation(HALLWAY_KEY);
 
             }
         }
@@ -358,13 +366,12 @@ namespace The_Darkest_Hour.Towns.Watertown
 
             returnData = new Location();
             returnData.Name = "Giant Room";
-            returnData.Description = "Mud and slime and poopoo.  What a nasty place.";
 
             //Actions
 
             if (defeatedOutlawBoss == false)
             {
-
+                returnData.Description = "Mud and slime and poopoo.  What a nasty place. The Outlaw Boss stands in the middle of the room";
                 // Location Actions
                 List<LocationAction> locationActions = new List<LocationAction>();
 
@@ -377,6 +384,8 @@ namespace The_Darkest_Hour.Towns.Watertown
 
                 returnData.Actions = locationActions;
             }
+            if (defeatedOutlawBoss)
+                returnData.Description = "Mud and slime and poopoo.  What a nasty place. The Outlaw Boss's dead body decomposes on the ground.";
 
             // Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
@@ -400,10 +409,10 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
             {
-                LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownSewerLeft.DEFEATED_FIRST_ROOM_RATS, true);
+                LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownSewerLeft.DEFEATED_OUTLAW_BOSS, true);
 
                 // Reload the Sewer Coordior so it will open up the sewer
-                LocationHandler.ResetLocation(ENTRANCE_KEY);
+                LocationHandler.ResetLocation(ROOM_FOUR_KEY);
 
             }
         }
@@ -411,7 +420,7 @@ namespace The_Darkest_Hour.Towns.Watertown
         public LocationDefinition GetRoomFourDefinition()
         {
             LocationDefinition returnData = new LocationDefinition();
-            string locationKey = HALLWAY_KEY;
+            string locationKey = ROOM_FOUR_KEY;
 
             if (LocationHandler.LocationExists(locationKey))
             {
