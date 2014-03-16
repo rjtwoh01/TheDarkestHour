@@ -93,6 +93,7 @@
     <Compile Include="Characters\Mobs\Bosses\BanditCaptain.cs" />
     <Compile Include="Characters\Mobs\Bosses\BanditLieutenant.cs" />
     <Compile Include="Characters\Mobs\Bosses\BanditSupplyCaptain.cs" />
+    <Compile Include="Characters\Mobs\Bosses\OutlawBoss.cs" />
     <Compile Include="Characters\Mobs\Bosses\SewerKing.cs" />
     <Compile Include="Characters\Mobs\SewerRat.cs" />
     <Compile Include="Combat\Battle.cs" />
