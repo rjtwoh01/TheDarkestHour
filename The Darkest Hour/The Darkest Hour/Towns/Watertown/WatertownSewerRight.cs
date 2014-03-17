@@ -36,7 +36,7 @@ namespace The_Darkest_Hour.Towns.Watertown
 
         public override LocationDefinition GetStartingLocationDefinition()
         {
-            return GetSewerLeftEntranceDefinition();
+            return GetSewerRightEntranceDefinition();
         }
 
         #region Sewer Right Entrance
@@ -122,7 +122,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
 
             // Town Center
-            LocationDefinition locationDefinition = WatertownSewerRight.GetTownInstance().GetSewerLeftEntranceDefinition();
+            LocationDefinition locationDefinition = WatertownSewerRight.GetTownInstance().GetSewerRightEntranceDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
             if (defeatedSewerRats)
             {
