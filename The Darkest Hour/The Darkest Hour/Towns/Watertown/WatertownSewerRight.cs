@@ -159,7 +159,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             else
             {
                 returnData.LocationKey = locationKey;
-                returnData.Name = "Yucky Room";
+                returnData.Name = "Small Room";
                 returnData.DoLoadLocation = LoadRoomTwo;
 
                 LocationHandler.AddLocation(returnData);
@@ -206,7 +206,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             else
             {
                 returnData.LocationKey = locationKey;
-                returnData.Name = "Plain Room";
+                returnData.Name = "Dirty Room";
                 returnData.DoLoadLocation = LoadRoomThree;
 
                 LocationHandler.AddLocation(returnData);
@@ -290,7 +290,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             else
             {
                 returnData.LocationKey = locationKey;
-                returnData.Name = "Hallway";
+                returnData.Name = "Dark Room";
                 returnData.DoLoadLocation = LoadRoomFour;
 
                 LocationHandler.AddLocation(returnData);
@@ -375,7 +375,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             else
             {
                 returnData.LocationKey = locationKey;
-                returnData.Name = "Giant Room";
+                returnData.Name = "Stuffy Room";
                 returnData.DoLoadLocation = LoadRoomFive;
 
                 LocationHandler.AddLocation(returnData);
@@ -483,7 +483,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             else
             {
                 returnData.LocationKey = locationKey;
-                returnData.Name = "Giant Room";
+                returnData.Name = "Room of Death";
                 returnData.DoLoadLocation = LoadRoomSix;
 
                 LocationHandler.AddLocation(returnData);
