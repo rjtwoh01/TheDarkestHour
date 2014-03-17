@@ -95,7 +95,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             bool defeatedSewerRats = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownSewerRight.DEFEATED_SECOND_ROOM_RATS));
 
             returnData = new Location();
-            returnData.Name = "Yucky Room";
+            returnData.Name = "Small Room";
 
             //Actions
 
@@ -177,7 +177,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             Location returnData;
 
             returnData = new Location();
-            returnData.Name = "Plain Room";
+            returnData.Name = "Dirty Room";
             returnData.Description = "Mud and slime and poopoo.  What a nasty place. The floor is covered with the dead skeletons of rats.";
                            
             // Adjacent Locations
@@ -225,7 +225,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             bool inspectedTalisman = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownSewerRight.INSPECTED_TALISMAN));
 
             returnData = new Location();
-            returnData.Name = "Hallway";
+            returnData.Name = "Dark Room";
             string talismanInfo = "This talisman has a sense of forboding about it.";
 
             //Actions
@@ -309,7 +309,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             bool defeatedOutlawBoss = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownSewerRight.DEFEATED_FIFTH_ROOM_SKELETONS));
 
             returnData = new Location();
-            returnData.Name = "Giant Room";
+            returnData.Name = "Stuffy Room";
 
             //Actions
 
@@ -320,7 +320,6 @@ namespace The_Darkest_Hour.Towns.Watertown
                 List<LocationAction> locationActions = new List<LocationAction>();
 
                 List<Mob> skeletons = new List<Mob>();
-                skeletons.Add(new Skeleton());
                 skeletons.Add(new Skeleton());
                 skeletons.Add(new Skeleton());
                 skeletons.Add(new Skeleton());
@@ -396,7 +395,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             bool openedChest = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownSewerRight.OPENED_SKELETON_KING_CHEST));
 
             returnData = new Location();
-            returnData.Name = "Giant Room";
+            returnData.Name = "Room of Death";
 
             //Actions
 
