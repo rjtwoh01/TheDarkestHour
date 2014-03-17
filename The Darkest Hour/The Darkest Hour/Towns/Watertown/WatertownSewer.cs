@@ -218,6 +218,10 @@ namespace The_Darkest_Hour.Towns.Watertown
                 //Sewer Left
                 locationDefinition = WatertownSewerLeft.GetTownInstance().GetStartingLocationDefinition();
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+
+                //Sewer Right
+                locationDefinition = WatertownSewerRight.GetTownInstance().GetStartingLocationDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
                 
                 //Town
                 locationDefinition = Watertown.GetTownInstance().GetTownCenterDefinition();
