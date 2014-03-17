@@ -15,7 +15,6 @@ namespace The_Darkest_Hour.Towns.Watertown
 {
     class WatertownSewerLeft : Town
     {
-
         #region Location Keys
 
         public const string ENTRANCE_KEY = "WatertownSewerLeft.Entrance";

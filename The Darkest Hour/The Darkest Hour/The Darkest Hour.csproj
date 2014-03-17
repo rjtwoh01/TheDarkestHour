@@ -95,6 +95,7 @@
     <Compile Include="Characters\Mobs\Bosses\BanditSupplyCaptain.cs" />
     <Compile Include="Characters\Mobs\Bosses\OutlawBoss.cs" />
     <Compile Include="Characters\Mobs\Bosses\SewerKing.cs" />
+    <Compile Include="Characters\Mobs\Bosses\SkeletonKing.cs" />
     <Compile Include="Characters\Mobs\SewerRat.cs" />
     <Compile Include="Combat\Battle.cs" />
     <Compile Include="Characters\Accomplishments.cs" />
@@ -190,6 +191,7 @@
     <Compile Include="Towns\Watertown\WatertownForest.cs" />
     <Compile Include="Towns\Watertown\WatertownSewer.cs" />
     <Compile Include="Towns\Watertown\WatertownSewerLeft.cs" />
+    <Compile Include="Towns\Watertown\WatertownSewerRight.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
