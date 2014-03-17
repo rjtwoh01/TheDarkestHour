@@ -306,14 +306,14 @@ namespace The_Darkest_Hour.Towns.Watertown
         public Location LoadRoomFive()
         {
             Location returnData;
-            bool defeatedOutlawBoss = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownSewerRight.DEFEATED_FIFTH_ROOM_SKELETONS));
+            bool defeatedSkeletons = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownSewerRight.DEFEATED_FIFTH_ROOM_SKELETONS));
 
             returnData = new Location();
             returnData.Name = "Stuffy Room";
 
             //Actions
 
-            if (defeatedOutlawBoss == false)
+            if (defeatedSkeletons == false)
             {
                 returnData.Description = "Mud and slime and poopoo.  What a nasty place. Skeletons block your path.";
                 // Location Actions
@@ -330,7 +330,7 @@ namespace The_Darkest_Hour.Towns.Watertown
 
                 returnData.Actions = locationActions;
             }
-            if (defeatedOutlawBoss)
+            if (defeatedSkeletons)
                 returnData.Description = "Mud and slime and poopoo.  What a nasty place. The bones of your vanquished enemies are scattered upon the floor.";
 
             // Adjacent Locations
@@ -340,9 +340,9 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = WatertownSewerRight.GetTownInstance().GetRoomFourDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            if (defeatedOutlawBoss)
+            if (defeatedSkeletons)
             {
-                locationDefinition = Watertown.GetTownInstance().GetTownCenterDefinition();
+                locationDefinition = WatertownSewerRight.GetTownInstance().GetRoomSixDefinition();
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
             }
 
