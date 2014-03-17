@@ -92,7 +92,7 @@ namespace The_Darkest_Hour.Towns.Watertown
         public Location LoadRoomTwo()
         {
             Location returnData;
-            bool defeatedSewerRats = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownSewerRight.TOOK_GOLD_KEY));
+            bool defeatedSewerRats = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownSewerRight.DEFEATED_SECOND_ROOM_RATS));
 
             returnData = new Location();
             returnData.Name = "Yucky Room";
@@ -306,7 +306,7 @@ namespace The_Darkest_Hour.Towns.Watertown
         public Location LoadRoomFive()
         {
             Location returnData;
-            bool defeatedOutlawBoss = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownSewerRight.DEFEATED_OUTLAW_BOSS));
+            bool defeatedOutlawBoss = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownSewerRight.DEFEATED_FIFTH_ROOM_SKELETONS));
 
             returnData = new Location();
             returnData.Name = "Giant Room";
