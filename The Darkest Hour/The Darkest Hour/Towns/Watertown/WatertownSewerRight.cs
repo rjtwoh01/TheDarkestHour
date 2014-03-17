@@ -39,9 +39,9 @@ namespace The_Darkest_Hour.Towns.Watertown
             return GetSewerLeftEntranceDefinition();
         }
 
-        #region Sewer Left Entrance
+        #region Sewer Right Entrance
 
-        public Location LoadSewerLeftEntrance()
+        public Location LoadSewerRightEntrance()
         {
             Location returnData;
 
@@ -64,7 +64,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             return returnData;
         }
 
-        public LocationDefinition GetSewerLeftEntranceDefinition()
+        public LocationDefinition GetSewerRightEntranceDefinition()
         {
             LocationDefinition returnData = new LocationDefinition();
             string locationKey = ENTRANCE_KEY;
@@ -76,8 +76,8 @@ namespace The_Darkest_Hour.Towns.Watertown
             else
             {
                 returnData.LocationKey = locationKey;
-                returnData.Name = "Watertown Sewer Left";
-                returnData.DoLoadLocation = LoadSewerLeftEntrance;
+                returnData.Name = "Watertown Sewer Right";
+                returnData.DoLoadLocation = LoadSewerRightEntrance;
 
                 LocationHandler.AddLocation(returnData);
             }
