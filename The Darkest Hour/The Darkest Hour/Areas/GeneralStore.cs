@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using The_Darkest_Hour.Characters;
 using The_Darkest_Hour.Items;
+using The_Darkest_Hour.GUIForm;
 
 namespace The_Darkest_Hour.Areas
 {
@@ -12,21 +13,21 @@ namespace The_Darkest_Hour.Areas
     {
         public static void DoGeneralStore() 
         {
-            Console.WriteLine("\nWelcome to the store, you can sell any of your goods here!");
-            Console.WriteLine("Or if you're interested, we have some mighty fine goods to buy here!\n\n");
+            DarkestHourWindow.WriteLine("\nWelcome to the store, you can sell any of your goods here!");
+            DarkestHourWindow.WriteLine("Or if you're interested, we have some mighty fine goods to buy here!\n\n");
 
             bool goAgain = false;
 
             do
             {
-                Console.WriteLine("Do you wish to (1) Sell Items or (2) Buy Items?");
+                DarkestHourWindow.WriteLine("Do you wish to (1) Sell Items or (2) Buy Items?");
                 string answer = Console.ReadLine();
                 if (answer == "1")
                     SellItems();
                 else if (answer == "2")
                     BuyItems();
 
-                Console.WriteLine("Do you still wish to utilize any of my services? (1) Yes (2) No");
+                DarkestHourWindow.WriteLine("Do you still wish to utilize any of my services? (1) Yes (2) No");
                 string answerTwo = Console.ReadLine();
                 if (answerTwo == "1")
                     goAgain = true;
@@ -49,7 +50,7 @@ namespace The_Darkest_Hour.Areas
                 GameState.Hero.SellItems();
                 ClearScreen();
 
-                Console.WriteLine("Want to go again? (1) Yes (2) No");
+                DarkestHourWindow.WriteLine("Want to go again? (1) Yes (2) No");
                 string answer = Console.ReadLine();
                 if (answer == "1")
                     goAgain = true;
@@ -123,15 +124,15 @@ namespace The_Darkest_Hour.Areas
                 int i = 1;
                 foreach (Item displayItems in itemsToBuy)
                 {
-                    Console.WriteLine(i + ". " + displayItems);
+                    DarkestHourWindow.WriteLine(i + ". " + displayItems);
                     i++;
                 }
 
-                Console.WriteLine("\nDo you want to buy any of these? (1) Yes, (2) No");
+                DarkestHourWindow.WriteLine("\nDo you want to buy any of these? (1) Yes, (2) No");
                 string answer = Console.ReadLine();
                 if (answer == "1")
                 {
-                    Console.WriteLine("Which item?");
+                    DarkestHourWindow.WriteLine("Which item?");
                     string itemAnswer = Console.ReadLine();
                     int selected = Int32.Parse(itemAnswer);
                     selected -= 1;
@@ -141,32 +142,32 @@ namespace The_Darkest_Hour.Areas
                     if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap && GameState.Hero.gold >= selectedItem.worth)
                     {
                         GameState.Hero.Inventory.Add(selectedItem);
-                        Console.WriteLine("You bought {0} for {1} gold and you now have {2} gold left.\n\n", selectedItem.name, selectedItem.worth, GameState.Hero.gold);
+                        DarkestHourWindow.WriteLine("You bought {0} for {1} gold and you now have {2} gold left.\n\n", selectedItem.name, selectedItem.worth, GameState.Hero.gold);
                     }
                     else if (GameState.Hero.Inventory.Count > GameState.Hero.inventoryCap)
                     {
-                        Console.WriteLine("You have too many items in your inventory. Maybe you should sell something to me first.\n\n");
+                        DarkestHourWindow.WriteLine("You have too many items in your inventory. Maybe you should sell something to me first.\n\n");
                     }
                     else if (GameState.Hero.gold < selectedItem.worth)
                     {
-                        Console.WriteLine("You don't have enough money for that\n\n");
+                        DarkestHourWindow.WriteLine("You don't have enough money for that\n\n");
                     }
                     else if (GameState.Hero.Inventory.Count > GameState.Hero.inventoryCap && GameState.Hero.gold < selectedItem.worth)
                     {
-                        Console.WriteLine("You have too many items in your inventory, and you don't have enough gold. Maybe you should sell something to me first.\n\n");
+                        DarkestHourWindow.WriteLine("You have too many items in your inventory, and you don't have enough gold. Maybe you should sell something to me first.\n\n");
                     }
                 }
                 else if (answer == "2")
                 {
-                    Console.WriteLine("Then why'd you ask to come here! I ain't going to have anything better you know!\n\n");
+                    DarkestHourWindow.WriteLine("Then why'd you ask to come here! I ain't going to have anything better you know!\n\n");
                 }
                 else
                 {
-                    Console.WriteLine("What you wasting my time for?");
+                    DarkestHourWindow.WriteLine("What you wasting my time for?");
                 }
 
 
-                Console.WriteLine("\n\nWant to buy something else? (1) Yes (2) No");
+                DarkestHourWindow.WriteLine("\n\nWant to buy something else? (1) Yes (2) No");
                 string answerTwo = Console.ReadLine();
                 if (answerTwo == "1")
                     goAgain = true;
@@ -182,9 +183,9 @@ namespace The_Darkest_Hour.Areas
 
         public static void ClearScreen()
         {
-            Console.WriteLine("\nPress any key to continue...");
+            DarkestHourWindow.WriteLine("\nPress any key to continue...");
             Console.ReadKey();
-            Console.Clear();
+            DarkestHourWindow.Clear();
         }
     }
 }

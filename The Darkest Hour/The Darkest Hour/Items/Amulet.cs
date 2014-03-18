@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using The_Darkest_Hour.Characters;
+using The_Darkest_Hour.GUIForm;
 
 namespace The_Darkest_Hour.Items
 {
@@ -75,7 +76,7 @@ namespace The_Darkest_Hour.Items
                     myHero.critChance = 1;
             }
             else
-                Console.WriteLine("\nYou cannot equip that yet, you do not meet the required level.\n");
+                DarkestHourWindow.WriteLine("\nYou cannot equip that yet, you do not meet the required level.\n");
         }
 
         public override void DeEquip(Item item, Player myHero)
@@ -97,7 +98,7 @@ namespace The_Darkest_Hour.Items
 
             if (myHero.AmuletFull)
             {
-                Console.WriteLine("\nAmulet Slot is full");
+                DarkestHourWindow.WriteLine("\nAmulet Slot is full");
                 isFull = true;
             }
             else

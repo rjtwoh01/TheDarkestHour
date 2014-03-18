@@ -20,14 +20,16 @@ namespace The_Darkest_Hour.GUIForm
         public DarkestHourWindow()
         {
             InitializeComponent();
-            SetInfo();
+            
+            //SetInfo();
             Bargraphics = BarBox.CreateGraphics();
-            SetBarInfo(Bargraphics);
+            //SetBarInfo(Bargraphics);
         }
         private void SetInfo()
         {
-            NameLabel.Text = GameState.Hero.Identifier;
-            ClassLabel.Text = GameState.Hero.Profession.Name;
+            MainGame game = new MainGame();
+            //NameLabel.Text = GameState.Hero.Identifier;
+            //ClassLabel.Text = GameState.Hero.Profession.Name;
         }
         //Next step is to pull info from game into message feed
         //Followed by replacing 90+% of in game controls with buttons
@@ -54,6 +56,7 @@ namespace The_Darkest_Hour.GUIForm
             HealthBar.Draw(g);
             EnergyBar.Draw(g);
         }
+        //public static string ReadLine();
         private void CommandsBox_KeyDown(object sender, KeyEventArgs e)
         {
             
@@ -61,8 +64,33 @@ namespace The_Darkest_Hour.GUIForm
             {
                 MessageFeed.Text = MessageFeed.Text+  Environment.NewLine + CommandsBox.Text;
             }
-            SetBarInfo(Bargraphics);
+            SetInfo();
+            //SetBarInfo(Bargraphics);
         }
+        public static void WriteLine() {MessageFeed.Text = MessageFeed.Text + Environment.NewLine;}
+        public static void WriteLine(bool value) { MessageFeed.Text = MessageFeed.Text + Environment.NewLine + value.ToString(); }
+        public static void WriteLine(char value) { MessageFeed.Text = MessageFeed.Text + Environment.NewLine + value.ToString(); }
+        public static void WriteLine(char[] buffer) { MessageFeed.Text = MessageFeed.Text + Environment.NewLine + buffer.ToString(); }
+        public static void WriteLine(decimal value) { MessageFeed.Text = MessageFeed.Text + Environment.NewLine + value.ToString(); }
+        public static void WriteLine(double value) { MessageFeed.Text = MessageFeed.Text + Environment.NewLine + value.ToString(); }
+        public static void WriteLine(float value) { MessageFeed.Text = MessageFeed.Text + Environment.NewLine + value.ToString(); }
+        public static void WriteLine(int value) { MessageFeed.Text = MessageFeed.Text + Environment.NewLine + value.ToString(); }
+        public static void WriteLine(long value) { MessageFeed.Text = MessageFeed.Text + Environment.NewLine + value.ToString(); }
+        public static void WriteLine(object value) { MessageFeed.Text = MessageFeed.Text + Environment.NewLine + value.ToString(); }
+        public static void WriteLine(string value) { MessageFeed.Text = MessageFeed.Text + Environment.NewLine + value.ToString(); }
+
+        public static void WriteLine(uint value) { MessageFeed.Text = MessageFeed.Text + Environment.NewLine + value.ToString(); }
+
+        public static void WriteLine(ulong value) { MessageFeed.Text = MessageFeed.Text + Environment.NewLine + value.ToString(); }
+        public static void WriteLine(string format, object arg0) { MessageFeed.Text += Environment.NewLine + String.Format(format, arg0); }
+        public static void WriteLine(string format, params object[] arg) { MessageFeed.Text += Environment.NewLine + String.Format(format, arg); }
+        public static void Clear() { MessageFeed.Text = ""; }
+        //public void WriteLine(char[] buffer, int index, int count);
+        //public void WriteLine(string format, object arg0, object arg1);
+        //public void WriteLine(string format, object arg0, object arg1, object arg2);
+        //[CLSCompliant(false)]
+        //public void WriteLine(string format, object arg0, object arg1, object arg2, object arg3);
+
         BarControl HealthBar;
         BarControl EnergyBar;
         Graphics Bargraphics;

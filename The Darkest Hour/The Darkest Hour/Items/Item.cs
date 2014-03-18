@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using The_Darkest_Hour.Characters;
 using System.IO;
+using The_Darkest_Hour.GUIForm;
 
 namespace The_Darkest_Hour.Items
 {
@@ -38,7 +39,7 @@ namespace The_Darkest_Hour.Items
                     myHero.critChance = 1;
             }
             else
-                Console.WriteLine("\nYou cannot equip that yet, you do not meet the required level.\n");
+                DarkestHourWindow.WriteLine("\nYou cannot equip that yet, you do not meet the required level.\n");
         }
 
         public virtual void DeEquip(Item item, Player myHero)
@@ -63,7 +64,7 @@ namespace The_Darkest_Hour.Items
             {
                 if (myHero.WeaponsFull)
                 {
-                    Console.WriteLine("\nWeapon slot is full");
+                    DarkestHourWindow.WriteLine("\nWeapon slot is full");
                     isFull = true;
                 }
                 else
@@ -76,7 +77,7 @@ namespace The_Darkest_Hour.Items
             {
                 if (myHero.ArmorFull)
                 {
-                    Console.WriteLine("\nArmor slot is full");
+                    DarkestHourWindow.WriteLine("\nArmor slot is full");
                     isFull = true;
                 }
                 else
@@ -89,7 +90,7 @@ namespace The_Darkest_Hour.Items
             {
                 if (myHero.HelmetFull)
                 {
-                    Console.WriteLine("\nHelmet slot is full");
+                    DarkestHourWindow.WriteLine("\nHelmet slot is full");
                     isFull = true;
                 }
                 else
@@ -102,7 +103,7 @@ namespace The_Darkest_Hour.Items
             {
                 if (myHero.AmuletFull)
                 {
-                    Console.WriteLine("\nAmulet slot is full");
+                    DarkestHourWindow.WriteLine("\nAmulet slot is full");
                     isFull = true;
                 }
                 else

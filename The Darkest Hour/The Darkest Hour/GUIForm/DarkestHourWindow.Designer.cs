@@ -31,7 +31,7 @@
             this.NameLabel = new System.Windows.Forms.Label();
             this.ClassLabel = new System.Windows.Forms.Label();
             this.CommandsBox = new System.Windows.Forms.TextBox();
-            this.MessageFeed = new System.Windows.Forms.Label();
+            MessageFeed = new System.Windows.Forms.Label();
             this.BarBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.BarBox)).BeginInit();
             this.SuspendLayout();
@@ -63,14 +63,14 @@
             // 
             // MessageFeed
             // 
-            this.MessageFeed.AutoSize = true;
-            this.MessageFeed.Location = new System.Drawing.Point(12, 12);
-            this.MessageFeed.MaximumSize = new System.Drawing.Size(600, 420);
-            this.MessageFeed.MinimumSize = new System.Drawing.Size(600, 420);
-            this.MessageFeed.Name = "MessageFeed";
-            this.MessageFeed.Size = new System.Drawing.Size(600, 420);
-            this.MessageFeed.TabIndex = 3;
-            this.MessageFeed.Text = "GameFeed";
+            MessageFeed.AutoSize = true;
+            MessageFeed.Location = new System.Drawing.Point(12, 12);
+            MessageFeed.MaximumSize = new System.Drawing.Size(600, 420);
+            MessageFeed.MinimumSize = new System.Drawing.Size(600, 420);
+            MessageFeed.Name = "MessageFeed";
+            MessageFeed.Size = new System.Drawing.Size(600, 420);
+            MessageFeed.TabIndex = 3;
+            MessageFeed.Text = "GameFeed";
             // 
             // BarBox
             // 
@@ -87,7 +87,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 565);
             this.Controls.Add(this.BarBox);
-            this.Controls.Add(this.MessageFeed);
+            this.Controls.Add(MessageFeed);
             this.Controls.Add(this.CommandsBox);
             this.Controls.Add(this.ClassLabel);
             this.Controls.Add(this.NameLabel);
@@ -107,7 +107,7 @@
         private System.Windows.Forms.Label NameLabel;
         private System.Windows.Forms.Label ClassLabel;
         private System.Windows.Forms.TextBox CommandsBox;
-        private System.Windows.Forms.Label MessageFeed;
+        private static System.Windows.Forms.Label MessageFeed;
         private System.Windows.Forms.PictureBox BarBox;
     }
 }

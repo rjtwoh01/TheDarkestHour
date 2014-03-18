@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using The_Darkest_Hour.Towns;
+using The_Darkest_Hour.GUIForm;
 
 namespace The_Darkest_Hour.Locations.Actions
 {
@@ -31,7 +32,7 @@ namespace The_Darkest_Hour.Locations.Actions
             {
                 int rumorIndex = GameState.NumberGenerator.Next(0, Rumors.Count);
 
-                Console.WriteLine(String.Format("{0} says '{1}'", this.NpcName, this.Rumors[rumorIndex].DisplayText));
+                DarkestHourWindow.WriteLine(String.Format("{0} says '{1}'", this.NpcName, this.Rumors[rumorIndex].DisplayText));
 
                 if (this.Rumors[rumorIndex].OnHeardRumor != null)
                 {
@@ -40,7 +41,7 @@ namespace The_Darkest_Hour.Locations.Actions
             }
             else
             {
-                Console.WriteLine(String.Format("{0} has nothing to say.", this.NpcName));
+                DarkestHourWindow.WriteLine(String.Format("{0} has nothing to say.", this.NpcName));
             }
 
             this.ClearScreen();

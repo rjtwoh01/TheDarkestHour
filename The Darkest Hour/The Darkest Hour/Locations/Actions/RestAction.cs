@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using The_Darkest_Hour.GUIForm;
 
 namespace The_Darkest_Hour.Locations.Actions
 {
@@ -30,13 +31,13 @@ namespace The_Darkest_Hour.Locations.Actions
 
             if (GameState.Hero.gold >= this.Cost)
             {
-                Console.WriteLine("You rest and feel refreshed");
+                DarkestHourWindow.WriteLine("You rest and feel refreshed");
                 GameState.Hero.ResetHealth();
                 GameState.Hero.gold -= this.Cost;
             }
             else
             {
-                Console.WriteLine("Come back when you have more money");
+                DarkestHourWindow.WriteLine("Come back when you have more money");
             }
 
             ClearScreen();
