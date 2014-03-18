@@ -58,7 +58,7 @@
             this.CommandsBox.Name = "CommandsBox";
             this.CommandsBox.Size = new System.Drawing.Size(600, 20);
             this.CommandsBox.TabIndex = 2;
-            this.CommandsBox.Text = "Commands Here";
+            
             this.CommandsBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CommandsBox_KeyDown);
             // 
             // MessageFeed

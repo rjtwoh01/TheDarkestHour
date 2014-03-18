@@ -27,6 +27,7 @@ namespace The_Darkest_Hour.GUIForm
         }
         private void SetInfo()
         {
+            Clear();
             MainGame game = new MainGame();
             //NameLabel.Text = GameState.Hero.Identifier;
             //ClassLabel.Text = GameState.Hero.Profession.Name;
