@@ -56,13 +56,13 @@ namespace The_Darkest_Hour.GUIForm
             HealthBar.Draw(g);
             EnergyBar.Draw(g);
         }
-        //public static string ReadLine();
+        public static string ReadLine() { return commandstring; }
         private void CommandsBox_KeyDown(object sender, KeyEventArgs e)
         {
             
             if (e.KeyCode == Keys.Enter)
             {
-                MessageFeed.Text = MessageFeed.Text+  Environment.NewLine + CommandsBox.Text;
+                commandstring = CommandsBox.Text;
             }
             SetInfo();
             //SetBarInfo(Bargraphics);
@@ -96,6 +96,7 @@ namespace The_Darkest_Hour.GUIForm
         Graphics Bargraphics;
         Font stringfont = new Font("Terminal", 12);
         Brush fontbrush = Brushes.Black;
+        static String commandstring;
         //private void DrawInfo(Graphics HeroInformationBox)
         //{
         //    int DrawX = HeroInformationBox.x;

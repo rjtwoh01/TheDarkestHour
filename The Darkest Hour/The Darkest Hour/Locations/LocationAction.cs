@@ -24,7 +24,7 @@ namespace The_Darkest_Hour.Locations
             if (promptToMoveOn)
             {
                 DarkestHourWindow.WriteLine("\n\nPress enter to continue on...");
-                Console.ReadLine();
+                DarkestHourWindow.ReadLine();
             }
 
             DarkestHourWindow.Clear();

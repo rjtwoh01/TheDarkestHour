@@ -49,7 +49,7 @@ Choose your attack:
 ");
                 try
                 {
-                    getUserInput = Console.ReadLine();
+                    getUserInput = DarkestHourWindow.ReadLine();
                     userInput = Int32.Parse(getUserInput);
 
                     switch (userInput)

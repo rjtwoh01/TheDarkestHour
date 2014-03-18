@@ -43,12 +43,12 @@ namespace The_Darkest_Hour.Characters
             if (this.Identifier == null || this.Identifier == "" || this.Identifier == " ")
             {
                 DarkestHourWindow.WriteLine(CharacterResources.EnterCharacterName);
-                this.Identifier = Console.ReadLine();
+                this.Identifier = DarkestHourWindow.ReadLine();
                 DarkestHourWindow.Clear();
                 if (this.Identifier == null || this.Identifier == "" || this.Identifier == " ")
                 {
                     DarkestHourWindow.WriteLine(CharacterResources.EnterCharacterName);
-                    this.Identifier = Console.ReadLine();
+                    this.Identifier = DarkestHourWindow.ReadLine();
                     DarkestHourWindow.Clear();
                 }
 
@@ -81,7 +81,7 @@ namespace The_Darkest_Hour.Characters
                 DarkestHourWindow.WriteLine(CharacterResources.ChooseProfession); //Ask the player what profession they want to be
                 try
                 {
-                    string buffer = Console.ReadLine(); //Recieve the input as a public string
+                    string buffer = DarkestHourWindow.ReadLine(); //Recieve the input as a public string
                     prof = (CharacterProfessions)Convert.ToInt32(buffer); //Convert it to an public int, using enums for readability in code
                     // TODO: Remove the profession property when everything reads the Profession property
                     switch (prof)
@@ -195,12 +195,12 @@ Name:           Level:          Health:           Damage:
             {
                 DarkestHourWindow.WriteLine("\n\nDo you want to use any of the items in your inventory?");
                 DarkestHourWindow.WriteLine("(1) Yes (2) No\n");
-                string answer = Console.ReadLine();
+                string answer = DarkestHourWindow.ReadLine();
                 int answerParsed = Int32.Parse(answer);
                 if (answerParsed == 1)
                 {
                     DarkestHourWindow.WriteLine("\nWhich item do you want to use?\n");
-                    answer = Console.ReadLine();
+                    answer = DarkestHourWindow.ReadLine();
                     int selected = Int32.Parse(answer);
                     selected -= 1;
 
@@ -282,12 +282,12 @@ Name:           Level:          Health:           Damage:
             {
                 DarkestHourWindow.WriteLine("\n\nDo you want to use any of your equipped items?");
                 DarkestHourWindow.WriteLine("(1) Yes (2) No\n");
-                string answer = Console.ReadLine();
+                string answer = DarkestHourWindow.ReadLine();
                 int answerParsed = Int32.Parse(answer);
                 if (answerParsed == 1)
                 {
                     DarkestHourWindow.WriteLine("\nWhich item do you want to use?\n");
-                    answer = Console.ReadLine();
+                    answer = DarkestHourWindow.ReadLine();
                     int selected = Int32.Parse(answer);
                     selected -= 1;
 
@@ -340,14 +340,14 @@ Name:           Level:          Health:           Damage:
             {
                 DarkestHourWindow.WriteLine("\n\nDo you want to replace an affix of any item in your inventory?");
                 DarkestHourWindow.WriteLine("(1) Yes (2) No\n");
-                string answer = Console.ReadLine();
+                string answer = DarkestHourWindow.ReadLine();
                 int answerParsed = Int32.Parse(answer);
                 if (answerParsed == 1)
                 {
                     do
                     {
                         DarkestHourWindow.WriteLine("\nWhich item do you want to change an affix of?\n");
-                        answer = Console.ReadLine();
+                        answer = DarkestHourWindow.ReadLine();
                         int selected = Int32.Parse(answer);
                         selected -= 1;
 
@@ -367,7 +367,7 @@ Name:           Level:          Health:           Damage:
                     do
                     {
                         DarkestHourWindow.WriteLine("This will cost {0} gold and you have {1} gold. Do you wish to proceed (1) Yes (2) No?", cost, this.gold);
-                        costAnswer = Console.ReadLine();
+                        costAnswer = DarkestHourWindow.ReadLine();
                         if (this.gold >= cost)
                         {
                             this.gold -= cost;
@@ -380,7 +380,7 @@ Name:           Level:          Health:           Damage:
                             do
                             {
                                 DarkestHourWindow.WriteLine("Which affix do you want to swap out? (ENTER FULL NAME OF THE AFFIX. CORRECTLY!)");
-                                string affixAnswer = Console.ReadLine();
+                                string affixAnswer = DarkestHourWindow.ReadLine();
                                 affixAnswer = affixAnswer.ToLower();
                                 switch (affixAnswer)
                                 {
@@ -483,12 +483,12 @@ Name:           Level:          Health:           Damage:
             {
                 DarkestHourWindow.WriteLine("\n\nDo you want to sell any of the items in your inventory?");
                 DarkestHourWindow.WriteLine("(1) Yes (2) No\n");
-                string answer = Console.ReadLine();
+                string answer = DarkestHourWindow.ReadLine();
                 int answerParsed = Int32.Parse(answer);
                 if (answerParsed == 1)
                 {
                     DarkestHourWindow.WriteLine("\nWhich item do you want to sell?\n");
-                    answer = Console.ReadLine();
+                    answer = DarkestHourWindow.ReadLine();
                     int selected = Int32.Parse(answer);
                     selected -= 1;
 

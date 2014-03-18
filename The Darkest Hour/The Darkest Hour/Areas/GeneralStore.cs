@@ -21,14 +21,14 @@ namespace The_Darkest_Hour.Areas
             do
             {
                 DarkestHourWindow.WriteLine("Do you wish to (1) Sell Items or (2) Buy Items?");
-                string answer = Console.ReadLine();
+                string answer = DarkestHourWindow.ReadLine();
                 if (answer == "1")
                     SellItems();
                 else if (answer == "2")
                     BuyItems();
 
                 DarkestHourWindow.WriteLine("Do you still wish to utilize any of my services? (1) Yes (2) No");
-                string answerTwo = Console.ReadLine();
+                string answerTwo = DarkestHourWindow.ReadLine();
                 if (answerTwo == "1")
                     goAgain = true;
                 else if (answerTwo == "2")
@@ -51,7 +51,7 @@ namespace The_Darkest_Hour.Areas
                 ClearScreen();
 
                 DarkestHourWindow.WriteLine("Want to go again? (1) Yes (2) No");
-                string answer = Console.ReadLine();
+                string answer = DarkestHourWindow.ReadLine();
                 if (answer == "1")
                     goAgain = true;
                 else if (answer == "2")
@@ -129,11 +129,11 @@ namespace The_Darkest_Hour.Areas
                 }
 
                 DarkestHourWindow.WriteLine("\nDo you want to buy any of these? (1) Yes, (2) No");
-                string answer = Console.ReadLine();
+                string answer = DarkestHourWindow.ReadLine();
                 if (answer == "1")
                 {
                     DarkestHourWindow.WriteLine("Which item?");
-                    string itemAnswer = Console.ReadLine();
+                    string itemAnswer = DarkestHourWindow.ReadLine();
                     int selected = Int32.Parse(itemAnswer);
                     selected -= 1;
 
@@ -168,7 +168,7 @@ namespace The_Darkest_Hour.Areas
 
 
                 DarkestHourWindow.WriteLine("\n\nWant to buy something else? (1) Yes (2) No");
-                string answerTwo = Console.ReadLine();
+                string answerTwo = DarkestHourWindow.ReadLine();
                 if (answerTwo == "1")
                     goAgain = true;
                 else if (answerTwo == "2")

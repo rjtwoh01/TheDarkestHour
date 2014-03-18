@@ -60,7 +60,7 @@ namespace The_Darkest_Hour.Locations
         {
             LocationAction returnData;
 
-            string answer = Console.ReadLine();
+            string answer = DarkestHourWindow.ReadLine();
             int actionIndex;
             char locationIndexChar;
             int locationIndexInt;

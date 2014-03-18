@@ -19,7 +19,7 @@ namespace The_Darkest_Hour.Characters.Professions
         public void ClearScreen()
         {
             DarkestHourWindow.WriteLine("\n\nPress enter to continue on...");
-            Console.ReadLine();
+            DarkestHourWindow.ReadLine();
             DarkestHourWindow.Clear();
         }
 

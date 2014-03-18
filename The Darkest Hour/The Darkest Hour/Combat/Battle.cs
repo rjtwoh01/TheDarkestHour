@@ -208,7 +208,7 @@ Do you want to:
 2) Inventory
 3) Flee
 ");
-                answer = Console.ReadLine();
+                answer = DarkestHourWindow.ReadLine();
                 if (answer != "1" && answer != "2" && answer != "3")
                     DarkestHourWindow.Clear();
             } while (answer != "1" && answer != "2" && answer != "3");
@@ -226,7 +226,7 @@ Do you want to:
         public void ClearScreen()
         {
             DarkestHourWindow.WriteLine("\n\nPress enter to continue on...");
-            Console.ReadLine();
+            DarkestHourWindow.ReadLine();
             DarkestHourWindow.Clear();
         }
 
