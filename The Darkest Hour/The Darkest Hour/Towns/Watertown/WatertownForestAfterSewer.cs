@@ -61,8 +61,6 @@ namespace The_Darkest_Hour.Towns.Watertown
                 skeletons.Add(new Skeleton());
                 skeletons.Add(new Skeleton());
                 skeletons.Add(new Skeleton());
-                skeletons.Add(new Skeleton());
-                skeletons.Add(new Skeleton());
                 CombatAction combatAction = new CombatAction("Skeletons", skeletons);
                 combatAction.PostCombat += EntranceSkeletons;
 
@@ -230,7 +228,7 @@ namespace The_Darkest_Hour.Towns.Watertown
                 villagers.Add(new PossesedVillager());
                 villagers.Add(new PossesedVillager());
                 CombatAction combatAction = new CombatAction("Possesed Villagers", villagers);
-                combatAction.PostCombat += EntranceSkeletons;
+                combatAction.PostCombat += MeetingGroundsVillagers;
 
                 locationActions.Add(combatAction);
 
