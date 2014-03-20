@@ -42,7 +42,7 @@ namespace The_Darkest_Hour.Characters.Professions
             {
                 Console.WriteLine(@"
 Choose your attack:
-1) Quick Shot - 100% damage, adds 250 energy
+1) Quick Shot - 100% damage, adds 500 energy
 2) Power Shot - 500% damage, subtracts 750 energy
 3) Rapid Fire -  400% damage, subtrats 500 energy
 4) Destructive Shot - 600% damage, subtracts 900 energy
@@ -107,7 +107,7 @@ Choose your attack:
             {
                 case "Quick Shot":
                     damage = myHero.damage;
-                    myHero.energy += 250;
+                    myHero.energy += 500;
                     if (myHero.energy >= myHero.maxEnergy)
                         myHero.energy = myHero.maxEnergy;
                         break;
