@@ -236,9 +236,9 @@ namespace The_Darkest_Hour.Towns.Watertown
                 // Location Actions
                 List<LocationAction> locationActions = new List<LocationAction>();
 
-                ReadPapersAction talismanAction = new ReadPapersAction(talismanInfo);
+                TakeItemAction talismanAction = new TakeItemAction("Inspect", talismanInfo);
 
-                talismanAction.PostPaper += RoomFourTalisman;
+                talismanAction.PostItem += RoomFourTalisman;
 
                 locationActions.Add(talismanAction);
 
@@ -266,9 +266,9 @@ namespace The_Darkest_Hour.Towns.Watertown
             return returnData;
         }
 
-        public void RoomFourTalisman(object sender, PaperReadEventArgs inspectEventArgs)
+        public void RoomFourTalisman(object sender, TakeItemEventArgs inspectEventArgs)
         {
-            if (inspectEventArgs.PaperResults == PaperReadResults.Read)
+            if (inspectEventArgs.ItemResults == TakeItemResults.Taken)
             {
                 LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownSewerRight.INSPECTED_TALISMAN, true);
 
@@ -438,6 +438,9 @@ namespace The_Darkest_Hour.Towns.Watertown
 
             if (defeatedSkeletonKing)
             {
+                locationDefinition = WatertownForestAfterSewer.GetTownInstance().GetStartingLocationDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+
                 locationDefinition = Watertown.GetTownInstance().GetTownCenterDefinition();
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
             }

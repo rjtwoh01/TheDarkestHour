@@ -34,13 +34,20 @@ namespace The_Darkest_Hour.Locations.Actions
             this.Description = "Take " + this._text;
         }
 
+        public TakeItemAction(string action, string text)
+        {
+            this._text = text;
+            this.Name = action + " " + this._text;
+            this.Description = action + " " + this._text;
+        }
+
         public override LocationDefinition DoAction()
         {
             LocationDefinition returnData = GameState.CurrentLocation;
 
             this.ClearScreen(false);
 
-            DarkestHourWindow.WriteLine(_text);
+            Console.WriteLine(_text);
 
             _ItemResults = TakeItemResults.Taken;
 
