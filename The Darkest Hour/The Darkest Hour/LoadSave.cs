@@ -11,7 +11,7 @@ using The_Darkest_Hour.Items;
 using The_Darkest_Hour.Locations;
 using The_Darkest_Hour.Locations.Actions;
 using The_Darkest_Hour.Common;
-using The_Darkest_Hour.GUIForm;
+//using The_Darkest_Hour.GUIForm;
 
 namespace The_Darkest_Hour
 {
@@ -63,9 +63,9 @@ namespace The_Darkest_Hour
             }
             catch (Exception e)
             {
-                DarkestHourWindow.WriteLine("\nNo saved games due to:");
-                DarkestHourWindow.WriteLine(e.Message);
-                DarkestHourWindow.WriteLine();
+                Console.WriteLine("\nNo saved games due to:");
+                Console.WriteLine(e.Message);
+                Console.WriteLine();
             }
 
             return returnData;
@@ -99,7 +99,7 @@ namespace The_Darkest_Hour
             {
                 myHero = (Player)playerXmlSerializer.Deserialize(playerStreamReader);
 
-                DarkestHourWindow.WriteLine("Game Loaded from xml file successfully\n");
+                Console.WriteLine("Game Loaded from xml file successfully\n");
             }
 
             return myHero;
@@ -179,7 +179,7 @@ namespace The_Darkest_Hour
                 playerXmlSerialization.Serialize(characterStreamWriter, gameObject);
                 characterStreamWriter.Close();
 
-                DarkestHourWindow.WriteLine(String.Format("{0} saved successfully",fileName));
+                Console.WriteLine(String.Format("{0} saved successfully",fileName));
             }
         }
 
@@ -197,7 +197,7 @@ namespace The_Darkest_Hour
                 locationStateXmlSerialization.Serialize(locationStateStreamWriter, gameObject);
                 locationStateStreamWriter.Close();
 
-                DarkestHourWindow.WriteLine(String.Format("{0} saved successfully", fileName));
+                Console.WriteLine(String.Format("{0} saved successfully", fileName));
             }
 
         }

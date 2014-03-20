@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using The_Darkest_Hour.Characters.Resources;
 using The_Darkest_Hour.Items;
 using The_Darkest_Hour.Characters.Professions;
-using The_Darkest_Hour.GUIForm;
+//using The_Darkest_Hour.GUIForm;
 
 namespace The_Darkest_Hour.Characters
 {
@@ -42,14 +42,14 @@ namespace The_Darkest_Hour.Characters
         {
             if (this.Identifier == null || this.Identifier == "" || this.Identifier == " ")
             {
-                DarkestHourWindow.WriteLine(CharacterResources.EnterCharacterName);
-                this.Identifier = DarkestHourWindow.ReadLine();
-                DarkestHourWindow.Clear();
+                Console.WriteLine(CharacterResources.EnterCharacterName);
+                this.Identifier = Console.ReadLine();
+                Console.Clear();
                 if (this.Identifier == null || this.Identifier == "" || this.Identifier == " ")
                 {
-                    DarkestHourWindow.WriteLine(CharacterResources.EnterCharacterName);
-                    this.Identifier = DarkestHourWindow.ReadLine();
-                    DarkestHourWindow.Clear();
+                    Console.WriteLine(CharacterResources.EnterCharacterName);
+                    this.Identifier = Console.ReadLine();
+                    Console.Clear();
                 }
 
                 this.damage = 10;
@@ -62,13 +62,13 @@ namespace The_Darkest_Hour.Characters
 
                 ChooseProfession();
 
-                DarkestHourWindow.Clear();
+                Console.Clear();
 
-                DarkestHourWindow.WriteLine(CharacterResources.IntroPartOne);
+                Console.WriteLine(CharacterResources.IntroPartOne);
                 ClearScreen();
-                DarkestHourWindow.WriteLine(CharacterResources.IntroPartTwo);
+                Console.WriteLine(CharacterResources.IntroPartTwo);
                 ClearScreen();
-                DarkestHourWindow.WriteLine(CharacterResources.IntroPartThree);
+                Console.WriteLine(CharacterResources.IntroPartThree);
                 ClearScreen();
             }
         }
@@ -78,16 +78,16 @@ namespace The_Darkest_Hour.Characters
             CharacterProfessions prof;
             if (this.Profession == null)
             {
-                DarkestHourWindow.WriteLine(CharacterResources.ChooseProfession); //Ask the player what profession they want to be
+                Console.WriteLine(CharacterResources.ChooseProfession); //Ask the player what profession they want to be
                 try
                 {
-                    string buffer = DarkestHourWindow.ReadLine(); //Recieve the input as a public string
+                    string buffer = Console.ReadLine(); //Recieve the input as a public string
                     prof = (CharacterProfessions)Convert.ToInt32(buffer); //Convert it to an public int, using enums for readability in code
                     // TODO: Remove the profession property when everything reads the Profession property
                     switch (prof)
                     {
                         case CharacterProfessions.Invalid:
-                            DarkestHourWindow.WriteLine("Uh oh, something went wrong O.O\n");
+                            Console.WriteLine("Uh oh, something went wrong O.O\n");
                             break;
 
                         case CharacterProfessions.Rogue:
@@ -115,13 +115,13 @@ namespace The_Darkest_Hour.Characters
                             break;
 
                         default:
-                            DarkestHourWindow.WriteLine("Uh oh, something went wrong O.O\n");
+                            Console.WriteLine("Uh oh, something went wrong O.O\n");
                             break;
                     }
                 }
                 catch (Exception e)
                 {
-                    DarkestHourWindow.WriteLine(e);
+                    Console.WriteLine(e);
                 }
             }
 
@@ -139,15 +139,15 @@ namespace The_Darkest_Hour.Characters
 
         public void DisplayProfession()
         {
-            DarkestHourWindow.WriteLine(this.Profession.Name);
-            DarkestHourWindow.WriteLine("Main stat is: {0}", this.mainStatName);
+            Console.WriteLine(this.Profession.Name);
+            Console.WriteLine("Main stat is: {0}", this.mainStatName);
         }
 
         public void ClearScreen()
         {
-            DarkestHourWindow.WriteLine("\nPress any key to continue...");
+            Console.WriteLine("\nPress any key to continue...");
             Console.ReadKey();
-            DarkestHourWindow.Clear();
+            Console.Clear();
         }
 
         public void UpdateStats()
@@ -157,7 +157,7 @@ namespace The_Darkest_Hour.Characters
 
         public void DisplayStats()
         {
-            DarkestHourWindow.WriteLine(@"
+            Console.WriteLine(@"
 *************************************************************************
 Name:           Level:          Health:           Damage:   
 -------------------------------------------------------------------------
@@ -183,30 +183,30 @@ Name:           Level:          Health:           Damage:
 
         public void DisplayInventory()
         {
-            DarkestHourWindow.WriteLine();
+            Console.WriteLine();
             int i = 1;
             foreach (Item displayItems in this.Inventory)
             {
-                DarkestHourWindow.WriteLine(i + ". " + displayItems);
+                Console.WriteLine(i + ". " + displayItems);
                 i++;
             }
 
             try
             {
-                DarkestHourWindow.WriteLine("\n\nDo you want to use any of the items in your inventory?");
-                DarkestHourWindow.WriteLine("(1) Yes (2) No\n");
-                string answer = DarkestHourWindow.ReadLine();
+                Console.WriteLine("\n\nDo you want to use any of the items in your inventory?");
+                Console.WriteLine("(1) Yes (2) No\n");
+                string answer = Console.ReadLine();
                 int answerParsed = Int32.Parse(answer);
                 if (answerParsed == 1)
                 {
-                    DarkestHourWindow.WriteLine("\nWhich item do you want to use?\n");
-                    answer = DarkestHourWindow.ReadLine();
+                    Console.WriteLine("\nWhich item do you want to use?\n");
+                    answer = Console.ReadLine();
                     int selected = Int32.Parse(answer);
                     selected -= 1;
 
                     Item selectedItem = this.Inventory.ElementAt(selected);
 
-                    //DarkestHourWindow.WriteLine("\nYou Selected: {0}", selectedItem);
+                    //Console.WriteLine("\nYou Selected: {0}", selectedItem);
 
                     if (selectedItem.isEquipable)
                     {
@@ -230,12 +230,12 @@ Name:           Level:          Health:           Damage:
                                 }
                                 else
                                 {
-                                    DarkestHourWindow.WriteLine("You're not high enough level");
+                                    Console.WriteLine("You're not high enough level");
                                 }
                             }
                         }
                         else
-                            DarkestHourWindow.WriteLine("You cannot use that item.");
+                            Console.WriteLine("You cannot use that item.");
                     }
 
                     if (selectedItem.isPotion)
@@ -249,11 +249,11 @@ Name:           Level:          Health:           Damage:
 
                         ClearScreen(false);
 
-                        DarkestHourWindow.WriteLine("\nYou use {0}", selectedItem.name);
+                        Console.WriteLine("\nYou use {0}", selectedItem.name);
                         if (selectedItem.healthHeal > 0)
-                            DarkestHourWindow.WriteLine("{0} heals you for {1}. \nYou now have {2} health", selectedItem.name, selectedItem.healthHeal, this.health);
+                            Console.WriteLine("{0} heals you for {1}. \nYou now have {2} health", selectedItem.name, selectedItem.healthHeal, this.health);
                         if (selectedItem.energyHeal > 0)
-                            DarkestHourWindow.WriteLine("{0} increases your energy by {1}. \nYou now have {2} energy", selectedItem.name, selectedItem.energyHeal, this.energy);
+                            Console.WriteLine("{0} increases your energy by {1}. \nYou now have {2} energy", selectedItem.name, selectedItem.energyHeal, this.energy);
 
                         this.Inventory.Remove(selectedItem);
 
@@ -265,35 +265,35 @@ Name:           Level:          Health:           Damage:
 
             catch (Exception e)
             {
-                DarkestHourWindow.WriteLine(e.Message);
+                Console.WriteLine(e.Message);
             }
         }
 
         public void DisplayEquipped()
         {
-            DarkestHourWindow.WriteLine();
+            Console.WriteLine();
             int i = 1;
             foreach (Item displayItems in this.EquippedItems)
             {
-                DarkestHourWindow.WriteLine(i + ". " + displayItems);
+                Console.WriteLine(i + ". " + displayItems);
                 i++;
             }
             try
             {
-                DarkestHourWindow.WriteLine("\n\nDo you want to use any of your equipped items?");
-                DarkestHourWindow.WriteLine("(1) Yes (2) No\n");
-                string answer = DarkestHourWindow.ReadLine();
+                Console.WriteLine("\n\nDo you want to use any of your equipped items?");
+                Console.WriteLine("(1) Yes (2) No\n");
+                string answer = Console.ReadLine();
                 int answerParsed = Int32.Parse(answer);
                 if (answerParsed == 1)
                 {
-                    DarkestHourWindow.WriteLine("\nWhich item do you want to use?\n");
-                    answer = DarkestHourWindow.ReadLine();
+                    Console.WriteLine("\nWhich item do you want to use?\n");
+                    answer = Console.ReadLine();
                     int selected = Int32.Parse(answer);
                     selected -= 1;
 
                     Item selectedItem = this.Inventory.ElementAt(selected);
 
-                    //DarkestHourWindow.WriteLine("\nYou Selected: {0}", selectedItem);
+                    //Console.WriteLine("\nYou Selected: {0}", selectedItem);
 
                     if (selectedItem.isEquipable)
                     {
@@ -309,45 +309,45 @@ Name:           Level:          Health:           Damage:
                                 }
                                 else
                                 {
-                                    DarkestHourWindow.WriteLine("You do not have enough room in your inventory. Go sell something first.");
+                                    Console.WriteLine("You do not have enough room in your inventory. Go sell something first.");
                                 }
                             }
                         }
                         else
-                            DarkestHourWindow.WriteLine("You cannot use that item.");
+                            Console.WriteLine("You cannot use that item.");
                     }
                 }
             }
 
             catch (Exception e)
             {
-                DarkestHourWindow.WriteLine(e.Message);
+                Console.WriteLine(e.Message);
             }
         }
 
         public void AffixSwap()
         {
             Item selectedItem;
-            DarkestHourWindow.WriteLine();
+            Console.WriteLine();
             int i = 1;
             foreach (Item displayItems in this.Inventory)
             {
-                DarkestHourWindow.WriteLine(i + ". " + displayItems);
+                Console.WriteLine(i + ". " + displayItems);
                 i++;
             }
 
             try
             {
-                DarkestHourWindow.WriteLine("\n\nDo you want to replace an affix of any item in your inventory?");
-                DarkestHourWindow.WriteLine("(1) Yes (2) No\n");
-                string answer = DarkestHourWindow.ReadLine();
+                Console.WriteLine("\n\nDo you want to replace an affix of any item in your inventory?");
+                Console.WriteLine("(1) Yes (2) No\n");
+                string answer = Console.ReadLine();
                 int answerParsed = Int32.Parse(answer);
                 if (answerParsed == 1)
                 {
                     do
                     {
-                        DarkestHourWindow.WriteLine("\nWhich item do you want to change an affix of?\n");
-                        answer = DarkestHourWindow.ReadLine();
+                        Console.WriteLine("\nWhich item do you want to change an affix of?\n");
+                        answer = Console.ReadLine();
                         int selected = Int32.Parse(answer);
                         selected -= 1;
 
@@ -355,7 +355,7 @@ Name:           Level:          Health:           Damage:
 
                         if (selectedItem.isPotion == true)
                         {
-                            DarkestHourWindow.WriteLine("\nSorry, we can't swap out affixes on a potion.\n");
+                            Console.WriteLine("\nSorry, we can't swap out affixes on a potion.\n");
                         }
                     } while (selectedItem.isPotion == true);
 
@@ -366,21 +366,21 @@ Name:           Level:          Health:           Damage:
 
                     do
                     {
-                        DarkestHourWindow.WriteLine("This will cost {0} gold and you have {1} gold. Do you wish to proceed (1) Yes (2) No?", cost, this.gold);
-                        costAnswer = DarkestHourWindow.ReadLine();
+                        Console.WriteLine("This will cost {0} gold and you have {1} gold. Do you wish to proceed (1) Yes (2) No?", cost, this.gold);
+                        costAnswer = Console.ReadLine();
                         if (this.gold >= cost)
                         {
                             this.gold -= cost;
-                            DarkestHourWindow.WriteLine("You now have {0} gold", this.gold);
+                            Console.WriteLine("You now have {0} gold", this.gold);
 
-                            DarkestHourWindow.WriteLine("\nYou Selected: {0}", selectedItem);
+                            Console.WriteLine("\nYou Selected: {0}", selectedItem);
 
                             bool success = false;
 
                             do
                             {
-                                DarkestHourWindow.WriteLine("Which affix do you want to swap out? (ENTER FULL NAME OF THE AFFIX. CORRECTLY!)");
-                                string affixAnswer = DarkestHourWindow.ReadLine();
+                                Console.WriteLine("Which affix do you want to swap out? (ENTER FULL NAME OF THE AFFIX. CORRECTLY!)");
+                                string affixAnswer = Console.ReadLine();
                                 affixAnswer = affixAnswer.ToLower();
                                 switch (affixAnswer)
                                 {
@@ -394,7 +394,7 @@ Name:           Level:          Health:           Damage:
                                         selectedItem.agility = 0;
                                         break;
                                     default:
-                                        DarkestHourWindow.WriteLine("\nYou entered an invalid affix. Try again.\n");
+                                        Console.WriteLine("\nYou entered an invalid affix. Try again.\n");
                                         break;
                                 }
 
@@ -423,7 +423,7 @@ Name:           Level:          Health:           Damage:
                                             if (affixAnswer != "strength")
                                             {
                                                 selectedItem.strength += value;
-                                                DarkestHourWindow.WriteLine("\n{0} got {1} added to it's strength, it now has {2} strength", selectedItem.name, value, selectedItem.strength);
+                                                Console.WriteLine("\n{0} got {1} added to it's strength, it now has {2} strength", selectedItem.name, value, selectedItem.strength);
                                                 secondSuccess = true;
                                             }
                                             break;
@@ -431,7 +431,7 @@ Name:           Level:          Health:           Damage:
                                             if (affixAnswer != "intelligence")
                                             {
                                                 selectedItem.intelligence += value;
-                                                DarkestHourWindow.WriteLine("\n{0} got {1} added to it's intelligence, it now has {2} intelligence", selectedItem.name, value, selectedItem.intelligence);
+                                                Console.WriteLine("\n{0} got {1} added to it's intelligence, it now has {2} intelligence", selectedItem.name, value, selectedItem.intelligence);
                                                 secondSuccess = true;
                                             }
                                             break;
@@ -439,7 +439,7 @@ Name:           Level:          Health:           Damage:
                                             if (affixAnswer != "agility")
                                             {
                                                 selectedItem.agility += value;
-                                                DarkestHourWindow.WriteLine("\n{0} got {1} added to it's agility, it now has {2} agility", selectedItem.name, value, selectedItem.agility);
+                                                Console.WriteLine("\n{0} got {1} added to it's agility, it now has {2} agility", selectedItem.name, value, selectedItem.agility);
                                                 secondSuccess = true;
                                             }
                                             break;
@@ -454,7 +454,7 @@ Name:           Level:          Health:           Damage:
                         }
                         else
                         {
-                            DarkestHourWindow.WriteLine("You don't have enough money. Try again.");
+                            Console.WriteLine("You don't have enough money. Try again.");
                             costAnswer = "";
                         }
                         ClearScreen();
@@ -465,30 +465,30 @@ Name:           Level:          Health:           Damage:
 
             catch (Exception e)
             {
-                DarkestHourWindow.WriteLine(e.Message);
+                Console.WriteLine(e.Message);
             }
         }
 
         public void SellItems()
         {
-            DarkestHourWindow.WriteLine();
+            Console.WriteLine();
             int i = 1;
             foreach (Item displayItems in this.Inventory)
             {
-                DarkestHourWindow.WriteLine(i + ". " + displayItems);
+                Console.WriteLine(i + ". " + displayItems);
                 i++;
             }
 
             try
             {
-                DarkestHourWindow.WriteLine("\n\nDo you want to sell any of the items in your inventory?");
-                DarkestHourWindow.WriteLine("(1) Yes (2) No\n");
-                string answer = DarkestHourWindow.ReadLine();
+                Console.WriteLine("\n\nDo you want to sell any of the items in your inventory?");
+                Console.WriteLine("(1) Yes (2) No\n");
+                string answer = Console.ReadLine();
                 int answerParsed = Int32.Parse(answer);
                 if (answerParsed == 1)
                 {
-                    DarkestHourWindow.WriteLine("\nWhich item do you want to sell?\n");
-                    answer = DarkestHourWindow.ReadLine();
+                    Console.WriteLine("\nWhich item do you want to sell?\n");
+                    answer = Console.ReadLine();
                     int selected = Int32.Parse(answer);
                     selected -= 1;
 
@@ -498,8 +498,8 @@ Name:           Level:          Health:           Damage:
                     if (this.gold >= this.maxGold)
                         this.gold = this.maxGold;
 
-                    DarkestHourWindow.WriteLine("\nYou sold {0} for {1} gold!", selectedItem.name, selectedItem.worth);
-                    DarkestHourWindow.WriteLine("You now have {0} gold!", this.gold);
+                    Console.WriteLine("\nYou sold {0} for {1} gold!", selectedItem.name, selectedItem.worth);
+                    Console.WriteLine("You now have {0} gold!", this.gold);
 
                     if (selectedItem.isEquipped)
                         selectedItem.DeEquip(selectedItem, this);
@@ -510,7 +510,7 @@ Name:           Level:          Health:           Damage:
 
             catch (Exception e)
             {
-                DarkestHourWindow.WriteLine(e.Message);
+                Console.WriteLine(e.Message);
             }
         }
 
@@ -528,14 +528,14 @@ Name:           Level:          Health:           Damage:
                     this.xp = 0 + leftOverXP;
                     int newXPRequired = CalculateXPNeeded();
                     this.requiredXP = newXPRequired;
-                    DarkestHourWindow.WriteLine("Congratulations! You leveled!\nYou're now level {0}!\nYou have {1} of {2} xp needed for level {3}", this.level, this.xp, this.requiredXP, (this.level + 1));
+                    Console.WriteLine("Congratulations! You leveled!\nYou're now level {0}!\nYou have {1} of {2} xp needed for level {3}", this.level, this.xp, this.requiredXP, (this.level + 1));
                 }
 
 
                 else
                 {
-                    DarkestHourWindow.WriteLine("{0}'s level: {1}", this.Identifier, this.level);
-                    DarkestHourWindow.WriteLine("You have {0} of {1} xp needed for level {2}.\n", this.xp, this.requiredXP, (this.level + 1));
+                    Console.WriteLine("{0}'s level: {1}", this.Identifier, this.level);
+                    Console.WriteLine("You have {0} of {1} xp needed for level {2}.\n", this.xp, this.requiredXP, (this.level + 1));
                 }
             }
 
@@ -585,7 +585,7 @@ Name:           Level:          Health:           Damage:
 
         private void ClearScreen(bool noMessage)
         {
-            DarkestHourWindow.Clear();
+            Console.Clear();
         }
     }
 }

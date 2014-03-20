@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using The_Darkest_Hour.Towns;
 using The_Darkest_Hour.Locations;
 using The_Darkest_Hour.Locations.Actions;
-using The_Darkest_Hour.GUIForm;
+//using The_Darkest_Hour.GUIForm;
 
 namespace The_Darkest_Hour.Towns.StartingArea
 {

@@ -20,7 +20,7 @@ namespace The_Darkest_Hour
             //Demonstrates the program's ability to pull and show information in the top right.
             //Application.EnableVisualStyles();
             //Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new The_Darkest_Hour.GUIForm.DarkestHourWindow());
+            //Application.Run(new The_Darkest_Hour.GUIForm.Console());
             
             
         }

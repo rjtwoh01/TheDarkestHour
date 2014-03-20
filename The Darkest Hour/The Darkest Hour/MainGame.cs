@@ -10,7 +10,7 @@ using The_Darkest_Hour.Areas;
 using The_Darkest_Hour.Locations;
 using The_Darkest_Hour.Locations.Actions;
 using The_Darkest_Hour.Towns.StartingArea;
-using The_Darkest_Hour.GUIForm;
+//using The_Darkest_Hour.GUIForm;
 
 namespace The_Darkest_Hour
 {

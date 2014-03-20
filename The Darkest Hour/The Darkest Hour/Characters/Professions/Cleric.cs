@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using The_Darkest_Hour.Items;
-using The_Darkest_Hour.GUIForm;
+//using The_Darkest_Hour.GUIForm;
 
 namespace The_Darkest_Hour.Characters.Professions
 {
@@ -38,7 +38,7 @@ namespace The_Darkest_Hour.Characters.Professions
 
             do
             {
-                DarkestHourWindow.WriteLine(@"
+                Console.WriteLine(@"
 Choose your attack:
 1) Smite - 100% damage, adds 250 energy
 2) Holy Strike - 500% damage, subtracts 750 energy
@@ -49,7 +49,7 @@ Choose your attack:
 ");
                 try
                 {
-                    getUserInput = DarkestHourWindow.ReadLine();
+                    getUserInput = Console.ReadLine();
                     userInput = Int32.Parse(getUserInput);
 
                     switch (userInput)
@@ -79,7 +79,7 @@ Choose your attack:
                             break;
 
                         default:
-                            DarkestHourWindow.WriteLine("You entered an invalid option.");
+                            Console.WriteLine("You entered an invalid option.");
                             ClearScreen();
                             break;
 
@@ -87,7 +87,7 @@ Choose your attack:
                 }
                 catch
                 {
-                    DarkestHourWindow.WriteLine("You entered an invalid option.");
+                    Console.WriteLine("You entered an invalid option.");
                     ClearScreen();
                 }
             } while (userInput > 1 && userInput > 6);
@@ -118,7 +118,7 @@ Choose your attack:
                     }
                     else
                     {
-                        DarkestHourWindow.WriteLine("Sorry, you don't have enough energy.");
+                        Console.WriteLine("Sorry, you don't have enough energy.");
                         CarryOn = false;
                         damage = 0;
                         ClearScreen();
@@ -133,7 +133,7 @@ Choose your attack:
                     }
                     else
                     {
-                        DarkestHourWindow.WriteLine("Sorry, you don't have enough energy.");
+                        Console.WriteLine("Sorry, you don't have enough energy.");
                         CarryOn = false;
                         damage = 0;
                         ClearScreen();
@@ -148,7 +148,7 @@ Choose your attack:
                     }
                     else
                     {
-                        DarkestHourWindow.WriteLine("Sorry, you don't have enough energy.");
+                        Console.WriteLine("Sorry, you don't have enough energy.");
                         CarryOn = false;
                         damage = 0;
                         ClearScreen();
@@ -163,7 +163,7 @@ Choose your attack:
                     }
                     else
                     {
-                        DarkestHourWindow.WriteLine("Sorry, you don't have enough energy.");
+                        Console.WriteLine("Sorry, you don't have enough energy.");
                         CarryOn = false;
                         damage = 0;
                         ClearScreen();
@@ -178,7 +178,7 @@ Choose your attack:
                     }
                     else
                     {
-                        DarkestHourWindow.WriteLine("Sorry, you don't have enough energy.");
+                        Console.WriteLine("Sorry, you don't have enough energy.");
                         CarryOn = false;
                         damage = 0;
                         ClearScreen();
@@ -186,7 +186,7 @@ Choose your attack:
                     break;
 
                 default:
-                    DarkestHourWindow.WriteLine("Uh oh, something went wrong");
+                    Console.WriteLine("Uh oh, something went wrong");
                     CarryOn = false;
                     ClearScreen();
                     break;

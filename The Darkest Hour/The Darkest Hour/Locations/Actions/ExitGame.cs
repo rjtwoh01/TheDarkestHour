@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using The_Darkest_Hour.Locations;
-using The_Darkest_Hour.GUIForm;
+//using The_Darkest_Hour.GUIForm;
 
 namespace The_Darkest_Hour.Locations.Actions
 {
@@ -20,7 +20,7 @@ namespace The_Darkest_Hour.Locations.Actions
         {
             LocationDefinition returnData = GameState.CurrentLocation;
 
-            DarkestHourWindow.WriteLine("Goodbye!");
+            Console.WriteLine("Goodbye!");
 
             return returnData;
         }

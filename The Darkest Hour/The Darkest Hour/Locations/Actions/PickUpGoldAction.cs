@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using The_Darkest_Hour.Common;
-using The_Darkest_Hour.GUIForm;
+//using The_Darkest_Hour.GUIForm;
 
 namespace The_Darkest_Hour.Locations.Actions
 {
@@ -47,7 +47,7 @@ namespace The_Darkest_Hour.Locations.Actions
                     GameState.Hero.gold = GameState.Hero.maxGold;
             }
 
-            DarkestHourWindow.WriteLine("You take {0} gold and now have {1} gold.", this._gold, GameState.Hero.gold);
+            Console.WriteLine("You take {0} gold and now have {1} gold.", this._gold, GameState.Hero.gold);
 
             _GoldResults = PickUpGoldResults.Taken;
 

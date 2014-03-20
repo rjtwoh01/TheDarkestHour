@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using The_Darkest_Hour.GUIForm;
 
 namespace The_Darkest_Hour.Locations
 {
@@ -23,11 +22,11 @@ namespace The_Darkest_Hour.Locations
         {
             if (promptToMoveOn)
             {
-                DarkestHourWindow.WriteLine("\n\nPress enter to continue on...");
-                DarkestHourWindow.ReadLine();
+                Console.WriteLine("\n\nPress enter to continue on...");
+                Console.ReadLine();
             }
 
-            DarkestHourWindow.Clear();
+            Console.Clear();
         }
 
 

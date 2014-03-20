@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using The_Darkest_Hour.Characters;
 using The_Darkest_Hour.Items;
 using The_Darkest_Hour.Characters.Professions;
-using The_Darkest_Hour.GUIForm;
+//using The_Darkest_Hour.GUIForm;
 
 
 namespace The_Darkest_Hour.Combat
@@ -72,25 +72,25 @@ namespace The_Darkest_Hour.Combat
                             }
                         }
                     }
-                    DarkestHourWindow.WriteLine("\n\n{0} attacks {1} with {2} and does {3} damage.", myHero.Identifier, mob.Identifier, attack, playerDamage);
-                    DarkestHourWindow.WriteLine("{0} has {1} health left.", mob.Identifier, mob.health);
+                    Console.WriteLine("\n\n{0} attacks {1} with {2} and does {3} damage.", myHero.Identifier, mob.Identifier, attack, playerDamage);
+                    Console.WriteLine("{0} has {1} health left.", mob.Identifier, mob.health);
                     if (attack != "Distracting Shot" && attack != "Frozen" && attack != "Dust in the Eyes" && attack != "Low Cut" && attack != "Block" && attack != "Blinding Light" && !mobLost)
                     {
-                        DarkestHourWindow.WriteLine("{0} attacks you for {1} damage.", mob.Identifier, mobDamage);
-                        DarkestHourWindow.WriteLine("{0} has {1} health left.\n\n", myHero.Identifier, myHero.health);
+                        Console.WriteLine("{0} attacks you for {1} damage.", mob.Identifier, mobDamage);
+                        Console.WriteLine("{0} has {1} health left.\n\n", myHero.Identifier, myHero.health);
                     }
                     else if (attack == "Distracting Shot")
-                        DarkestHourWindow.WriteLine("{0} was too distracted to attack you!", mob.Identifier);
+                        Console.WriteLine("{0} was too distracted to attack you!", mob.Identifier);
                     else if (attack == "Frozen")
-                        DarkestHourWindow.WriteLine("{0} was frozen and couldn't attack you!", mob.Identifier);
+                        Console.WriteLine("{0} was frozen and couldn't attack you!", mob.Identifier);
                     else if (attack == "Dust in the Eyes")
-                        DarkestHourWindow.WriteLine("{0} couldn't see so {0} couldn't attack you!", mob.Identifier);
+                        Console.WriteLine("{0} couldn't see so {0} couldn't attack you!", mob.Identifier);
                     else if (attack == "Low Cut")
-                        DarkestHourWindow.WriteLine("{0} was imobolized due to {0}'s leg injury, so {0} couldn't attack you!", mob.Identifier);
+                        Console.WriteLine("{0} was imobolized due to {0}'s leg injury, so {0} couldn't attack you!", mob.Identifier);
                     else if (attack == "Block")
-                        DarkestHourWindow.WriteLine("{0}'s attack was blocked by your shield!", mob.Identifier);
+                        Console.WriteLine("{0}'s attack was blocked by your shield!", mob.Identifier);
                     else if (attack == "Blinding Light")
-                        DarkestHourWindow.WriteLine("{0} couldn't see due to the bright flash of light, so {0} couldn't attack you!!", mob.Identifier);
+                        Console.WriteLine("{0} couldn't see due to the bright flash of light, so {0} couldn't attack you!!", mob.Identifier);
                     ClearScreen();
                 }
 
@@ -135,8 +135,8 @@ namespace The_Darkest_Hour.Combat
                                 }
                             }
 
-                            DarkestHourWindow.WriteLine("\n{0} attacks you for {1} damage.", mob.Identifier, mobDamage);
-                            DarkestHourWindow.WriteLine("{0} has {1} health left.\n\n", myHero.Identifier, myHero.health);
+                            Console.WriteLine("\n{0} attacks you for {1} damage.", mob.Identifier, mobDamage);
+                            Console.WriteLine("{0} has {1} health left.\n\n", myHero.Identifier, myHero.health);
                         }
                         GameState.Hero.usedPotionCombat = false;
                     }
@@ -157,12 +157,12 @@ namespace The_Darkest_Hour.Combat
             if (playerLost)
             {
                 myHero.ResetHealth();
-                DarkestHourWindow.WriteLine("The battle is over and you lost. Better luck next time ya idiot.");
+                Console.WriteLine("The battle is over and you lost. Better luck next time ya idiot.");
                 playerLost = false;
             }
             else if (mobLost)
             {
-                DarkestHourWindow.WriteLine("The battle is over and you emerge victorious! Hail to the hero!");
+                Console.WriteLine("The battle is over and you emerge victorious! Hail to the hero!");
                 loot = new Loot(mob);
                 myHero.xp += mob.xp;
                 myHero.gold += mob.gold;
@@ -171,7 +171,7 @@ namespace The_Darkest_Hour.Combat
             }
             else if (hasFled)
             {
-                DarkestHourWindow.WriteLine("\nYou run away with your tail in between your legs like a puppy. BABY!");
+                Console.WriteLine("\nYou run away with your tail in between your legs like a puppy. BABY!");
                 hasFled = false;
             }
 
@@ -185,7 +185,7 @@ namespace The_Darkest_Hour.Combat
 
         public void DisplayStats(Player myHero, Mob mob)
         {
-            DarkestHourWindow.WriteLine(@"
+            Console.WriteLine(@"
 *********************************************************************
 Name:           Level:          Health:        Energy:
 ---------------------------------------------------------------------
@@ -202,15 +202,15 @@ Name:           Level:          Health:        Energy:
             do
             {
                 DisplayStats(myHero, mob);
-                DarkestHourWindow.WriteLine(@"
+                Console.WriteLine(@"
 Do you want to:
 1) Attack
 2) Inventory
 3) Flee
 ");
-                answer = DarkestHourWindow.ReadLine();
+                answer = Console.ReadLine();
                 if (answer != "1" && answer != "2" && answer != "3")
-                    DarkestHourWindow.Clear();
+                    Console.Clear();
             } while (answer != "1" && answer != "2" && answer != "3");
 
             if (answer == "1")
@@ -225,14 +225,14 @@ Do you want to:
 
         public void ClearScreen()
         {
-            DarkestHourWindow.WriteLine("\n\nPress enter to continue on...");
-            DarkestHourWindow.ReadLine();
-            DarkestHourWindow.Clear();
+            Console.WriteLine("\n\nPress enter to continue on...");
+            Console.ReadLine();
+            Console.Clear();
         }
 
         public void ClearScreen(bool noMessage)
         {
-            DarkestHourWindow.Clear();
+            Console.Clear();
         }
     }
 }

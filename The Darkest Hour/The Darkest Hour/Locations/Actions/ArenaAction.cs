@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using The_Darkest_Hour.Characters.Mobs;
 using The_Darkest_Hour.Characters;
 using The_Darkest_Hour.Combat;
-using The_Darkest_Hour.GUIForm;
+//using The_Darkest_Hour.GUIForm;
 
 namespace The_Darkest_Hour.Locations.Actions
 {
@@ -38,7 +38,7 @@ namespace The_Darkest_Hour.Locations.Actions
             }
 
             mob.Scale();
-            DarkestHourWindow.Clear();
+            Console.Clear();
             battle.DoBattle(GameState.Hero, mob);
             //Eventually going to remove this and have an option to rest
             //in the inn to reset your health. Otherwise you'll have to rely

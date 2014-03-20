@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using The_Darkest_Hour.Characters;
-using The_Darkest_Hour.GUIForm;
+
 
 namespace The_Darkest_Hour.Items
 {
@@ -136,7 +136,7 @@ namespace The_Darkest_Hour.Items
                             itemName = SwordNames.ElementAt(2);
                             break;
                         default:
-                            DarkestHourWindow.WriteLine("\nUh Oh, something went wrong.\n");
+                            Console.WriteLine("\nUh Oh, something went wrong.\n");
                             break;
                     }
                     break;
@@ -154,7 +154,7 @@ namespace The_Darkest_Hour.Items
                             itemName = BowNames.ElementAt(2);
                             break;
                         default:
-                            DarkestHourWindow.WriteLine("\nUh Oh, something went wrong.\n");
+                            Console.WriteLine("\nUh Oh, something went wrong.\n");
                             break;
                     }
                     break;
@@ -172,7 +172,7 @@ namespace The_Darkest_Hour.Items
                             itemName = StaffNames.ElementAt(2);
                             break;
                         default:
-                            DarkestHourWindow.WriteLine("\nUh Oh, something went wrong.\n");
+                            Console.WriteLine("\nUh Oh, something went wrong.\n");
                             break;
                     }
                     break;
@@ -190,7 +190,7 @@ namespace The_Darkest_Hour.Items
                             itemName = WandNames.ElementAt(2);
                             break;
                         default:
-                            DarkestHourWindow.WriteLine("\nUh Oh, something went wrong.\n");
+                            Console.WriteLine("\nUh Oh, something went wrong.\n");
                             break;
                     }
                     break;
@@ -208,7 +208,7 @@ namespace The_Darkest_Hour.Items
                             itemName = DaggerNames.ElementAt(2);
                             break;
                         default:
-                            DarkestHourWindow.WriteLine("\nUh Oh, something went wrong.\n");
+                            Console.WriteLine("\nUh Oh, something went wrong.\n");
                             break;
                     }
                     break;
@@ -226,12 +226,12 @@ namespace The_Darkest_Hour.Items
                             itemName = AxeNames.ElementAt(2);
                             break;
                         default:
-                            DarkestHourWindow.WriteLine("\nUh Oh, something went wrong.\n");
+                            Console.WriteLine("\nUh Oh, something went wrong.\n");
                             break;
                     }
                     break;
                 default:
-                    DarkestHourWindow.WriteLine("\nUh Oh, something went wrong.\n");
+                    Console.WriteLine("\nUh Oh, something went wrong.\n");
                     break;
             }
 
@@ -286,7 +286,7 @@ namespace The_Darkest_Hour.Items
                     itemType = "Cloth";
                     break;
                 default:
-                    DarkestHourWindow.WriteLine("\nUh Oh, something went wrong.\n");
+                    Console.WriteLine("\nUh Oh, something went wrong.\n");
                     break;
             }
 
@@ -340,7 +340,7 @@ namespace The_Darkest_Hour.Items
                     itemType = "Cloth";
                     break;
                 default:
-                    DarkestHourWindow.WriteLine("\nUh Oh, something went wrong.\n");
+                    Console.WriteLine("\nUh Oh, something went wrong.\n");
                     break;
             }
 
@@ -390,7 +390,7 @@ namespace The_Darkest_Hour.Items
                     itemName = AmuletNames.ElementAt(2);
                     break;
                 default:
-                    DarkestHourWindow.WriteLine("\nUh Oh, something went wrong.\n");
+                    Console.WriteLine("\nUh Oh, something went wrong.\n");
                     break;
             }
 
@@ -492,7 +492,7 @@ namespace The_Darkest_Hour.Items
                             itemName = SwordNames.ElementAt(2);
                             break;
                         default:
-                            DarkestHourWindow.WriteLine("\nUh Oh, something went wrong.\n");
+                            Console.WriteLine("\nUh Oh, something went wrong.\n");
                             break;
                     }
                     break;
@@ -510,7 +510,7 @@ namespace The_Darkest_Hour.Items
                             itemName = BowNames.ElementAt(2);
                             break;
                         default:
-                            DarkestHourWindow.WriteLine("\nUh Oh, something went wrong.\n");
+                            Console.WriteLine("\nUh Oh, something went wrong.\n");
                             break;
                     }
                     break;
@@ -528,7 +528,7 @@ namespace The_Darkest_Hour.Items
                             itemName = StaffNames.ElementAt(2);
                             break;
                         default:
-                            DarkestHourWindow.WriteLine("\nUh Oh, something went wrong.\n");
+                            Console.WriteLine("\nUh Oh, something went wrong.\n");
                             break;
                     }
                     break;
@@ -546,7 +546,7 @@ namespace The_Darkest_Hour.Items
                             itemName = WandNames.ElementAt(2);
                             break;
                         default:
-                            DarkestHourWindow.WriteLine("\nUh Oh, something went wrong.\n");
+                            Console.WriteLine("\nUh Oh, something went wrong.\n");
                             break;
                     }
                     break;
@@ -564,7 +564,7 @@ namespace The_Darkest_Hour.Items
                             itemName = DaggerNames.ElementAt(2);
                             break;
                         default:
-                            DarkestHourWindow.WriteLine("\nUh Oh, something went wrong.\n");
+                            Console.WriteLine("\nUh Oh, something went wrong.\n");
                             break;
                     }
                     break;
@@ -582,12 +582,12 @@ namespace The_Darkest_Hour.Items
                             itemName = AxeNames.ElementAt(2);
                             break;
                         default:
-                            DarkestHourWindow.WriteLine("\nUh Oh, something went wrong.\n");
+                            Console.WriteLine("\nUh Oh, something went wrong.\n");
                             break;
                     }
                     break;
                 default:
-                    DarkestHourWindow.WriteLine("\nUh Oh, something went wrong.\n");
+                    Console.WriteLine("\nUh Oh, something went wrong.\n");
                     break;
             }
 
@@ -640,7 +640,7 @@ namespace The_Darkest_Hour.Items
                     itemType = "Cloth";
                     break;
                 default:
-                    DarkestHourWindow.WriteLine("\nUh Oh, something went wrong.\n");
+                    Console.WriteLine("\nUh Oh, something went wrong.\n");
                     break;
             }
 
@@ -694,7 +694,7 @@ namespace The_Darkest_Hour.Items
                     itemType = "Cloth";
                     break;
                 default:
-                    DarkestHourWindow.WriteLine("\nUh Oh, something went wrong.\n");
+                    Console.WriteLine("\nUh Oh, something went wrong.\n");
                     break;
             }
 
@@ -744,7 +744,7 @@ namespace The_Darkest_Hour.Items
                     itemName = AmuletNames.ElementAt(2);
                     break;
                 default:
-                    DarkestHourWindow.WriteLine("\nUh Oh, something went wrong.\n");
+                    Console.WriteLine("\nUh Oh, something went wrong.\n");
                     break;
             }
 
@@ -846,7 +846,7 @@ namespace The_Darkest_Hour.Items
                             itemName = SwordNames.ElementAt(2);
                             break;
                         default:
-                            DarkestHourWindow.WriteLine("\nUh Oh, something went wrong.\n");
+                            Console.WriteLine("\nUh Oh, something went wrong.\n");
                             break;
                     }
                     break;
@@ -864,7 +864,7 @@ namespace The_Darkest_Hour.Items
                             itemName = BowNames.ElementAt(2);
                             break;
                         default:
-                            DarkestHourWindow.WriteLine("\nUh Oh, something went wrong.\n");
+                            Console.WriteLine("\nUh Oh, something went wrong.\n");
                             break;
                     }
                     break;
@@ -882,7 +882,7 @@ namespace The_Darkest_Hour.Items
                             itemName = StaffNames.ElementAt(2);
                             break;
                         default:
-                            DarkestHourWindow.WriteLine("\nUh Oh, something went wrong.\n");
+                            Console.WriteLine("\nUh Oh, something went wrong.\n");
                             break;
                     }
                     break;
@@ -900,7 +900,7 @@ namespace The_Darkest_Hour.Items
                             itemName = WandNames.ElementAt(2);
                             break;
                         default:
-                            DarkestHourWindow.WriteLine("\nUh Oh, something went wrong.\n");
+                            Console.WriteLine("\nUh Oh, something went wrong.\n");
                             break;
                     }
                     break;
@@ -918,7 +918,7 @@ namespace The_Darkest_Hour.Items
                             itemName = DaggerNames.ElementAt(2);
                             break;
                         default:
-                            DarkestHourWindow.WriteLine("\nUh Oh, something went wrong.\n");
+                            Console.WriteLine("\nUh Oh, something went wrong.\n");
                             break;
                     }
                     break;
@@ -936,12 +936,12 @@ namespace The_Darkest_Hour.Items
                             itemName = AxeNames.ElementAt(2);
                             break;
                         default:
-                            DarkestHourWindow.WriteLine("\nUh Oh, something went wrong.\n");
+                            Console.WriteLine("\nUh Oh, something went wrong.\n");
                             break;
                     }
                     break;
                 default:
-                    DarkestHourWindow.WriteLine("\nUh Oh, something went wrong.\n");
+                    Console.WriteLine("\nUh Oh, something went wrong.\n");
                     break;
             }
 
@@ -994,7 +994,7 @@ namespace The_Darkest_Hour.Items
                     itemType = "Cloth";
                     break;
                 default:
-                    DarkestHourWindow.WriteLine("\nUh Oh, something went wrong.\n");
+                    Console.WriteLine("\nUh Oh, something went wrong.\n");
                     break;
             }
 
@@ -1048,7 +1048,7 @@ namespace The_Darkest_Hour.Items
                     itemType = "Cloth";
                     break;
                 default:
-                    DarkestHourWindow.WriteLine("\nUh Oh, something went wrong.\n");
+                    Console.WriteLine("\nUh Oh, something went wrong.\n");
                     break;
             }
 
@@ -1098,7 +1098,7 @@ namespace The_Darkest_Hour.Items
                     itemName = AmuletNames.ElementAt(2);
                     break;
                 default:
-                    DarkestHourWindow.WriteLine("\nUh Oh, something went wrong.\n");
+                    Console.WriteLine("\nUh Oh, something went wrong.\n");
                     break;
             }
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using The_Darkest_Hour.GUIForm;
+
 
 namespace The_Darkest_Hour.Locations.Actions
 {
@@ -19,7 +19,7 @@ namespace The_Darkest_Hour.Locations.Actions
         {
             LocationDefinition returnData = GameState.UpcomingLocation;
 
-            DarkestHourWindow.WriteLine(String.Format("\nYou are moving to {0}.",GameState.UpcomingLocation.Name));
+            Console.WriteLine(String.Format("\nYou are moving to {0}.",GameState.UpcomingLocation.Name));
 
             this.ClearScreen();
 

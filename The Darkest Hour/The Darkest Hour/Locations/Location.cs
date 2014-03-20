@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using The_Darkest_Hour.Locations.Actions;
-using The_Darkest_Hour.GUIForm;
 
 namespace The_Darkest_Hour.Locations
 {
@@ -22,20 +21,20 @@ namespace The_Darkest_Hour.Locations
 
         public void Display()
         {
-            DarkestHourWindow.WriteLine(String.Format("{0}\n\n", this.Name));
+            Console.WriteLine(String.Format("{0}\n\n", this.Name));
 
-            DarkestHourWindow.WriteLine(this.Description);
+            Console.WriteLine(this.Description);
 
             if ((this.AdjacentLocationDefinitions != null) && (this.AdjacentLocationDefinitions.Count > 0))
             {
-                DarkestHourWindow.WriteLine("\nAdjacent Locations:\n");
+                Console.WriteLine("\nAdjacent Locations:\n");
 
                 char c = 'A';
 
                 foreach (LocationDefinition locationDefinition in this.AdjacentLocationDefinitions.Values)
                 {
 
-                    DarkestHourWindow.WriteLine(String.Format("\t{0}) {1}", c, locationDefinition.Name));
+                    Console.WriteLine(String.Format("\t{0}) {1}", c, locationDefinition.Name));
                     c++;
                 }
 
@@ -44,14 +43,14 @@ namespace The_Darkest_Hour.Locations
             if ((this.Actions != null) && (this.Actions.Count > 0))
             {
 
-                DarkestHourWindow.WriteLine("\nActions:\n");
+                Console.WriteLine("\nActions:\n");
 
                 int i = 0;
 
                 foreach (LocationAction locationAction in this.Actions)
                 {
                     i++;
-                    DarkestHourWindow.WriteLine(String.Format("\t{0}) {1}", i, locationAction.Name));
+                    Console.WriteLine(String.Format("\t{0}) {1}", i, locationAction.Name));
                 }
             }
         }
@@ -60,7 +59,7 @@ namespace The_Darkest_Hour.Locations
         {
             LocationAction returnData;
 
-            string answer = DarkestHourWindow.ReadLine();
+            string answer = Console.ReadLine();
             int actionIndex;
             char locationIndexChar;
             int locationIndexInt;
@@ -107,8 +106,8 @@ namespace The_Darkest_Hour.Locations
                     }
                     catch (Exception e)
                     {
-                        DarkestHourWindow.WriteLine("You entered something invalid.\n");
-                        DarkestHourWindow.WriteLine(e.Message + "\n");
+                        Console.WriteLine("You entered something invalid.\n");
+                        Console.WriteLine(e.Message + "\n");
                         returnData = new InvalidSelectionAction();
                     }
                 }                

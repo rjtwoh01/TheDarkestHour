@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using The_Darkest_Hour.Characters;
 using The_Darkest_Hour.Combat;
-using The_Darkest_Hour.GUIForm;
+//using The_Darkest_Hour.GUIForm;
 
 namespace The_Darkest_Hour.Locations.Actions
 {
@@ -56,7 +56,7 @@ namespace The_Darkest_Hour.Locations.Actions
 
             Battle battle = new Battle();
 
-            DarkestHourWindow.Clear();
+            Console.Clear();
             if (Mobs != null)
             {
                 for (int i = 0; i < Mobs.Count; i++)
