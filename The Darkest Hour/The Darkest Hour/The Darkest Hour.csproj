@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{17B1330D-9D3A-4D22-A751-6ABE7EADFDBF}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>The_Darkest_Hour</RootNamespace>
     <AssemblyName>The_Darkest_Hour</AssemblyName>
@@ -97,8 +97,10 @@
     <Compile Include="Characters\Mobs\Bosses\BanditLieutenant.cs" />
     <Compile Include="Characters\Mobs\Bosses\BanditSupplyCaptain.cs" />
     <Compile Include="Characters\Mobs\Bosses\OutlawBoss.cs" />
+    <Compile Include="Characters\Mobs\Bosses\PossesedGuardBoss.cs" />
     <Compile Include="Characters\Mobs\Bosses\SewerKing.cs" />
     <Compile Include="Characters\Mobs\Bosses\SkeletonKing.cs" />
+    <Compile Include="Characters\Mobs\PossesedVillager.cs" />
     <Compile Include="Characters\Mobs\SewerRat.cs" />
     <Compile Include="Combat\Battle.cs" />
     <Compile Include="Characters\Accomplishments.cs" />
@@ -192,6 +194,7 @@
     <Compile Include="Towns\Watertown\WatertownBanditCave.cs" />
     <Compile Include="Towns\Watertown\WatertownBanditCaveDeeper.cs" />
     <Compile Include="Towns\Watertown\WatertownForest.cs" />
+    <Compile Include="Towns\Watertown\WatertownForestAfterSewer.cs" />
     <Compile Include="Towns\Watertown\WatertownSewer.cs" />
     <Compile Include="Towns\Watertown\WatertownSewerLeft.cs" />
     <Compile Include="Towns\Watertown\WatertownSewerRight.cs" />
