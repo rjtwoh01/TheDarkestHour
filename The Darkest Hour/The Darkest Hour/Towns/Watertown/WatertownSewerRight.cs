@@ -236,7 +236,7 @@ namespace The_Darkest_Hour.Towns.Watertown
                 // Location Actions
                 List<LocationAction> locationActions = new List<LocationAction>();
 
-                TakeItemAction talismanAction = new TakeItemAction("Inspect", talismanInfo);
+                TakeItemAction talismanAction = new TakeItemAction("Inspect", "Talisman", talismanInfo);
 
                 talismanAction.PostItem += RoomFourTalisman;
 

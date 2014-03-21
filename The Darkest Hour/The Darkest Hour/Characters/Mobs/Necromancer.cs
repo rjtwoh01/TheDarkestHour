@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 
 namespace The_Darkest_Hour.Characters.Mobs
 {
-    class PossesedVillager : Mob
+    class Necromancer : Mob
     {
-        public PossesedVillager()
+        public Necromancer()
         {
-            this.damageMin = 1;
-            this.damageMax = 4;
-            this.health = 35;
-            this.maxHealth = 35;
+            this.damageMin = 4;
+            this.damageMax = 8;
+            this.health = 40;
+            this.maxHealth = 40;
             this.level = 1;
             this.gold = 1;
             this.xp = 25;
-            Identifier = "Possesed Villager";
+            Identifier = "Necromancer";
         }
     }
 }

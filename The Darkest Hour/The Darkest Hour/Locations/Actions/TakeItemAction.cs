@@ -34,11 +34,11 @@ namespace The_Darkest_Hour.Locations.Actions
             this.Description = "Take " + this._text;
         }
 
-        public TakeItemAction(string action, string text)
+        public TakeItemAction(string action, string item, string text)
         {
             this._text = text;
-            this.Name = action + " " + this._text;
-            this.Description = action + " " + this._text;
+            this.Name = action + " " + item;
+            this.Description = this._text;
         }
 
         public override LocationDefinition DoAction()

@@ -96,10 +96,12 @@
     <Compile Include="Characters\Mobs\Bosses\BanditCaptain.cs" />
     <Compile Include="Characters\Mobs\Bosses\BanditLieutenant.cs" />
     <Compile Include="Characters\Mobs\Bosses\BanditSupplyCaptain.cs" />
+    <Compile Include="Characters\Mobs\Bosses\NecromancerLeader.cs" />
     <Compile Include="Characters\Mobs\Bosses\OutlawBoss.cs" />
     <Compile Include="Characters\Mobs\Bosses\PossesedGuardBoss.cs" />
     <Compile Include="Characters\Mobs\Bosses\SewerKing.cs" />
     <Compile Include="Characters\Mobs\Bosses\SkeletonKing.cs" />
+    <Compile Include="Characters\Mobs\Necromancer.cs" />
     <Compile Include="Characters\Mobs\PossesedVillager.cs" />
     <Compile Include="Characters\Mobs\SewerRat.cs" />
     <Compile Include="Combat\Battle.cs" />
@@ -188,6 +190,7 @@
     <Compile Include="Towns\Watertown\WatertownBanditCaveDeeper.cs" />
     <Compile Include="Towns\Watertown\WatertownForest.cs" />
     <Compile Include="Towns\Watertown\WatertownForestAfterSewer.cs" />
+    <Compile Include="Towns\Watertown\WatertownForestCabin.cs" />
     <Compile Include="Towns\Watertown\WatertownSewer.cs" />
     <Compile Include="Towns\Watertown\WatertownSewerLeft.cs" />
     <Compile Include="Towns\Watertown\WatertownSewerRight.cs" />

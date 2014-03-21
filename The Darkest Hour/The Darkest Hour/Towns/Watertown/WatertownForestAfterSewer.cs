@@ -430,6 +430,9 @@ namespace The_Darkest_Hour.Towns.Watertown
 
             if (defeatedSkeletonKing)
             {
+                locationDefinition = WatertownForestCabin.GetTownInstance().GetEntranceDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+
                 locationDefinition = Watertown.GetTownInstance().GetTownCenterDefinition();
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
             }
