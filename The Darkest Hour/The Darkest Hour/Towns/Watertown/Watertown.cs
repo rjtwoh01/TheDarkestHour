@@ -257,33 +257,36 @@ namespace The_Darkest_Hour.Towns.Watertown
                 bool defeatedSewerKing = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownSewer.DEFEATED_SEWER_KING));
                 bool exploredLeft = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownSewerLeft.DEFEATED_OUTLAW_BOSS));
                 bool exploredRight = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownSewerRight.DEFEATED_SKELETON_KING));
-                bool defeatedNecro = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForestCabin.DEFEATED_NECROMANCER_LEADER));
+                bool defeatedNecro = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForestCabin.TOOK_LETTER));
                 Rumor rumor;
 
                 if (defeatedSewerKing && !exploredLeft && !exploredRight)
                 {
                     rumor = new Rumor("Defeated Sewer King", "Congratulations on defeating that monster! Explore both the left and right hand parts of the sewer from his room. You may find some treasures or some nice piece of info. You can never know.");
+                    rumor.OnHeardRumor = this.KilledSewerKingRumor;
                 }
-                else if (visitedSewers)
+                else if (exploredLeft && exploredRight && !defeatedNecro)
                 {
-                    rumor = new Rumor("Visisted Sewers", "I've heard you've been down to the sewers.  Have you found the Sewer King yet?");
-                }
-                else
-                {
-                    rumor = new Rumor("Sewer King", "There are tales of a Sewer King with hoards of riches and gold.  The entrance to the sewers can be found in the Town Center.");
-                    rumor.OnHeardRumor = this.HeardSewerKingRumor;
-                }
-                if (exploredLeft && exploredRight && !defeatedNecro)
-                {
-                    rumor = new Rumor("Explored Left Right", "A skeleton king you say? That's highly disturbine. Please go to the forest from the exit on the right hand side and investigate some more.");
+                    rumor = new Rumor("Explore the Forest", "A skeleton king you say? That's highly disturbing. Please go to the forest from the exit on the right hand side and investigate some more.");
                     rumor.OnHeardRumor = this.HeardForestSkeletonRumor;
                 }
-                if (defeatedNecro)
+                else if (defeatedNecro)
                 {
                     rumor = new Rumor("Killed Necro Leader", "Thanks for bringing me the letter. This is all highly disturbing stuff. We're legally not allowed to look in this letter and we need to send it to Anokki for investigation. So officially your involvement in this matter is over. However, I have a distinct feeling that this is not the case, and you'll be getting far deeper in this mess than anyone could every imagine.");
                     rumor.OnHeardRumor = this.HeardNecroLeaderRumor;
                 }
-
+                else if (visitedSewers & !defeatedSewerKing && !exploredLeft && !exploredRight)
+                {
+                    rumor = new Rumor("Visisted Sewers", "I've heard you've been down to the sewers.  Have you found the Sewer King yet?");
+                }
+                else if (!visitedSewers && !defeatedSewerKing)
+                {
+                    rumor = new Rumor("Sewer King", "There are tales of a Sewer King with hoards of riches and gold.  The entrance to the sewers can be found in the Town Center.");
+                    rumor.OnHeardRumor = this.HeardSewerKingRumor;
+                }
+                else
+                    rumor = new Rumor("How are you doing", "Hi, how are you doing?");
+                
                 returnData.Add(rumor);
 
                 returnData.Add(new Rumor("Not Much", "Not much happening around here these days."));
@@ -300,6 +303,33 @@ namespace The_Darkest_Hour.Towns.Watertown
             GameState.Hero.Accomplishments.Add(accomplishment);
 
             // Reload the TownCenter so it will open up the sewer
+            LocationHandler.ResetLocation(TOWN_CENTER_KEY);
+        }
+
+        public void HeardForestSkeletonRumor()
+        {
+            Accomplishment accomplishment = Watertown.GetWatertownAccomplishments().Find(x => x.Name.Contains("Explore the Forest"));
+            GameState.Hero.Accomplishments.Add(accomplishment);
+
+            // Reload the TownCenter so it will open up the hidden room
+            LocationHandler.ResetLocation(TOWN_CENTER_KEY);
+        }
+
+        public void KilledSewerKingRumor()
+        {
+            Accomplishment accomplishment = Watertown.GetWatertownAccomplishments().Find(x => x.Name.Contains("Defeated Sewer King"));
+            GameState.Hero.Accomplishments.Add(accomplishment);
+
+            // Reload the TownCenter so it will open up the hidden room
+            LocationHandler.ResetLocation(TOWN_CENTER_KEY);
+        }
+
+        public void HeardNecroLeaderRumor()
+        {
+            Accomplishment accomplishment = Watertown.GetWatertownAccomplishments().Find(x => x.Name.Contains("Killed Necro Leader"));
+            GameState.Hero.Accomplishments.Add(accomplishment);
+
+            // Reload the TownCenter so it will open up the hidden room
             LocationHandler.ResetLocation(TOWN_CENTER_KEY);
         }
 
@@ -401,24 +431,6 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationHandler.ResetLocation(TOWN_CENTER_KEY);
         }
 
-        public void HeardForestSkeletonRumor()
-        {
-            Accomplishment accomplishment = Watertown.GetWatertownAccomplishments().Find(x => x.Name.Contains("Explored Left Right"));
-            GameState.Hero.Accomplishments.Add(accomplishment);
-
-            // Reload the TownCenter so it will open up the hidden room
-            LocationHandler.ResetLocation(TOWN_CENTER_KEY);
-        }
-
-        public void HeardNecroLeaderRumor()
-        {
-            Accomplishment accomplishment = Watertown.GetWatertownAccomplishments().Find(x => x.Name.Contains("Killed Necro Leader"));
-            GameState.Hero.Accomplishments.Add(accomplishment);
-
-            // Reload the TownCenter so it will open up the hidden room
-            LocationHandler.ResetLocation(TOWN_CENTER_KEY);
-        }
-
         #endregion
 
         #endregion
@@ -454,6 +466,18 @@ namespace The_Darkest_Hour.Towns.Watertown
                 accomplishment.NameSpace = "Watertown";
                 accomplishment.Name = "Has Heard Bandit Murder Rumor";
                 accomplishment.Description = "Has heard the rumor of the bandit murder.";
+                _WatertownAccomplishments.Add(accomplishment);
+
+                accomplishment = new Accomplishment();
+                accomplishment.NameSpace = "Watertown";
+                accomplishment.Name = "Has heard rumor of Explore the Forest";
+                accomplishment.Description = "Has heard the rumor of exploring the forest off the sewer.";
+                _WatertownAccomplishments.Add(accomplishment);
+
+                accomplishment = new Accomplishment();
+                accomplishment.NameSpace = "Watertown";
+                accomplishment.Name = "Has heard rumor Defeated Sewer King";
+                accomplishment.Description = "Has heard the rumor of Defeated Sewer King.";
                 _WatertownAccomplishments.Add(accomplishment);
 
                 // TODO: Can add more accomplishments here;

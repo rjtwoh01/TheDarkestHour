@@ -185,6 +185,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             bool defeatedSewerKing = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownSewer.DEFEATED_SEWER_KING));
             returnData = new Location();
             returnData.Name = "Sewer Entrance Corridor Final";
+            Accomplishment exploredAccomplishment = Watertown.GetWatertownAccomplishments().Find(x => x.Name.Contains("Defeated Sewer King"));
 
             if (defeatedSewerKing)
             {
@@ -213,7 +214,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = GetSewerEntranceCorridorDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            if (defeatedSewerKing)
+            if (GameState.Hero.Accomplishments.Contains(exploredAccomplishment))
             {
                 //Sewer Left
                 locationDefinition = WatertownSewerLeft.GetTownInstance().GetStartingLocationDefinition();
@@ -222,7 +223,10 @@ namespace The_Darkest_Hour.Towns.Watertown
                 //Sewer Right
                 locationDefinition = WatertownSewerRight.GetTownInstance().GetStartingLocationDefinition();
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
-                
+            }
+
+            if (defeatedSewerKing)
+            {
                 //Town
                 locationDefinition = Watertown.GetTownInstance().GetTownCenterDefinition();
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);

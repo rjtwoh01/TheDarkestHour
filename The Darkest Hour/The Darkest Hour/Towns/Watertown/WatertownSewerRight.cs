@@ -393,6 +393,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             Location returnData;
             bool defeatedSkeletonKing = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownSewerRight.DEFEATED_SKELETON_KING));
             bool openedChest = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownSewerRight.OPENED_SKELETON_KING_CHEST));
+            Accomplishment forestExplorationAccomplishment = Watertown.GetWatertownAccomplishments().Find(x => x.Name.Contains("Explore the Forest"));
 
             returnData = new Location();
             returnData.Name = "Room of Death";
@@ -436,11 +437,14 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = WatertownSewerRight.GetTownInstance().GetRoomFiveDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            if (defeatedSkeletonKing)
+            if (GameState.Hero.Accomplishments.Contains(forestExplorationAccomplishment))
             {
                 locationDefinition = WatertownForestAfterSewer.GetTownInstance().GetStartingLocationDefinition();
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
 
+            if (defeatedSkeletonKing)
+            {
                 locationDefinition = Watertown.GetTownInstance().GetTownCenterDefinition();
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
             }
