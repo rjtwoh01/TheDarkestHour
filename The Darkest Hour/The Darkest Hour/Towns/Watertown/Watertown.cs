@@ -255,11 +255,14 @@ namespace The_Darkest_Hour.Towns.Watertown
 
                 bool visitedSewers = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownSewer.VISITED_SEWER_STATE));
                 bool defeatedSewerKing = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownSewer.DEFEATED_SEWER_KING));
+                bool exploredLeft = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownSewerLeft.DEFEATED_OUTLAW_BOSS));
+                bool exploredRight = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownSewerRight.DEFEATED_SKELETON_KING));
+                bool defeatedNecro = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForestCabin.DEFEATED_NECROMANCER_LEADER));
                 Rumor rumor;
 
-                if (defeatedSewerKing)
+                if (defeatedSewerKing && !exploredLeft && !exploredRight)
                 {
-                    rumor = new Rumor("Defeated Sewer King", "Congratulations on defeating that monster! Come back later and I'll have more info about treasures in the sewer (THIS QUEST LINE IS NOT COMPLETE!).");
+                    rumor = new Rumor("Defeated Sewer King", "Congratulations on defeating that monster! Explore both the left and right hand parts of the sewer from his room. You may find some treasures or some nice piece of info. You can never know.");
                 }
                 else if (visitedSewers)
                 {
@@ -269,6 +272,16 @@ namespace The_Darkest_Hour.Towns.Watertown
                 {
                     rumor = new Rumor("Sewer King", "There are tales of a Sewer King with hoards of riches and gold.  The entrance to the sewers can be found in the Town Center.");
                     rumor.OnHeardRumor = this.HeardSewerKingRumor;
+                }
+                if (exploredLeft && exploredRight && !defeatedNecro)
+                {
+                    rumor = new Rumor("Explored Left Right", "A skeleton king you say? That's highly disturbine. Please go to the forest from the exit on the right hand side and investigate some more.");
+                    rumor.OnHeardRumor = this.HeardForestSkeletonRumor;
+                }
+                if (defeatedNecro)
+                {
+                    rumor = new Rumor("Killed Necro Leader", "Thanks for bringing me the letter. This is all highly disturbing stuff. We're legally not allowed to look in this letter and we need to send it to Anokki for investigation. So officially your involvement in this matter is over. However, I have a distinct feeling that this is not the case, and you'll be getting far deeper in this mess than anyone could every imagine.");
+                    rumor.OnHeardRumor = this.HeardNecroLeaderRumor;
                 }
 
                 returnData.Add(rumor);
@@ -382,6 +395,24 @@ namespace The_Darkest_Hour.Towns.Watertown
         public void HeardMurderRumor()
         {
             Accomplishment accomplishment = Watertown.GetWatertownAccomplishments().Find(x => x.Name.Contains("Bandit Murder"));
+            GameState.Hero.Accomplishments.Add(accomplishment);
+
+            // Reload the TownCenter so it will open up the hidden room
+            LocationHandler.ResetLocation(TOWN_CENTER_KEY);
+        }
+
+        public void HeardForestSkeletonRumor()
+        {
+            Accomplishment accomplishment = Watertown.GetWatertownAccomplishments().Find(x => x.Name.Contains("Explored Left Right"));
+            GameState.Hero.Accomplishments.Add(accomplishment);
+
+            // Reload the TownCenter so it will open up the hidden room
+            LocationHandler.ResetLocation(TOWN_CENTER_KEY);
+        }
+
+        public void HeardNecroLeaderRumor()
+        {
+            Accomplishment accomplishment = Watertown.GetWatertownAccomplishments().Find(x => x.Name.Contains("Killed Necro Leader"));
             GameState.Hero.Accomplishments.Add(accomplishment);
 
             // Reload the TownCenter so it will open up the hidden room
