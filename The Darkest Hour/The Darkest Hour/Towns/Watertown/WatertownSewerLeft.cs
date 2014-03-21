@@ -213,7 +213,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 returnData.Description = "Mud and slime and poopoo.  What a nasty place. A treasure chest sits against a wall.";
                 List<LocationAction> locationActions = new List<LocationAction>();
-                TreasureChestAction itemAction = new TreasureChestAction(5);
+                TreasureChestAction itemAction = new TreasureChestAction(2);
                 locationActions.Add(itemAction);
                 itemAction.PostItem += RoomThreeChest;
                 returnData.Actions = locationActions;

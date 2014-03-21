@@ -256,7 +256,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             Location returnData;
             bool defeatedNecromancerLeader = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForestCabin.DEFEATED_NECROMANCER_LEADER));
             bool openedChest = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForestCabin.OPENED_BOSS_CHEST_ROOM_SIX));
-            bool takeLetter = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForestCabin.INSPECTED_DEAD_BODIES));
+            bool takeLetter = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForestCabin.TOOK_LETTER));
 
             returnData = new Location();
             returnData.Name = "Bedroom";
@@ -287,7 +287,7 @@ namespace The_Darkest_Hour.Towns.Watertown
                     else
                         returnData.Description = "A small bedroom. The necromancer leader lays dead and broken on the ground. His unopened chest is against the far wall.";
                     List<LocationAction> locationActions = new List<LocationAction>();
-                    TreasureChestAction itemAction = new TreasureChestAction(5);
+                    TreasureChestAction itemAction = new TreasureChestAction(3);
                     locationActions.Add(itemAction);
                     itemAction.PostItem += NecroChest;
                     returnData.Actions = locationActions;

@@ -412,7 +412,7 @@ namespace The_Darkest_Hour.Towns.Watertown
                 {
                     returnData.Description = "A small enclosed clearing. A cabin sits in the back of it, with a small walkway leading up to its front door. The walk way is lined in skulls and candles. The possesed guard lays to rest to the side of the path. His unopened chest appears off to the side.";
                     List<LocationAction> locationActions = new List<LocationAction>();
-                    TreasureChestAction itemAction = new TreasureChestAction(5);
+                    TreasureChestAction itemAction = new TreasureChestAction(3);
                     locationActions.Add(itemAction);
                     itemAction.PostItem += GuardChest;
                     returnData.Actions = locationActions;

@@ -420,7 +420,7 @@ namespace The_Darkest_Hour.Towns.Watertown
                 {
                     returnData.Description = "Mud and slime and poopoo.  What a nasty place. The Skeleton King rest in pieces on the ground. His unopened chest appears in the middle of the room.";
                     List<LocationAction> locationActions = new List<LocationAction>();
-                    TreasureChestAction itemAction = new TreasureChestAction(10);
+                    TreasureChestAction itemAction = new TreasureChestAction(3);
                     locationActions.Add(itemAction);
                     itemAction.PostItem += SkeletonKingChest;
                     returnData.Actions = locationActions;
