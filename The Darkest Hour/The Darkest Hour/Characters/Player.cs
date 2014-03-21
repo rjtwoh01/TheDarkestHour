@@ -16,7 +16,7 @@ namespace The_Darkest_Hour.Characters
         public double critDamage = 1;
         public int requiredXP = 100;
         public int armor = 0; //Needs to be implemented
-        public int inventoryCap = 50;
+        public int inventoryCap = 60;
         public int maxGold = 1000000;
         public double magicFind;
         public double goldFind;
