@@ -299,13 +299,9 @@ namespace The_Darkest_Hour.Towns.Watertown
                 {
                     returnData.Description = "A small bedroom. The necromancer leader lays dead and broken on the ground. His opened chest is against the far wall. A letter fell out of his pocket.";
                     List<LocationAction> locationActions = new List<LocationAction>();
-
-                    TakeItemAction talismanAction = new TakeItemAction("Letter");
-
-                    talismanAction.PostItem += NecroLetter;
-
-                    locationActions.Add(talismanAction);
-
+                    TakeItemAction letterAction = new TakeItemAction("Letter");
+                    letterAction.PostItem += NecroLetter;
+                    locationActions.Add(letterAction);
                     returnData.Actions = locationActions;
                 }
             }
@@ -317,7 +313,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = WatertownForestCabin.GetTownInstance().GetRoomThreeDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            if (defeatedNecromancerLeader)
+            if (takeLetter)
             {
                 locationDefinition = Watertown.GetTownInstance().GetTownCenterDefinition();
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);

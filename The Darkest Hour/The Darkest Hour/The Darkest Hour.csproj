@@ -29,7 +29,7 @@
     <InstallUrl>https://darkesthour.codeplex.com/releases/clickonce/</InstallUrl>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>28</ApplicationRevision>
+    <ApplicationRevision>29</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -95,6 +95,7 @@
     <Compile Include="Areas\GeneralStore.cs" />
     <Compile Include="Characters\Mobs\Bosses\BanditCaptain.cs" />
     <Compile Include="Characters\Mobs\Bosses\BanditLieutenant.cs" />
+    <Compile Include="Characters\Mobs\Bosses\BanditSpy.cs" />
     <Compile Include="Characters\Mobs\Bosses\BanditSupplyCaptain.cs" />
     <Compile Include="Characters\Mobs\Bosses\NecromancerLeader.cs" />
     <Compile Include="Characters\Mobs\Bosses\OutlawBoss.cs" />
@@ -186,6 +187,7 @@
     <Compile Include="Towns\StartingArea\InitialGameMenu.cs" />
     <Compile Include="Towns\Town.cs" />
     <Compile Include="Towns\Watertown\Watertown.cs" />
+    <Compile Include="Towns\Watertown\WatertownBanditHouse.cs" />
     <Compile Include="Towns\Watertown\WatertownBanditCave.cs" />
     <Compile Include="Towns\Watertown\WatertownBanditCaveDeeper.cs" />
     <Compile Include="Towns\Watertown\WatertownForest.cs" />
