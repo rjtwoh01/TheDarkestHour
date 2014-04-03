@@ -289,7 +289,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             else
             {
                 returnData.LocationKey = locationKey;
-                returnData.Name = "StairWay";
+                returnData.Name = "Stair Way";
                 returnData.DoLoadLocation = LoadStairWay;
 
                 LocationHandler.AddLocation(returnData);

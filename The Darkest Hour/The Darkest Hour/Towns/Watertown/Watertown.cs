@@ -214,6 +214,13 @@ namespace The_Darkest_Hour.Towns.Watertown
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
             }
 
+            Accomplishment murderRoomAccomplishment = Watertown.GetWatertownAccomplishments().Find(x => x.Name.Contains("Murder Room"));
+            if (GameState.Hero.Accomplishments.Contains(banditCaptainAccomplishment))
+            {
+                locationDefinition = WatertownBanditHouse.GetTownInstance().GetEntranceDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
+
             return returnData;
         }
 
@@ -382,7 +389,7 @@ namespace The_Darkest_Hour.Towns.Watertown
 
                 if (defeatedSupplyCaptain)
                 {
-                    Rumor constablerRumor = new Rumor("Bandit Murder", "So you discovered a crime scene? This will take some serious investigating. Bandits don't usually turn on eachother, so if they did that's worrisome. And if it's a law abiding citizen we need to know. Come back to me later, I may have a plan of action then. THIS QUEST CHAIN IS NOT COMPLETE. WILL BE CONTINUED IN LATER ALPHA PATCHES.");
+                    Rumor constablerRumor = new Rumor("Bandit Murder", "So you discovered a crime scene? This will take some serious investigating. Bandits don't usually turn on eachother, so if they did that's worrisome. And if it's a law abiding citizen we need to know. I know there is one suspicious house we've been watching here in Watertown. Maybe you should go investigate it and report back with what you find..");
                     constablerRumor.OnHeardRumor = this.HeardBanditCaptainRumor;
                     returnData.Add(constablerRumor);
                 }
