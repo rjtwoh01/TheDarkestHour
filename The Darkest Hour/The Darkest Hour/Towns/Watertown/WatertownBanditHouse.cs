@@ -616,7 +616,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             }
         }
 
-        public LocationDefinition GetRoomFourDefinition()
+        public LocationDefinition GetRoomSixDefinition()
         {
             LocationDefinition returnData = new LocationDefinition();
             string locationKey = ROOM_SIX_KEY;
