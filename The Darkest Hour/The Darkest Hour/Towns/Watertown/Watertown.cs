@@ -16,6 +16,7 @@ namespace The_Darkest_Hour.Towns.Watertown
         public const string ARENA_KEY = "Watertown.Arena";
         public const string TOWN_CENTER_KEY = "Watertown.TownCenter";
         public const string INN_KEY = "Watertown.Inn";
+        public const string CONSTABLE_OFFICE_KEY = "Watertown.ConstableOffice";
 
         public const string LOCATION_STATE_KEY = "Watertown";
         #endregion
@@ -97,10 +98,6 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationAction guestLocationAction = new RumorAction("Guest", this.InnGuestRumors);
             locationActions.Add(guestLocationAction);
 
-            //Adding rumors from constable in the inn
-            LocationAction constableLocationAction = new RumorAction("Town Constable", this.ConstableRumors);
-            locationActions.Add(constableLocationAction);
-
             locationAction = new RestAction(5);
             locationActions.Add(locationAction);
 
@@ -142,6 +139,60 @@ namespace The_Darkest_Hour.Towns.Watertown
                 returnData.LocationKey = locationKey;
                 returnData.Name = "Prancing Pony";
                 returnData.DoLoadLocation = LoadInn;
+
+                LocationHandler.AddLocation(returnData);
+            }
+
+            return returnData;
+
+
+        }
+
+        public Location LoadConstableOffice()
+        {
+            Location returnData;
+
+
+            returnData = new Location();
+            returnData.Name = "Constable Office";
+            returnData.Description = "A stuffed and busy office of the town's finest.";
+
+            // Location Actions
+            List<LocationAction> locationActions = new List<LocationAction>();
+
+            //Adding rumors from constable in the Constable Office
+            LocationAction constableLocationAction = new RumorAction("Town Constable", this.ConstableRumors);
+            locationActions.Add(constableLocationAction);
+
+            returnData.Actions = locationActions;
+
+            // Adjacent Locations
+            Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
+
+            LocationDefinition locationDefinition = GetTownCenterDefinition();
+
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+
+            returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
+
+            return returnData;
+        }
+
+
+        public LocationDefinition GetConstableOfficeDefinition()
+        {
+            LocationDefinition returnData = new LocationDefinition();
+            string locationKey = CONSTABLE_OFFICE_KEY;
+
+            if (LocationHandler.LocationExists(locationKey))
+            {
+                returnData = LocationHandler.GetLocation(locationKey);
+            }
+            else
+            {
+                returnData.LocationKey = locationKey;
+                returnData.Name = "Constable Office";
+                returnData.DoLoadLocation = LoadConstableOffice;
 
                 LocationHandler.AddLocation(returnData);
             }
@@ -198,7 +249,8 @@ namespace The_Darkest_Hour.Towns.Watertown
             locationDefinition = GetInnDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
+            locationDefinition = GetConstableOfficeDefinition();
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
                         
             Accomplishment sewerKingAccomplishment = Watertown.GetWatertownAccomplishments().Find(x => x.Name.Contains("Sewer King"));
             if (GameState.Hero.Accomplishments.Contains(sewerKingAccomplishment))
@@ -220,6 +272,8 @@ namespace The_Darkest_Hour.Towns.Watertown
                 locationDefinition = WatertownBanditHouse.GetTownInstance().GetEntranceDefinition();
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
             }
+
+            returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
 
             return returnData;
         }
