@@ -181,12 +181,15 @@ namespace The_Darkest_Hour.Towns.Watertown
             Location returnData = new Location();
             returnData.Name = "Forest Clearing";
             bool defeatedBanditCaptain = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForest.DEFEATED_BANDIT_CAPTAIN_KEY));
+            Accomplishment murderRoomAccomplishment = Watertown.GetWatertownAccomplishments().Find(x => x.Name.Contains("Bandit Spy"));
             if (!defeatedBanditCaptain)
             {
                 returnData.Description = "The Bandit Captain stands in the clearing and stares at you, daring you to challenge him.";
             }
-            else
-                returnData.Description = "The Bandit Captain lays dead in the clearing";
+            else if (defeatedBanditCaptain && !GameState.Hero.Accomplishments.Contains(murderRoomAccomplishment))
+                returnData.Description = "The Bandit Captain lays dead in the clearing.";
+            else if (GameState.Hero.Accomplishments.Contains(murderRoomAccomplishment))
+                returnData.Description = "A medium sized clearing. Now that you've been told to search for the tower you can see a covered up entrance to a narrow path. It also looks like the Bandit Captain's body has been removed.";
 
             // Location Actions
             List<LocationAction> locationActions = new List<LocationAction>();
@@ -214,6 +217,13 @@ namespace The_Darkest_Hour.Towns.Watertown
                 LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, DEFEATED_CAPTAIN_STATE, true);
                 LocationHandler.ResetLocation(Watertown.INN_KEY); // Need to reload Inn so that new conversation can be set.
             }
+
+            if (GameState.Hero.Accomplishments.Contains(murderRoomAccomplishment))
+            {
+                locationDefinition = WatertownForestClearingBeforeTower.GetTownInstance().GetEntranceDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
+            
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
 

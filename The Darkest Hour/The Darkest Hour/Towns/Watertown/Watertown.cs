@@ -438,11 +438,12 @@ namespace The_Darkest_Hour.Towns.Watertown
             get
             {
                 bool defeatedSupplyCaptain = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownBanditCaveDeeper.DEFEATED_BANDIT_SUPPLY_CAPTAIN_KEY));
+                bool defeatedSpy = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownBanditHouse.DEFATED_BANDIT_SPY));
                 bool tookSpyLetter = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownBanditHouse.TOOK_SPY_LETTER));
 
                 List<Rumor> returnData = new List<Rumor>();
 
-                if (defeatedSupplyCaptain)
+                if (!defeatedSpy && defeatedSupplyCaptain)
                 {
                     Rumor constablerRumor = new Rumor("Bandit Murder", "So you discovered a crime scene? This will take some serious investigating. Bandits don't usually turn on eachother, so if they did that's worrisome. And if it's a law abiding citizen we need to know. I know there is one suspicious house we've been watching here in Watertown. Maybe you should go investigate it and report back with what you find..");
                     constablerRumor.OnHeardRumor = this.HeardBanditCaptainRumor;
@@ -451,7 +452,7 @@ namespace The_Darkest_Hour.Towns.Watertown
                 if (tookSpyLetter)
                 {
                     Rumor constablerRumor = new Rumor("Bandit Spy", "Thank you for bringing this letter to my attention. It doesn't contain much of importance but on the back of it there is a map of the forest on the northern side of Watrtown. There is a tower a little past the clearing you fought the bandit captain in a while ago. This tower is marked. I wonder if that's where the base of the bandit operations are. This must be investigated. Go there and find out what you can. If you have a chance to end the bandit's reign of terror on Watertown, please seize it.");
-                    constablerRumor.OnHeardRumor = this.HeardBanditCaptainRumor;
+                    constablerRumor.OnHeardRumor = this.HeardSpyRumor;
                     returnData.Add(constablerRumor);
                 }
                 returnData.Add(new Rumor("Look Out", "If you see any crime, please report it to me."));
@@ -560,7 +561,7 @@ namespace The_Darkest_Hour.Towns.Watertown
                 accomplishment = new Accomplishment();
                 accomplishment.NameSpace = "Watertown";
                 accomplishment.Name = "Has Heard Bandit Spy Rumor";
-                accomplishment.Description = "Has heard the rumor of the bandit spy in Watertown.";
+                accomplishment.Description = "Has heard the rumor of the Bandit Spy in Watertown.";
                 _WatertownAccomplishments.Add(accomplishment);
 
                 // TODO: Can add more accomplishments here;
