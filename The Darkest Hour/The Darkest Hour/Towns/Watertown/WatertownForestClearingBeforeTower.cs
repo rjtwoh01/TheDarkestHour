@@ -89,7 +89,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             returnData = new Location();
             returnData.Name = "Large Circular Clearing";
             bool defeatedBanditsOne = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForestClearingBeforeTower.DEFEATED_CLEARING_SKELETONS_GROUP_ONE));
-            bool defeatedBanditsTwo = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForestClearingBeforeTower.DEFEATED_CLEARING_SKELETONS_GROUP_ONE));
+            bool defeatedBanditsTwo = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForestClearingBeforeTower.DEFEATED_CLEARING_SKELETONS_GROUP_TWO));
 
             //Actions
 
