@@ -194,7 +194,7 @@ Choose your attack:
 
             if (CarryOn)
             {
-                damage = rand.Next(1, damage);
+                damage = rand.Next(myHero.damageMin, damage);
 
                 int roll = 0;
                 roll = rand.Next(1, 101);

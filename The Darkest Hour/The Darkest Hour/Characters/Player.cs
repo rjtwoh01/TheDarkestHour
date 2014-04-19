@@ -52,6 +52,7 @@ namespace The_Darkest_Hour.Characters
                     Console.Clear();
                 }
 
+                this.damageMin = 1;
                 this.damage = 10;
                 this.level = 1;
                 this.levelCap = 50;
@@ -524,7 +525,7 @@ Name:           Level:          Health:           Damage:
                 {
                     int leftOverXP = this.xp - this.requiredXP;
                     this.level += 1;
-                    this.AddToStats(10);
+                    this.AddToStats(10, 2);
                     this.xp = 0 + leftOverXP;
                     int newXPRequired = CalculateXPNeeded();
                     this.requiredXP = newXPRequired;
@@ -546,7 +547,7 @@ Name:           Level:          Health:           Damage:
             }
         }
 
-        private void AddToStats(int numberAddedToStats)
+        private void AddToStats(int numberAddedToStats, int secondNumberAddedToStats)
         {
             this.damage += numberAddedToStats;
             this.strength += numberAddedToStats;
@@ -554,6 +555,7 @@ Name:           Level:          Health:           Damage:
             this.intelligence += numberAddedToStats;
             this.health += numberAddedToStats;
             this.maxHealth += numberAddedToStats;
+            this.damageMin += secondNumberAddedToStats;
 
             this.energy = this.energy;
             this.health = this.maxHealth;

@@ -198,7 +198,7 @@ Choose your attack:
                 damage = rand.Next(1, damage);
 
                 int roll = 0;
-                roll = rand.Next(1, 101);
+                roll = rand.Next(myHero.damageMin, 101);
                 roll += (int)myHero.critChance;
                 if (roll >= 100)
                     damage *= (int)myHero.critDamage;
