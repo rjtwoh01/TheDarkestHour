@@ -22,11 +22,19 @@ namespace The_Darkest_Hour.Towns.Watertown
         public const string LARGE_HALL_KEY = "WatertownForestTower.LargeHall";
         public const string WEST_WING_ROOM_KEY = "WatertownForestTower.WestWingRoom";
         public const string LARGE_ROOM_KEY = "WatertownForestTower.LargeRoom";
+        public const string CENTER_WING_ROOM_KEY = "WatertownForestTower.CenterWingRoom";
+        public const string BANDIT_STUDY_KEY = "WatertownForestTower.BanditStudy";
+        public const string EAST_WING_ROOM_KEY = "WatertownForestTower.EastWingRoom";
+        public const string CUSHIONED_ROOM_KEY = "WatertownForestTower.CushionedRoom";
         public const string INSPECTED_SKULLS_ROOM_ONE = "WatertownForestTower.InspectedSkulls";
         public const string DEFEATED_LARGE_HALL_BANDITS_ONE = "WatertownForestTower.DefeatedLargeHallBanditsOne";
         public const string DEFEATED_LARGE_HALL_BANDITS_TWO = "WatertownForestTower.DefeatedLargeHallBanditsTwo";
         public const string DEFEATED_WEST_WING_ROOM_SKELETONS = "WatertownForestTower.DefeatedWestWingRoomSkeletons";
         public const string DEFEATED_NECRO_ENVOY = "WatertownForestTower.DefeatedNecroEnvoy";
+        public const string DEFEATED_CENTER_WING_BANDITS = "WatertownForestTower.DefeatedCenterWingBandits";
+        public const string DEFEATED_BANDIT_SCHOLAR = "WatertownForestTower.DefeatedBanditScholar";
+        public const string DEFEATED_EAST_WING_OUTLAWS = "WatertownForestTower.DefeatedEastWingCrazedOutlaws";
+        public const string DEFEATED_CRAZED_OUTLAW_LEADER = "WatertownForestTower.DefeatedCrazedOutlawLeader";
 
         #endregion
 
@@ -245,7 +253,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
 
             // The Clearing on the outside of this tower.
-            LocationDefinition locationDefinition = WatertownForestTower.GetTownInstance().GetEntranceDefinition();
+            LocationDefinition locationDefinition = WatertownForestTower.GetTownInstance().GetLargeHallDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
             //Large Room here
@@ -343,7 +351,7 @@ namespace The_Darkest_Hour.Towns.Watertown
                 // Reload the Sewer Coordior so it will open up the sewer
                 LocationHandler.ResetLocation(LARGE_ROOM_KEY);
 
-                Item armor = NecroEnvoy();
+                Item armor = NecroEnvoyLoot();
                 if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
                 {
                     GameState.Hero.Inventory.Add(armor);
@@ -382,6 +390,348 @@ namespace The_Darkest_Hour.Towns.Watertown
 
         #endregion
 
+        #region Center Wing
+
+        #region Center Wing Room One
+
+        public Location LoadCenterWingRoom()
+        {
+            Location returnData;
+            returnData = new Location();
+            returnData.Name = "Center Wing Room";
+            bool defeatedBandits = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForestTower.DEFEATED_CENTER_WING_BANDITS));
+
+            if (!defeatedBandits)
+            {
+                returnData.Description = "A medium sized room with two bandits roaming about it";
+                // Location Actions
+                List<LocationAction> locationActions = new List<LocationAction>();
+
+                List<Mob> bandits = new List<Mob>();
+                bandits.Add(new Bandit());
+                bandits.Add(new Bandit());
+                CombatAction combatAction = new CombatAction("Bandits", bandits);
+                combatAction.PostCombat += CenterWingBandits;
+
+                locationActions.Add(combatAction);
+
+                returnData.Actions = locationActions;
+            }
+            else
+                returnData.Description = "A medium sized room with two dead bandit bodies strewn across the floor.";
+
+            // Adjacent Locations
+            Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
+
+            // The Large Hall
+            LocationDefinition locationDefinition = WatertownForestTower.GetTownInstance().GetLargeHallDefinition();
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+
+            //Bandit Study here
+            if (defeatedBandits)
+            {
+                locationDefinition = WatertownForestTower.GetTownInstance().GetBanditStudyDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
+
+            returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
+
+            return returnData;
+        }
+
+        public void CenterWingBandits(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForestTower.DEFEATED_CENTER_WING_BANDITS, true);
+
+                // Reload the Sewer Coordior so it will open up the sewer
+                LocationHandler.ResetLocation(CENTER_WING_ROOM_KEY);
+
+            }
+        }
+
+        public LocationDefinition GetCenterWingRoomDefinition()
+        {
+            LocationDefinition returnData = new LocationDefinition();
+            string locationKey = CENTER_WING_ROOM_KEY;
+
+            if (LocationHandler.LocationExists(locationKey))
+            {
+                returnData = LocationHandler.GetLocation(locationKey);
+            }
+            else
+            {
+                returnData.LocationKey = locationKey;
+                returnData.Name = "Center Wing Room";
+                returnData.DoLoadLocation = LoadCenterWingRoom;
+
+                LocationHandler.AddLocation(returnData);
+            }
+
+            return returnData;
+        }
+
+        #endregion
+
+        #region Bandit Study
+
+        public Location LoadBanditStudy()
+        {
+            Location returnData;
+            returnData = new Location();
+            returnData.Name = "Large Room";
+            bool defeatedBanditScholar = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForestTower.DEFEATED_BANDIT_SCHOLAR));
+
+            if (!defeatedBanditScholar)
+            {
+                returnData.Description = "A small room lined with bookshelves and a desk overflowing with parchments. A scholar is sitting in a chair pouring over various documents.";
+                // Location Actions
+                List<LocationAction> locationActions = new List<LocationAction>();
+
+                List<Mob> banditScholar = new List<Mob>();
+                banditScholar.Add(new BanditScholar());
+                CombatAction combatAction = new CombatAction("Bandit Scholar", banditScholar);
+                combatAction.PostCombat += BanditScholar;
+
+                locationActions.Add(combatAction);
+
+                returnData.Actions = locationActions;
+            }
+            else
+                returnData.Description = "A small room lined with bookshelves and a desk overflowing with parchments.";
+
+            // Adjacent Locations
+            Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
+
+            // The Clearing on the outside of this tower.
+            LocationDefinition locationDefinition = WatertownForestTower.GetTownInstance().GetCenterWingRoomDefinition();
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+
+            returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
+
+            return returnData;
+        }
+
+        public void BanditScholar(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForestTower.DEFEATED_BANDIT_SCHOLAR, true);
+
+                // Reload the Sewer Coordior so it will open up the sewer
+                LocationHandler.ResetLocation(BANDIT_STUDY_KEY);
+
+                Item helm = BanditScholarLoot();
+                if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
+                {
+                    GameState.Hero.Inventory.Add(helm);
+                    Console.WriteLine("You loot \n{0}\n", helm);
+                }
+                else
+                {
+                    Console.WriteLine("Bandit Scholar drops \n{0}\nBut you don't have enough space to equip!\n", helm);
+                }
+                GameState.ClearScreen();
+            }
+        }
+
+        public LocationDefinition GetBanditStudyDefinition()
+        {
+            LocationDefinition returnData = new LocationDefinition();
+            string locationKey = BANDIT_STUDY_KEY;
+
+            if (LocationHandler.LocationExists(locationKey))
+            {
+                returnData = LocationHandler.GetLocation(locationKey);
+            }
+            else
+            {
+                returnData.LocationKey = locationKey;
+                returnData.Name = "Bandit Study";
+                returnData.DoLoadLocation = LoadBanditStudy;
+
+                LocationHandler.AddLocation(returnData);
+            }
+
+            return returnData;
+        }
+
+        #endregion
+
+        #endregion
+
+        #region East Wing
+
+        #region East Wing Room One
+
+        public Location LoadEastWingRoom()
+        {
+            Location returnData;
+            returnData = new Location();
+            returnData.Name = "East Wing Room";
+            bool defeatedOutlaws = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForestTower.DEFEATED_EAST_WING_OUTLAWS));
+
+            if (!defeatedOutlaws)
+            {
+                returnData.Description = "A small room with four crazed outlaws running around within";
+                // Location Actions
+                List<LocationAction> locationActions = new List<LocationAction>();
+
+                List<Mob> crazedOutlaws = new List<Mob>();
+                crazedOutlaws.Add(new CrazedOutlaw());
+                crazedOutlaws.Add(new CrazedOutlaw());
+                CombatAction combatAction = new CombatAction("Crazed Outlaws", crazedOutlaws);
+                combatAction.PostCombat += EastWingCrazedOutlaws;
+
+                locationActions.Add(combatAction);
+
+                returnData.Actions = locationActions;
+            }
+            else
+                returnData.Description = "A small room overcrowded by the dead outlaw bodies on the floor.";
+
+            // Adjacent Locations
+            Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
+
+            // The Large Hall
+            LocationDefinition locationDefinition = WatertownForestTower.GetTownInstance().GetLargeHallDefinition();
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+
+            //Bandit Study here
+            if (defeatedOutlaws)
+            {
+                locationDefinition = WatertownForestTower.GetTownInstance().GetCushionedRoomDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
+
+            returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
+
+            return returnData;
+        }
+
+        public void EastWingCrazedOutlaws(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForestTower.DEFEATED_EAST_WING_OUTLAWS, true);
+
+                // Reload the Sewer Coordior so it will open up the sewer
+                LocationHandler.ResetLocation(EAST_WING_ROOM_KEY);
+
+            }
+        }
+
+        public LocationDefinition GetEastWingRoomDefinition()
+        {
+            LocationDefinition returnData = new LocationDefinition();
+            string locationKey = EAST_WING_ROOM_KEY;
+
+            if (LocationHandler.LocationExists(locationKey))
+            {
+                returnData = LocationHandler.GetLocation(locationKey);
+            }
+            else
+            {
+                returnData.LocationKey = locationKey;
+                returnData.Name = "East Wing Room";
+                returnData.DoLoadLocation = LoadEastWingRoom;
+
+                LocationHandler.AddLocation(returnData);
+            }
+
+            return returnData;
+        }
+
+        #endregion
+
+        #region Cushioned Room
+
+        public Location LoadCushionedRoom()
+        {
+            Location returnData;
+            returnData = new Location();
+            returnData.Name = "Cushioned Room";
+            bool defeatedCrazedOutlawLeader = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForestTower.DEFEATED_CRAZED_OUTLAW_LEADER));
+
+            if (!defeatedCrazedOutlawLeader)
+            {
+                returnData.Description = "A small room that's completely cushioned. There is a man jumping around laughing with a crazed look inside.";
+                // Location Actions
+                List<LocationAction> locationActions = new List<LocationAction>();
+
+                List<Mob> crazedOutlawLeasder = new List<Mob>();
+                crazedOutlawLeasder.Add(new CrazedOutlawLeader());
+                CombatAction combatAction = new CombatAction("Crazed Outlaw Leader", crazedOutlawLeasder);
+                combatAction.PostCombat += CrazedOutlawLeader;
+
+                locationActions.Add(combatAction);
+
+                returnData.Actions = locationActions;
+            }
+            else
+                returnData.Description = "A small room that's completely cushioned.";
+
+            // Adjacent Locations
+            Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
+
+            // The Clearing on the outside of this tower.
+            LocationDefinition locationDefinition = WatertownForestTower.GetTownInstance().GetEastWingRoomDefinition();
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+
+            returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
+
+            return returnData;
+        }
+
+        public void CrazedOutlawLeader(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForestTower.DEFEATED_CRAZED_OUTLAW_LEADER, true);
+
+                // Reload the Sewer Coordior so it will open up the sewer
+                LocationHandler.ResetLocation(CUSHIONED_ROOM_KEY);
+
+                Item amulet = CrazedOutlawLoot();
+                if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
+                {
+                    GameState.Hero.Inventory.Add(amulet);
+                    Console.WriteLine("You loot \n{0}\n", amulet);
+                }
+                else
+                {
+                    Console.WriteLine("Crazed Outlaw Leader drops \n{0}\nBut you don't have enough space to equip!\n", amulet);
+                }
+                GameState.ClearScreen();
+            }
+        }
+
+        public LocationDefinition GetCushionedRoomDefinition()
+        {
+            LocationDefinition returnData = new LocationDefinition();
+            string locationKey = CUSHIONED_ROOM_KEY;
+
+            if (LocationHandler.LocationExists(locationKey))
+            {
+                returnData = LocationHandler.GetLocation(locationKey);
+            }
+            else
+            {
+                returnData.LocationKey = locationKey;
+                returnData.Name = "Cushioned Room";
+                returnData.DoLoadLocation = LoadCushionedRoom;
+
+                LocationHandler.AddLocation(returnData);
+            }
+
+            return returnData;
+        }
+
+        #endregion
+
+        #endregion
+
         #endregion
 
         #region Get Town Instance
@@ -400,9 +750,9 @@ namespace The_Darkest_Hour.Towns.Watertown
 
         #endregion
 
-        #region Boos Loot
+        #region Boss Loot
 
-        public Item NecroEnvoy()
+        public Item NecroEnvoyLoot()
         {
             Item returnData;
 
@@ -445,6 +795,155 @@ namespace The_Darkest_Hour.Towns.Watertown
             }
 
             returnData = new Armor(name, armorType, armor, strength, agility, intelligence, health, 0, 0, requiredLevel, critChance, critDamage, worth);
+
+            return returnData;
+        }
+
+        public Item BanditScholarLoot()
+        {
+            Item returnData;
+
+            int agility, strength, intelligence, armor, health, critChance, critDamage, requiredLevel, worth;
+            agility = strength = intelligence = critChance = 0;
+            armor = 28;
+            health = 34;
+            critDamage = 2;
+            requiredLevel = GameState.Hero.level;
+            worth = 100;
+            string armorType = "";
+            string name = "Helm of Wisdom";
+
+            switch (GameState.Hero.Profession.Name)
+            {
+                case "Hunter":
+                    agility = 32;
+                    armorType = "Leather";
+                    break;
+                case "Rogue":
+                    agility = 32;
+                    armorType = "Leather";
+                    break;
+                case "Warrior":
+                    strength = 32;
+                    armorType = "Mail";
+                    break;
+                case "Guardian":
+                    strength = 32;
+                    armorType = "Mail";
+                    break;
+                case "Mage":
+                    intelligence = 32;
+                    armorType = "Cloth";
+                    break;
+                case "Cleric":
+                    intelligence = 32;
+                    armorType = "Cloth";
+                    break;
+            }
+
+            returnData = new Helmet(name, armorType, armor, strength, agility, intelligence, health, 0, 0, requiredLevel, critChance, critDamage, worth);
+
+            return returnData;
+        }
+
+        public Item CrazedOutlawLoot()
+        {
+            Item returnData;
+
+            int agility, strength, intelligence, armor, health, critChance, critDamage, requiredLevel, worth;
+            agility = strength = intelligence = 0;
+            armor = 32;
+            health = 40;
+            critDamage = 5;
+            critChance = 2;
+            requiredLevel = GameState.Hero.level;
+            worth = 100;
+            string armorType = "";
+            string name = "Amulet of the Damned";
+
+            switch (GameState.Hero.Profession.Name)
+            {
+                case "Hunter":
+                    agility = 40;
+                    armorType = "Leather";
+                    break;
+                case "Rogue":
+                    agility = 40;
+                    armorType = "Leather";
+                    break;
+                case "Warrior":
+                    strength = 40;
+                    armorType = "Mail";
+                    break;
+                case "Guardian":
+                    strength = 40;
+                    armorType = "Mail";
+                    break;
+                case "Mage":
+                    intelligence = 40;
+                    armorType = "Cloth";
+                    break;
+                case "Cleric":
+                    intelligence = 40;
+                    armorType = "Cloth";
+                    break;
+            }
+
+            returnData = new Amulet(name, armorType, armor, strength, agility, intelligence, health, 0, 0, requiredLevel, critChance, critDamage, worth);
+
+            return returnData;
+        }
+
+        public Item BanditKingLoot()
+        {
+            Item returnData;
+
+            int agility, strength, intelligence, damage, health, critChance, critDamage, requiredLevel, worth;
+            agility = strength = intelligence = 0;
+            damage = 32;
+            health = 35;
+            critDamage = 5;
+            critChance = 2;
+            requiredLevel = GameState.Hero.level;
+            worth = 100;
+            string armorType = "";
+            string name = "";
+
+            switch (GameState.Hero.Profession.Name)
+            {
+                case "Hunter":
+                    agility = 50;
+                    armorType = "Bow";
+                    name = "Royalty Killer";
+                    break;
+                case "Rogue":
+                    agility = 50;
+                    armorType = "Dagger";
+                    name = "Sabotager";
+                    break;
+                case "Warrior":
+                    strength = 50;
+                    armorType = "Sword";
+                    name = "King Slayer";
+                    break;
+                case "Guardian":
+                    strength = 50;
+                    armorType = "Sword";
+                    name = "Protection";
+                    break;
+                case "Mage":
+                    intelligence = 50;
+                    armorType = "Staff";
+                    name = "The Unmaker";
+                    break;
+                case "Cleric":
+                    intelligence = 50;
+                    armorType = "Staff";
+                    name = "Holy Smiter";
+                    break;
+            }
+
+            returnData = new Weapon(name, armorType, damage, strength, agility, intelligence, health, 0, 0, requiredLevel, critChance, critDamage, worth);
 
             return returnData;
         }

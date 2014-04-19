@@ -105,6 +105,7 @@
     <Compile Include="Characters\Mobs\Bosses\PossesedGuardBoss.cs" />
     <Compile Include="Characters\Mobs\Bosses\SewerKing.cs" />
     <Compile Include="Characters\Mobs\Bosses\SkeletonKing.cs" />
+    <Compile Include="Characters\Mobs\CrazedOutlaw.cs" />
     <Compile Include="Characters\Mobs\Necromancer.cs" />
     <Compile Include="Characters\Mobs\PossesedVillager.cs" />
     <Compile Include="Characters\Mobs\SewerRat.cs" />
