@@ -143,6 +143,23 @@ namespace The_Darkest_Hour
             CurrentLocation = null;
             UpcomingLocation = null;
         }
+        
+        /// <summary>
+        /// Will clear the game screen
+        /// </summary>
+        public static void ClearScreen()
+        {
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
+            Console.Clear();
+        }
 
+        /// <summary>
+        /// Will clear the game screen w/out user input
+        /// </summary>
+        public static void ClearScreen(bool clearWithoutInput)
+        {
+            Console.Clear();
+        }
     }
 }

@@ -326,6 +326,7 @@ Name:           Level:          Health:           Damage:
             }
         }
 
+        //Maybe AffixSwap() should be moved to a different class. Maybe the the Action that actually implements this method.
         public void AffixSwap()
         {
             Item selectedItem;

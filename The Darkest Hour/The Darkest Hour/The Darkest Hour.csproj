@@ -8,7 +8,7 @@
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>The_Darkest_Hour</RootNamespace>
-    <AssemblyName>The_Darkest_Hour</AssemblyName>
+    <AssemblyName>The Darkest Hour</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>true</IsWebBootstrapper>
@@ -95,8 +95,11 @@
     <Compile Include="Areas\GeneralStore.cs" />
     <Compile Include="Characters\Mobs\Bosses\BanditCaptain.cs" />
     <Compile Include="Characters\Mobs\Bosses\BanditLieutenant.cs" />
+    <Compile Include="Characters\Mobs\Bosses\BanditScholar.cs" />
     <Compile Include="Characters\Mobs\Bosses\BanditSpy.cs" />
     <Compile Include="Characters\Mobs\Bosses\BanditSupplyCaptain.cs" />
+    <Compile Include="Characters\Mobs\Bosses\CrazedOutlawLeader.cs" />
+    <Compile Include="Characters\Mobs\Bosses\NecroEnvoy.cs" />
     <Compile Include="Characters\Mobs\Bosses\NecromancerLeader.cs" />
     <Compile Include="Characters\Mobs\Bosses\OutlawBoss.cs" />
     <Compile Include="Characters\Mobs\Bosses\PossesedGuardBoss.cs" />
