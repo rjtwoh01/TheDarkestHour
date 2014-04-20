@@ -18,6 +18,7 @@ namespace The_Darkest_Hour.Characters
         public int armor = 0; //Needs to be implemented
         public int inventoryCap = 60;
         public int maxGold = 1000000;
+        public int travelRations = 0;
         public double magicFind;
         public double goldFind;
         public string mainStatName;

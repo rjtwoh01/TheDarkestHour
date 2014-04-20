@@ -26,6 +26,7 @@ namespace The_Darkest_Hour.Combat
         bool playerLost = false;
         bool mobLost = false;
         bool hasFled = false;
+        bool actionStarted = false;
 
         public CombatResult DoBattle(Player myHero, Mob mob)
         {
@@ -38,6 +39,7 @@ namespace The_Darkest_Hour.Combat
                 answer = InitialQuestion(myHero, mob);
                 if (answer == "Attack")
                 {
+                    actionStarted = true;
                     do{
                         attack = myHero.Profession.GetAttack(myHero);
                         playerDamage = myHero.Profession.CalculateDamage(myHero, attack);
@@ -111,6 +113,7 @@ namespace The_Darkest_Hour.Combat
                     myHero.DisplayInventory();
                     if (GameState.Hero.usedPotionCombat)
                     {
+                        actionStarted = true;
                         if (mob.health <= 0)
                         {
                             mob.health = 0;
@@ -148,6 +151,27 @@ namespace The_Darkest_Hour.Combat
                     battleInProgress = true;
                     hasFled = false;
                     myHero.DisplayEquipped();
+                    ClearScreen();
+                }
+
+                else if (answer == "Ration")
+                {
+                    battleInProgress = true;
+                    hasFled = false;
+                    if (!actionStarted)
+                    {
+                        if (myHero.travelRations > 0)
+                        {
+                            myHero.health = myHero.maxHealth;
+                            myHero.energy = myHero.maxEnergy;
+                            myHero.travelRations--;
+                            Console.WriteLine("You use a travel ration to restore your health and energy to max.\nYou now have {0} rations left", myHero.travelRations);
+                        }
+                        else
+                            Console.WriteLine("You don't have enough travel rations");
+                    }
+                    else if (actionStarted)
+                        Console.WriteLine("You cannot use a travel ration once the battle has started");
                     ClearScreen();
                 }
 
@@ -215,12 +239,13 @@ Do you want to:
 1) Attack
 2) Inventory
 3) View Equipped Items
-4) Flee
-");
+4) Use Travel Ration {0}
+5) Flee
+", myHero.travelRations);
                 answer = Console.ReadLine();
-                if (answer != "1" && answer != "2" && answer != "3" && answer != "4")
+                if (answer != "1" && answer != "2" && answer != "3" && answer != "4" && answer != "5")
                     Console.Clear();
-            } while (answer != "1" && answer != "2" && answer != "3" && answer != "4");
+            } while (answer != "1" && answer != "2" && answer != "3" && answer != "4" && answer != "5");
 
             if (answer == "1")
                 answer = "Attack";
@@ -229,6 +254,8 @@ Do you want to:
             else if (answer == "3")
                 answer = "Equipped";
             else if (answer == "4")
+                answer = "Ration";
+            else if (answer == "5")
                 answer = "Flee";
 
             return answer;

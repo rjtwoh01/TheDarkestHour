@@ -101,6 +101,9 @@ namespace The_Darkest_Hour.Towns.Watertown
             locationAction = new RestAction(5);
             locationActions.Add(locationAction);
 
+            locationAction = new BuyTravelRation();
+            locationActions.Add(locationAction);
+
             locationAction = new SaveAction();
             locationActions.Add(locationAction);
 

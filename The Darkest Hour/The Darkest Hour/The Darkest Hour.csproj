@@ -161,6 +161,7 @@
     <Compile Include="LoadSave.cs" />
     <Compile Include="Locations\Actions\AffixSwapperAction.cs" />
     <Compile Include="Locations\Actions\ArenaAction.cs" />
+    <Compile Include="Locations\Actions\BuyTravelRation.cs" />
     <Compile Include="Locations\Actions\CombatAction.cs" />
     <Compile Include="Locations\Actions\CreateNewCharacterAction.cs" />
     <Compile Include="Locations\Actions\DisplayEquippedAction.cs" />
