@@ -105,6 +105,9 @@ namespace The_Darkest_Hour.Towns.Watertown
             returnData.Name = "Large Hall";
             bool defeatedBanditsOne = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForestTower.DEFEATED_LARGE_HALL_BANDITS_ONE));
             bool defeatedBanditsTwo = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForestTower.DEFEATED_LARGE_HALL_BANDITS_TWO));
+            bool defeatedNecroEnvoy = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForestTower.DEFEATED_NECRO_ENVOY));
+            bool defeatedBanditScholar = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForestTower.DEFEATED_BANDIT_SCHOLAR));
+            bool defeatedCrazedOutlawLeader = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForestTower.DEFEATED_CRAZED_OUTLAW_LEADER));
 
             if (!defeatedBanditsOne)
             {
@@ -161,6 +164,20 @@ namespace The_Darkest_Hour.Towns.Watertown
                 locationDefinition = WatertownForestTower.GetTownInstance().GetWestWingRoomDefinition();
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
+                //Center Wing
+                locationDefinition = WatertownForestTower.GetTownInstance().GetCenterWingRoomDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+
+                //East Wing
+                locationDefinition = WatertownForestTower.GetTownInstance().GetEastWingRoomDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
+
+            if (defeatedBanditScholar && defeatedCrazedOutlawLeader && defeatedNecroEnvoy)
+            {
+                //Floor two
+                locationDefinition = WatertownForestTowerFloorTwo.GetTownInstance().GetEntranceDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
             }
 
             //Floor Two Entrance here.... Need to also check to make sure the player has all of the keys

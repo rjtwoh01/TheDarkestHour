@@ -199,6 +199,7 @@
     <Compile Include="Towns\Watertown\WatertownForestCabin.cs" />
     <Compile Include="Towns\Watertown\WatertownForestClearingBeforeTower.cs" />
     <Compile Include="Towns\Watertown\WatertownForestTower.cs" />
+    <Compile Include="Towns\Watertown\WatertownForestTowerFloorTwo.cs" />
     <Compile Include="Towns\Watertown\WatertownSewer.cs" />
     <Compile Include="Towns\Watertown\WatertownSewerLeft.cs" />
     <Compile Include="Towns\Watertown\WatertownSewerRight.cs" />
