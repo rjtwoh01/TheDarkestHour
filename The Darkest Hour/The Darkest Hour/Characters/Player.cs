@@ -25,6 +25,7 @@ namespace The_Darkest_Hour.Characters
         public string requiredWeaponType;
         public string requiredArmorType;
         public string requiredAmuletType = "Amulet";
+        public string startingLocation = "Watertown";
         public bool isHardCore = false;
         public bool isAlive = true;
         public bool WeaponsFull = false;

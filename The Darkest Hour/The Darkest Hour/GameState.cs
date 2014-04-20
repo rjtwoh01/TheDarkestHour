@@ -38,7 +38,14 @@ namespace The_Darkest_Hour
             {
                 if (_StartingTown == null)
                 {
-                    _StartingTown = The_Darkest_Hour.Towns.Watertown.Watertown.GetTownInstance();
+                    if (Hero.startingLocation == "Watertown")
+                    {
+                        _StartingTown = The_Darkest_Hour.Towns.Watertown.Watertown.GetTownInstance();
+                    }
+                    if (Hero.startingLocation == "Ankou")
+                    {
+                        _StartingTown = The_Darkest_Hour.Towns.Watertown.Ankou.GetTownInstance();
+                    }
                 }
 
                 return _StartingTown;

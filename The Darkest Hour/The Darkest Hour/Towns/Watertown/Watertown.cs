@@ -276,6 +276,13 @@ namespace The_Darkest_Hour.Towns.Watertown
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
             }
 
+            Accomplishment banditKingAccomplishment = Watertown.GetWatertownAccomplishments().Find(x => x.Name.Contains("Bandit God King"));
+            if (GameState.Hero.Accomplishments.Contains(banditKingAccomplishment))
+            {
+                locationDefinition = Ankou.GetTownInstance().GetTownCenterDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
+
             returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
 
             return returnData;
@@ -300,6 +307,12 @@ namespace The_Darkest_Hour.Towns.Watertown
                 returnData.DoLoadLocation = LoadTownCenter;
 
                 LocationHandler.AddLocation(returnData);
+            }
+
+            if (GameState.Hero.startingLocation != "Watertown")
+            {
+                GameState.Hero.startingLocation = "Watertown";
+                LocationHandler.ResetLocation(TOWN_CENTER_KEY);
             }
 
             return returnData;
@@ -353,8 +366,8 @@ namespace The_Darkest_Hour.Towns.Watertown
                 
                 returnData.Add(rumor);
 
-                returnData.Add(new Rumor("Not Much", "Not much happening around here these days."));
-                returnData.Add(new Rumor("Stay awhile", "Stay a while and listen to our bard play music and sing songs of great tales."));
+                //returnData.Add(new Rumor("Not Much", "Not much happening around here these days."));
+                //returnData.Add(new Rumor("Stay awhile", "Stay a while and listen to our bard play music and sing songs of great tales."));
                 return returnData;
             }
         }
@@ -428,8 +441,8 @@ namespace The_Darkest_Hour.Towns.Watertown
                     guestRumor.OnHeardRumor = this.HeardHiddenRoomRumor;
                     returnData.Add(guestRumor);
                 }
-                returnData.Add(new Rumor("Life's Hard", "It's hard to make it as a traveling minstrel. Come to think of it, I think it's starting to get close to the time that I need to get moving away from here."));
-                returnData.Add(new Rumor("Riches", "This town may not look it from the outside, but there is a great big market here. You can get plenty rich while here. Lot's of trade."));
+                //returnData.Add(new Rumor("Life's Hard", "It's hard to make it as a traveling minstrel. Come to think of it, I think it's starting to get close to the time that I need to get moving away from here."));
+                //returnData.Add(new Rumor("Riches", "This town may not look it from the outside, but there is a great big market here. You can get plenty rich while here. Lot's of trade."));
 
                 return returnData;
             }
@@ -443,6 +456,7 @@ namespace The_Darkest_Hour.Towns.Watertown
                 bool defeatedSupplyCaptain = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownBanditCaveDeeper.DEFEATED_BANDIT_SUPPLY_CAPTAIN_KEY));
                 bool defeatedSpy = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownBanditHouse.DEFATED_BANDIT_SPY));
                 bool tookSpyLetter = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownBanditHouse.TOOK_SPY_LETTER));
+                bool defeatedBanditKing = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForestTowerFloorTwo.DEFEATED_BANDIT_KING));
 
                 List<Rumor> returnData = new List<Rumor>();
 
@@ -452,14 +466,20 @@ namespace The_Darkest_Hour.Towns.Watertown
                     constablerRumor.OnHeardRumor = this.HeardBanditCaptainRumor;
                     returnData.Add(constablerRumor);
                 }
-                if (tookSpyLetter)
+                if (tookSpyLetter && !defeatedBanditKing)
                 {
                     Rumor constablerRumor = new Rumor("Bandit Spy", "Thank you for bringing this letter to my attention. It doesn't contain much of importance but on the back of it there is a map of the forest on the northern side of Watrtown. There is a tower a little past the clearing you fought the bandit captain in a while ago. This tower is marked. I wonder if that's where the base of the bandit operations are. This must be investigated. Go there and find out what you can. If you have a chance to end the bandit's reign of terror on Watertown, please seize it.");
                     constablerRumor.OnHeardRumor = this.HeardSpyRumor;
                     returnData.Add(constablerRumor);
                 }
-                returnData.Add(new Rumor("Look Out", "If you see any crime, please report it to me."));
-                returnData.Add(new Rumor("Need Anything", "If you need anything, just shout. I'll help however I can."));
+                if (defeatedBanditKing)
+                {
+                    Rumor constablerRumor = new Rumor("Bandit God King", "It is such a relief to know this whole bandit threat is taken care of for Watertown. However, it is very worrying that they've aligned themselves with necromancers. That's very bad news. Unfortunately, there's nothing further that can be done about it here. Tell you what, go to Ankou and talk to their head mage. She has spent the better part of her life battling necromancers and if anyone knows their current movements it would be her. Again, I thank you for all of your service in Watertown.");
+                    constablerRumor.OnHeardRumor = this.HeardBanditKingRumor;
+                    returnData.Add(constablerRumor);
+                }
+                //returnData.Add(new Rumor("Look Out", "If you see any crime, please report it to me."));
+                //returnData.Add(new Rumor("Need Anything", "If you need anything, just shout. I'll help however I can."));
 
                 return returnData;
             }
@@ -506,6 +526,15 @@ namespace The_Darkest_Hour.Towns.Watertown
         public void HeardSpyRumor()
         {
             Accomplishment accomplishment = Watertown.GetWatertownAccomplishments().Find(x => x.Name.Contains("Bandit Spy"));
+            GameState.Hero.Accomplishments.Add(accomplishment);
+
+            // Reload the TownCenter so it will open up the hidden room
+            LocationHandler.ResetLocation(TOWN_CENTER_KEY);
+        }
+
+        public void HeardBanditKingRumor()
+        {
+            Accomplishment accomplishment = Watertown.GetWatertownAccomplishments().Find(x => x.Name.Contains("Bandit God King"));
             GameState.Hero.Accomplishments.Add(accomplishment);
 
             // Reload the TownCenter so it will open up the hidden room
@@ -565,6 +594,12 @@ namespace The_Darkest_Hour.Towns.Watertown
                 accomplishment.NameSpace = "Watertown";
                 accomplishment.Name = "Has Heard Bandit Spy Rumor";
                 accomplishment.Description = "Has heard the rumor of the Bandit Spy in Watertown.";
+                _WatertownAccomplishments.Add(accomplishment);
+
+                accomplishment = new Accomplishment();
+                accomplishment.NameSpace = "Watertown";
+                accomplishment.Name = "Has Heard Bandit God King Rumor";
+                accomplishment.Description = "Has heard the rumor of the Bandit God King in Watertown.";
                 _WatertownAccomplishments.Add(accomplishment);
 
                 // TODO: Can add more accomplishments here;
