@@ -292,30 +292,20 @@ Name:           Level:          Health:           Damage:
                     int selected = Int32.Parse(answer);
                     selected -= 1;
 
-                    Item selectedItem = this.Inventory.ElementAt(selected);
+                    Item selectedItem = this.EquippedItems.ElementAt(selected);
 
                     //Console.WriteLine("\nYou Selected: {0}", selectedItem);
-
-                    if (selectedItem.isEquipable)
+                    if (Inventory.Count < inventoryCap)
                     {
-                        if (selectedItem.itemType == this.requiredArmorType || selectedItem.itemType == this.requiredWeaponType || selectedItem.itemType == this.requiredAmuletType)
-                        {
-                            if (selectedItem.isEquipped)
-                            {
-                                if (Inventory.Count < inventoryCap)
-                                {
-                                    selectedItem.DeEquip(selectedItem, this);
-                                    Inventory.Add(selectedItem);
-                                    EquippedItems.Remove(selectedItem);
-                                }
-                                else
-                                {
-                                    Console.WriteLine("You do not have enough room in your inventory. Go sell something first.");
-                                }
-                            }
-                        }
-                        else
-                            Console.WriteLine("You cannot use that item.");
+                        selectedItem.DeEquip(selectedItem, this);
+                        Inventory.Add(selectedItem);
+                        EquippedItems.Remove(selectedItem);
+
+                        Console.WriteLine("Successfully un-equipped {0}", selectedItem.name);
+                    }
+                    else
+                    {
+                        Console.WriteLine("You do not have enough room in your inventory. Go sell something first.");
                     }
                 }
             }

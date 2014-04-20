@@ -143,6 +143,14 @@ namespace The_Darkest_Hour.Combat
                     ClearScreen();
                 }
 
+                else if (answer == "Equipped")
+                {
+                    battleInProgress = true;
+                    hasFled = false;
+                    myHero.DisplayEquipped();
+                    ClearScreen();
+                }
+
                 else if (answer == "Flee")
                 {
                     battleInProgress = false;
@@ -206,18 +214,21 @@ Name:           Level:          Health:        Energy:
 Do you want to:
 1) Attack
 2) Inventory
-3) Flee
+3) View Equipped Items
+4) Flee
 ");
                 answer = Console.ReadLine();
-                if (answer != "1" && answer != "2" && answer != "3")
+                if (answer != "1" && answer != "2" && answer != "3" && answer != "4")
                     Console.Clear();
-            } while (answer != "1" && answer != "2" && answer != "3");
+            } while (answer != "1" && answer != "2" && answer != "3" && answer != "4");
 
             if (answer == "1")
                 answer = "Attack";
             else if (answer == "2")
                 answer = "Inventory";
             else if (answer == "3")
+                answer = "Equipped";
+            else if (answer == "4")
                 answer = "Flee";
 
             return answer;
