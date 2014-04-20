@@ -24,7 +24,7 @@ namespace The_Darkest_Hour.Towns.Watertown
         public const string ROOM_THREE_KEY = "WatertownForestTowerFloorTwoFloorTwo.RoomThree";
         public const string ROOM_FOUR_KEY = "WatertownForestTowerFloorTwoFloorTwo.RoomFour";
         public const string ROOM_FIVE_KEY = "WatertownForestTowerFloorTwoFloorTwo.RoomFive";
-        public const string GRAND_ROOM_KEY = "WatertownForestTowerFloorTwoFloorTwo.RoomOne";
+        public const string GRAND_ROOM_KEY = "WatertownForestTowerFloorTwoFloorTwo.GrandRoom";
         public const string DEFEATED_ENTRANCE_SKELETONS = "WatertownForestTowerFloorTwoFloorTwo.DefeatedEntranceSkeletons";
         public const string DEFEATED_ROOM_ONE_BANDITS = "WatertownForestTowerFloorTwoFloorTwo.DefeatedRoomOneBandits";
         public const string DEFEATED_ROOM_TWO_GROUP = "WatertownForestTowerFloorTwoFloorTwo.DefeatedRoomTwoBandits";
@@ -81,8 +81,11 @@ namespace The_Darkest_Hour.Towns.Watertown
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
             //Room One
-            locationDefinition = WatertownForestTowerFloorTwo.GetTownInstance().GetRoomOneDefinition();
-            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            if (defeatedSkeletons)
+            {
+                locationDefinition = WatertownForestTowerFloorTwo.GetTownInstance().GetRoomOneDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
 
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
@@ -142,13 +145,10 @@ namespace The_Darkest_Hour.Towns.Watertown
                 List<LocationAction> locationActions = new List<LocationAction>();
 
                 List<Mob> skeletons = new List<Mob>();
-                skeletons.Add(new Skeleton());
-                skeletons.Add(new Skeleton());
-                skeletons.Add(new Skeleton());
-                skeletons.Add(new Skeleton());
-                skeletons.Add(new Skeleton());
-                CombatAction combatAction = new CombatAction("Skeletons", skeletons);
-                combatAction.PostCombat += EntranceSkeletons;
+                skeletons.Add(new Bandit());
+                skeletons.Add(new Bandit());
+                CombatAction combatAction = new CombatAction("Bandits", skeletons);
+                combatAction.PostCombat += RoomOneBandits;
 
                 locationActions.Add(combatAction);
 
@@ -456,8 +456,8 @@ namespace The_Darkest_Hour.Towns.Watertown
                 List<Mob> mobs = new List<Mob>();
                 mobs.Add(new Necromancer());
                 mobs.Add(new Necromancer());
-                CombatAction combatAction = new CombatAction("Guards", mobs);
-                combatAction.PostCombat += RoomFourGuards;
+                CombatAction combatAction = new CombatAction("Necromancers", mobs);
+                combatAction.PostCombat += RoomFiveNecro;
 
                 locationActions.Add(combatAction);
 
@@ -521,7 +521,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             Location returnData;
             returnData = new Location();
             returnData.Name = "Grand Room";
-            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForestTowerFloorTwo.DEFEATED_ROOM_FIVE_NECRO));
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForestTowerFloorTwo.DEFEATED_BANDIT_KING));
 
             //Actions
             if (!defeatedMobs)
@@ -533,7 +533,7 @@ namespace The_Darkest_Hour.Towns.Watertown
                 List<Mob> mobs = new List<Mob>();
                 mobs.Add(new BanditKing());
                 CombatAction combatAction = new CombatAction("Bandit King", mobs);
-                combatAction.PostCombat += RoomFourGuards;
+                combatAction.PostCombat += BanditKing;
 
                 locationActions.Add(combatAction);
 
