@@ -21,7 +21,7 @@ namespace The_Darkest_Hour
 
 #region Game Defaults
 
-        private const string PLAYER_GAME_FILES_LOCATION_DEFAULT = @"c:\TheDarkestHour\CharacterSavesAlpha";
+        private const string PLAYER_GAME_FILES_LOCATION_DEFAULT = @"c:\TheDarkestHour\CharacterSavesAlphaTestTwo";
 
 #endregion
 
@@ -37,10 +37,10 @@ namespace The_Darkest_Hour
         {
             get
             {
-                if ( (_PlayerGameFilesLocation==null) || (_PlayerGameFilesLocation.Length==0))
-                {
-                    _PlayerGameFilesLocation = ConfigurationManager.AppSettings["PlayerGameFilesLocation"];
-                } 
+                //if ( (_PlayerGameFilesLocation==null) || (_PlayerGameFilesLocation.Length==0))
+                //{
+                  //  _PlayerGameFilesLocation = ConfigurationManager.AppSettings["PlayerGameFilesLocation"];
+                //} 
 
                 if ((_PlayerGameFilesLocation == null) || (_PlayerGameFilesLocation.Length == 0))
                 {
