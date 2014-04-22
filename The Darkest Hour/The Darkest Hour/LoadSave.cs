@@ -7,6 +7,7 @@ using The_Darkest_Hour.Characters;
 using System.Data.OleDb;
 using System.Data;
 using System.IO;
+using System.Diagnostics;
 using The_Darkest_Hour.Items;
 using The_Darkest_Hour.Locations;
 using The_Darkest_Hour.Locations.Actions;
@@ -63,9 +64,13 @@ namespace The_Darkest_Hour
             }
             catch (Exception e)
             {
-                Console.WriteLine("\nNo saved games due to:");
-                Console.WriteLine(e.Message);
-                Console.WriteLine();
+                //Don't really need to output this back to the user. We know the causes of this error.
+                //Console.WriteLine("\nNo saved games due to:");
+                //Console.WriteLine(e.Message);
+                //Console.WriteLine();
+                
+                //Though if there are problems, it'll be useful to write them to the debugger just in case it needs to be repoduced in the development environment.
+                Debug.Write(e.Message);
             }
 
             return returnData;
