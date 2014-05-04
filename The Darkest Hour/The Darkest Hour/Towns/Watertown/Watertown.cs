@@ -269,7 +269,7 @@ namespace The_Darkest_Hour.Towns.Watertown
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
             }
 
-            Accomplishment murderRoomAccomplishment = Watertown.GetWatertownAccomplishments().Find(x => x.Name.Contains("Murder Room"));
+            Accomplishment murderRoomAccomplishment = Watertown.GetWatertownAccomplishments().Find(x => x.Name.Contains("Bandit Murder"));
             if (GameState.Hero.Accomplishments.Contains(banditCaptainAccomplishment))
             {
                 locationDefinition = WatertownBanditHouse.GetTownInstance().GetEntranceDefinition();

@@ -57,7 +57,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
 
             // Town Center
-            LocationDefinition locationDefinition = WatertownForestAfterSewer.GetTownInstance().GetEnclosedClearingDefinition();
+            LocationDefinition locationDefinition = Watertown.GetTownInstance().GetTownCenterDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
             locationDefinition = WatertownBanditHouse.GetTownInstance().GetRoomTwoDefinition();
