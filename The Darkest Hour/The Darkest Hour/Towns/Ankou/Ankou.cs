@@ -92,7 +92,9 @@ namespace The_Darkest_Hour.Towns.Watertown
             // Location Actions
             List<LocationAction> locationActions = new List<LocationAction>();
 
-            LocationAction locationAction = new RestAction(5);
+            LocationAction locationAction = new RumorAction("Bartender", this.InnKeepersRumors);
+
+            locationAction = new RestAction(5);
             locationActions.Add(locationAction);
 
             locationAction = new BuyTravelRation();
@@ -144,6 +146,58 @@ namespace The_Darkest_Hour.Towns.Watertown
 
 
         }
+
+        public Location LoadConstableOffice()
+        {
+            Location returnData;
+
+
+            returnData = new Location();
+            returnData.Name = "Constable Office";
+            returnData.Description = "A stuffed and busy office of the town's finest.";
+
+            // Location Actions
+            List<LocationAction> locationActions = new List<LocationAction>();
+
+            //Adding rumors from constable in the Constable Office
+            LocationAction constableLocationAction = new RumorAction("Krea - Head Investigator", this.ConstableRumors);
+            locationActions.Add(constableLocationAction);
+
+            returnData.Actions = locationActions;
+
+            // Adjacent Locations
+            Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
+
+            LocationDefinition locationDefinition = GetTownCenterDefinition();
+
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+
+            returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
+
+            return returnData;
+        }
+
+        public LocationDefinition GetConstableOfficeDefinition()
+        {
+            LocationDefinition returnData = new LocationDefinition();
+            string locationKey = CONSTABLE_OFFICE_KEY;
+
+            if (LocationHandler.LocationExists(locationKey))
+            {
+                returnData = LocationHandler.GetLocation(locationKey);
+            }
+            else
+            {
+                returnData.LocationKey = locationKey;
+                returnData.Name = "Constable Office";
+                returnData.DoLoadLocation = LoadConstableOffice;
+
+                LocationHandler.AddLocation(returnData);
+            }
+
+            return returnData;
+        }
+
 
         public Location LoadTownCenter()
         {
@@ -228,6 +282,70 @@ namespace The_Darkest_Hour.Towns.Watertown
             }
 
             return returnData;
+        }
+
+        #endregion
+
+        #region Rumors
+
+        private List<Rumor> InnKeepersRumors
+        {
+            get
+            {
+                List<Rumor> returnData = new List<Rumor>();
+                Rumor rumor;
+                rumor = new Rumor("Hello", "Hey there friend! Fancy a drink? Or some food perhaps? Best place to come for such things on this side of Anokii.");
+                returnData.Add(rumor);
+                return returnData;
+            }
+        }
+
+        private List<Rumor> ConstableRumors
+        {
+            get
+            {
+                List<Rumor> returnData = new List<Rumor>;
+                bool killedMurderer = false;
+                Rumor rumor;
+                if (!killedMurderer)
+                {
+                    rumor = new Rumor("Scummy Murderer", "So I see you come in with high regards from the constable office in Watertown. We've caught wind of some necormancer type activities in the area, however, we're too tied up keeping the peasants from starting a revolt against the nobles. But I can't just send you out to hunt them down, you'll need to prove yourself to the others here. Earn some sort of rank and respect before you're able to commander any men or resources we have avaliable. I'll tell you what, there's one mission that could earn you a lot of allies in this place. There was a peasant that murdered an entire noble family, seeking revenge for the way his family was treated. We tried to arrest him, but he's holed up tight in some shack on the edge of town. We think he has armed allies in the shack with him, and that's why we've been apprehensive to approach. But the nobles are breathing down our necks about this issue and we need something done before this confilct escalates anymore. If you can either bring this guy in or kill him, you'll earn a lot of gratitude and favors from those that work here. Then we can talk about getting to the bottom of this necromancer activity.");
+                    //Add the on heard action for the scummy murderer
+                }
+
+                return returnData;
+            }
+        }
+
+        public void HeardScummyMurdererRomor()
+        {
+            Accomplishment accomplishment = Ankou.GetAnkouAccomplishments().Find(x => x.Name.Contains("Scummy Murderer"));
+            GameState.Hero.Accomplishments.Add(accomplishment);
+            //Reload the TownCenter so it will open up the Shack that the murderer is in.
+            LocationHandler.ResetLocation(TOWN_CENTER_KEY);
+        }
+
+        //Add the on heard action for the scummy murderer
+
+        #endregion
+
+        #region Accomplishments
+
+        public static Accomplishments _AnkouAccomplishments;
+        public static Accomplishments GetAnkouAccomplishments()
+        {
+            if (_AnkouAccomplishments == null)
+            {
+                _AnkouAccomplishments = new Accomplishments();
+
+                Accomplishment accomplishent = new Accomplishment();
+                accomplishent.NameSpace = "Ankou";
+                accomplishent.Name = "Has heard rumor of the Scummy Murderer";
+                accomplishent.Description = "Has heard teh rumor of the Scummy Murderer who is causing much political conflict within Ankou between the nobility and peasants.";
+                _AnkouAccomplishments.Add(accomplishent);
+            }
+
+            return _AnkouAccomplishments;
         }
 
         #endregion

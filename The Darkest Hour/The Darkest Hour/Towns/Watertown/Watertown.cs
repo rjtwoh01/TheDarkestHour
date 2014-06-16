@@ -201,8 +201,6 @@ namespace The_Darkest_Hour.Towns.Watertown
             }
 
             return returnData;
-
-
         }
 
         public Location LoadTownCenter()
