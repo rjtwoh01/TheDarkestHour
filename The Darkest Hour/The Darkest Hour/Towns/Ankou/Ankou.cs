@@ -304,7 +304,7 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             get
             {
-                List<Rumor> returnData = new List<Rumor>;
+                List<Rumor> returnData = new List<Rumor>();
                 bool killedMurderer = false;
                 Rumor rumor;
                 if (!killedMurderer)
