@@ -249,6 +249,13 @@ namespace The_Darkest_Hour.Towns.Watertown
             locationDefinition = Watertown.GetTownInstance().GetTownCenterDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
+            Accomplishment scummyMurdererMission = Watertown.GetWatertownAccomplishments().Find(x => x.Name.Contains("Scummy Murderer"));
+            if (GameState.Hero.Accomplishments.Contains(scummyMurdererMission))
+            {
+                locationDefinition = AnkouMurderShack.GetTownInstance().GetEntranceDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
+
             returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
 
             return returnData;
@@ -311,6 +318,7 @@ namespace The_Darkest_Hour.Towns.Watertown
                 {
                     rumor = new Rumor("Scummy Murderer", "So I see you come in with high regards from the constable office in Watertown. We've caught wind of some necormancer type activities in the area, however, we're too tied up keeping the peasants from starting a revolt against the nobles. But I can't just send you out to hunt them down, you'll need to prove yourself to the others here. Earn some sort of rank and respect before you're able to commander any men or resources we have avaliable. I'll tell you what, there's one mission that could earn you a lot of allies in this place. There was a peasant that murdered an entire noble family, seeking revenge for the way his family was treated. We tried to arrest him, but he's holed up tight in some shack on the edge of town. We think he has armed allies in the shack with him, and that's why we've been apprehensive to approach. But the nobles are breathing down our necks about this issue and we need something done before this confilct escalates anymore. If you can either bring this guy in or kill him, you'll earn a lot of gratitude and favors from those that work here. Then we can talk about getting to the bottom of this necromancer activity.");
                     //Add the on heard action for the scummy murderer
+                    rumor.OnHeardRumor = this.HeardScummyMurdererRomor;
                 }
 
                 return returnData;

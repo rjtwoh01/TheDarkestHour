@@ -191,6 +191,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Towns\Ankou\Ankou.cs" />
+    <Compile Include="Towns\Ankou\AnkouMurderShack.cs" />
     <Compile Include="Towns\Rumor.cs" />
     <Compile Include="Towns\StartingArea\InitialGameMenu.cs" />
     <Compile Include="Towns\Town.cs" />
