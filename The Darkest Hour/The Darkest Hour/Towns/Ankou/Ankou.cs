@@ -323,7 +323,8 @@ namespace The_Darkest_Hour.Towns.Watertown
                 }
                 if (killedMurderer && !locatedNecromancers)
                 {
-                    rumor = new Rumor("Located Necromancers", "Thank you so much for ridding us of that problem. That peasant has caused way too many issues. I guess a promise is a promise. Our preliminary intel has indicated that the necromancers have a camp a few miles into the forest surrounding the east side of Ankou. If you can locate them, find out what you can about their group and their plans. Come back once you've got that done and maybe we'll have enough intel to actually make a move on them. It's really unfortnate I can't take care of this right now. Having necromancers this close to my city makes me highly uncomfortable. Oh, and try not to get killed. We could use someone like you around here. The longer you decide to stick around the better.");
+                    rumor = new Rumor("Locate Necromancers", "Thank you so much for ridding us of that problem. That peasant has caused way too many issues. I guess a promise is a promise. Our preliminary intel has indicated that the necromancers have a camp a few miles into the forest surrounding the east side of Ankou. If you can locate them, find out what you can about their group and their plans. Come back once you've got that done and maybe we'll have enough intel to actually make a move on them. It's really unfortnate I can't take care of this right now. Having necromancers this close to my city makes me highly uncomfortable. Oh, and try not to get killed. We could use someone like you around here. The longer you decide to stick around the better.");
+                    //Add the on heard action here. Also, implement the code to go with hearing this rumor
                 }
 
                 return returnData;

@@ -380,7 +380,7 @@ namespace The_Darkest_Hour.Towns.Watertown
                     returnData.Actions = locationActions;
                 }
                 else
-                    returnData.Description = "A medium sized room with several tables and plates scattered about. There is an open chest at the front of the bed. The Scummy Murderer's body lays mangled and strewn across his bed.";
+                    returnData.Description = "A large room with a torn up bed in the corner. There is an open chest at the front of the bed. The Scummy Murderer's body lays mangled and strewn across his bed.";
             }
 
             // Adjacent Locations
