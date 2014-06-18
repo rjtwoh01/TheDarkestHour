@@ -29,6 +29,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             return GetTownCenterDefinition();
         }
 
+        #region Arena
         public Location LoadArena()
         {
             Location returnData;
@@ -58,7 +59,6 @@ namespace The_Darkest_Hour.Towns.Watertown
             return returnData;
         }
 
-
         public LocationDefinition GetArenaDefinition()
         {
             LocationDefinition returnData = new LocationDefinition();
@@ -79,7 +79,9 @@ namespace The_Darkest_Hour.Towns.Watertown
 
             return returnData;
         }
+        #endregion
 
+        #region Inn
         public Location LoadInn()
         {
             Location returnData;
@@ -123,7 +125,6 @@ namespace The_Darkest_Hour.Towns.Watertown
             return returnData;
         }
 
-
         public LocationDefinition GetInnDefinition()
         {
             LocationDefinition returnData = new LocationDefinition();
@@ -146,7 +147,9 @@ namespace The_Darkest_Hour.Towns.Watertown
 
 
         }
+        #endregion
 
+        #region Constable Office
         public Location LoadConstableOffice()
         {
             Location returnData;
@@ -197,8 +200,9 @@ namespace The_Darkest_Hour.Towns.Watertown
 
             return returnData;
         }
+        #endregion
 
-
+        #region Town Center
         public Location LoadTownCenter()
         {
             Location returnData;
@@ -256,11 +260,17 @@ namespace The_Darkest_Hour.Towns.Watertown
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
             }
 
+            Accomplishment locateNecroMission = Watertown.GetWatertownAccomplishments().Find(x => x.Name.Contains("Locate Neocramancers"));
+            if (GameState.Hero.Accomplishments.Contains(locateNecroMission))
+            {
+                locationDefinition = AnkouForest.GetTownInstance().GetEntranceDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
+
             returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
 
             return returnData;
         }
-
 
         // TODO: Probably should change the design of the GetTownCenter, etc..
         // to public Get properties as this is exactly how they are operating.
@@ -290,6 +300,7 @@ namespace The_Darkest_Hour.Towns.Watertown
 
             return returnData;
         }
+        #endregion
 
         #endregion
 
@@ -327,7 +338,7 @@ namespace The_Darkest_Hour.Towns.Watertown
                 if (killedMurderer && !locatedNecromancers)
                 {
                     rumor = new Rumor("Locate Necromancers", locateNecros);
-                    //Add the on heard action here. Also, implement the code to go with hearing this rumor
+                    rumor.OnHeardRumor = this.HeardLocateNecrosRumor;
                 }
 
                 return returnData;
@@ -339,6 +350,14 @@ namespace The_Darkest_Hour.Towns.Watertown
             Accomplishment accomplishment = Ankou.GetAnkouAccomplishments().Find(x => x.Name.Contains("Scummy Murderer"));
             GameState.Hero.Accomplishments.Add(accomplishment);
             //Reload the TownCenter so it will open up the Shack that the murderer is in.
+            LocationHandler.ResetLocation(TOWN_CENTER_KEY);
+        }
+
+        public void HeardLocateNecrosRumor()
+        {
+            Accomplishment accomplishment = Ankou.GetAnkouAccomplishments().Find(x => x.Name.Contains("Locate Necromancers"));
+            GameState.Hero.Accomplishments.Add(accomplishment);
+            //Reload the TownCenter so it will open up the Forest to go hunt down the necromancer camp
             LocationHandler.ResetLocation(TOWN_CENTER_KEY);
         }
 
@@ -359,6 +378,12 @@ namespace The_Darkest_Hour.Towns.Watertown
                 accomplishent.NameSpace = "Ankou";
                 accomplishent.Name = "Has heard rumor of the Scummy Murderer";
                 accomplishent.Description = "Has heard teh rumor of the Scummy Murderer who is causing much political conflict within Ankou between the nobility and peasants.";
+                _AnkouAccomplishments.Add(accomplishent);
+
+                accomplishent = new Accomplishment();
+                accomplishent.NameSpace = "Ankou";
+                accomplishent.Name = "Has heard rumor of the Locate Necromancers";
+                accomplishent.Description = "Has heard teh rumor of searching the forest to Locate Necromancers and their camp, and then uncover whatever evidence their is as to what their intentions are.";
                 _AnkouAccomplishments.Add(accomplishent);
             }
 
