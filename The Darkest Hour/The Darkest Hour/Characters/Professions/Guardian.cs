@@ -27,7 +27,7 @@ namespace The_Darkest_Hour.Characters.Professions
             myHero.requiredWeaponType = "Sword";
             myHero.requiredArmorType = "Mail";
             Weapon aSword = new Weapon("Simple Sword", "Sword", 5, 2, 0, 0, 2, 0, 0, 1, 0, 0, 5);
-            myHero.Inventory.Add(aSword);
+            myHero.EquippedItems.Add(aSword);
             aSword.Equip(aSword, myHero);
         }
 

@@ -28,7 +28,7 @@ namespace The_Darkest_Hour.Characters.Professions
             myHero.requiredWeaponType = "Staff";
             myHero.requiredArmorType = "Cloth";
             Weapon aStaff = new Weapon("Simple Staff", "Staff", 5, 0, 0, 2, 2, 0, 0, 1, 0, 0, 5);
-            myHero.Inventory.Add(aStaff);
+            myHero.EquippedItems.Add(aStaff);
             aStaff.Equip(aStaff, myHero);
         }
 

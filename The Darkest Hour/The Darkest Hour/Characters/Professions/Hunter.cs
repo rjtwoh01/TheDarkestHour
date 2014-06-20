@@ -27,7 +27,7 @@ namespace The_Darkest_Hour.Characters.Professions
             myHero.requiredWeaponType = "Bow";
             myHero.requiredArmorType = "Leather";
             Weapon aBow = new Weapon("Simple Bow", "Bow", 5, 0, 2, 0, 2, 0, 0, 1, 0, 0, 5);
-            myHero.Inventory.Add(aBow);
+            myHero.EquippedItems.Add(aBow);
             aBow.Equip(aBow, myHero);
         }
 
