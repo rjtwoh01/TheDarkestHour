@@ -465,7 +465,6 @@ namespace The_Darkest_Hour.Towns.Watertown
 
         #endregion
 
-        //Remember to add the code connecting the necro camp here.
         #region Left Three
 
         public Location LoadLeftThree()
@@ -487,7 +486,8 @@ namespace The_Darkest_Hour.Towns.Watertown
             locationDefinition = AnkouForest.GetTownInstance().GetLeftTwoDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            //Add necro camp here
+            locationDefinition = AnkouNecromancerCamp.GetTownInstance().GetEntranceDefinition();
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
