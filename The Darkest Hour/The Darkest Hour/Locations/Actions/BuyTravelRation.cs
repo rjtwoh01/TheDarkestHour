@@ -24,7 +24,7 @@ namespace The_Darkest_Hour.Locations.Actions
 
             try
             {
-                Console.WriteLine("You have {0} gold\n", GameState.Hero.gold);
+                Console.WriteLine("\nYou have {0} gold", GameState.Hero.gold);
                 Console.WriteLine("It is {0} gold per ration. How many do you want to buy?", cost);
                 answer = Console.ReadLine();
                 cost = (Int32.Parse(answer)) * cost;
@@ -32,6 +32,7 @@ namespace The_Darkest_Hour.Locations.Actions
                 if (GameState.Hero.gold >= cost)
                 {
                     GameState.Hero.travelRations += count;
+                    GameState.Hero.gold -= cost;
                     Console.WriteLine("You buy {0} rations for {1} gold, you now have {2} gold and {3} travel rations", count, cost, GameState.Hero.gold, GameState.Hero.travelRations);
                 }
                 else
