@@ -13,7 +13,7 @@ namespace The_Darkest_Hour.Items
         int damage, strength, agility, intelligence, health, requiredLevel, temp, temp2, armor, healAmount, energyIncreased, worth;
         double goldFind, magicFind, critChance, critDamage;
         string itemType, itemName;
-        Random rand;
+        Random rand = new Random();
 
         public Loot()
         {
@@ -54,7 +54,7 @@ namespace The_Darkest_Hour.Items
         public void LevelsOneToFiveLoot()
         {
             rand = new Random();
-            temp = GameState.NumberGenerator.Next(1, 7);
+            temp = GameState.NumberGenerator.Next(1, 6);
             switch (temp)
             {
                 case 1:
@@ -80,7 +80,7 @@ namespace The_Darkest_Hour.Items
         public void LevelsSixToTenLoot()
         {
             rand = new Random();
-            temp = GameState.NumberGenerator.Next(1, 7);
+            temp = GameState.NumberGenerator.Next(1, 6);
             switch (temp)
             {
                 case 1:
@@ -106,7 +106,7 @@ namespace The_Darkest_Hour.Items
         public void LevelsElevelToFifteenLoot()
         {
             rand = new Random();
-            temp = GameState.NumberGenerator.Next(1, 7);
+            temp = GameState.NumberGenerator.Next(1, 6);
             switch (temp)
             {
                 case 1:
@@ -170,7 +170,7 @@ namespace The_Darkest_Hour.Items
             DaggerNames.Add("Chipped Dagger");
 
             temp = GameState.NumberGenerator.Next(1, 7);
-            temp2 = GameState.NumberGenerator.Next(1, 7);
+            temp2 = GameState.NumberGenerator.Next(1, 4);
 
             switch (temp)
             {
