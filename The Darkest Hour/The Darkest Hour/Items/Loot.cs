@@ -31,7 +31,7 @@ namespace The_Darkest_Hour.Items
             }
             if (GameState.Hero.level >= 11 && GameState.Hero.level <= 50)
             {
-                LevelsElevelToFifteenLoot();
+                LevelsElevenToFifteenLoot();
             }
         }
 
@@ -47,7 +47,7 @@ namespace The_Darkest_Hour.Items
             }
             if (mob.level >= 11 && mob.level <= 15)
             {
-                LevelsElevelToFifteenLoot();
+                LevelsElevenToFifteenLoot();
             }
             if (mob.level >= 16 && mob.level <= 20)
             {
@@ -111,26 +111,26 @@ namespace The_Darkest_Hour.Items
             }
         }
 
-        public void LevelsElevelToFifteenLoot()
+        public void LevelsElevenToFifteenLoot()
         {
             rand = new Random();
             temp = GameState.NumberGenerator.Next(1, 6);
             switch (temp)
             {
                 case 1:
-                    LevelsElevelToFifteenGetWeapon();
+                    LevelsElevenToFifteenGetWeapon();
                     break;
                 case 2:
-                    LevelsElevelToFifteenGetArmor();
+                    LevelsElevenToFifteenGetArmor();
                     break;
                 case 3:
-                    LevelsElevelToFifteenGetHelmet();
+                    LevelsElevenToFifteenGetHelmet();
                     break;
                 case 4:
-                    LevelsElevelToFifteenGetAmulet();
+                    LevelsElevenToFifteenGetAmulet();
                     break;
                 case 5:
-                    LevelsElevelToFifteenGetPotion();
+                    LevelsElevenToFifteenGetPotion();
                     break;
                 default:
                     break;
@@ -1022,7 +1022,7 @@ namespace The_Darkest_Hour.Items
                 Console.WriteLine("Unfortunately you don't have enough space to store {0} and it will lay forever abandoned and forgotten", itemName);
         }
 
-        public void LevelsElevelToFifteenGetWeapon()
+        public void LevelsElevenToFifteenGetWeapon()
         {
             rand = new Random();
 
@@ -1255,7 +1255,7 @@ namespace The_Darkest_Hour.Items
             }
         }
 
-        public void LevelsElevelToFifteenGetArmor()
+        public void LevelsElevenToFifteenGetArmor()
         {
             rand = new Random();
 
@@ -1309,7 +1309,7 @@ namespace The_Darkest_Hour.Items
                 Console.WriteLine("Unfortunately you don't have enough space to store {0} and it will lay forever abandoned and forgotten", itemName);
         }
 
-        public void LevelsElevelToFifteenGetHelmet()
+        public void LevelsElevenToFifteenGetHelmet()
         {
             rand = new Random();
 
@@ -1363,7 +1363,7 @@ namespace The_Darkest_Hour.Items
                 Console.WriteLine("Unfortunately you don't have enough space to store {0} and it will lay forever abandoned and forgotten", itemName);
         }
 
-        public void LevelsElevelToFifteenGetAmulet()
+        public void LevelsElevenToFifteenGetAmulet()
         {
             rand = new Random();
 
@@ -1415,7 +1415,7 @@ namespace The_Darkest_Hour.Items
                 Console.WriteLine("Unfortunately you don't have enough space to store {0} and it will lay forever abandoned and forgotten", itemName);
         }
 
-        public void LevelsElevelToFifteenGetPotion()
+        public void LevelsElevenToFifteenGetPotion()
         {
             rand = new Random();
 
@@ -1602,7 +1602,7 @@ namespace The_Darkest_Hour.Items
             agility = GameState.NumberGenerator.Next(0, 31);
             intelligence = GameState.NumberGenerator.Next(0, 31);
             health = GameState.NumberGenerator.Next(0, 31);
-            requiredLevel = GameState.NumberGenerator.Next(11, 16);
+            requiredLevel = GameState.NumberGenerator.Next(16, 21);
             goldFind = 0;
             magicFind = 0;
             critChance = 0;
@@ -1710,7 +1710,7 @@ namespace The_Darkest_Hour.Items
             agility = GameState.NumberGenerator.Next(0, 31);
             intelligence = GameState.NumberGenerator.Next(0, 31);
             health = GameState.NumberGenerator.Next(0, 31);
-            requiredLevel = GameState.NumberGenerator.Next(11, 16);
+            requiredLevel = GameState.NumberGenerator.Next(16, 21);
             goldFind = 0;
             magicFind = 0;
             critChance = 0;
@@ -1764,7 +1764,7 @@ namespace The_Darkest_Hour.Items
             agility = GameState.NumberGenerator.Next(0, 31);
             intelligence = GameState.NumberGenerator.Next(0, 31);
             health = GameState.NumberGenerator.Next(0, 31);
-            requiredLevel = GameState.NumberGenerator.Next(11, 16);
+            requiredLevel = GameState.NumberGenerator.Next(16, 21);
             goldFind = 0;
             magicFind = 0;
             critChance = 0;
@@ -1816,7 +1816,7 @@ namespace The_Darkest_Hour.Items
             agility = GameState.NumberGenerator.Next(0, 31);
             intelligence = GameState.NumberGenerator.Next(0, 31);
             health = GameState.NumberGenerator.Next(0, 31);
-            requiredLevel = GameState.NumberGenerator.Next(11, 16);
+            requiredLevel = GameState.NumberGenerator.Next(16, 21);
             goldFind = 0;
             magicFind = 0;
             critChance = 0;
@@ -2018,7 +2018,7 @@ namespace The_Darkest_Hour.Items
             agility = GameState.NumberGenerator.Next(0, 36);
             intelligence = GameState.NumberGenerator.Next(0, 36);
             health = GameState.NumberGenerator.Next(0, 36);
-            requiredLevel = GameState.NumberGenerator.Next(11, 16);
+            requiredLevel = GameState.NumberGenerator.Next(21, 26);
             goldFind = 0;
             magicFind = 0;
             critChance = 0;
@@ -2126,7 +2126,7 @@ namespace The_Darkest_Hour.Items
             agility = GameState.NumberGenerator.Next(0, 36);
             intelligence = GameState.NumberGenerator.Next(0, 36);
             health = GameState.NumberGenerator.Next(0, 36);
-            requiredLevel = GameState.NumberGenerator.Next(11, 16);
+            requiredLevel = GameState.NumberGenerator.Next(21, 26);
             goldFind = 0;
             magicFind = 0;
             critChance = 0;
@@ -2180,7 +2180,7 @@ namespace The_Darkest_Hour.Items
             agility = GameState.NumberGenerator.Next(0, 36);
             intelligence = GameState.NumberGenerator.Next(0, 36);
             health = GameState.NumberGenerator.Next(0, 36);
-            requiredLevel = GameState.NumberGenerator.Next(11, 16);
+            requiredLevel = GameState.NumberGenerator.Next(21, 26);
             goldFind = 0;
             magicFind = 0;
             critChance = 0;
@@ -2232,7 +2232,7 @@ namespace The_Darkest_Hour.Items
             agility = GameState.NumberGenerator.Next(0, 36);
             intelligence = GameState.NumberGenerator.Next(0, 36);
             health = GameState.NumberGenerator.Next(0, 36);
-            requiredLevel = GameState.NumberGenerator.Next(11, 16);
+            requiredLevel = GameState.NumberGenerator.Next(21, 26);
             goldFind = 0;
             magicFind = 0;
             critChance = 0;
@@ -2259,7 +2259,7 @@ namespace The_Darkest_Hour.Items
 
             healAmount = GameState.NumberGenerator.Next(30, 41);
             energyIncreased = GameState.NumberGenerator.Next(300, 651);
-            requiredLevel = 16;
+            requiredLevel = 21;
             worth = GameState.NumberGenerator.Next(30, 41);
 
             aPotion = new Potion(potionName, healAmount, energyIncreased, requiredLevel, itemType, worth);
