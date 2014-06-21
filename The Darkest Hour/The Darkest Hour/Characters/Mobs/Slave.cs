@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 
 namespace The_Darkest_Hour.Characters.Mobs
 {
-    class Guard : Mob
+    class Slave : Mob
     {
-        public Guard()
+        public Slave()
         {
             this.damageMin = 1;
-            this.damageMax = 5;
-            this.health = 100;
-            this.maxHealth = 100;
-            this.level = 1;
-            this.gold = 5;
+            this.damageMax = 4;
+            this.health = 25;
+            this.maxHealth = 25;
+            this.level = 0;
+            this.gold = 0;
             this.xp = 25;
-            this.Identifier = "Guard";
+            Identifier = "Slave";
         }
     }
 }

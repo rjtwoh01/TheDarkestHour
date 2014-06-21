@@ -97,9 +97,31 @@ namespace The_Darkest_Hour.Towns.Watertown
             Location returnData;
             returnData = new Location();
             returnData.Name = "Tent Cluster";
-            returnData.Description = "A large cluster of tents. There are several necromancers mingling about.";
+            bool defeatedNecros = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouNecromancerCamp.DEFEATED_CLUSTER_TENT_NECRO));
 
-            //Actions
+            if (!defeatedNecros)
+            {
+                returnData.Description = "A large cluster of tents. There are several necromancers mingling about.";
+
+                //Actions
+                List<LocationAction> locationActions = new List<LocationAction>();
+
+                List<Mob> necro = new List<Mob>();
+                necro.Add(new Necromancer());
+                necro.Add(new Necromancer());
+                necro.Add(new Necromancer());
+                necro.Add(new Necromancer());
+                necro.Add(new Necromancer());
+                necro.Add(new Necromancer());
+                CombatAction combatAction = new CombatAction("Necromancers", necro);
+                combatAction.PostCombat += ClusterTentNecros;
+
+                locationActions.Add(combatAction);
+
+                returnData.Actions = locationActions;
+            }
+            if (defeatedNecros)
+                returnData.Description = "A large cluster of tents. There are several dead necromancer bodies laying bloodied and beaten on the floor.";
 
             // Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
@@ -108,12 +130,27 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = AnkouNecromancerCamp.GetTownInstance().GetEntranceDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            locationDefinition = AnkouNecromancerCamp.GetTownInstance().GetCookingAreaDefinition();
-            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            if (defeatedNecros)
+            {
+                locationDefinition = AnkouNecromancerCamp.GetTownInstance().GetCookingAreaDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
 
             return returnData;
+        }
+
+        public void ClusterTentNecros(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouNecromancerCamp.DEFEATED_CLUSTER_TENT_NECRO, true);
+
+                // Reload the Sewer Coordior so it will open up the sewer
+                LocationHandler.ResetLocation(TENT_CLUSTER_KEY);
+
+            }
         }
 
         public LocationDefinition GetTentClusterDefinition()
@@ -146,9 +183,31 @@ namespace The_Darkest_Hour.Towns.Watertown
             Location returnData;
             returnData = new Location();
             returnData.Name = "Cooking Area";
-            returnData.Description = "A large cooking area for the necromancers. There are three necromancers and three slaves working on the night's dinner.";
+            bool defeatedNecros = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouNecromancerCamp.DEFEATED_COOKING_AREA_MOBS));
 
-            //Actions
+            if (!defeatedNecros)
+            {
+                returnData.Description = "A large cooking area for the necromancers. There are three necromancers and three slaves working on the night's dinner";
+
+                //Actions
+                List<LocationAction> locationActions = new List<LocationAction>();
+
+                List<Mob> necro = new List<Mob>();
+                necro.Add(new Necromancer());
+                necro.Add(new Slave());
+                necro.Add(new Necromancer());
+                necro.Add(new Slave());
+                necro.Add(new Slave());
+                necro.Add(new Necromancer());
+                CombatAction combatAction = new CombatAction("Necromancers and Slaves", necro);
+                combatAction.PostCombat += CookingAreaMobs;
+
+                locationActions.Add(combatAction);
+
+                returnData.Actions = locationActions;
+            }
+            if (defeatedNecros)
+                returnData.Description = "A large cooking area for the necromancers. The blood of the dead is now staining the food and drink.";
 
             // Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
@@ -157,12 +216,27 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = AnkouNecromancerCamp.GetTownInstance().GetTentClusterDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            locationDefinition = AnkouNecromancerCamp.GetTownInstance().GetEatingAreaDefinition();
-            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            if (defeatedNecros)
+            {
+                locationDefinition = AnkouNecromancerCamp.GetTownInstance().GetEatingAreaDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
 
             return returnData;
+        }
+
+        public void CookingAreaMobs(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouNecromancerCamp.DEFEATED_COOKING_AREA_MOBS, true);
+
+                // Reload the Sewer Coordior so it will open up the sewer
+                LocationHandler.ResetLocation(COOKING_AREA_KEY);
+
+            }
         }
 
         public LocationDefinition GetCookingAreaDefinition()
@@ -195,9 +269,35 @@ namespace The_Darkest_Hour.Towns.Watertown
             Location returnData;
             returnData = new Location();
             returnData.Name = "Eating Area";
-            returnData.Description = "A large area for the necromancers to eat their meals. There are make shift tables, crudely cut from wood. Also, there are several logs that haven been evened off for seats placed in several places. There are ten necromancers eating in the area.";
+            bool defeatedNecros = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouNecromancerCamp.DEFEATED_EATING_AREA_MOBS));
 
-            //Actions
+            if (!defeatedNecros)
+            {
+                returnData.Description = "A large area for the necromancers to eat their meals. There are make shift tables, crudely cut from wood. Also, there are several logs that haven been evened off for seats placed in several places. There are ten necromancers eating in the area.";
+
+                //Actions
+                List<LocationAction> locationActions = new List<LocationAction>();
+
+                List<Mob> necro = new List<Mob>();
+                necro.Add(new Necromancer());
+                necro.Add(new Necromancer());
+                necro.Add(new Necromancer());
+                necro.Add(new Necromancer());
+                necro.Add(new Necromancer());
+                necro.Add(new Necromancer());
+                necro.Add(new Necromancer());
+                necro.Add(new Necromancer());
+                necro.Add(new Necromancer());
+                necro.Add(new Necromancer());
+                CombatAction combatAction = new CombatAction("Necromancers", necro);
+                combatAction.PostCombat += EatingAreaMobs;
+
+                locationActions.Add(combatAction);
+
+                returnData.Actions = locationActions;
+            }
+            if (defeatedNecros)
+                returnData.Description = "A large area for the necromancers to eat their meals. There are make shift tables, crudely cut from wood. Also, there are several logs that haven been evened off for seats placed in several places. The necromancers lay dead with their food growing cold due to no one being there to eat it.";
 
             // Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
@@ -206,12 +306,27 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = AnkouNecromancerCamp.GetTownInstance().GetCookingAreaDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            locationDefinition = AnkouNecromancerCamp.GetTownInstance().GetNarrowStairsDefinition();
-            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            if (defeatedNecros)
+            {
+                locationDefinition = AnkouNecromancerCamp.GetTownInstance().GetNarrowStairsDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
 
             return returnData;
+        }
+
+        public void EatingAreaMobs(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouNecromancerCamp.DEFEATED_EATING_AREA_MOBS, true);
+
+                // Reload the Sewer Coordior so it will open up the sewer
+                LocationHandler.ResetLocation(EATING_AREA_KEY);
+
+            }
         }
 
         public LocationDefinition GetEatingAreaDefinition()
@@ -293,9 +408,29 @@ namespace The_Darkest_Hour.Towns.Watertown
             Location returnData;
             returnData = new Location();
             returnData.Name = "Large Clearing";
-            returnData.Description = "A large clearing, with grotesque displays of hanging bodies off the sides of the path. There is a rather large tent on the back end of the clearing. Four necromancers in elite guard robes stand at the entrance to the tent, blocking all progress forward.";
+            bool defeatedNecros = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouNecromancerCamp.DEFEATED_CLEARING_ELITE_NECRO_GUARD));
 
-            //Actions
+            if (!defeatedNecros)
+            {
+                returnData.Description = "A large clearing, with grotesque displays of hanging bodies off the sides of the path. There is a rather large tent on the back end of the clearing. Four necromancers in elite guard robes stand at the entrance to the tent, blocking all progress forward.";
+
+                //Actions
+                List<LocationAction> locationActions = new List<LocationAction>();
+
+                List<Mob> necro = new List<Mob>();
+                necro.Add(new NecromancerEliteGuard());
+                necro.Add(new NecromancerEliteGuard());
+                necro.Add(new NecromancerEliteGuard());
+                necro.Add(new NecromancerEliteGuard());
+                CombatAction combatAction = new CombatAction("Necromancer Elite Guard", necro);
+                combatAction.PostCombat += ClearingGuards;
+
+                locationActions.Add(combatAction);
+
+                returnData.Actions = locationActions;
+            }
+            if (defeatedNecros)
+                returnData.Description = "A large clearing, with grotesque displays of hanging bodies off the sides of the path. There is a rather large tent on the back end of the clearing. The crumpled bodies of the necromancer guards are scattered across the clearing. There is no more resistance to the entrance of the tent.";
 
             // Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
@@ -304,12 +439,27 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = AnkouNecromancerCamp.GetTownInstance().GetNarrowStairsDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            locationDefinition = AnkouNecromancerCamp.GetTownInstance().GetLeaderTentDefinition();
-            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            if (defeatedNecros)
+            {
+                locationDefinition = AnkouNecromancerCamp.GetTownInstance().GetLeaderTentDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
 
             return returnData;
+        }
+
+        public void ClearingGuards(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouNecromancerCamp.DEFEATED_CLEARING_ELITE_NECRO_GUARD, true);
+
+                // Reload the Sewer Coordior so it will open up the sewer
+                LocationHandler.ResetLocation(LARGE_CLEARING_KEY);
+
+            }
         }
 
         public LocationDefinition GetLargeClearingDefinition()
@@ -342,9 +492,53 @@ namespace The_Darkest_Hour.Towns.Watertown
             Location returnData;
             returnData = new Location();
             returnData.Name = "Necromancer Leader's Tent";
-            returnData.Description = "A large tent, full of many dark items. The necromancer leader sits at his desk, twirling a long, sharp knife in his hand.";
+            bool defeatedNecros = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouNecromancerCamp.DEFEATED_NECRO_LEADER));
+            bool openedChest = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouNecromancerCamp.OPENED_CHEST));
+            bool takeJournal = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouNecromancerCamp.TOOK_JOURNAL));
 
-            //Actions
+            if (!defeatedNecros)
+            {
+                returnData.Description = "A large tent, full of many dark items. The necromancer leader sits at his desk, twirling a long, sharp knife in his hand.";
+
+                //Actions
+                List<LocationAction> locationActions = new List<LocationAction>();
+
+                List<Mob> necro = new List<Mob>();
+                necro.Add(new AnkouNecroLeader());
+                CombatAction combatAction = new CombatAction("Necromancer Leader", necro);
+                combatAction.PostCombat += ClusterTentNecros;
+
+                locationActions.Add(combatAction);
+
+                returnData.Actions = locationActions;
+            }
+            if (defeatedNecros)
+            {
+                if (!openedChest)
+                {
+                    if (!takeJournal)
+                        returnData.Description = "A large tent, full of many dark items. The necromancer leader is dead on the ground. There is a journal on his desk and an unopened treasure chest.";
+                    else
+                        returnData.Description = "A large tent, full of many dark items. The necromancer leader is dead on the ground. There is an unopened treasure chest.";
+
+                    List<LocationAction> locationActions = new List<LocationAction>();
+                    TreasureChestAction itemAction = new TreasureChestAction(3);
+                    locationActions.Add(itemAction);
+                    itemAction.PostItem += Chest;
+                    returnData.Actions = locationActions;
+                }
+                if (openedChest && takeJournal)
+                    returnData.Description = "A large tent, full of many dark items. The necromancer leader is dead on the ground. There is a opened treasure chest.";
+                if (!takeJournal && openedChest)
+                {
+                    returnData.Description = "A large tent, full of many dark items. The necromancer leader is dead on the ground. There is a journal on his desk and an opened treasure chest.";
+                    List<LocationAction> locationActions = new List<LocationAction>();
+                    TakeItemAction letterAction = new TakeItemAction("Necromancer Leader's Journal");
+                    letterAction.PostItem += LeaderJournal;
+                    locationActions.Add(letterAction);
+                    returnData.Actions = locationActions;
+                }
+            }
 
             // Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
@@ -353,12 +547,51 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = AnkouNecromancerCamp.GetTownInstance().GetLargeClearingDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            locationDefinition = Ankou.GetTownInstance().GetTownCenterDefinition();
-            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            if (defeatedNecros && takeJournal)
+            {
+                locationDefinition = Ankou.GetTownInstance().GetTownCenterDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
 
             return returnData;
+        }
+
+        public void NecroLeader(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouNecromancerCamp.DEFEATED_NECRO_LEADER, true);
+
+                // Reload the Sewer Coordior so it will open up the sewer
+                LocationHandler.ResetLocation(LEADER_TENT_KEY);
+
+            }
+        }
+
+        public void Chest(object sender, ChestEventArgs chestEventArgs)
+        {
+            if (chestEventArgs.ChestResults == ChestResults.Taken)
+            {
+                LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouNecromancerCamp.OPENED_CHEST, true);
+
+                // Reload the Sewer Coordior so it will open up the sewer
+                LocationHandler.ResetLocation(LEADER_TENT_KEY);
+
+            }
+        }
+
+        public void LeaderJournal(object sender, TakeItemEventArgs inspectEventArgs)
+        {
+            if (inspectEventArgs.ItemResults == TakeItemResults.Taken)
+            {
+                LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouNecromancerCamp.TOOK_JOURNAL, true);
+
+                // Reload the Sewer Coordior so it will open up the sewer
+                LocationHandler.ResetLocation(LEADER_TENT_KEY);
+
+            }
         }
 
         public LocationDefinition GetLeaderTentDefinition()
