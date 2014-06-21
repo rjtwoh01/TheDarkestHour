@@ -326,7 +326,8 @@ namespace The_Darkest_Hour.Towns.Watertown
                 string locateNecros = "Thank you so much for ridding us of that problem. That peasant has caused way too many issues. I guess a promise is a promise. Our preliminary intel has indicated that the necromancers have a camp a few miles into the forest surrounding the east side of Ankou. If you can locate them, find out what you can about their group and their plans. Come back once you've got that done and maybe we'll have enough intel to actually make a move on them. It's really unfortnate I can't take care of this right now. Having necromancers this close to my city makes me highly uncomfortable. Oh, and " + GameState.Hero.Identifier + "try not to get killed. We could use someone like you around here. The longer you decide to stick around the better";
 
                 bool killedMurderer = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouMurderShack.DEFEATED_SCUMMY_MURDERER));
-                bool locatedNecromancers = false;
+                bool locatedNecromancers = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouNecromancerCamp.TOOK_JOURNAL));
+                bool silencedAriean = false;
                 List<Rumor> returnData = new List<Rumor>();
                 Rumor rumor;
                 if (!killedMurderer)
@@ -339,6 +340,10 @@ namespace The_Darkest_Hour.Towns.Watertown
                 {
                     rumor = new Rumor("Locate Necromancers", locateNecros);
                     rumor.OnHeardRumor = this.HeardLocateNecrosRumor;
+                }
+                if (locatedNecromancers && !silencedAriean)
+                {
+                    rumor = new Rumor("Silence Ariean", "Krae flips through the journal, studying the last few pages intensiley. Finally, she looks up at you and says \"This is highly troubling. Apparently the necromancers are planning to bring a full scale army and raise Ankou to the ground. One of their points of contact in the city is a noblewoman named Ariean. She's always seeemed cold to me, but to turn on us like this...\" She pauses for a second before continuing, \"This combined with the mini war between the peasants and nobles, I fear this city may turn to dust before our very eyes. Please, go find out what you can about Ariean. And if you have to, end her. I'd rather have her alive for questioning, but if she fights back, don't hesitate to kill her. An inside contact with the necromancers is too risky to be left free. Go now, and good luck.\" She turns back to the journal, a clear dismissal.");
                 }
 
                 return returnData;
@@ -361,6 +366,14 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationHandler.ResetLocation(TOWN_CENTER_KEY);
         }
 
+        public void HeardArieanRumor()
+        {
+            Accomplishment accomplishment = Ankou.GetAnkouAccomplishments().Find(x => x.Name.Contains("Silence Ariean"));
+            GameState.Hero.Accomplishments.Add(accomplishment);
+            //Reload the TownCenter so it will open up the Forest to go hunt down the necromancer camp
+            LocationHandler.ResetLocation(TOWN_CENTER_KEY);
+        }
+
         //Add the on heard action for the scummy murderer
 
         #endregion
@@ -377,13 +390,19 @@ namespace The_Darkest_Hour.Towns.Watertown
                 Accomplishment accomplishent = new Accomplishment();
                 accomplishent.NameSpace = "Ankou";
                 accomplishent.Name = "Has heard rumor of the Scummy Murderer";
-                accomplishent.Description = "Has heard teh rumor of the Scummy Murderer who is causing much political conflict within Ankou between the nobility and peasants.";
+                accomplishent.Description = "Has heard the rumor of the Scummy Murderer who is causing much political conflict within Ankou between the nobility and peasants.";
                 _AnkouAccomplishments.Add(accomplishent);
 
                 accomplishent = new Accomplishment();
                 accomplishent.NameSpace = "Ankou";
                 accomplishent.Name = "Has heard rumor of the Locate Necromancers";
-                accomplishent.Description = "Has heard teh rumor of searching the forest to Locate Necromancers and their camp, and then uncover whatever evidence their is as to what their intentions are.";
+                accomplishent.Description = "Has heard the rumor of searching the forest to Locate Necromancers and their camp, and then uncover whatever evidence their is as to what their intentions are.";
+                _AnkouAccomplishments.Add(accomplishent);
+
+                accomplishent = new Accomplishment();
+                accomplishent.NameSpace = "Ankou";
+                accomplishent.Name = "Has heard rumor of the Silence Ariean";
+                accomplishent.Description = "Has heard the rumor of hunting down Ariean and silencing her. She's too dangerous to be left free.";
                 _AnkouAccomplishments.Add(accomplishent);
             }
 
