@@ -250,22 +250,25 @@ namespace The_Darkest_Hour.Towns.Watertown
             locationDefinition = GetInnDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            locationDefinition = Watertown.GetTownInstance().GetTownCenterDefinition();
+            locationDefinition = GetConstableOfficeDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            Accomplishment scummyMurdererMission = Watertown.GetWatertownAccomplishments().Find(x => x.Name.Contains("Scummy Murderer"));
+            Accomplishment scummyMurdererMission = Ankou.GetAnkouAccomplishments().Find(x => x.Name.Contains("Scummy Murderer"));
             if (GameState.Hero.Accomplishments.Contains(scummyMurdererMission))
             {
                 locationDefinition = AnkouMurderShack.GetTownInstance().GetEntranceDefinition();
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
             }
 
-            Accomplishment locateNecroMission = Watertown.GetWatertownAccomplishments().Find(x => x.Name.Contains("Locate Neocramancers"));
+            Accomplishment locateNecroMission = Ankou.GetAnkouAccomplishments().Find(x => x.Name.Contains("Locate Neocramancers"));
             if (GameState.Hero.Accomplishments.Contains(locateNecroMission))
             {
                 locationDefinition = AnkouForest.GetTownInstance().GetEntranceDefinition();
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
             }
+
+            locationDefinition = Watertown.GetTownInstance().GetTownCenterDefinition();
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
 
@@ -345,6 +348,9 @@ namespace The_Darkest_Hour.Towns.Watertown
                 {
                     rumor = new Rumor("Silence Ariean", "Krae flips through the journal, studying the last few pages intensiley. Finally, she looks up at you and says \"This is highly troubling. Apparently the necromancers are planning to bring a full scale army and raise Ankou to the ground. One of their points of contact in the city is a noblewoman named Ariean. She's always seeemed cold to me, but to turn on us like this...\" She pauses for a second before continuing, \"This combined with the mini war between the peasants and nobles, I fear this city may turn to dust before our very eyes. Please, go find out what you can about Ariean. And if you have to, end her. I'd rather have her alive for questioning, but if she fights back, don't hesitate to kill her. An inside contact with the necromancers is too risky to be left free. Go now, and good luck.\" She turns back to the journal, a clear dismissal.");
                 }
+                else
+                    rumor = new Rumor("How can I help you?", "You have any crimes to report?");
+                returnData.Add(rumor);
 
                 return returnData;
             }

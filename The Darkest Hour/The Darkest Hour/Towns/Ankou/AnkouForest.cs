@@ -60,10 +60,6 @@ namespace The_Darkest_Hour.Towns.Watertown
             locationDefinition = AnkouForest.GetTownInstance().GetStraightOneDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            locationDefinition = Ankou.GetTownInstance().GetTownCenterDefinition();
-            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
-
-
             returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
 
             return returnData;
@@ -107,10 +103,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
 
             // Town Center
-            LocationDefinition locationDefinition = Ankou.GetTownInstance().GetTownCenterDefinition();
-            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
-
-            locationDefinition = AnkouForest.GetTownInstance().GetEntranceDefinition();
+            LocationDefinition locationDefinition = AnkouForest.GetTownInstance().GetEntranceDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
             locationDefinition = AnkouForest.GetTownInstance().GetStraightTwoDefinition();
@@ -158,11 +151,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             // Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
 
-            // Town Center
-            LocationDefinition locationDefinition = Ankou.GetTownInstance().GetTownCenterDefinition();
-            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
-
-            locationDefinition = AnkouForest.GetTownInstance().GetStraightTwoDefinition();
+            LocationDefinition locationDefinition = AnkouForest.GetTownInstance().GetStraightTwoDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
             locationDefinition = AnkouForest.GetTownInstance().GetStraightThreeDefinition();
@@ -218,10 +207,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
 
             // Town Center
-            LocationDefinition locationDefinition = Ankou.GetTownInstance().GetTownCenterDefinition();
-            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
-
-            locationDefinition = AnkouForest.GetTownInstance().GetStraightTwoDefinition();
+            LocationDefinition locationDefinition = AnkouForest.GetTownInstance().GetStraightTwoDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
             locationDefinition = AnkouForest.GetTownInstance().GetStraightFourDefinition();
@@ -270,11 +256,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             // Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
 
-            // Town Center
-            LocationDefinition locationDefinition = Ankou.GetTownInstance().GetTownCenterDefinition();
-            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
-
-            locationDefinition = AnkouForest.GetTownInstance().GetStraightThreeDefinition();
+            LocationDefinition locationDefinition = AnkouForest.GetTownInstance().GetStraightThreeDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
             locationDefinition = AnkouForest.GetTownInstance().GetStraightFiveDefinition();
@@ -324,10 +306,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
 
             // Town Center
-            LocationDefinition locationDefinition = Ankou.GetTownInstance().GetTownCenterDefinition();
-            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
-
-            locationDefinition = AnkouForest.GetTownInstance().GetStraightFourDefinition();
+            LocationDefinition locationDefinition = AnkouForest.GetTownInstance().GetStraightFourDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
 
@@ -374,10 +353,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
 
             // Town Center
-            LocationDefinition locationDefinition = Ankou.GetTownInstance().GetTownCenterDefinition();
-            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
-
-            locationDefinition = AnkouForest.GetTownInstance().GetStraightTwoDefinition();
+            LocationDefinition locationDefinition = AnkouForest.GetTownInstance().GetStraightTwoDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
             locationDefinition = AnkouForest.GetTownInstance().GetLeftTwoDefinition();
@@ -427,10 +403,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
 
             // Town Center
-            LocationDefinition locationDefinition = Ankou.GetTownInstance().GetTownCenterDefinition();
-            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
-
-            locationDefinition = AnkouForest.GetTownInstance().GetLeftOneDefinition();
+            LocationDefinition locationDefinition = AnkouForest.GetTownInstance().GetLeftOneDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
             locationDefinition = AnkouForest.GetTownInstance().GetLeftThreeDefinition();
@@ -479,11 +452,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             // Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
 
-            // Town Center
-            LocationDefinition locationDefinition = Ankou.GetTownInstance().GetTownCenterDefinition();
-            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
-
-            locationDefinition = AnkouForest.GetTownInstance().GetLeftTwoDefinition();
+            LocationDefinition locationDefinition = AnkouForest.GetTownInstance().GetLeftTwoDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
             locationDefinition = AnkouNecromancerCamp.GetTownInstance().GetEntranceDefinition();
@@ -532,11 +501,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             // Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
 
-            // Town Center
-            LocationDefinition locationDefinition = Ankou.GetTownInstance().GetTownCenterDefinition();
-            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
-
-            locationDefinition = AnkouForest.GetTownInstance().GetStraightOneDefinition();
+            LocationDefinition locationDefinition = AnkouForest.GetTownInstance().GetStraightOneDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
             locationDefinition = AnkouForest.GetTownInstance().GetRightTwoDefinition();
@@ -585,11 +550,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             // Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
 
-            // Town Center
-            LocationDefinition locationDefinition = Ankou.GetTownInstance().GetTownCenterDefinition();
-            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
-
-            locationDefinition = AnkouForest.GetTownInstance().GetRightOneDefinition();
+            LocationDefinition locationDefinition = AnkouForest.GetTownInstance().GetRightOneDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
             locationDefinition = AnkouForest.GetTownInstance().GetRightThreeDefinition();
@@ -639,10 +600,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
 
             // Town Center
-            LocationDefinition locationDefinition = Ankou.GetTownInstance().GetTownCenterDefinition();
-            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
-
-            locationDefinition = AnkouForest.GetTownInstance().GetRightThreeDefinition();
+            LocationDefinition locationDefinition = AnkouForest.GetTownInstance().GetRightThreeDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
 
