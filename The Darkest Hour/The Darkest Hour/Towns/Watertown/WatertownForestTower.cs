@@ -60,7 +60,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
 
             // The Clearing on the outside of this tower.
-            LocationDefinition locationDefinition = WatertownForestClearingBeforeTower.GetTownInstance().GetEntranceDefinition();
+            LocationDefinition locationDefinition = WatertownForestClearingBeforeTower.GetTownInstance().GetClearingDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
             //Large Hall
