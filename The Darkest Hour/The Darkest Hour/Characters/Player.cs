@@ -523,6 +523,7 @@ Name:           Level:          Health:           Damage:
                     int newXPRequired = CalculateXPNeeded();
                     this.requiredXP = newXPRequired;
                     Console.WriteLine("Congratulations! You leveled!\nYou're now level {0}!\nYou have {1} of {2} xp needed for level {3}", this.level, this.xp, this.requiredXP, (this.level + 1));
+                    Console.WriteLine("\a");
                 }
 
 
