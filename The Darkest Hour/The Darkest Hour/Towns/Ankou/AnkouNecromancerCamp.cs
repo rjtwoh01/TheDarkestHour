@@ -506,7 +506,7 @@ namespace The_Darkest_Hour.Towns.Watertown
                 List<Mob> necro = new List<Mob>();
                 necro.Add(new AnkouNecroLeader());
                 CombatAction combatAction = new CombatAction("Necromancer Leader", necro);
-                combatAction.PostCombat += ClusterTentNecros;
+                combatAction.PostCombat += NecroLeader;
 
                 locationActions.Add(combatAction);
 
