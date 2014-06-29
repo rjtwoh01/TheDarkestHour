@@ -339,12 +339,12 @@ namespace The_Darkest_Hour.Towns.Watertown
                     //Add the on heard action for the scummy murderer
                     rumor.OnHeardRumor = this.HeardScummyMurdererRomor;
                 }
-                if (killedMurderer && !locatedNecromancers)
+                else if (killedMurderer && !locatedNecromancers)
                 {
                     rumor = new Rumor("Locate Necromancers", locateNecros);
                     rumor.OnHeardRumor = this.HeardLocateNecrosRumor;
                 }
-                if (locatedNecromancers && !silencedAriean)
+                else if (locatedNecromancers && !silencedAriean)
                 {
                     rumor = new Rumor("Silence Ariean", "Krae flips through the journal, studying the last few pages intensiley. Finally, she looks up at you and says \"This is highly troubling. Apparently the necromancers are planning to bring a full scale army and raise Ankou to the ground. One of their points of contact in the city is a noblewoman named Ariean. She's always seeemed cold to me, but to turn on us like this...\" She pauses for a second before continuing, \"This combined with the mini war between the peasants and nobles, I fear this city may turn to dust before our very eyes. Please, go find out what you can about Ariean. And if you have to, end her. I'd rather have her alive for questioning, but if she fights back, don't hesitate to kill her. An inside contact with the necromancers is too risky to be left free. Go now, and good luck.\" She turns back to the journal, a clear dismissal.");
                 }
