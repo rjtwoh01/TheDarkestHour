@@ -501,7 +501,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             // Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
 
-            LocationDefinition locationDefinition = AnkouForest.GetTownInstance().GetStraightOneDefinition();
+            LocationDefinition locationDefinition = AnkouForest.GetTownInstance().GetStraightTwoDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
             locationDefinition = AnkouForest.GetTownInstance().GetRightTwoDefinition();
