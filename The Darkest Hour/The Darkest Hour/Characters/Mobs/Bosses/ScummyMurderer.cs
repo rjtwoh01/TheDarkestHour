@@ -10,10 +10,10 @@ namespace The_Darkest_Hour.Characters.Mobs.Bosses
     {
         public ScummyMurderer()
         {
-            this.damageMin = 60;
-            this.damageMax = 90;
-            this.health = 1750;
-            this.maxHealth = 1750;
+            this.damageMin = 50;
+            this.damageMax = 80;
+            this.health = 1300;
+            this.maxHealth = 1300;
             this.level = 1;
             this.gold = 275;
             this.xp = 800;
