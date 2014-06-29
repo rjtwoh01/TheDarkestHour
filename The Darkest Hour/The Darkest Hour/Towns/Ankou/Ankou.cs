@@ -260,7 +260,7 @@ namespace The_Darkest_Hour.Towns.Watertown
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
             }
 
-            Accomplishment locateNecroMission = Ankou.GetAnkouAccomplishments().Find(x => x.Name.Contains("Locate Neocramancers"));
+            Accomplishment locateNecroMission = Ankou.GetAnkouAccomplishments().Find(x => x.Name.Contains("Locate Necromancers"));
             if (GameState.Hero.Accomplishments.Contains(locateNecroMission))
             {
                 locationDefinition = AnkouForest.GetTownInstance().GetEntranceDefinition();

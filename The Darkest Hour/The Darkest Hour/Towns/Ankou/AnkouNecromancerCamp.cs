@@ -342,7 +342,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 returnData.LocationKey = locationKey;
                 returnData.Name = "Eating Area";
-                returnData.DoLoadLocation = LoadCookingArea;
+                returnData.DoLoadLocation = LoadEatingArea;
 
                 LocationHandler.AddLocation(returnData);
             }

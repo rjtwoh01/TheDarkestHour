@@ -406,7 +406,7 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
             {
-                LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouMurderShack.DEFEATED_DINNING_ROOM_GUARDS, true);
+                LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouMurderShack.DEFEATED_SCUMMY_MURDERER, true);
 
                 // Reload the Sewer Coordior so it will open up the sewer
                 LocationHandler.ResetLocation(MASTER_ROOM_KEY);
@@ -439,7 +439,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 returnData.LocationKey = locationKey;
                 returnData.Name = "Master Room";
-                returnData.DoLoadLocation = LoadDinningRoom;
+                returnData.DoLoadLocation = LoadMasterRoom;
 
                 LocationHandler.AddLocation(returnData);
             }
