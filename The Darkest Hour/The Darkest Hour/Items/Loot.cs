@@ -488,7 +488,7 @@ namespace The_Darkest_Hour.Items
             HelmetNames.Add("Patched Hat");
 
 
-            temp = GameState.NumberGenerator.Next(0, 11);
+            temp = GameState.NumberGenerator.Next(1, 4);
 
             switch (temp)
             {
