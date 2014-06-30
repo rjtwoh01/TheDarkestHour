@@ -10,10 +10,10 @@ namespace The_Darkest_Hour.Characters.Mobs.Bosses
     {
         public AnkouNecroLeader()
         {
-            this.damageMin = 85;
-            this.damageMax = 100;
-            this.health = 60;
-            this.maxHealth = 60;
+            this.damageMin = 65;
+            this.damageMax = 85;
+            this.health = 1000;
+            this.maxHealth = 1000;
             this.level = 1;
             this.gold = 250;
             this.xp = 250;

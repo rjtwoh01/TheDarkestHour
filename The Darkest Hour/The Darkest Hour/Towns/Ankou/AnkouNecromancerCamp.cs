@@ -586,7 +586,7 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             if (inspectEventArgs.ItemResults == TakeItemResults.Taken)
             {
-                LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouNecromancerCamp.TOOK_JOURNAL, true);
+                LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouNecromancerCamp.TOOK_JOURNAL, true);
 
                 // Reload the Sewer Coordior so it will open up the sewer
                 LocationHandler.ResetLocation(LEADER_TENT_KEY);

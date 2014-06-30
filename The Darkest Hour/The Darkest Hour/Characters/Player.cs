@@ -551,7 +551,7 @@ Name:           Level:          Health:           Damage:
             this.maxHealth += numberAddedToStats;
             this.damageMin += secondNumberAddedToStats;
 
-            this.energy = this.energy;
+            this.energy = this.maxEnergy;
             this.health = this.maxHealth;
         }
 
