@@ -211,7 +211,7 @@ namespace The_Darkest_Hour.Towns.Watertown
 
             returnData = new Location();
             returnData.Name = "Ankou Town Center";
-            returnData.Description = "Welcome to the cozy Watertown Town Center.";
+            returnData.Description = "Welcome to the cozy Ankou Town Center.";
 
             // Location Actions
             List<LocationAction> locationActions = new List<LocationAction>();
@@ -264,6 +264,12 @@ namespace The_Darkest_Hour.Towns.Watertown
             if (GameState.Hero.Accomplishments.Contains(locateNecroMission))
             {
                 locationDefinition = AnkouForest.GetTownInstance().GetEntranceDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
+            Accomplishment silenceAriean = Ankou.GetAnkouAccomplishments().Find(x => x.Name.Contains("Silence Ariean"));
+            if (GameState.Hero.Accomplishments.Contains(silenceAriean))
+            {
+                locationDefinition = AnkouArieansEstate.GetTownInstance().GetEntranceDefinition();
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
             }
 
@@ -336,7 +342,6 @@ namespace The_Darkest_Hour.Towns.Watertown
                 if (!killedMurderer)
                 {
                     rumor = new Rumor("Scummy Murderer", "So I see you come in with high regards from the constable office in Watertown. We've caught wind of some necormancer type activities in the area, however, we're too tied up keeping the peasants from starting a revolt against the nobles. But I can't just send you out to hunt them down, you'll need to prove yourself to the others here. Earn some sort of rank and respect before you're able to commander any men or resources we have avaliable. I'll tell you what, there's one mission that could earn you a lot of allies in this place. There was a peasant that murdered an entire noble family, seeking revenge for the way his family was treated. We tried to arrest him, but he's holed up tight in some shack on the edge of town. We think he has armed allies in the shack with him, and that's why we've been apprehensive to approach. But the nobles are breathing down our necks about this issue and we need something done before this confilct escalates anymore. If you can either bring this guy in or kill him, you'll earn a lot of gratitude and favors from those that work here. Then we can talk about getting to the bottom of this necromancer activity.");
-                    //Add the on heard action for the scummy murderer
                     rumor.OnHeardRumor = this.HeardScummyMurdererRomor;
                 }
                 else if (killedMurderer && !locatedNecromancers)
@@ -347,6 +352,7 @@ namespace The_Darkest_Hour.Towns.Watertown
                 else if (locatedNecromancers && !silencedAriean)
                 {
                     rumor = new Rumor("Silence Ariean", "Krae flips through the journal, studying the last few pages intensiley. Finally, she looks up at you and says \"This is highly troubling. Apparently the necromancers are planning to bring a full scale army and raise Ankou to the ground. One of their points of contact in the city is a noblewoman named Ariean. She's always seeemed cold to me, but to turn on us like this...\" She pauses for a second before continuing, \"This combined with the mini war between the peasants and nobles, I fear this city may turn to dust before our very eyes. Please, go find out what you can about Ariean. And if you have to, end her. I'd rather have her alive for questioning, but if she fights back, don't hesitate to kill her. An inside contact with the necromancers is too risky to be left free. Go now, and good luck.\" She turns back to the journal, a clear dismissal.");
+                    rumor.OnHeardRumor = this.HeardArieanRumor;
                 }
                 else
                     rumor = new Rumor("How can I help you?", "You have any crimes to report?");
@@ -376,7 +382,7 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             Accomplishment accomplishment = Ankou.GetAnkouAccomplishments().Find(x => x.Name.Contains("Silence Ariean"));
             GameState.Hero.Accomplishments.Add(accomplishment);
-            //Reload the TownCenter so it will open up the Forest to go hunt down the necromancer camp
+            //Reload the TownCenter so it will open up the Ariean's Estate
             LocationHandler.ResetLocation(TOWN_CENTER_KEY);
         }
 
