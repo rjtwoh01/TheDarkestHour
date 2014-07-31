@@ -16,6 +16,9 @@ namespace The_Darkest_Hour.Locations.Actions
     class CombatAction : LocationAction
     {
         private CombatResult _CombatResult = CombatResult.NoResults;
+        private string _startText;
+        private string _endText;
+        private bool _extraQuestText = false;
 
         public event PostCombatHandler PostCombat;
 
@@ -48,6 +51,26 @@ namespace The_Darkest_Hour.Locations.Actions
             }
         }
 
+        public CombatAction(string mobName, List<Mob> mobs, string first, string second)
+        {
+            this.MobName = mobName;
+            this.Mobs = mobs;
+            if ((mobs != null) && (mobs.Count > 0))
+            {
+                this.Name = String.Format("Fight {0} {1}", mobs.Count, mobName);
+                this.Description = String.Format("Fight {0} {1}", mobs.Count, mobName);
+            }
+            else
+            {
+                this.Name = "Invalid MOBs";
+                this.Description = "Invalid MOBs";
+            }
+
+            this._startText = first;
+            this._endText = second;
+            this._extraQuestText = true;
+        }
+
         public override LocationDefinition DoAction()
         {
             LocationDefinition returnData = GameState.CurrentLocation;
@@ -57,6 +80,15 @@ namespace The_Darkest_Hour.Locations.Actions
             Battle battle = new Battle();
 
             Console.Clear();
+
+            if (_extraQuestText)
+            {
+                Console.WriteLine(_startText);
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
+                Console.Clear();
+            }
+
             if (Mobs != null)
             {
                 for (int i = 0; i < Mobs.Count; i++)
@@ -77,6 +109,13 @@ namespace The_Darkest_Hour.Locations.Actions
                     else
                     {
                         _CombatResult = tempResult;
+                        if (_extraQuestText)
+                        {
+                            Console.WriteLine(_endText);
+                            Console.WriteLine("Press any key to continue...");
+                            Console.ReadKey();
+                            Console.Clear();
+                        }
                     }
                 }
             }

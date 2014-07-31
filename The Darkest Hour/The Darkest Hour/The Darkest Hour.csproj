@@ -95,6 +95,7 @@
     <Compile Include="Characters\Accomplishment.cs" />
     <Compile Include="Areas\GeneralStore.cs" />
     <Compile Include="Characters\Mobs\Bosses\AnkouNecroLeader.cs" />
+    <Compile Include="Characters\Mobs\Bosses\Ariean.cs" />
     <Compile Include="Characters\Mobs\Bosses\BanditCaptain.cs" />
     <Compile Include="Characters\Mobs\Bosses\BanditKing.cs" />
     <Compile Include="Characters\Mobs\Bosses\BanditLieutenant.cs" />
@@ -113,6 +114,7 @@
     <Compile Include="Characters\Mobs\Guard.cs" />
     <Compile Include="Characters\Mobs\Necromancer.cs" />
     <Compile Include="Characters\Mobs\NecromancerEliteGuard.cs" />
+    <Compile Include="Characters\Mobs\Noble.cs" />
     <Compile Include="Characters\Mobs\Peasant.cs" />
     <Compile Include="Characters\Mobs\PossesedVillager.cs" />
     <Compile Include="Characters\Mobs\SewerRat.cs" />
