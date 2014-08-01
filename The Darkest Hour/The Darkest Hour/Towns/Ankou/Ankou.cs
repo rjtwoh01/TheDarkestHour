@@ -272,12 +272,12 @@ namespace The_Darkest_Hour.Towns.Watertown
                 locationDefinition = AnkouArieansEstate.GetTownInstance().GetEntranceDefinition();
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
             }
-            //Accomplishment killBanditTorturer = Ankou.GetAnkouAccomplishments().Find(x => x.Name.Contains("Kill Bandit Torturer"));
-            //if (GameState.Hero.Accomplishments.Contains(killBanditTorturer))
-            //{
+            Accomplishment killBanditTorturer = Ankou.GetAnkouAccomplishments().Find(x => x.Name.Contains("Kill Bandit Torturer"));
+            if (GameState.Hero.Accomplishments.Contains(killBanditTorturer))
+            {
                 locationDefinition = AnkouSeedyInn.GetTownInstance().GetEntranceDefinition();
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
-            //}
+            }
 
             locationDefinition = Watertown.GetTownInstance().GetTownCenterDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
@@ -439,7 +439,7 @@ namespace The_Darkest_Hour.Towns.Watertown
 
                 accomplishent = new Accomplishment();
                 accomplishent.NameSpace = "Ankou";
-                accomplishent.Name = "Has heard rumor of the Kill Bandit Tortuer";
+                accomplishent.Name = "Has heard rumor of the Kill Bandit Torturer";
                 accomplishent.Description = "Has heard the rumor of going to the seedy inn and killing off the bandit torturer and finding out what he has to do with the mystery going on in Ankou.";
                 _AnkouAccomplishments.Add(accomplishent);
             }
