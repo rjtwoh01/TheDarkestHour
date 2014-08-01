@@ -1360,7 +1360,7 @@ namespace The_Darkest_Hour.Towns.Watertown
                 if (!openedChest)
                 {
                     if (!takeLetters)
-                        returnData.Description = "A large room with very expensive furniture and decorations. The letters Ariean referenced are in her nightstand.";
+                        returnData.Description = "A large room with very expensive furniture and decorations. The letters Ariean referenced are in her nightstand. There is an unopened chest in the corner of the room.";
                     else
                         returnData.Description = "A large room with very expensive furniture and decorations. An unopened treasure chest sits in the corner of the room.";
 
