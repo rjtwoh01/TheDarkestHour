@@ -286,7 +286,7 @@ namespace The_Darkest_Hour.Towns.Watertown
                 necro.Add(new Necromancer());
                 necro.Add(new Necromancer());
                 CombatAction combatAction = new CombatAction("Necromancers", necro);
-                combatAction.PostCombat += DirtyRoomBandits;
+                combatAction.PostCombat += LargeRoomNecros;
 
                 locationActions.Add(combatAction);
 
@@ -302,8 +302,11 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = AnkouBanditAndNecroCave.GetTownInstance().GetSmallHovelDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            locationDefinition = AnkouBanditAndNecroCave.GetTownInstance().GetDarkRoomDefinition();
-            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            if (defeatedNecro)
+            {
+                locationDefinition = AnkouBanditAndNecroCave.GetTownInstance().GetDarkRoomDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
 
@@ -353,14 +356,14 @@ namespace The_Darkest_Hour.Towns.Watertown
             returnData = new Location();
             returnData.Name = "Dark Room";
             returnData.Description = "A very dark room. The walls are black and glowing purple with some dark evil magic. There are skulls aligned in ritualistic patterns on the floor. There are drawings on the walls, painted with blood. In the middle stands a small man with a black hood covering his face. He has his hands outstreched and he's chanting something and the air grows heavier the more he chants.";
-            bool defeatedBanditTorturer = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouBanditAndNecroCave.KILLED_NECRO_CONTRACTOR));
+            bool defeatedNecroContractor = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouBanditAndNecroCave.KILLED_NECRO_CONTRACTOR));
             bool openedChest = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouBanditAndNecroCave.TOOK_TREASURE));
             bool takeLetters = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouBanditAndNecroCave.TOOK_JOURNAL));
             string necroSpeechBefore = "Welcome to my humble adobe, " + GameState.Hero.Identifier + ". You won't make it out alive. Come, join me.";
             string necroSpeechAfter = "The necromancer's body vanishes from his robes and they collapse to the ground, blackened and charred from the dark magic he used during the fight.";
 
             //Actions
-            if (!defeatedBanditTorturer)
+            if (!defeatedNecroContractor)
             {
                 returnData.Description = "A very dark room. The walls are black and glowing purple with some dark evil magic. There are skulls aligned in ritualistic patterns on the floor. There are drawings on the walls, painted with blood. In the middle stands a small man with a black hood covering his face. He has his hands outstreched and he's chanting something and the air grows heavier the more he chants.";
                 List<LocationAction> locationActions = new List<LocationAction>();
@@ -374,7 +377,7 @@ namespace The_Darkest_Hour.Towns.Watertown
 
                 returnData.Actions = locationActions;
             }
-            else if (defeatedBanditTorturer)
+            else if (defeatedNecroContractor)
             {
                 if (!openedChest)
                 {
@@ -412,8 +415,11 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = AnkouBanditAndNecroCave.GetTownInstance().GetLargeRoomDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            locationDefinition = Ankou.GetTownInstance().GetTownCenterDefinition();
-            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            if (defeatedNecroContractor)
+            {
+                locationDefinition = Ankou.GetTownInstance().GetTownCenterDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
 
