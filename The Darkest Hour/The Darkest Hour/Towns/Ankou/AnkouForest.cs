@@ -603,6 +603,12 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = AnkouForest.GetTownInstance().GetRightTwoDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
+            Accomplishment killNecroContractor = Ankou.GetAnkouAccomplishments().Find(x => x.Name.Contains("Kill Necromancer Contractor"));
+            if (GameState.Hero.Accomplishments.Contains(killNecroContractor))
+            {
+                locationDefinition = AnkouBanditAndNecroCave.GetTownInstance().GetStartingLocationDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
 

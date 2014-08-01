@@ -80,7 +80,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             else
             {
                 returnData.LocationKey = locationKey;
-                returnData.Name = "Ankou Seedy Inn";
+                returnData.Name = "Seedy Inn";
                 returnData.DoLoadLocation = LoadEntrance;
 
                 LocationHandler.AddLocation(returnData);
@@ -187,6 +187,8 @@ namespace The_Darkest_Hour.Towns.Watertown
                 List<LocationAction> locationActions = new List<LocationAction>();
 
                 List<Mob> peasant = new List<Mob>();
+                peasant.Add(new Peasant());
+                peasant.Add(new Peasant());
                 peasant.Add(new Peasant());
                 peasant.Add(new Peasant());
                 CombatAction combatAction = new CombatAction("Peasants", peasant);
@@ -474,7 +476,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             bool defeatedBanditTorturer = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouSeedyInn.KILLED_BANDIT_TORTURER));
             bool openedChest = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouSeedyInn.TOOK_TREASURE));
             bool takeLetters = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouSeedyInn.TOOK_NOTES_OF_PAYMENT));
-            string banditSpeechBefore = "";
+            string banditSpeechBefore = "Welcome, " + GameState.Hero.Identifier + ". You're the new guest of honor. I hope you like my work here, you'll be my new canvas after all. What do you say we get to know each other, you look a tad uncomfortable.";
             string banditSpeechAfter = "The Bandit Torturer's dead body falls to the ground and you feel a profound sense of relief knowing the world has been rid of this evil being.";
             
             //Actions
@@ -527,8 +529,11 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = AnkouSeedyInn.GetTownInstance().GetStorageDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            locationDefinition = Ankou.GetTownInstance().GetTownCenterDefinition();
-            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            if (defeatedBanditTorturer && takeLetters)
+            {
+                locationDefinition = Ankou.GetTownInstance().GetTownCenterDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
 

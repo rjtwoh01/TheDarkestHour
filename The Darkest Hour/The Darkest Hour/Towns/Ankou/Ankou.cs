@@ -343,7 +343,8 @@ namespace The_Darkest_Hour.Towns.Watertown
                 bool killedMurderer = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouMurderShack.DEFEATED_SCUMMY_MURDERER));
                 bool locatedNecromancers = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouNecromancerCamp.TOOK_JOURNAL));
                 bool silencedAriean = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouArieansEstate.TOOK_LETTERS));
-                bool killedBanditTorturer = false;
+                bool killedBanditTorturer = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouSeedyInn.TOOK_NOTES_OF_PAYMENT));
+                bool killedNecroContractor = false;
                 List<Rumor> returnData = new List<Rumor>();
                 Rumor rumor;
                 if (!killedMurderer)
@@ -365,6 +366,11 @@ namespace The_Darkest_Hour.Towns.Watertown
                 {
                     rumor = new Rumor("Kill Bandit Torturer", "Good working on capturing Ariean without killing her. She may provide more useful knowledge after some time spent in interrogation. The letters you recovered from her estate seem to indicate something about some torture expert connected with a bandit group operating in Ankou. This makes me extremely uncomfortable. Initial recon indicates that the torturer may be taking up residence in a very seedy inn on the south side of town. You'll know it when you see it. Go see if you can find out more information about this whole situation from him. Oh, and you don't have to try to bring him in alive like Ariean. It's better if people like that are not members of society.");
                     rumor.OnHeardRumor = this.HeardBanditTorturerRumor;
+                }
+                else if (killedBanditTorturer && !killedNecroContractor)
+                {
+                    rumor = new Rumor("Kill Necromancer Contractor", "The torturer's notes of payment indicate a location somewhere in the forest close to this city. It looks like it may be a cave. Go there and see if you can find out anything more about this. We really need to get to the bottom of this before things become very violent and messy. As what's becoming the norm it seems, the city and the constable office thanks you for disposing of the vile torturer and recovering this information. Good luck in getting to the bottom of this issue");
+                    rumor.OnHeardRumor = this.HeardNecroContractorRumor;
                 }
                 else
                     rumor = new Rumor("How can I help you?", "You have any crimes to report?");
@@ -406,6 +412,14 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationHandler.ResetLocation(TOWN_CENTER_KEY);
         }
 
+        public void HeardNecroContractorRumor()
+        {
+            Accomplishment accomplishment = Ankou.GetAnkouAccomplishments().Find(x => x.Name.Contains("Kill Necromancer Contractor"));
+            GameState.Hero.Accomplishments.Add(accomplishment);
+            //Reload the TownCenter so it will open up the Ariean's Estate
+            LocationHandler.ResetLocation(TOWN_CENTER_KEY);
+        }
+
         //Add the on heard action for the scummy murderer
 
         #endregion
@@ -441,6 +455,12 @@ namespace The_Darkest_Hour.Towns.Watertown
                 accomplishent.NameSpace = "Ankou";
                 accomplishent.Name = "Has heard rumor of the Kill Bandit Torturer";
                 accomplishent.Description = "Has heard the rumor of going to the seedy inn and killing off the bandit torturer and finding out what he has to do with the mystery going on in Ankou.";
+                _AnkouAccomplishments.Add(accomplishent);
+
+                accomplishent = new Accomplishment();
+                accomplishent.NameSpace = "Ankou";
+                accomplishent.Name = "Has heard rumor of the Kill Necromancer Contractor";
+                accomplishent.Description = "Has heard the rumor of going into the forest and finding the cave that the necromancer contractor is in and killing him.";
                 _AnkouAccomplishments.Add(accomplishent);
             }
 

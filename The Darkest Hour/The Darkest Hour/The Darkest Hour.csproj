@@ -201,6 +201,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Towns\Ankou\Ankou.cs" />
     <Compile Include="Towns\Ankou\AnkouArieansEstate.cs" />
+    <Compile Include="Towns\Ankou\AnkouBanditAndNecroCave.cs" />
     <Compile Include="Towns\Ankou\AnkouForest.cs" />
     <Compile Include="Towns\Ankou\AnkouMurderShack.cs" />
     <Compile Include="Towns\Ankou\AnkouNecromancerCamp.cs" />
