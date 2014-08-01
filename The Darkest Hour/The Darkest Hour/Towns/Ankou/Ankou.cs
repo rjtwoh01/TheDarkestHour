@@ -272,6 +272,12 @@ namespace The_Darkest_Hour.Towns.Watertown
                 locationDefinition = AnkouArieansEstate.GetTownInstance().GetEntranceDefinition();
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
             }
+            //Accomplishment killBanditTorturer = Ankou.GetAnkouAccomplishments().Find(x => x.Name.Contains("Kill Bandit Torturer"));
+            //if (GameState.Hero.Accomplishments.Contains(killBanditTorturer))
+            //{
+                locationDefinition = AnkouSeedyInn.GetTownInstance().GetEntranceDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            //}
 
             locationDefinition = Watertown.GetTownInstance().GetTownCenterDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
@@ -336,7 +342,8 @@ namespace The_Darkest_Hour.Towns.Watertown
 
                 bool killedMurderer = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouMurderShack.DEFEATED_SCUMMY_MURDERER));
                 bool locatedNecromancers = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouNecromancerCamp.TOOK_JOURNAL));
-                bool silencedAriean = false;
+                bool silencedAriean = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouArieansEstate.TOOK_LETTERS));
+                bool killedBanditTorturer = false;
                 List<Rumor> returnData = new List<Rumor>();
                 Rumor rumor;
                 if (!killedMurderer)
@@ -353,6 +360,11 @@ namespace The_Darkest_Hour.Towns.Watertown
                 {
                     rumor = new Rumor("Silence Ariean", "Krae flips through the journal, studying the last few pages intensiley. Finally, she looks up at you and says \"This is highly troubling. Apparently the necromancers are planning to bring a full scale army and raise Ankou to the ground. One of their points of contact in the city is a noblewoman named Ariean. She's always seeemed cold to me, but to turn on us like this...\" She pauses for a second before continuing, \"This combined with the mini war between the peasants and nobles, I fear this city may turn to dust before our very eyes. Please, go find out what you can about Ariean. And if you have to, end her. I'd rather have her alive for questioning, but if she fights back, don't hesitate to kill her. An inside contact with the necromancers is too risky to be left free. Go now, and good luck.\" She turns back to the journal, a clear dismissal.");
                     rumor.OnHeardRumor = this.HeardArieanRumor;
+                }
+                else if (silencedAriean && !killedBanditTorturer)
+                {
+                    rumor = new Rumor("Kill Bandit Torturer", "Good working on capturing Ariean without killing her. She may provide more useful knowledge after some time spent in interrogation. The letters you recovered from her estate seem to indicate something about some torture expert connected with a bandit group operating in Ankou. This makes me extremely uncomfortable. Initial recon indicates that the torturer may be taking up residence in a very seedy inn on the south side of town. You'll know it when you see it. Go see if you can find out more information about this whole situation from him. Oh, and you don't have to try to bring him in alive like Ariean. It's better if people like that are not members of society.");
+                    rumor.OnHeardRumor = this.HeardBanditTorturerRumor;
                 }
                 else
                     rumor = new Rumor("How can I help you?", "You have any crimes to report?");
@@ -381,6 +393,14 @@ namespace The_Darkest_Hour.Towns.Watertown
         public void HeardArieanRumor()
         {
             Accomplishment accomplishment = Ankou.GetAnkouAccomplishments().Find(x => x.Name.Contains("Silence Ariean"));
+            GameState.Hero.Accomplishments.Add(accomplishment);
+            //Reload the TownCenter so it will open up the Ariean's Estate
+            LocationHandler.ResetLocation(TOWN_CENTER_KEY);
+        }
+
+        public void HeardBanditTorturerRumor()
+        {
+            Accomplishment accomplishment = Ankou.GetAnkouAccomplishments().Find(x => x.Name.Contains("Kill Bandit Torturer"));
             GameState.Hero.Accomplishments.Add(accomplishment);
             //Reload the TownCenter so it will open up the Ariean's Estate
             LocationHandler.ResetLocation(TOWN_CENTER_KEY);
@@ -415,6 +435,12 @@ namespace The_Darkest_Hour.Towns.Watertown
                 accomplishent.NameSpace = "Ankou";
                 accomplishent.Name = "Has heard rumor of the Silence Ariean";
                 accomplishent.Description = "Has heard the rumor of hunting down Ariean and silencing her. She's too dangerous to be left free.";
+                _AnkouAccomplishments.Add(accomplishent);
+
+                accomplishent = new Accomplishment();
+                accomplishent.NameSpace = "Ankou";
+                accomplishent.Name = "Has heard rumor of the Kill Bandit Tortuer";
+                accomplishent.Description = "Has heard the rumor of going to the seedy inn and killing off the bandit torturer and finding out what he has to do with the mystery going on in Ankou.";
                 _AnkouAccomplishments.Add(accomplishent);
             }
 

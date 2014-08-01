@@ -102,6 +102,7 @@
     <Compile Include="Characters\Mobs\Bosses\BanditScholar.cs" />
     <Compile Include="Characters\Mobs\Bosses\BanditSpy.cs" />
     <Compile Include="Characters\Mobs\Bosses\BanditSupplyCaptain.cs" />
+    <Compile Include="Characters\Mobs\Bosses\BanditTorturer.cs" />
     <Compile Include="Characters\Mobs\Bosses\CrazedOutlawLeader.cs" />
     <Compile Include="Characters\Mobs\Bosses\NecroEnvoy.cs" />
     <Compile Include="Characters\Mobs\Bosses\NecromancerLeader.cs" />
@@ -203,6 +204,7 @@
     <Compile Include="Towns\Ankou\AnkouForest.cs" />
     <Compile Include="Towns\Ankou\AnkouMurderShack.cs" />
     <Compile Include="Towns\Ankou\AnkouNecromancerCamp.cs" />
+    <Compile Include="Towns\Ankou\AnkouSeedyInn.cs" />
     <Compile Include="Towns\Rumor.cs" />
     <Compile Include="Towns\StartingArea\InitialGameMenu.cs" />
     <Compile Include="Towns\Town.cs" />
