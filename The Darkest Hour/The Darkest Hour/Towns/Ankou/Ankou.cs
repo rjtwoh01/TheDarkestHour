@@ -344,7 +344,8 @@ namespace The_Darkest_Hour.Towns.Watertown
                 bool locatedNecromancers = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouNecromancerCamp.TOOK_JOURNAL));
                 bool silencedAriean = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouArieansEstate.TOOK_LETTERS));
                 bool killedBanditTorturer = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouSeedyInn.TOOK_NOTES_OF_PAYMENT));
-                bool killedNecroContractor = false;
+                bool killedNecroContractor = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouBanditAndNecroCave.TOOK_JOURNAL));
+                bool rescuedPeasants = false;
                 List<Rumor> returnData = new List<Rumor>();
                 Rumor rumor;
                 if (!killedMurderer)
@@ -371,6 +372,11 @@ namespace The_Darkest_Hour.Towns.Watertown
                 {
                     rumor = new Rumor("Kill Necromancer Contractor", "The torturer's notes of payment indicate a location somewhere in the forest close to this city. It looks like it may be a cave. Go there and see if you can find out anything more about this. We really need to get to the bottom of this before things become very violent and messy. As what's becoming the norm it seems, the city and the constable office thanks you for disposing of the vile torturer and recovering this information. Good luck in getting to the bottom of this issue");
                     rumor.OnHeardRumor = this.HeardNecroContractorRumor;
+                }
+                else if (killedNecroContractor && !rescuedPeasants)
+                    {
+                    rumor = new Rumor("Rescue Peasants", "Oh no, this isn't good at all. This journal documents every single finicial transaction between teh necromancers and the people of Ankou. There is something something in here about a group of ten peasants being captured by a group of bandits. The bandits were to hold the prisoners until the necromancers either decided to make an example of the peasants in the Town Center or to possess them with magic and add them to their ranks as cannon fodder. Unlike the nobles, these peasants don't have family that could pay ransom or launch a counter assault on the bandits. You'll have to go find whatever shack the bandits have these peasants kept in and free the prisoners.");
+                    rumor.OnHeardRumor = this.HeardRescuePeasantsRumor;
                 }
                 else
                     rumor = new Rumor("How can I help you?", "You have any crimes to report?");
@@ -420,6 +426,14 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationHandler.ResetLocation(TOWN_CENTER_KEY);
         }
 
+        public void HeardRescuePeasantsRumor()
+        {
+            Accomplishment accomplishment = Ankou.GetAnkouAccomplishments().Find(x => x.Name.Contains("Rescue Peasants"));
+            GameState.Hero.Accomplishments.Add(accomplishment);
+            //Reload the TownCenter so it will open up the Ariean's Estate
+            LocationHandler.ResetLocation(TOWN_CENTER_KEY);
+        }
+
         //Add the on heard action for the scummy murderer
 
         #endregion
@@ -461,6 +475,12 @@ namespace The_Darkest_Hour.Towns.Watertown
                 accomplishent.NameSpace = "Ankou";
                 accomplishent.Name = "Has heard rumor of the Kill Necromancer Contractor";
                 accomplishent.Description = "Has heard the rumor of going into the forest and finding the cave that the necromancer contractor is in and killing him.";
+                _AnkouAccomplishments.Add(accomplishent);
+
+                accomplishent = new Accomplishment();
+                accomplishent.NameSpace = "Ankou";
+                accomplishent.Name = "Has heard rumor of the Rescue Peasants";
+                accomplishent.Description = "Has heard the rumor of searching for the bandit shack and rescuing the peasants they took as prisoners for the necromancers.";
                 _AnkouAccomplishments.Add(accomplishent);
             }
 

@@ -259,6 +259,13 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = AnkouForest.GetTownInstance().GetStraightThreeDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
+            Accomplishment rescuePeasants = Ankou.GetAnkouAccomplishments().Find(x => x.Name.Contains("Rescue Peasants"));
+            if (GameState.Hero.Accomplishments.Contains(rescuePeasants))
+            {
+                locationDefinition = AnkouBanditShack.GetTownInstance().GetEntranceDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
+
             locationDefinition = AnkouForest.GetTownInstance().GetStraightFiveDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
