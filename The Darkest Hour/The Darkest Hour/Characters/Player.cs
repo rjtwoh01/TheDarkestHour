@@ -508,6 +508,33 @@ Name:           Level:          Health:           Damage:
             }
         }
 
+        public void SellAll()
+        {
+            Console.WriteLine();
+            int i = 0;
+            int totalGold = 0;
+            foreach (Item displayItems in this.Inventory)
+            {
+                i++;
+            }
+            i--;
+            for (int counter = 0; counter < i; counter++)
+            {
+                Item selectedItem = this.Inventory.ElementAt(0);
+                this.gold += selectedItem.worth;
+                if (this.gold >= this.maxGold)
+                    this.gold = this.maxGold;
+                if (selectedItem.isEquipped)
+                    selectedItem.DeEquip(selectedItem, this);
+                totalGold += selectedItem.worth;
+
+                this.Inventory.Remove(selectedItem);
+
+                i--;
+            }
+            Console.WriteLine("\nYou sold all of your items for a total of {0} gold. You now have {1} gold.\n", totalGold, this.gold);
+        }
+
         public void GetLevel()
         {
             if (this.level < levelCap)

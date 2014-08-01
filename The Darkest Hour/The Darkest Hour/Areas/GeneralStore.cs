@@ -20,12 +20,14 @@ namespace The_Darkest_Hour.Areas
 
             do
             {
-                Console.WriteLine("Do you wish to (1) Sell Items or (2) Buy Items?");
+                Console.WriteLine("Do you wish to (1) Sell Items, (2) Buy Items or (3) Sell All?");
                 string answer = Console.ReadLine();
                 if (answer == "1")
                     SellItems();
                 else if (answer == "2")
                     BuyItems();
+                else if (answer == "3")
+                    SellAll();
 
                 Console.WriteLine("Do you still wish to utilize any of my services? (1) Yes (2) No");
                 string answerTwo = Console.ReadLine();
@@ -204,6 +206,12 @@ namespace The_Darkest_Hour.Areas
 
                 ClearScreen();
             } while (goAgain);
+            ClearScreen();
+        }
+
+        public static void SellAll()
+        {
+            GameState.Hero.SellAll();
             ClearScreen();
         }
 
