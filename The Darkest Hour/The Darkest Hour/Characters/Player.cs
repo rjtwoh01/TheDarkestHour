@@ -517,8 +517,9 @@ Name:           Level:          Health:           Damage:
             {
                 i++;
             }
+            int max = i--;
             i--;
-            for (int counter = 0; counter < i; counter++)
+            for (int counter = 0; counter < max; counter++)
             {
                 Item selectedItem = this.Inventory.ElementAt(0);
                 this.gold += selectedItem.worth;
