@@ -501,12 +501,12 @@ namespace The_Darkest_Hour.Towns.Watertown
                     if (!takeLetters)
                         returnData.Description = "A medium sized room painted red with blood. There is blood all over the floor and several dead bodies laying in the corner. There is a freshly dead of a young woman laying on a table in the center of the room. She is nude with several cuts and burns all over her body. Blood is still falling from her wounds. Next to her is the dead body of the Bandit Torturer. There are notes signifying his payment for his work from a necromancer in his pocket. And there is an unopened chest in the corner of the room.";
                     else
-                        returnData.Description = "A medium sized room painted red with blood. There is blood all over the floor and several dead bodies laying in the corner. There is a freshly dead of a young woman laying on a table in the center of the room. She is nude with several cuts and burns all over her body. Blood is still falling from her wounds. Next to her is the dead body of the Bandit Torturer. There is an unopen chest in the corner of the room.";
+                        returnData.Description = "A medium sized room painted red with blood. There is blood all over the floor and several dead bodies laying in the corner. There is a freshly dead of a young woman laying on a table in the center of the room. She is nude with several cuts and burns all over her body. Blood is still falling from her wounds. Next to her is the dead body of the Bandit Torturer. There is an unopened chest in the corner of the room.";
 
                     List<LocationAction> locationActions = new List<LocationAction>();
                     TreasureChestAction itemAction = new TreasureChestAction(5);
                     locationActions.Add(itemAction);
-                    itemAction.PostItem += ArieanChest;
+                    itemAction.PostItem += TorturerChest;
                     returnData.Actions = locationActions;
                 }
                 if (openedChest && takeLetters)
@@ -552,7 +552,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             }
         }
 
-        public void ArieanChest(object sender, ChestEventArgs chestEventArgs)
+        public void TorturerChest(object sender, ChestEventArgs chestEventArgs)
         {
             if (chestEventArgs.ChestResults == ChestResults.Taken)
             {
