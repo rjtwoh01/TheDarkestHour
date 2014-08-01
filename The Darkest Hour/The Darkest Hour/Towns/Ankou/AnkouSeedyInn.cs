@@ -551,7 +551,7 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             if (chestEventArgs.ChestResults == ChestResults.Taken)
             {
-                LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouSeedyInn.TOOK_TREASURE, true);
+                LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouSeedyInn.TOOK_TREASURE, true);
 
                 // Reload the Sewer Coordior so it will open up the sewer
                 LocationHandler.ResetLocation(TORTURE_CHAMBER_KEY);

@@ -474,7 +474,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             
 
             //Actions
-            if (defeatedGuards)
+            if (!defeatedGuards)
             {
                 returnData.Description = "A medium sized room full of armor and weapns. There are six guards sitting around inside.";
 
@@ -704,7 +704,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             bool defeatedGuards = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouArieansEstate.DEFEATED_LANDING_GUARDS));
             
             //Actions
-            if (defeatedGuards)
+            if (!defeatedGuards)
             {
                 returnData.Description = "A large landing that overlooks the great hall beneath it. There are six guards blocking further access to the second floor.";
 
@@ -822,7 +822,7 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             if (chestEventArgs.ChestResults == ChestResults.Taken)
             {
-                LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouArieansEstate.TOOK_ROOM_FOUR_TREASURE, true);
+                LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouArieansEstate.TOOK_ROOM_FOUR_TREASURE, true);
 
                 // Reload the Sewer Coordior so it will open up the sewer
                 LocationHandler.ResetLocation(ROOM_FOUR_KEY);
@@ -1284,7 +1284,7 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             if (goldEventArgs.GoldResults == PickUpGoldResults.Taken)
             {
-                LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouArieansEstate.TOOK_STORAGE_ROOM_GOLD, true);
+                LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouArieansEstate.TOOK_STORAGE_ROOM_GOLD, true);
 
                 // Reload the Sewer Coordior so it will open up the sewer
                 LocationHandler.ResetLocation(STORAGE_ROOM_KEY);
@@ -1296,7 +1296,7 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             if (chestEventArgs.ChestResults == ChestResults.Taken)
             {
-                LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouArieansEstate.TOOK_STORAGE_ROOM_TREASURE, true);
+                LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouArieansEstate.TOOK_STORAGE_ROOM_TREASURE, true);
 
                 // Reload the Sewer Coordior so it will open up the sewer
                 LocationHandler.ResetLocation(STORAGE_ROOM_KEY);
@@ -1418,7 +1418,7 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             if (chestEventArgs.ChestResults == ChestResults.Taken)
             {
-                LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouArieansEstate.TOOK_ARIEAN_CHEST, true);
+                LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouArieansEstate.TOOK_ARIEAN_CHEST, true);
 
                 // Reload the Sewer Coordior so it will open up the sewer
                 LocationHandler.ResetLocation(ARIENS_MASTER_BEDROOM);
