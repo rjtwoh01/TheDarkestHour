@@ -209,6 +209,7 @@
     <Compile Include="Towns\Ankou\AnkouMurderShack.cs" />
     <Compile Include="Towns\Ankou\AnkouNecromancerCamp.cs" />
     <Compile Include="Towns\Ankou\AnkouSeedyInn.cs" />
+    <Compile Include="Towns\Ankou\AnkouUndergroundHideOut.cs" />
     <Compile Include="Towns\Rumor.cs" />
     <Compile Include="Towns\StartingArea\InitialGameMenu.cs" />
     <Compile Include="Towns\Town.cs" />

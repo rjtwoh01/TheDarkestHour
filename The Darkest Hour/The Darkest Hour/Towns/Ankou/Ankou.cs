@@ -345,7 +345,8 @@ namespace The_Darkest_Hour.Towns.Watertown
                 bool silencedAriean = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouArieansEstate.TOOK_LETTERS));
                 bool killedBanditTorturer = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouSeedyInn.TOOK_NOTES_OF_PAYMENT));
                 bool killedNecroContractor = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouBanditAndNecroCave.TOOK_JOURNAL));
-                bool rescuedPeasants = false;
+                bool rescuedPeasants = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouBanditShack.RESCUED_PEASANTS));
+                bool scoutedUndergroundHideout = false;
                 List<Rumor> returnData = new List<Rumor>();
                 Rumor rumor;
                 if (!killedMurderer)
@@ -377,6 +378,11 @@ namespace The_Darkest_Hour.Towns.Watertown
                     {
                     rumor = new Rumor("Rescue Peasants", "Oh no, this isn't good at all. This journal documents every single finicial transaction between teh necromancers and the people of Ankou. There is something something in here about a group of ten peasants being captured by a group of bandits. The bandits were to hold the prisoners until the necromancers either decided to make an example of the peasants in the Town Center or to possess them with magic and add them to their ranks as cannon fodder. Unlike the nobles, these peasants don't have family that could pay ransom or launch a counter assault on the bandits. You'll have to go find whatever shack the bandits have these peasants kept in and free the prisoners.");
                     rumor.OnHeardRumor = this.HeardRescuePeasantsRumor;
+                }
+                else if (rescuedPeasants && !scoutedUndergroundHideout)
+                {
+                    rumor = new Rumor("Scouted Underground Hideout", "Once again you've done this city a great service and on behalf of everyone here, I thank you. Now, while you were escorting the prisoners back to town, I sent in a team behind you as clean up and to gather any evidence we could find. We discovered something pretty interesting in the shack. There is a trap door to an underground hide out in the buffer room. I want you to return to the shack and figure out what you can about what's going on in that hide out.");
+                    rumor.OnHeardRumor = this.HeardScoutUndergroundHideoutRumor;
                 }
                 else
                     rumor = new Rumor("How can I help you?", "You have any crimes to report?");
@@ -434,6 +440,14 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationHandler.ResetLocation(TOWN_CENTER_KEY);
         }
 
+        public void HeardScoutUndergroundHideoutRumor()
+        {
+            Accomplishment accomplishment = Ankou.GetAnkouAccomplishments().Find(x => x.Name.Contains("Scouted Underground Hideout"));
+            GameState.Hero.Accomplishments.Add(accomplishment);
+            //Reload the TownCenter so it will open up the Ariean's Estate
+            LocationHandler.ResetLocation(TOWN_CENTER_KEY);
+        }
+
         //Add the on heard action for the scummy murderer
 
         #endregion
@@ -482,6 +496,12 @@ namespace The_Darkest_Hour.Towns.Watertown
                 accomplishent.Name = "Has heard rumor of the Rescue Peasants";
                 accomplishent.Description = "Has heard the rumor of searching for the bandit shack and rescuing the peasants they took as prisoners for the necromancers.";
                 _AnkouAccomplishments.Add(accomplishent);
+
+                accomplishent = new Accomplishment();
+                accomplishent.NameSpace = "Ankou";
+                accomplishent.Name = "Has heard rumor of the Scouted Underground Hideout";
+                accomplishent.Description = "Has heard the rumor of returning to the buffer room in the bandit shack and using the trap door Krea's team had discovred and exploring the underground hideout and finding out what you can about what the bandits are doing down there.";
+                _AnkouAccomplishments.Add(accomplishent);                             
             }
 
             return _AnkouAccomplishments;

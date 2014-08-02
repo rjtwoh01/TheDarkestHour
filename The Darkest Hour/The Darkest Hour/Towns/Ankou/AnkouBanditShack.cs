@@ -388,6 +388,13 @@ namespace The_Darkest_Hour.Towns.Watertown
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
             }
 
+            Accomplishment scoutUndergroundHideout = Ankou.GetAnkouAccomplishments().Find(x => x.Name.Contains("Scouted Underground Hideout"));
+            if (GameState.Hero.Accomplishments.Contains(scoutUndergroundHideout))
+            {
+                locationDefinition = AnkouUndergroundHideOut.GetTownInstance().GetEntranceDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
+
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
 
