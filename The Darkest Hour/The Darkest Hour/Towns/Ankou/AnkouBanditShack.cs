@@ -49,8 +49,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             returnData = new Location();
             returnData.Name = "Bandit Shack";
             bool defeatedBandits = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouBanditShack.DEFEATED_ENTRANCE_BANDITS));
-            returnData.Description = "A run down shack that the bandits are using as both a hide out and prisoner storage. The entrance is guarded by four bandits.";
-
+            
             //Actions
             if (!defeatedBandits)
             {
