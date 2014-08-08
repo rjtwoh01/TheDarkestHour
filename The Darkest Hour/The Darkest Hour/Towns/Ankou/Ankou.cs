@@ -354,7 +354,8 @@ namespace The_Darkest_Hour.Towns.Watertown
                 bool rescuedPeasants = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouBanditShack.RESCUED_PEASANTS));
                 bool scoutedUndergroundHideout = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouUndergroundHideOut.TOOK_JOURNAL));
                 bool investigatedPeasantLeader = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouForestCabin.TOOK_MAP));
-                bool investigatedTunnels = false;
+                bool investigatedTunnels = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouUndergroundTunnel.TOOK_ATTACK_PLANS));
+                bool battleOfAnkou = false;
                 List<Rumor> returnData = new List<Rumor>();
                 Rumor rumor;
                 if (!killedMurderer)
@@ -400,6 +401,11 @@ namespace The_Darkest_Hour.Towns.Watertown
                 else if (investigatedPeasantLeader && !investigatedTunnels)
                 {
                     rumor = new Rumor("Investigate Tunnels", "This map you took from the peasant leader seems to indicate a secret undergound tunnel that runs beneath Ankou's Town Center. And with his threats of Ankou burning, this is most worrying. Go with all the haste you can muster and get to the bottom of this!");
+                    rumor.OnHeardRumor = this.HeardInvestigateTunnelsRumor;
+                }
+                else if (investigatedTunnels && !battleOfAnkou)
+                {
+                    rumor = new Rumor("Battle of Ankou", "There's no time! These plans talk about an attack on this very night! We must prepare our defenses, it is far too late to stop this attack. Please, go and defend this city as best you can. I will see you on the other side, " + GameState.Hero.Identifier + "!");
                     rumor.OnHeardRumor = this.HeardInvestigateTunnelsRumor;
                 }
                 else

@@ -26,8 +26,8 @@ namespace The_Darkest_Hour.Towns.Watertown
         public const string DEFEATED_MUDDY_ROOM_BANDITS = "Ankou.AnkouUndergroundTunnel.DefeatedMuddyRoomBandits";
         public const string DEFEATED_SMALL_ROOM_MOBS = "Ankou.AnkouUndergroundTunnel.DefeatedSmallRoomMobs";
         public const string DEFEATED_BUFFER_ROOM_BANDITS = "Ankou.AnkouUndergroundTunnel.DefeatedRitualRoomMobs";
-        public const string KILLED_BANDIT_WARDEN = "Ankou.AnkouUndergroundTunnel.KilledBanditWarden";
-        public const string RESCUED_PEASANTS = "Ankou.AnkouUndergroundTunnel.RescudedPeasants";
+        public const string KILLED_ATTACK_COORDINATOR = "Ankou.AnkouUndergroundTunnel.KilledAttackCoordinator";
+        public const string TOOK_ATTACK_PLANS = "Ankou.AnkouUndergroundTunnel.TookAttackPlans";
         public const string TOOK_TREASURE = "Ankou.AnkouUndergroundTunnel.TookTreasure";
 
 
@@ -347,9 +347,9 @@ namespace The_Darkest_Hour.Towns.Watertown
             Location returnData;
             returnData = new Location();
             returnData.Name = "Coordination Room";
-            bool defeatedAttackCoordinator = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouUndergroundTunnel.KILLED_BANDIT_WARDEN));
+            bool defeatedAttackCoordinator = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouUndergroundTunnel.TOOK_ATTACK_PLANS));
             bool openedChest = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouUndergroundTunnel.TOOK_TREASURE));
-            bool freePrisoners = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouUndergroundTunnel.RESCUED_PEASANTS));
+            bool freePrisoners = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouUndergroundTunnel.TOOK_ATTACK_PLANS));
             string mobSpeechBefore = "I heard you as you walked in, " + GameState.Hero.Identifier +". You cannot sneak up on me. No, I think you've seen too much here, and I can't let you leave.\n";
             string mobSpeechAfter = "The attack coordinator's body falls to ground dead, blood falling out of his mouth and onto the ground.\n";
 
@@ -421,7 +421,7 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
             {
-                LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouUndergroundTunnel.KILLED_BANDIT_WARDEN, true);
+                LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouUndergroundTunnel.TOOK_ATTACK_PLANS, true);
 
                 // Reload the Sewer Coordior so it will open up the sewer
                 LocationHandler.ResetLocation(COORDINATION_ROOM_KEY);
@@ -445,7 +445,7 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             if (inspectEventArgs.ItemResults == TakeItemResults.Taken)
             {
-                LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouUndergroundTunnel.RESCUED_PEASANTS, true);
+                LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouUndergroundTunnel.TOOK_ATTACK_PLANS, true);
 
                 // Reload the Sewer Coordior so it will open up the sewer
                 LocationHandler.ResetLocation(COORDINATION_ROOM_KEY);
