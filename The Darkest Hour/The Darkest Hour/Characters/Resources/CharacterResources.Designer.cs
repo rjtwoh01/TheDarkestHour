@@ -99,7 +99,7 @@ namespace The_Darkest_Hour.Characters.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} travels to Watertown, a small village on the outskirts of Ankou. TO DO..
+        ///   Looks up a localized string similar to {0} travels to Watertown, a small village on the outskirts of Ankou. Evil brews on the outskirts of Watertown and beneath its very streets. A darkness is growin in the east as evil forces that have long been forgotten return to the world. It is up to {0} to investigate and get to the bottom of the growing darkness and stop it before it spreads and consumes all of the land..
         /// </summary>
         internal static string IntroPartThree {
             get {
