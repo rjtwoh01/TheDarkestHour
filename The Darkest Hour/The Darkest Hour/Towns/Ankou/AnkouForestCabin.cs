@@ -264,8 +264,8 @@ namespace The_Darkest_Hour.Towns.Watertown
             bool defeatedPeasantWarden = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouForestCabin.KILLED_PEASANT_LEADER));
             bool openedChest = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouForestCabin.TOOK_TREASURE));
             bool freePrisoners = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouForestCabin.TOOK_MAP));
-            string peasantSpeechBefore = "Ah, I see you found me. You've been causing a lot of problems for my enemies, and some problems for me. I'm willing to forgive all the crimes you've comitted against me if you agree to focus solely on eradicating every noble in Ankou.\n\nNo? Fine then. Die. Now.";
-            string peasantSpeechAfter = "";
+            string peasantSpeechBefore = "Ah, I see you found me. You've been causing a lot of problems for my enemies, and some problems for me. I'm willing to forgive all the crimes you've comitted against me if you agree to focus solely on eradicating every noble in Ankou.\n\nNo? Fine then. Die. Now.\n";
+            string peasantSpeechAfter = "The peasant leader gasp out, ''You won't survive what's to come " + GameState.Hero.Identifier + ". Your world will burn, and this town will be nuthing but dust by the time we're done with you!'' \n\nHe collapses to the ground, his body cold and lifeless.\n";
 
             //Actions
             if (!defeatedPeasantWarden)
