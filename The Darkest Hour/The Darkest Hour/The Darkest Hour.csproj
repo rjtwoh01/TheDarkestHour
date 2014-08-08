@@ -110,6 +110,7 @@
     <Compile Include="Characters\Mobs\Bosses\NecromancerLeader.cs" />
     <Compile Include="Characters\Mobs\Bosses\NecroOverseer.cs" />
     <Compile Include="Characters\Mobs\Bosses\OutlawBoss.cs" />
+    <Compile Include="Characters\Mobs\Bosses\PeasantLeader.cs" />
     <Compile Include="Characters\Mobs\Bosses\PossesedGuardBoss.cs" />
     <Compile Include="Characters\Mobs\Bosses\ScummyMurderer.cs" />
     <Compile Include="Characters\Mobs\Bosses\SewerKing.cs" />

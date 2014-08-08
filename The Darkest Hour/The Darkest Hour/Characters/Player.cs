@@ -71,7 +71,7 @@ namespace The_Darkest_Hour.Characters
                 ClearScreen();
                 Console.WriteLine(CharacterResources.IntroPartTwo);
                 ClearScreen();
-                Console.WriteLine(CharacterResources.IntroPartThree);
+                Console.WriteLine(CharacterResources.IntroPartThree, this.Identifier);
                 ClearScreen();
             }
         }

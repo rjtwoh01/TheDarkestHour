@@ -346,7 +346,8 @@ namespace The_Darkest_Hour.Towns.Watertown
                 bool killedBanditTorturer = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouSeedyInn.TOOK_NOTES_OF_PAYMENT));
                 bool killedNecroContractor = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouBanditAndNecroCave.TOOK_JOURNAL));
                 bool rescuedPeasants = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouBanditShack.RESCUED_PEASANTS));
-                bool scoutedUndergroundHideout = false;
+                bool scoutedUndergroundHideout = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouUndergroundHideOut.TOOK_JOURNAL));
+                bool investigatedPeasantLeader = false;
                 List<Rumor> returnData = new List<Rumor>();
                 Rumor rumor;
                 if (!killedMurderer)
@@ -382,6 +383,11 @@ namespace The_Darkest_Hour.Towns.Watertown
                 else if (rescuedPeasants && !scoutedUndergroundHideout)
                 {
                     rumor = new Rumor("Scouted Underground Hideout", "Once again you've done this city a great service and on behalf of everyone here, I thank you. Now, while you were escorting the prisoners back to town, I sent in a team behind you as clean up and to gather any evidence we could find. We discovered something pretty interesting in the shack. There is a trap door to an underground hide out in the buffer room. I want you to return to the shack and figure out what you can about what's going on in that hide out.");
+                    rumor.OnHeardRumor = this.HeardScoutUndergroundHideoutRumor;
+                }
+                else if (scoutedUndergroundHideout && !investigatedPeasantLeader)
+                {
+                    rumor = new Rumor("Investigated Peasant Leader", "This journal you found contains some really interesting information. Apparently this overseer has had contact with bandits, nobles, and even peasants. I wonder if the necromancers are trying to be the puppet masters of the conflict going on here. It would certainly make sense with all the odd things that have been happening around here lately. Our intelligence reports that the peasant leader is holed up in a small cabin on the outskirts of town. Go see if you can find him and anything else that who's really behind this conflict.");
                     rumor.OnHeardRumor = this.HeardScoutUndergroundHideoutRumor;
                 }
                 else
