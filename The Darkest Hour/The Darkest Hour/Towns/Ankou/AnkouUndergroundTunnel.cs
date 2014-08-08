@@ -55,7 +55,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
 
             // Town Center
-            LocationDefinition locationDefinition = AnkouForest.GetTownInstance().GetStraightFourDefinition();
+            LocationDefinition locationDefinition = Ankou.GetTownInstance().GetTownCenterDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
             locationDefinition = AnkouUndergroundTunnel.GetTownInstance().GetMuddyRoomDefinition();
@@ -122,7 +122,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
 
             // Town Center
-            LocationDefinition locationDefinition = AnkouUndergroundTunnel.GetTownInstance().GetMuddyRoomDefinition();
+            LocationDefinition locationDefinition = AnkouUndergroundTunnel.GetTownInstance().GetEntranceDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
             if (defeatedMobs)
@@ -347,9 +347,9 @@ namespace The_Darkest_Hour.Towns.Watertown
             Location returnData;
             returnData = new Location();
             returnData.Name = "Coordination Room";
-            bool defeatedAttackCoordinator = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouUndergroundTunnel.TOOK_ATTACK_PLANS));
+            bool defeatedAttackCoordinator = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouUndergroundTunnel.KILLED_ATTACK_COORDINATOR));
             bool openedChest = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouUndergroundTunnel.TOOK_TREASURE));
-            bool freePrisoners = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouUndergroundTunnel.TOOK_ATTACK_PLANS));
+            bool takePlans = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouUndergroundTunnel.TOOK_ATTACK_PLANS));
             string mobSpeechBefore = "I heard you as you walked in, " + GameState.Hero.Identifier +". You cannot sneak up on me. No, I think you've seen too much here, and I can't let you leave.\n";
             string mobSpeechAfter = "The attack coordinator's body falls to ground dead, blood falling out of his mouth and onto the ground.\n";
 
@@ -372,7 +372,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 if (!openedChest)
                 {
-                    if (!freePrisoners)
+                    if (!takePlans)
                         returnData.Description = "A large room with maps of Ankou covering the walls. The maps are all anoted with circles and pins scattered about them. There is a small man dead in the middle of the room, lying in his own blood. The attack plans are sitting on a table on the far edge of the room and there is an unopened chest beneath the table.";
                     else
                         returnData.Description = "A large room with maps of Ankou covering the walls. The maps are all anoted with circles and pins scattered about them. There is a small man dead in the middle of the room, lying in his own blood. There is an unopened chest beneath the table.";
@@ -380,19 +380,19 @@ namespace The_Darkest_Hour.Towns.Watertown
                     List<LocationAction> locationActions = new List<LocationAction>();
                     TreasureChestAction itemAction = new TreasureChestAction(5);
                     locationActions.Add(itemAction);
-                    itemAction.PostItem += WardenChest;
+                    itemAction.PostItem += CoordinatorChest;
                     returnData.Actions = locationActions;
                 }
-                if (openedChest && freePrisoners)
+                if (openedChest && takePlans)
                     returnData.Description = "A large room with maps of Ankou covering the walls. The maps are all anoted with circles and pins scattered about them. There is a small man dead in the middle of the room, lying in his own blood. There is an opened chest beneath the table.";
-                if (!freePrisoners && openedChest)
+                if (!takePlans && openedChest)
                 {
                     returnData.Description = "A large room with maps of Ankou covering the walls. The maps are all anoted with circles and pins scattered about them. There is a small man dead in the middle of the room, lying in his own blood. The attack plans are sitting on a table on the far edge of the room and there is an opened chest beneath the table.";
 
                     List<LocationAction> locationActions = new List<LocationAction>();
-                    TakeItemAction freePrisonerAction = new TakeItemAction("Attack Plans");
-                    freePrisonerAction.PostItem += TakeAttackPlans;
-                    locationActions.Add(freePrisonerAction);
+                    TakeItemAction takePlansAction = new TakeItemAction("Attack Plans");
+                    takePlansAction.PostItem += TakeAttackPlans;
+                    locationActions.Add(takePlansAction);
                     returnData.Actions = locationActions;
                 }
             }
@@ -406,7 +406,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = AnkouUndergroundTunnel.GetTownInstance().GetRitualRoomDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            if (defeatedAttackCoordinator && freePrisoners)
+            if (defeatedAttackCoordinator && takePlans)
             {
                 locationDefinition = Ankou.GetTownInstance().GetTownCenterDefinition();
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
@@ -421,7 +421,7 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
             {
-                LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouUndergroundTunnel.TOOK_ATTACK_PLANS, true);
+                LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouUndergroundTunnel.KILLED_ATTACK_COORDINATOR, true);
 
                 // Reload the Sewer Coordior so it will open up the sewer
                 LocationHandler.ResetLocation(COORDINATION_ROOM_KEY);
@@ -429,7 +429,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             }
         }
 
-        public void WardenChest(object sender, ChestEventArgs chestEventArgs)
+        public void CoordinatorChest(object sender, ChestEventArgs chestEventArgs)
         {
             if (chestEventArgs.ChestResults == ChestResults.Taken)
             {

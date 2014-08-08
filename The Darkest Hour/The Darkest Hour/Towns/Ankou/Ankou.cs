@@ -285,6 +285,13 @@ namespace The_Darkest_Hour.Towns.Watertown
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
             }
 
+            Accomplishment battleOfAnkou = Ankou.GetAnkouAccomplishments().Find(x => x.Name.Contains("Battle of Ankou"));
+            if (GameState.Hero.Accomplishments.Contains(battleOfAnkou))
+            {
+                locationDefinition = AnkouBattle.GetTownInstance().GetEntranceDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
+
             locationDefinition = Watertown.GetTownInstance().GetTownCenterDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
@@ -406,7 +413,7 @@ namespace The_Darkest_Hour.Towns.Watertown
                 else if (investigatedTunnels && !battleOfAnkou)
                 {
                     rumor = new Rumor("Battle of Ankou", "There's no time! These plans talk about an attack on this very night! We must prepare our defenses, it is far too late to stop this attack. Please, go and defend this city as best you can. I will see you on the other side, " + GameState.Hero.Identifier + "!");
-                    rumor.OnHeardRumor = this.HeardInvestigateTunnelsRumor;
+                    rumor.OnHeardRumor = this.HeardBattleOkAnkouRumor;
                 }
                 else
                     rumor = new Rumor("How can I help you?", "You have any crimes to report?");
@@ -488,6 +495,14 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationHandler.ResetLocation(TOWN_CENTER_KEY);
         }
 
+        public void HeardBattleOkAnkouRumor()
+        {
+            Accomplishment accomplishment = Ankou.GetAnkouAccomplishments().Find(x => x.Name.Contains("Battle of Ankou"));
+            GameState.Hero.Accomplishments.Add(accomplishment);
+            //Reload the TownCenter so it will open up the Ariean's Estate
+            LocationHandler.ResetLocation(TOWN_CENTER_KEY);
+        }
+
         //Add the on heard action for the scummy murderer
 
         #endregion
@@ -553,6 +568,12 @@ namespace The_Darkest_Hour.Towns.Watertown
                 accomplishent.NameSpace = "Ankou";
                 accomplishent.Name = "Has heard rumor of the Investigate Tunnels";
                 accomplishent.Description = "Has heard the rumor of investigating the tunnels beneath the Ankou Town Center and preventing the outbreak of war within the city.";
+                _AnkouAccomplishments.Add(accomplishent);
+
+                accomplishent = new Accomplishment();
+                accomplishent.NameSpace = "Ankou";
+                accomplishent.Name = "Has heard rumor of the Battle of Ankou";
+                accomplishent.Description = "Has heard the rumor of helpind defend Ankou against the dark forces that rally against it.";
                 _AnkouAccomplishments.Add(accomplishent);
             }
 

@@ -208,6 +208,7 @@
     <Compile Include="Towns\Ankou\AnkouArieansEstate.cs" />
     <Compile Include="Towns\Ankou\AnkouBanditAndNecroCave.cs" />
     <Compile Include="Towns\Ankou\AnkouBanditShack.cs" />
+    <Compile Include="Towns\Ankou\AnkouBattle.cs" />
     <Compile Include="Towns\Ankou\AnkouForest.cs" />
     <Compile Include="Towns\Ankou\AnkouForestCabin.cs" />
     <Compile Include="Towns\Ankou\AnkouMurderShack.cs" />
