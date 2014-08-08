@@ -25,7 +25,7 @@ namespace The_Darkest_Hour.Towns.Watertown
         public const string DEFEATED_LIVING_ROOM_BANDITS = "Ankou.AnkouUndergroundTunnel.CoordinationRoom";
         public const string DEFEATED_MUDDY_ROOM_BANDITS = "Ankou.AnkouUndergroundTunnel.DefeatedMuddyRoomBandits";
         public const string DEFEATED_SMALL_ROOM_MOBS = "Ankou.AnkouUndergroundTunnel.DefeatedSmallRoomMobs";
-        public const string DEFEATED_BUFFER_ROOM_BANDITS = "Ankou.AnkouUndergroundTunnel.DefeatedRitualRoomBandits";
+        public const string DEFEATED_BUFFER_ROOM_BANDITS = "Ankou.AnkouUndergroundTunnel.DefeatedRitualRoomMobs";
         public const string KILLED_BANDIT_WARDEN = "Ankou.AnkouUndergroundTunnel.KilledBanditWarden";
         public const string RESCUED_PEASANTS = "Ankou.AnkouUndergroundTunnel.RescudedPeasants";
         public const string TOOK_TREASURE = "Ankou.AnkouUndergroundTunnel.TookTreasure";
@@ -97,18 +97,18 @@ namespace The_Darkest_Hour.Towns.Watertown
             Location returnData;
             returnData = new Location();
             returnData.Name = "Muddy Room";
-            bool defeatedBandits = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouUndergroundTunnel.DEFEATED_MUDDY_ROOM_BANDITS));
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouUndergroundTunnel.DEFEATED_MUDDY_ROOM_BANDITS));
 
             //Actions
-            if (!defeatedBandits)
+            if (!defeatedMobs)
             {
-                returnData.Description = "A muddy room that has two bandits pacing it, guarding further access to the tunnel";
+                returnData.Description = "A muddy room that has two mobs pacing it, guarding further access to the tunnel";
                 List<LocationAction> locationActions = new List<LocationAction>();
 
-                List<Mob> bandit = new List<Mob>();
-                bandit.Add(new Bandit());
-                bandit.Add(new Bandit());
-                CombatAction combatAction = new CombatAction("Bandits", bandit);
+                List<Mob> mob = new List<Mob>();
+                mob.Add(new Bandit());
+                mob.Add(new Bandit());
+                CombatAction combatAction = new CombatAction("Bandits", mob);
                 combatAction.PostCombat += MuddyRoomBandits;
 
                 locationActions.Add(combatAction);
@@ -116,7 +116,7 @@ namespace The_Darkest_Hour.Towns.Watertown
                 returnData.Actions = locationActions;
             }
             else
-                returnData.Description = "A muddy room that has two dead bandits laying on the ground, their blood pulled on the cold ground.";
+                returnData.Description = "A muddy room that has two dead mobs laying on the ground, their blood pulled on the cold ground.";
 
             // Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
@@ -125,7 +125,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = AnkouUndergroundTunnel.GetTownInstance().GetMuddyRoomDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            if (defeatedBandits)
+            if (defeatedMobs)
             {
                 locationDefinition = AnkouUndergroundTunnel.GetTownInstance().GetSmallRoomDefinition();
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
@@ -178,19 +178,21 @@ namespace The_Darkest_Hour.Towns.Watertown
             Location returnData;
             returnData = new Location();
             returnData.Name = "Small Room";
-            bool defeatedBandits = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouUndergroundTunnel.DEFEATED_SMALL_ROOM_MOBS));
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouUndergroundTunnel.DEFEATED_SMALL_ROOM_MOBS));
 
             //Actions
-            if (!defeatedBandits)
+            if (!defeatedMobs)
             {
                 returnData.Description = "A small room that has two peasants and two nobles playing a game of cards amongst themselves, killing time.";
                 List<LocationAction> locationActions = new List<LocationAction>();
 
-                List<Mob> bandit = new List<Mob>();
-                bandit.Add(new Bandit());
-                bandit.Add(new Bandit());
-                CombatAction combatAction = new CombatAction("Bandits", bandit);
-                combatAction.PostCombat += SmallRoomBandits;
+                List<Mob> mob = new List<Mob>();
+                mob.Add(new Peasant());
+                mob.Add(new Noble());
+                mob.Add(new Peasant());
+                mob.Add(new Noble());
+                CombatAction combatAction = new CombatAction("Peasants and Nobles", mob);
+                combatAction.PostCombat += SmallRoomMobs;
 
                 locationActions.Add(combatAction);
 
@@ -206,7 +208,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = AnkouUndergroundTunnel.GetTownInstance().GetMuddyRoomDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            if (defeatedBandits)
+            if (defeatedMobs)
             {
                 locationDefinition = AnkouUndergroundTunnel.GetTownInstance().GetRitualRoomDefinition();
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
@@ -217,7 +219,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             return returnData;
         }
 
-        public void SmallRoomBandits(object sender, CombatEventArgs combatEventArgs)
+        public void SmallRoomMobs(object sender, CombatEventArgs combatEventArgs)
         {
             if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
             {
@@ -259,21 +261,24 @@ namespace The_Darkest_Hour.Towns.Watertown
             Location returnData;
             returnData = new Location();
             returnData.Name = "Ritual Room";
-            bool defeatedBandits = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouUndergroundTunnel.DEFEATED_BUFFER_ROOM_BANDITS));
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouUndergroundTunnel.DEFEATED_BUFFER_ROOM_BANDITS));
 
             //Actions
-            if (!defeatedBandits)
+            if (!defeatedMobs)
             {
                 returnData.Description = "A dark room, swirling with strong dark energy. There are six necromancers in a cirlce chanting together";
 
                 List<LocationAction> locationActions = new List<LocationAction>();
 
-                List<Mob> bandit = new List<Mob>();
-                bandit.Add(new Bandit());
-                bandit.Add(new Bandit());
-                bandit.Add(new Bandit());
-                CombatAction combatAction = new CombatAction("Bandits", bandit);
-                combatAction.PostCombat += RitualRoomBandits;
+                List<Mob> mob = new List<Mob>();
+                mob.Add(new Necromancer());
+                mob.Add(new Necromancer());
+                mob.Add(new Necromancer());
+                mob.Add(new Necromancer());
+                mob.Add(new Necromancer());
+                mob.Add(new Necromancer());
+                CombatAction combatAction = new CombatAction("Necromancers", mob);
+                combatAction.PostCombat += RitualRoomMobs;
 
                 locationActions.Add(combatAction);
 
@@ -289,7 +294,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = AnkouUndergroundTunnel.GetTownInstance().GetSmallRoomDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            if (defeatedBandits)
+            if (defeatedMobs)
             {
                 locationDefinition = AnkouUndergroundTunnel.GetTownInstance().GetCoordinationRoomDefinition();
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
@@ -300,7 +305,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             return returnData;
         }
 
-        public void RitualRoomBandits(object sender, CombatEventArgs combatEventArgs)
+        public void RitualRoomMobs(object sender, CombatEventArgs combatEventArgs)
         {
             if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
             {
@@ -345,8 +350,8 @@ namespace The_Darkest_Hour.Towns.Watertown
             bool defeatedAttackCoordinator = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouUndergroundTunnel.KILLED_BANDIT_WARDEN));
             bool openedChest = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouUndergroundTunnel.TOOK_TREASURE));
             bool freePrisoners = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouUndergroundTunnel.RESCUED_PEASANTS));
-            string banditSpeechBefore = "";
-            string banditSpeechAfter = "";
+            string mobSpeechBefore = "";
+            string mobSpeechAfter = "";
 
             //Actions
             if (!defeatedAttackCoordinator)
@@ -354,10 +359,10 @@ namespace The_Darkest_Hour.Towns.Watertown
                 returnData.Description = "A large room with maps of Ankou covering the walls. The maps are all anoted with circles and pins scattered about them. There is a small man observing the maps, his back turned to the wall.";
                 List<LocationAction> locationActions = new List<LocationAction>();
 
-                List<Mob> wardnen = new List<Mob>();
-                wardnen.Add(new BanditWarden());
-                CombatAction combatAction = new CombatAction("Bandit Warden", wardnen, banditSpeechBefore, banditSpeechAfter);
-                combatAction.PostCombat += DefeatedBanditWarden;
+                List<Mob> coordinator = new List<Mob>();
+                coordinator.Add(new AttackCoordinator());
+                CombatAction combatAction = new CombatAction("Attack Coordinator", coordinator, mobSpeechBefore, mobSpeechAfter);
+                combatAction.PostCombat += DefeatedAttackCoordinator;
 
                 locationActions.Add(combatAction);
 
@@ -386,7 +391,7 @@ namespace The_Darkest_Hour.Towns.Watertown
 
                     List<LocationAction> locationActions = new List<LocationAction>();
                     TakeItemAction freePrisonerAction = new TakeItemAction("Attack Plans");
-                    freePrisonerAction.PostItem += FreePrisoners;
+                    freePrisonerAction.PostItem += TakeAttackPlans;
                     locationActions.Add(freePrisonerAction);
                     returnData.Actions = locationActions;
                 }
@@ -412,7 +417,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             return returnData;
         }
 
-        public void DefeatedBanditWarden(object sender, CombatEventArgs combatEventArgs)
+        public void DefeatedAttackCoordinator(object sender, CombatEventArgs combatEventArgs)
         {
             if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
             {
@@ -436,7 +441,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             }
         }
 
-        public void FreePrisoners(object sender, TakeItemEventArgs inspectEventArgs)
+        public void TakeAttackPlans(object sender, TakeItemEventArgs inspectEventArgs)
         {
             if (inspectEventArgs.ItemResults == TakeItemResults.Taken)
             {
