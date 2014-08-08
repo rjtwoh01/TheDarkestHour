@@ -127,7 +127,7 @@ namespace The_Darkest_Hour.Towns.Watertown
 
             if (defeatedBandits)
             {
-                locationDefinition = AnkouUndergroundTunnel.GetTownInstance().GetRitualRoomDefinition();
+                locationDefinition = AnkouUndergroundTunnel.GetTownInstance().GetSmallRoomDefinition();
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
             }
 
