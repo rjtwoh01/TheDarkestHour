@@ -25,7 +25,7 @@ namespace The_Darkest_Hour.Towns.Watertown
         public const string DEFEATED_LIVING_ROOM_PEASANTS = "Ankou.AnkouForestCabin.DefeatedLivingRoomPeasants";
         public const string DEFEATED_KITCHEN_PEASANTS = "Ankou.AnkouForestCabin.DefeatedKitchenPeasants";
         public const string KILLED_PEASANT_LEADER = "Ankou.AnkouForestCabin.KilledPeasantLeader";
-        public const string RESCUED_PEASANTS = "Ankou.AnkouForestCabin.RescudedPeasants";
+        public const string TOOK_MAP = "Ankou.AnkouForestCabin.TookMap";
         public const string TOOK_TREASURE = "Ankou.AnkouForestCabin.TookTreasure";
 
 
@@ -95,31 +95,27 @@ namespace The_Darkest_Hour.Towns.Watertown
             Location returnData;
             returnData = new Location();
             returnData.Name = "Living Room";
-            bool defeatedBandits = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouForestCabin.DEFEATED_LIVING_ROOM_PEASANTS));
+            bool defeatedPeasants = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouForestCabin.DEFEATED_LIVING_ROOM_PEASANTS));
 
             //Actions
-            if (!defeatedBandits)
+            if (!defeatedPeasants)
             {
-                returnData.Description = "A shabby living room with beat up chairs. There are six bandits mingling about, eating and talking about nothing in particular.";
+                returnData.Description = "A small living devoid of any and all furniture except for a wooden bench across the back wall. There are two peasants in the room. One is sitting on the bench and the other is pacing around nervously, something obviously on her mind.";
 
                 List<LocationAction> locationActions = new List<LocationAction>();
 
-                List<Mob> bandit = new List<Mob>();
-                bandit.Add(new Bandit());
-                bandit.Add(new Bandit());
-                bandit.Add(new Bandit());
-                bandit.Add(new Bandit());
-                bandit.Add(new Bandit());
-                bandit.Add(new Bandit());
-                CombatAction combatAction = new CombatAction("Bandits", bandit);
-                combatAction.PostCombat += LivingRoomBandits;
+                List<Mob> peasant = new List<Mob>();
+                peasant.Add(new Peasant());
+                peasant.Add(new Peasant());
+                CombatAction combatAction = new CombatAction("Peasants", peasant);
+                combatAction.PostCombat += LivingRoomPeasants;
 
                 locationActions.Add(combatAction);
 
                 returnData.Actions = locationActions;
             }
             else
-                returnData.Description = "A shabby living room with beat up chairs. There are six dead bandits scattered about the room.";
+                returnData.Description = "A small living devoid of any and all furniture except for a wooden bench across the back wall. There are two dead peasants laying on the floor.";
 
             // Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
@@ -128,7 +124,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = AnkouForestCabin.GetTownInstance().GetEntranceDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            if (defeatedBandits)
+            if (defeatedPeasants)
             {
                 locationDefinition = AnkouForestCabin.GetTownInstance().GetKitchenDefinition();
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
@@ -140,7 +136,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             return returnData;
         }
 
-        public void LivingRoomBandits(object sender, CombatEventArgs combatEventArgs)
+        public void LivingRoomPeasants(object sender, CombatEventArgs combatEventArgs)
         {
             if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
             {
@@ -182,26 +178,28 @@ namespace The_Darkest_Hour.Towns.Watertown
             Location returnData;
             returnData = new Location();
             returnData.Name = "Kitchen";
-            bool defeatedBandits = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouForestCabin.DEFEATED_KITCHEN_PEASANTS));
+            bool defeatedPeasants = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouForestCabin.DEFEATED_KITCHEN_PEASANTS));
 
             //Actions
-            if (!defeatedBandits)
+            if (!defeatedPeasants)
             {
-                returnData.Description = "A small kitchen. Most of the appliances don't work but never-the-less there are bandits working on the next meal for everyone.";
+                returnData.Description = "A tiny kitchen with barely any materials to cook with. Despite this, there are four peasants working tirelessly to produce food for their leader.";
                 List<LocationAction> locationActions = new List<LocationAction>();
 
-                List<Mob> bandit = new List<Mob>();
-                bandit.Add(new Bandit());
-                bandit.Add(new Bandit());
-                CombatAction combatAction = new CombatAction("Bandits", bandit);
-                combatAction.PostCombat += KitchenBandits;
+                List<Mob> peasant = new List<Mob>();
+                peasant.Add(new Peasant());
+                peasant.Add(new Peasant());
+                peasant.Add(new Peasant());
+                peasant.Add(new Peasant());
+                CombatAction combatAction = new CombatAction("Peasants", peasant);
+                combatAction.PostCombat += KitchenPeasants;
 
                 locationActions.Add(combatAction);
 
                 returnData.Actions = locationActions;
             }
             else
-                returnData.Description = "A small kitchen. Most of the appliances don't work. There are several severed bandit heads laying in the soup they were making.";
+                returnData.Description = "A tiny kitchen with barely any materials to cook with. There are four dead peasants whose blood now coats the walls.";
 
             // Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
@@ -210,7 +208,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = AnkouForestCabin.GetTownInstance().GetLivingRoomDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            if (defeatedBandits)
+            if (defeatedPeasants)
             {
                 locationDefinition = AnkouForestCabin.GetTownInstance().GetBedroomDefinition();
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
@@ -221,7 +219,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             return returnData;
         }
 
-        public void KitchenBandits(object sender, CombatEventArgs combatEventArgs)
+        public void KitchenPeasants(object sender, CombatEventArgs combatEventArgs)
         {
             if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
             {
@@ -263,51 +261,51 @@ namespace The_Darkest_Hour.Towns.Watertown
             Location returnData;
             returnData = new Location();
             returnData.Name = "Bedroom";
-            bool defeatedBanditWarden = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouForestCabin.KILLED_PEASANT_LEADER));
+            bool defeatedPeasantWarden = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouForestCabin.KILLED_PEASANT_LEADER));
             bool openedChest = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouForestCabin.TOOK_TREASURE));
-            bool freePrisoners = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouForestCabin.RESCUED_PEASANTS));
-            string banditSpeechBefore = "So you did come after all, " + GameState.Hero.Identifier + ". I guess I was wrong about you. I thought you weren't this stupid. No matter, this is better for us after all. You see, what's going to happen is I'm going to kill you. Slowly, and painfully. But before you take your last breath, you'll have to watch all of these people die a horrific death. Kind of a sad story. A 'hero' such as to come so far only to falter when it really matters. Die now, " + GameState.Hero.Identifier + ".";
-            string banditSpeechAfter = "''How... How could you have bested me?'' Gasp out the Bandit Warden. He is hunched over, his sword laying next to him. You walk over to him and kick him down on the floor and pick up his sword. You stare at his eyes and watch as they widden in horror as he realizes the end is here. You swiftly behead and turn your attention to the suffering prisoners. Despite what they've been through, there is a visible look of relief on their faces as they realize that their captor has been slain and they are safe now.";
+            bool freePrisoners = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouForestCabin.TOOK_MAP));
+            string peasantSpeechBefore = "Ah, I see you found me. You've been causing a lot of problems for my enemies, and some problems for me. I'm willing to forgive all the crimes you've comitted against me if you agree to focus solely on eradicating every noble in Ankou.\n\nNo? Fine then. Die. Now.";
+            string peasantSpeechAfter = "";
 
             //Actions
-            if (!defeatedBanditWarden)
+            if (!defeatedPeasantWarden)
             {
-                returnData.Description = "The largest room in the shack is dedicated to holding prisoners. There are ten peasants chained to the wall. All of them are nude, including the women and childern. All of them have whip lashes covering their bodies. A young teenaged woman on the right hand corner has fresh blood running down her chest from an cut between her breast.";
+                returnData.Description = "A small bedroom with a wooden bed and a torn sheet laying on it. The peasant leader is sitting on it, staring out the window.";
                 List<LocationAction> locationActions = new List<LocationAction>();
 
-                List<Mob> wardnen = new List<Mob>();
-                wardnen.Add(new BanditWarden());
-                CombatAction combatAction = new CombatAction("Bandit Warden", wardnen, banditSpeechBefore, banditSpeechAfter);
-                combatAction.PostCombat += DefeatedBanditWarden;
+                List<Mob> leader = new List<Mob>();
+                leader.Add(new PeasantLeader());
+                CombatAction combatAction = new CombatAction("Peasant Leader", leader, peasantSpeechBefore, peasantSpeechAfter);
+                combatAction.PostCombat += DefeatedPeasantWarden;
 
                 locationActions.Add(combatAction);
 
                 returnData.Actions = locationActions;
             }
-            else if (defeatedBanditWarden)
+            else if (defeatedPeasantWarden)
             {
                 if (!openedChest)
                 {
                     if (!freePrisoners)
-                        returnData.Description = "The largest room in the shack is dedicated to holding prisoners. There are ten peasants chained to the wall. All of them are nude, including the women and childern. All of them have whip lashes covering their bodies. A young teenaged woman on the right hand corner has fresh blood running down her chest from an cut between her breast. There is an unopened chest where the warden used to stand.";
+                        returnData.Description = "A small bedroom with a wooden bed and a torn sheet laying on it. The peasant leader lays dead at the foot of his bed. There is a map that's halfway fallen out of his pocket and a small shabby chest beneath the bed that's unopened.";
                     else
-                        returnData.Description = "The largest room in the shack is dedicated to holding prisoners. The chains that used to hold the prisoners are missing but the bodily imprints of the prisoners remains on the wall, and their blood remains behind standing as testimony to the horrors experienced here.There is an unopened chest where the warden use to stand.";
+                        returnData.Description = "A small bedroom with a wooden bed and a torn sheet laying on it. The peasant leader lays dead at the foot of his bed. There is a small shabby chest beneath the bed that's unopened.";
 
                     List<LocationAction> locationActions = new List<LocationAction>();
                     TreasureChestAction itemAction = new TreasureChestAction(5);
                     locationActions.Add(itemAction);
-                    itemAction.PostItem += WardenChest;
+                    itemAction.PostItem += LeaderChest;
                     returnData.Actions = locationActions;
                 }
                 if (openedChest && freePrisoners)
-                    returnData.Description = "The largest room in the shack is dedicated to holding prisoners. The chains that used to hold the prisoners are missing but the bodily imprints of the prisoners remains on the wall, and their blood remains behind standing as testimony to the horrors experienced here.There is an opened chest where the warden use to stand.";
+                    returnData.Description = "A small bedroom with a wooden bed and a torn sheet laying on it. The peasant leader lays dead at the foot of his bed. There is a small shabby chest beneath the bed that's opened.";
                 if (!freePrisoners && openedChest)
                 {
-                    returnData.Description = "The largest room in the shack is dedicated to holding prisoners. There are ten peasants chained to the wall. All of them are nude, including the women and childern. All of them have whip lashes covering their bodies. A young teenaged woman on the right hand corner has fresh blood running down her chest from an cut between her breast. There is an unopened chest where the warden used to stand.";
+                    returnData.Description = "A small bedroom with a wooden bed and a torn sheet laying on it. The peasant leader lays dead at the foot of his bed. There is a map that's halfway fallen out of his pocket and a small shabby chest beneath the bed that's opened.";
 
                     List<LocationAction> locationActions = new List<LocationAction>();
-                    TakeItemAction freePrisonerAction = new TakeItemAction("Free", "Prisoners", "You hastily cut down the chains holding the prisoners. You make sure all of them are able to walk and you usher them out of the house and to safety. You urge the more injured ones to seek medical help and promise them that that the town constable office will pay for all expenses.");
-                    freePrisonerAction.PostItem += FreePrisoners;
+                    TakeItemAction freePrisonerAction = new TakeItemAction("Map");
+                    freePrisonerAction.PostItem += TakeMap;
                     locationActions.Add(freePrisonerAction);
                     returnData.Actions = locationActions;
                 }
@@ -322,7 +320,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = AnkouForestCabin.GetTownInstance().GetKitchenDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            if (defeatedBanditWarden && freePrisoners)
+            if (defeatedPeasantWarden && freePrisoners)
             {
                 locationDefinition = Ankou.GetTownInstance().GetTownCenterDefinition();
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
@@ -333,7 +331,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             return returnData;
         }
 
-        public void DefeatedBanditWarden(object sender, CombatEventArgs combatEventArgs)
+        public void DefeatedPeasantWarden(object sender, CombatEventArgs combatEventArgs)
         {
             if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
             {
@@ -345,7 +343,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             }
         }
 
-        public void WardenChest(object sender, ChestEventArgs chestEventArgs)
+        public void LeaderChest(object sender, ChestEventArgs chestEventArgs)
         {
             if (chestEventArgs.ChestResults == ChestResults.Taken)
             {
@@ -357,11 +355,11 @@ namespace The_Darkest_Hour.Towns.Watertown
             }
         }
 
-        public void FreePrisoners(object sender, TakeItemEventArgs inspectEventArgs)
+        public void TakeMap(object sender, TakeItemEventArgs inspectEventArgs)
         {
             if (inspectEventArgs.ItemResults == TakeItemResults.Taken)
             {
-                LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouForestCabin.RESCUED_PEASANTS, true);
+                LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouForestCabin.TOOK_MAP, true);
 
                 // Reload the Sewer Coordior so it will open up the sewer
                 LocationHandler.ResetLocation(BEDROOM_KEY);
