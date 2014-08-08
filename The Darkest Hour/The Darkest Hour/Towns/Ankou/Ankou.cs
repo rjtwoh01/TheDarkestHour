@@ -278,6 +278,12 @@ namespace The_Darkest_Hour.Towns.Watertown
                 locationDefinition = AnkouSeedyInn.GetTownInstance().GetEntranceDefinition();
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
             }
+            Accomplishment investigateTunnels = Ankou.GetAnkouAccomplishments().Find(x => x.Name.Contains("Investigate Tunnels"));
+            if (GameState.Hero.Accomplishments.Contains(investigateTunnels))
+            {
+                locationDefinition = AnkouUndergroundTunnel.GetTownInstance().GetEntranceDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
 
             locationDefinition = Watertown.GetTownInstance().GetTownCenterDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
