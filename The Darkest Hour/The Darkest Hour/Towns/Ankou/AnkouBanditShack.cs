@@ -470,7 +470,7 @@ namespace The_Darkest_Hour.Towns.Watertown
                     if (!freePrisoners)
                         returnData.Description = "The largest room in the shack is dedicated to holding prisoners. There are ten peasants chained to the wall. All of them are nude, including the women and childern. All of them have whip lashes covering their bodies. A young teenaged woman on the right hand corner has fresh blood running down her chest from an cut between her breast. There is an unopened chest where the warden used to stand.";
                     else
-                        returnData.Description = "The largest room in the shack is dedicated to holding prisoners. The chains that used to hold the prisoners are missing but the bodily imprints of the prisoners remains on the wall, and their blood remains behind standing as testimony to the horrors experienced here.There is an unopened chest where the warden use to stand.";
+                        returnData.Description = "The largest room in the shack is dedicated to holding prisoners. The chains that used to hold the prisoners are missing but the bodily imprints of the prisoners remains on the wall, and their blood remains behind standing as testimony to the horrors experienced here. There is an unopened chest where the warden use to stand.";
 
                     List<LocationAction> locationActions = new List<LocationAction>();
                     TreasureChestAction itemAction = new TreasureChestAction(5);
@@ -479,7 +479,7 @@ namespace The_Darkest_Hour.Towns.Watertown
                     returnData.Actions = locationActions;
                 }
                 if (openedChest && freePrisoners)
-                    returnData.Description = "The largest room in the shack is dedicated to holding prisoners. The chains that used to hold the prisoners are missing but the bodily imprints of the prisoners remains on the wall, and their blood remains behind standing as testimony to the horrors experienced here.There is an opened chest where the warden use to stand.";
+                    returnData.Description = "The largest room in the shack is dedicated to holding prisoners. The chains that used to hold the prisoners are missing but the bodily imprints of the prisoners remains on the wall, and their blood remains behind standing as testimony to the horrors experienced here. There is an opened chest where the warden use to stand.";
                 if (!freePrisoners && openedChest)
                 {
                     returnData.Description = "The largest room in the shack is dedicated to holding prisoners. There are ten peasants chained to the wall. All of them are nude, including the women and childern. All of them have whip lashes covering their bodies. A young teenaged woman on the right hand corner has fresh blood running down her chest from an cut between her breast. There is an unopened chest where the warden used to stand.";

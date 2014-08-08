@@ -350,8 +350,8 @@ namespace The_Darkest_Hour.Towns.Watertown
             bool defeatedAttackCoordinator = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouUndergroundTunnel.KILLED_BANDIT_WARDEN));
             bool openedChest = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouUndergroundTunnel.TOOK_TREASURE));
             bool freePrisoners = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouUndergroundTunnel.RESCUED_PEASANTS));
-            string mobSpeechBefore = "";
-            string mobSpeechAfter = "";
+            string mobSpeechBefore = "I heard you as you walked in, " + GameState.Hero.Identifier +". You cannot sneak up on me. No, I think you've seen too much here, and I can't let you leave.\n";
+            string mobSpeechAfter = "The attack coordinator's body falls to ground dead, blood falling out of his mouth and onto the ground.\n";
 
             //Actions
             if (!defeatedAttackCoordinator)
@@ -373,9 +373,9 @@ namespace The_Darkest_Hour.Towns.Watertown
                 if (!openedChest)
                 {
                     if (!freePrisoners)
-                        returnData.Description = "";
+                        returnData.Description = "A large room with maps of Ankou covering the walls. The maps are all anoted with circles and pins scattered about them. There is a small man dead in the middle of the room, lying in his own blood. The attack plans are sitting on a table on the far edge of the room and there is an unopened chest beneath the table.";
                     else
-                        returnData.Description = "";
+                        returnData.Description = "A large room with maps of Ankou covering the walls. The maps are all anoted with circles and pins scattered about them. There is a small man dead in the middle of the room, lying in his own blood. There is an unopened chest beneath the table.";
 
                     List<LocationAction> locationActions = new List<LocationAction>();
                     TreasureChestAction itemAction = new TreasureChestAction(5);
@@ -384,10 +384,10 @@ namespace The_Darkest_Hour.Towns.Watertown
                     returnData.Actions = locationActions;
                 }
                 if (openedChest && freePrisoners)
-                    returnData.Description = "";
+                    returnData.Description = "A large room with maps of Ankou covering the walls. The maps are all anoted with circles and pins scattered about them. There is a small man dead in the middle of the room, lying in his own blood. There is an opened chest beneath the table.";
                 if (!freePrisoners && openedChest)
                 {
-                    returnData.Description = "";
+                    returnData.Description = "A large room with maps of Ankou covering the walls. The maps are all anoted with circles and pins scattered about them. There is a small man dead in the middle of the room, lying in his own blood. The attack plans are sitting on a table on the far edge of the room and there is an opened chest beneath the table.";
 
                     List<LocationAction> locationActions = new List<LocationAction>();
                     TakeItemAction freePrisonerAction = new TakeItemAction("Attack Plans");
