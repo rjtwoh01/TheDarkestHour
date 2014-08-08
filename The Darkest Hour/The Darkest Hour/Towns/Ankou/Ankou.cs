@@ -388,7 +388,7 @@ namespace The_Darkest_Hour.Towns.Watertown
                 else if (scoutedUndergroundHideout && !investigatedPeasantLeader)
                 {
                     rumor = new Rumor("Investigated Peasant Leader", "This journal you found contains some really interesting information. Apparently this overseer has had contact with bandits, nobles, and even peasants. I wonder if the necromancers are trying to be the puppet masters of the conflict going on here. It would certainly make sense with all the odd things that have been happening around here lately. Our intelligence reports that the peasant leader is holed up in a small cabin on the outskirts of town. Go see if you can find him and anything else that who's really behind this conflict.");
-                    rumor.OnHeardRumor = this.HeardScoutUndergroundHideoutRumor;
+                    rumor.OnHeardRumor = this.HeardInvestigatedPeasantLeaderRumor;
                 }
                 else
                     rumor = new Rumor("How can I help you?", "You have any crimes to report?");
@@ -454,6 +454,14 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationHandler.ResetLocation(TOWN_CENTER_KEY);
         }
 
+        public void HeardInvestigatedPeasantLeaderRumor()
+        {
+            Accomplishment accomplishment = Ankou.GetAnkouAccomplishments().Find(x => x.Name.Contains("Investigated Peasant Leader"));
+            GameState.Hero.Accomplishments.Add(accomplishment);
+            //Reload the TownCenter so it will open up the Ariean's Estate
+            LocationHandler.ResetLocation(TOWN_CENTER_KEY);
+        }
+
         //Add the on heard action for the scummy murderer
 
         #endregion
@@ -507,7 +515,13 @@ namespace The_Darkest_Hour.Towns.Watertown
                 accomplishent.NameSpace = "Ankou";
                 accomplishent.Name = "Has heard rumor of the Scouted Underground Hideout";
                 accomplishent.Description = "Has heard the rumor of returning to the buffer room in the bandit shack and using the trap door Krea's team had discovred and exploring the underground hideout and finding out what you can about what the bandits are doing down there.";
-                _AnkouAccomplishments.Add(accomplishent);                             
+                _AnkouAccomplishments.Add(accomplishent);
+
+                accomplishent = new Accomplishment();
+                accomplishent.NameSpace = "Ankou";
+                accomplishent.Name = "Has heard rumor of the Investigated Peasant Leader";
+                accomplishent.Description = "Has heard the rumor of locating the peasant leader's cabin in the forest surrounding Ankou and investigating him.";
+                _AnkouAccomplishments.Add(accomplishent);
             }
 
             return _AnkouAccomplishments;

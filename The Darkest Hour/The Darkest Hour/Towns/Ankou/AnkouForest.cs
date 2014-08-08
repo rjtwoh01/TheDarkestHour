@@ -163,6 +163,13 @@ namespace The_Darkest_Hour.Towns.Watertown
             locationDefinition = AnkouForest.GetTownInstance().GetRightOneDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
+            Accomplishment investigatePeasantLeader = Ankou.GetAnkouAccomplishments().Find(x => x.Name.Contains("Investigated Peasant Leader"));
+            if (GameState.Hero.Accomplishments.Contains(investigatePeasantLeader))
+            {
+                locationDefinition = AnkouForestCabin.GetTownInstance().GetEntranceDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
+
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
 
