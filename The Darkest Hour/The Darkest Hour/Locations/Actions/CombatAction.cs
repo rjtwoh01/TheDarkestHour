@@ -108,15 +108,19 @@ namespace The_Darkest_Hour.Locations.Actions
                     }
                     else
                     {
-                        _CombatResult = tempResult;
-                        if (_extraQuestText)
-                        {
-                            Console.WriteLine(_endText);
-                            Console.WriteLine("Press any key to continue...");
-                            Console.ReadKey();
-                            Console.Clear();
-                        }
+                        _CombatResult = tempResult;                       
                     }
+                }
+            }
+
+            if (_CombatResult == CombatResult.PlayerVictory)
+            {
+                if (_extraQuestText)
+                {
+                    Console.WriteLine(_endText);
+                    Console.WriteLine("Press any key to continue...");
+                    Console.ReadKey();
+                    Console.Clear();
                 }
             }
 

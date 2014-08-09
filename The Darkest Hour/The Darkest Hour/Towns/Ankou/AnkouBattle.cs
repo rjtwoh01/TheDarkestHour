@@ -768,7 +768,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             //Actions
             if (!defeatedMobs)
             {
-                returnData.Description = "A room with dead bodies strewn about the floor and skeletons wondering around";
+                returnData.Description = "The northern road is a very long one that will go all the way up to City Hall. The first part of the road feels heavy with dark magic. There are several necromancers hurling dark bolts of energy at innocent civilians and laughing with glee with each person they strike down.";
                 // Location Actions
                 List<LocationAction> locationActions = new List<LocationAction>();
 
@@ -778,14 +778,14 @@ namespace The_Darkest_Hour.Towns.Watertown
                 mobs.Add(new Necromancer());
                 mobs.Add(new Necromancer());
                 CombatAction combatAction = new CombatAction("Necromancers", mobs);
-                combatAction.PostCombat += RoomOneBandits;
+                combatAction.PostCombat += NorthOneMobs;
 
                 locationActions.Add(combatAction);
 
                 returnData.Actions = locationActions;
             }
             else
-                returnData.Description = "A room with dead bodies strewn about the floor.";
+                returnData.Description = "The northern road is a very long one that will go all the way up to City Hall. The first part of the road feels heavy with dark magic. There are several dead necromancers, their bodies laying amongst those of their victims.";
 
             // Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
@@ -807,7 +807,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             return returnData;
         }
 
-        public void RoomOneBandits(object sender, CombatEventArgs combatEventArgs)
+        public void NorthOneMobs(object sender, CombatEventArgs combatEventArgs)
         {
             if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
             {
@@ -854,7 +854,10 @@ namespace The_Darkest_Hour.Towns.Watertown
             //Actions
             if (!defeatedMobs)
             {
-                returnData.Description = "A room filled with tables for eating. There is a group of necromancers and bandits eating";
+                returnData.Description = "The northern road continues with fires blowing high into the sky. There are half a dozen necromancers rounding up civilians to take as slaves.";
+                string before = "One of the new slaves looks up at you and shouts out, ''Come! Help us! Don't let them take us away!'' \n\nOne of the necromancers twirls around firing a bolt of dark magic at you while another one stabs the man who cried out in the gut. You draw your weapon and prepare yourself to save these people from a very nasty fate.\n";
+                string after = "As the last necromancers falls dead to the ground you turn your attention to the slaves. You cut them loose from their ropes and bid them to hury and find saftey. They run off into the distance, all looking for parts of the city that have been reclaimed by the army and constables.\n";
+
                 // Location Actions
                 List<LocationAction> locationActions = new List<LocationAction>();
 
@@ -865,15 +868,15 @@ namespace The_Darkest_Hour.Towns.Watertown
                 mobs.Add(new Necromancer());
                 mobs.Add(new Necromancer());
                 mobs.Add(new Necromancer());
-                CombatAction combatAction = new CombatAction("Necromancers", mobs);
-                combatAction.PostCombat += RoomTwoGroup;
+                CombatAction combatAction = new CombatAction("Necromancers", mobs, before, after);
+                combatAction.PostCombat += NorthTwoMobs;
 
                 locationActions.Add(combatAction);
 
                 returnData.Actions = locationActions;
             }
             else
-                returnData.Description = "A room with dead bodies strewn about the floor.";
+                returnData.Description = "The northern road continues with fires blowing high into the sky. There are half a dozen dead necromancer bodies on the ground, their newly aquired slaves long gone.";
 
             // Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
@@ -895,7 +898,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             return returnData;
         }
 
-        public void RoomTwoGroup(object sender, CombatEventArgs combatEventArgs)
+        public void NorthTwoMobs(object sender, CombatEventArgs combatEventArgs)
         {
             if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
             {
@@ -942,7 +945,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             //Actions
             if (!defeatedMobs)
             {
-                returnData.Description = "A guard room. There is a door on the other signed guarded by four very grim men.";
+                returnData.Description = "The northern road continues on. There are two necromancers sitting in the ruins of a burned building, taking a break from their killings.";
                 // Location Actions
                 List<LocationAction> locationActions = new List<LocationAction>();
 
@@ -957,7 +960,7 @@ namespace The_Darkest_Hour.Towns.Watertown
                 returnData.Actions = locationActions;
             }
             else
-                returnData.Description = "A guard room with four failures of guards laying dead on the ground";
+                returnData.Description = "The northern road continues. There are two dead necromancers in the wreckage of one of the burnt buildings.";
 
             // Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
@@ -1024,7 +1027,9 @@ namespace The_Darkest_Hour.Towns.Watertown
             //Actions
             if (!defeatedMobs)
             {
-                returnData.Description = "A guard room. There is a door on the other signed guarded by four very grim men.";
+                returnData.Description = "The northern road continues on. There is a group of four necromancers raping a young woman.";
+                string before = "As you see the necromancers engaging in such revolting activity with the woman, you draw your weapon and shout a horrible battle cry, one that sends chills to the bones of everyone within the city. The necromancers turn on you and one of them slices the woman's throat. While you feel bad for what happen to the woman and regret over not being able to save her, you take consilation in the fact that she is now at peace and doesn't have to worry about anything anymore.\n";
+                string after = "You feel an immense surge of satisfaction as the last necromancer falls dead to the ground. They deserved everything they got and then more. You strip one of the necromancers robes off him and gingerly place them on the dead woman, determined you will at least give her dignity in death even if the necromancers robbed her of it in life.\n";
                 // Location Actions
                 List<LocationAction> locationActions = new List<LocationAction>();
 
@@ -1033,15 +1038,15 @@ namespace The_Darkest_Hour.Towns.Watertown
                 mobs.Add(new Necromancer());
                 mobs.Add(new Necromancer());
                 mobs.Add(new Necromancer());
-                CombatAction combatAction = new CombatAction("Necromancers", mobs);
-                combatAction.PostCombat += RoomFourGuards;
+                CombatAction combatAction = new CombatAction("Necromancers", mobs, before, after);
+                combatAction.PostCombat += NorthFourMobs;
 
                 locationActions.Add(combatAction);
 
                 returnData.Actions = locationActions;
             }
             else
-                returnData.Description = "A guard room with four failures of guards laying dead on the ground";
+                returnData.Description = "The northern road continues on. There are four dead necromancers, one of them without robes which are on the dead woman lying several feet away from the necromancers.";
 
             // Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
@@ -1063,7 +1068,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             return returnData;
         }
 
-        public void RoomFourGuards(object sender, CombatEventArgs combatEventArgs)
+        public void NorthFourMobs(object sender, CombatEventArgs combatEventArgs)
         {
             if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
             {
@@ -1110,7 +1115,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             //Actions
             if (!defeatedMobs)
             {
-                returnData.Description = "A small lounge area for necromancers. There are two necromancers sitting on a couch relaxing.";
+                returnData.Description = "The northern road nears its end as it approaches City Hall. There is a large group of necromancers blocking the way to City Hall, preventing any relief forces from reclaiming the vital part of Ankou.";
                 // Location Actions
                 List<LocationAction> locationActions = new List<LocationAction>();
 
@@ -1124,14 +1129,14 @@ namespace The_Darkest_Hour.Towns.Watertown
                 mobs.Add(new Necromancer());
                 mobs.Add(new Necromancer());
                 CombatAction combatAction = new CombatAction("Necromancers", mobs);
-                combatAction.PostCombat += RoomFiveNecro;
+                combatAction.PostCombat += NorthFiveNecro;
 
                 locationActions.Add(combatAction);
 
                 returnData.Actions = locationActions;
             }
             else
-                returnData.Description = "A small lounge area for necromancers.";
+                returnData.Description = "The northern road nears its end as it approaches City Hall. The dead bodies of eight necromancers lay on the ground. There is now nothing stopping the army from reclaiming the vital part of the city.";
 
             // Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
@@ -1151,7 +1156,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             return returnData;
         }
 
-        public void RoomFiveNecro(object sender, CombatEventArgs combatEventArgs)
+        public void NorthFiveNecro(object sender, CombatEventArgs combatEventArgs)
         {
             if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
             {
@@ -1186,25 +1191,27 @@ namespace The_Darkest_Hour.Towns.Watertown
 
         #endregion
 
-        #region North Clearing
+        #region City Hall
 
         public Location LoadNorthClearing()
         {
             Location returnData;
             returnData = new Location();
-            returnData.Name = "North Clearing";
+            returnData.Name = "City Hall";
             bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouBattle.DEFEATED_LORD_ARGUS));
 
             //Actions
             if (!defeatedMobs)
             {
-                returnData.Description = "A large grand room. The Lord Argus is sitting on his throne.";
+                returnData.Description = "The clearing around city hall is full of fighting necromancers and soldiers of Ankou's army. The constables are off trying to restore peace in other parts of the city. Lord Argus stands at the top of the steps to City Hall, observing the fight with a smirk on his face.";
                 // Location Actions
                 List<LocationAction> locationActions = new List<LocationAction>();
+                string before = "Lord Argus walks down the steps saying in a loud booming voice, ''Well, well, well. If it isn't the great hero, " + GameState.Hero.Identifier + ". Here to save the city are we? Well you're too late. Tonight has been in the making for several months. Ankou will burn to the ground. Die fool.''\n";
+                string after = "Lord Argus's body falls to the ground at the bottom of the steps to City Hall. The once proud noble turned dark by the necromancers can no longer spread his corruption. As the necromancers see their leader's body fall to the ground, they make a retreat. The army storms city hall and raises Ankou's flag over the building once more. The city has been saved.\n";
 
                 List<Mob> mobs = new List<Mob>();
                 mobs.Add(new LordArgus());
-                CombatAction combatAction = new CombatAction("Lord Argus", mobs);
+                CombatAction combatAction = new CombatAction("Lord Argus", mobs, before, after);
                 combatAction.PostCombat += LordArgus;
 
                 locationActions.Add(combatAction);
@@ -1212,7 +1219,7 @@ namespace The_Darkest_Hour.Towns.Watertown
                 returnData.Actions = locationActions;
             }
             else
-                returnData.Description = "A large grand room. The Lord Argus lays dead at the foot of his throne.";
+                returnData.Description = "The clearing before City Hall is littered with dead bodies from both sides of the conflict. The are is full of cheering soldiers, relieved that they have reclaimed the city.";
 
             // Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
@@ -1223,7 +1230,7 @@ namespace The_Darkest_Hour.Towns.Watertown
 
             if (defeatedMobs)
             {
-                locationDefinition = Watertown.GetTownInstance().GetTownCenterDefinition();
+                locationDefinition = Ankou.GetTownInstance().GetTownCenterDefinition();
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
             }
 
@@ -1267,7 +1274,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             else
             {
                 returnData.LocationKey = locationKey;
-                returnData.Name = "North Clearing";
+                returnData.Name = "City Hall";
                 returnData.DoLoadLocation = LoadNorthClearing;
 
                 LocationHandler.AddLocation(returnData);
