@@ -53,9 +53,17 @@ namespace The_Darkest_Hour.Items
             {
                 LevelsSixteenToTwentyLoot();
             }
-            if (mob.level >= 21 && mob.level <= 50)
+            if (mob.level >= 21 && mob.level <= 25)
             {
                 LevelsTwentyOneToTwentyFiveLoot();
+            }
+            if (mob.level >= 26 && mob.level <= 30)
+            {
+                LevelsTwentySixToThirtyLoot();
+            }
+            if (mob.level >= 31 && mob.level <= 50)
+            {
+                LevelsThirtyOneToThirtyFiveLoot();
             }
         }
 
@@ -183,6 +191,58 @@ namespace The_Darkest_Hour.Items
                     break;
                 case 5:
                     LevelsTwentyOneToTwenyFiveGetPotion();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public void LevelsTwentySixToThirtyLoot()
+        {
+            rand = new Random();
+            temp = GameState.NumberGenerator.Next(1, 6);
+            switch (temp)
+            {
+                case 1:
+                    LevelsTwentySixToThirtyGetWeapon();
+                    break;
+                case 2:
+                    LevelsTwentySixToThirtyGetArmor();
+                    break;
+                case 3:
+                    LevelsTwentySixToThirtyGetHelmet();
+                    break;
+                case 4:
+                    LevelsTwentySixToThirtyGetAmulet();
+                    break;
+                case 5:
+                    LevelsTwentySixToThirtyGetPotion();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public void LevelsThirtyOneToThirtyFiveLoot()
+        {
+            rand = new Random();
+            temp = GameState.NumberGenerator.Next(1, 6);
+            switch (temp)
+            {
+                case 1:
+                    LevelsThirtyOneToThirtyFiveGetWeapon();
+                    break;
+                case 2:
+                    LevelsThirtyOneToThirtyFiveGetArmor();
+                    break;
+                case 3:
+                    LevelsThirtyOneToThirtyFiveGetHelmet();
+                    break;
+                case 4:
+                    LevelsThirtyOneToThirtyFiveGetAmulet();
+                    break;
+                case 5:
+                    LevelsThirtyOneToThirtyFiveGetPotion();
                     break;
                 default:
                     break;
@@ -2270,6 +2330,836 @@ namespace The_Darkest_Hour.Items
                 Console.WriteLine("Unfortunately you don't have enough space to store {0} and it will lay forever abandoned and forgotten", itemName);
         }
 
+        public void LevelsTwentySixToThirtyGetWeapon()
+        {
+            rand = new Random();
 
+            Weapon aSword;
+            Weapon aBow;
+            Weapon aStaff;
+            Weapon aAxe;
+            Weapon aDagger;
+            Weapon aWand;
+
+            List<string> SwordNames = new List<string>();
+            SwordNames.Add("Blackened Sword");
+            SwordNames.Add("Cold Sword");
+            SwordNames.Add("Fire Sword");
+
+            List<string> BowNames = new List<string>();
+            BowNames.Add("Blackened Bow");
+            BowNames.Add("Cold Bow");
+            BowNames.Add("Fire Bow");
+
+            List<string> StaffNames = new List<string>();
+            StaffNames.Add("Blackened Staff");
+            StaffNames.Add("Cold Staff");
+            StaffNames.Add("Fire Staff");
+
+            List<string> WandNames = new List<string>();
+            WandNames.Add("Blackened Wand");
+            WandNames.Add("Cold Wand");
+            WandNames.Add("Fire Wand");
+
+            List<string> AxeNames = new List<string>();
+            AxeNames.Add("Blackened Axe");
+            AxeNames.Add("Cold Axe");
+            AxeNames.Add("Fire Axe");
+
+            List<string> DaggerNames = new List<string>();
+            DaggerNames.Add("Blackened Dagger");
+            DaggerNames.Add("Cold Dagger");
+            DaggerNames.Add("Fire Dagger");
+
+            temp = GameState.NumberGenerator.Next(1, 7);
+            temp2 = GameState.NumberGenerator.Next(1, 4);
+
+            switch (temp)
+            {
+                case 1:
+                    itemType = "Sword";
+                    switch (temp2)
+                    {
+                        case 1:
+                            itemName = SwordNames.ElementAt(0);
+                            break;
+                        case 2:
+                            itemName = SwordNames.ElementAt(1);
+                            break;
+                        case 3:
+                            itemName = SwordNames.ElementAt(2);
+                            break;
+                        default:
+                            Console.WriteLine("\nUh Oh, something went wrong.\n");
+                            break;
+                    }
+                    break;
+                case 2:
+                    itemType = "Bow";
+                    switch (temp2)
+                    {
+                        case 1:
+                            itemName = BowNames.ElementAt(0);
+                            break;
+                        case 2:
+                            itemName = BowNames.ElementAt(1);
+                            break;
+                        case 3:
+                            itemName = BowNames.ElementAt(2);
+                            break;
+                        default:
+                            Console.WriteLine("\nUh Oh, something went wrong.\n");
+                            break;
+                    }
+                    break;
+                case 3:
+                    itemType = "Staff";
+                    switch (temp2)
+                    {
+                        case 1:
+                            itemName = StaffNames.ElementAt(0);
+                            break;
+                        case 2:
+                            itemName = StaffNames.ElementAt(1);
+                            break;
+                        case 3:
+                            itemName = StaffNames.ElementAt(2);
+                            break;
+                        default:
+                            Console.WriteLine("\nUh Oh, something went wrong.\n");
+                            break;
+                    }
+                    break;
+                case 4:
+                    itemType = "Wand";
+                    switch (temp2)
+                    {
+                        case 1:
+                            itemName = WandNames.ElementAt(0);
+                            break;
+                        case 2:
+                            itemName = WandNames.ElementAt(1);
+                            break;
+                        case 3:
+                            itemName = WandNames.ElementAt(2);
+                            break;
+                        default:
+                            Console.WriteLine("\nUh Oh, something went wrong.\n");
+                            break;
+                    }
+                    break;
+                case 5:
+                    itemType = "Dagger";
+                    switch (temp2)
+                    {
+                        case 1:
+                            itemName = DaggerNames.ElementAt(0);
+                            break;
+                        case 2:
+                            itemName = DaggerNames.ElementAt(1);
+                            break;
+                        case 3:
+                            itemName = DaggerNames.ElementAt(2);
+                            break;
+                        default:
+                            Console.WriteLine("\nUh Oh, something went wrong.\n");
+                            break;
+                    }
+                    break;
+                case 6:
+                    itemType = "Axe";
+                    switch (temp2)
+                    {
+                        case 1:
+                            itemName = AxeNames.ElementAt(0);
+                            break;
+                        case 2:
+                            itemName = AxeNames.ElementAt(1);
+                            break;
+                        case 3:
+                            itemName = AxeNames.ElementAt(2);
+                            break;
+                        default:
+                            Console.WriteLine("\nUh Oh, something went wrong.\n");
+                            break;
+                    }
+                    break;
+                default:
+                    Console.WriteLine("\nUh Oh, something went wrong.\n");
+                    break;
+            }
+
+            damage = GameState.NumberGenerator.Next(30, 41);
+            strength = GameState.NumberGenerator.Next(0, 41);
+            agility = GameState.NumberGenerator.Next(0, 41);
+            intelligence = GameState.NumberGenerator.Next(0, 41);
+            health = GameState.NumberGenerator.Next(0, 41);
+            requiredLevel = GameState.NumberGenerator.Next(26, 31);
+            goldFind = 0;
+            magicFind = 0;
+            critChance = 0;
+            critDamage = 0;
+            worth = GameState.NumberGenerator.Next(30, 41);
+
+            switch (itemType)
+            {
+                case "Sword":
+                    aSword = new Weapon(itemName, itemType, damage, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
+                    Console.WriteLine("You loot {0}", itemName);
+                    if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
+                        GameState.Hero.Inventory.Add(aSword);
+                    else
+                        Console.WriteLine("Unfortunately you don't have enough space to store {0} and it will lay forever abandoned and forgotten", itemName);
+                    break;
+
+                case "Bow":
+                    aBow = new Weapon(itemName, itemType, damage, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
+                    Console.WriteLine("You loot {0}", itemName);
+                    if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
+                        GameState.Hero.Inventory.Add(aBow);
+                    else
+                        Console.WriteLine("Unfortunately you don't have enough space to store {0} and it will lay forever abandoned and forgotten", itemName);
+                    break;
+
+                case "Staff":
+                    aStaff = new Weapon(itemName, itemType, damage, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
+                    Console.WriteLine("You loot {0}", itemName);
+                    if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
+                        GameState.Hero.Inventory.Add(aStaff);
+                    else
+                        Console.WriteLine("Unfortunately you don't have enough space to store {0} and it will lay forever abandoned and forgotten", itemName);
+                    break;
+
+                case "Wand":
+                    aWand = new Weapon(itemName, itemType, damage, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
+                    Console.WriteLine("You loot {0}", itemName);
+                    if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
+                        GameState.Hero.Inventory.Add(aWand);
+                    else
+                        Console.WriteLine("Unfortunately you don't have enough space to store {0} and it will lay forever abandoned and forgotten", itemName);
+                    break;
+
+                case "Dagger":
+                    aDagger = new Weapon(itemName, itemType, damage, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
+                    Console.WriteLine("You loot {0}", itemName);
+                    if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
+                        GameState.Hero.Inventory.Add(aDagger);
+                    else
+                        Console.WriteLine("Unfortunately you don't have enough space to store {0} and it will lay forever abandoned and forgotten", itemName);
+                    break;
+
+                case "Axe":
+                    aAxe = new Weapon(itemName, itemType, damage, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
+                    Console.WriteLine("You loot {0}", itemName);
+                    if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
+                        GameState.Hero.Inventory.Add(aAxe);
+                    else
+                        Console.WriteLine("Unfortunately you don't have enough space to store {0} and it will lay forever abandoned and forgotten", itemName);
+                    break;
+
+                default:
+                    Console.WriteLine("\nUh Oh, something went wrong.\n");
+                    break;
+            }
+        }
+
+        public void LevelsTwentySixToThirtyGetArmor()
+        {
+            rand = new Random();
+
+            Armor aArmor;
+
+            List<string> ArmorNames = new List<string>();
+            ArmorNames.Add("Cold Chainmail");
+            ArmorNames.Add("Blackened Leather Armor");
+            ArmorNames.Add("Fire Robes");
+
+
+            temp = GameState.NumberGenerator.Next(1, 4);
+
+            switch (temp)
+            {
+                case 1:
+                    itemName = ArmorNames.ElementAt(0);
+                    itemType = "Mail";
+                    break;
+                case 2:
+                    itemName = ArmorNames.ElementAt(1);
+                    itemType = "Leather";
+                    break;
+                case 3:
+                    itemName = ArmorNames.ElementAt(2);
+                    itemType = "Cloth";
+                    break;
+                default:
+                    Console.WriteLine("\nUh Oh, something went wrong.\n");
+                    break;
+            }
+
+
+            armor = GameState.NumberGenerator.Next(30, 41);
+            strength = GameState.NumberGenerator.Next(0, 41);
+            agility = GameState.NumberGenerator.Next(0, 41);
+            intelligence = GameState.NumberGenerator.Next(0, 41);
+            health = GameState.NumberGenerator.Next(0, 41);
+            requiredLevel = GameState.NumberGenerator.Next(26, 31);
+            goldFind = 0;
+            magicFind = 0;
+            critChance = 0;
+            critDamage = 0;
+            worth = GameState.NumberGenerator.Next(30, 41);
+
+            aArmor = new Armor(itemName, itemType, armor, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
+            Console.WriteLine("You loot {0}", itemName);
+            if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
+                GameState.Hero.Inventory.Add(aArmor);
+            else
+                Console.WriteLine("Unfortunately you don't have enough space to store {0} and it will lay forever abandoned and forgotten", itemName);
+        }
+
+        public void LevelsTwentySixToThirtyGetHelmet()
+        {
+            rand = new Random();
+
+            Helmet aHelmet;
+
+            List<string> HelmetNames = new List<string>();
+            HelmetNames.Add("Blackened Helmet");
+            HelmetNames.Add("Cold Helmet");
+            HelmetNames.Add("Fire Hat");
+
+
+            temp = GameState.NumberGenerator.Next(1, 4);
+
+            switch (temp)
+            {
+                case 1:
+                    itemName = HelmetNames.ElementAt(0);
+                    itemType = "Mail";
+                    break;
+                case 2:
+                    itemName = HelmetNames.ElementAt(1);
+                    itemType = "Leather";
+                    break;
+                case 3:
+                    itemName = HelmetNames.ElementAt(2);
+                    itemType = "Cloth";
+                    break;
+                default:
+                    Console.WriteLine("\nUh Oh, something went wrong.\n");
+                    break;
+            }
+
+
+            armor = GameState.NumberGenerator.Next(30, 41);
+            strength = GameState.NumberGenerator.Next(0, 41);
+            agility = GameState.NumberGenerator.Next(0, 41);
+            intelligence = GameState.NumberGenerator.Next(0, 41);
+            health = GameState.NumberGenerator.Next(0, 41);
+            requiredLevel = GameState.NumberGenerator.Next(26, 31);
+            goldFind = 0;
+            magicFind = 0;
+            critChance = 0;
+            critDamage = 0;
+            worth = GameState.NumberGenerator.Next(30, 41);
+
+            aHelmet = new Helmet(itemName, itemType, armor, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
+            Console.WriteLine("You loot {0}", itemName);
+            if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
+                GameState.Hero.Inventory.Add(aHelmet);
+            else
+                Console.WriteLine("Unfortunately you don't have enough space to store {0} and it will lay forever abandoned and forgotten", itemName);
+        }
+
+        public void LevelsTwentySixToThirtyGetAmulet()
+        {
+            rand = new Random();
+
+            Amulet aAmulet;
+
+            List<string> AmuletNames = new List<string>();
+            AmuletNames.Add("Blackened Amulet");
+            AmuletNames.Add("Cold Amulet");
+            AmuletNames.Add("Fire Amulet");
+
+
+            temp = GameState.NumberGenerator.Next(1, 4);
+
+            switch (temp)
+            {
+                case 1:
+                    itemName = AmuletNames.ElementAt(0);
+                    break;
+                case 2:
+                    itemName = AmuletNames.ElementAt(1);
+                    break;
+                case 3:
+                    itemName = AmuletNames.ElementAt(2);
+                    break;
+                default:
+                    Console.WriteLine("\nUh Oh, something went wrong.\n");
+                    break;
+            }
+
+            itemType = "Amulet";
+
+            armor = GameState.NumberGenerator.Next(30, 41);
+            strength = GameState.NumberGenerator.Next(0, 41);
+            agility = GameState.NumberGenerator.Next(0, 41);
+            intelligence = GameState.NumberGenerator.Next(0, 41);
+            health = GameState.NumberGenerator.Next(0, 41);
+            requiredLevel = GameState.NumberGenerator.Next(26, 31);
+            goldFind = 0;
+            magicFind = 0;
+            critChance = 0;
+            critDamage = 0;
+            worth = GameState.NumberGenerator.Next(30, 41);
+
+            aAmulet = new Amulet(itemName, itemType, armor, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
+            Console.WriteLine("You loot {0}", itemName);
+            if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
+                GameState.Hero.Inventory.Add(aAmulet);
+            else
+                Console.WriteLine("Unfortunately you don't have enough space to store {0} and it will lay forever abandoned and forgotten", itemName);
+        }
+
+        public void LevelsTwentySixToThirtyGetPotion()
+        {
+            rand = new Random();
+
+            Potion aPotion;
+
+            string potionName = "Cold Potion";
+
+            itemType = "Potion";
+
+            healAmount = GameState.NumberGenerator.Next(100, 201);
+            energyIncreased = GameState.NumberGenerator.Next(400, 751);
+            requiredLevel = 26;
+            worth = GameState.NumberGenerator.Next(30, 41);
+
+            aPotion = new Potion(potionName, healAmount, energyIncreased, requiredLevel, itemType, worth);
+            Console.WriteLine("You loot {0}", potionName);
+            if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
+                GameState.Hero.Inventory.Add(aPotion);
+            else
+                Console.WriteLine("Unfortunately you don't have enough space to store {0} and it will lay forever abandoned and forgotten", itemName);
+        }
+
+        public void LevelsThirtyOneToThirtyFiveGetWeapon()
+        {
+            rand = new Random();
+
+            Weapon aSword;
+            Weapon aBow;
+            Weapon aStaff;
+            Weapon aAxe;
+            Weapon aDagger;
+            Weapon aWand;
+
+            List<string> SwordNames = new List<string>();
+            SwordNames.Add("Earth Sword");
+            SwordNames.Add("Warm Sword");
+            SwordNames.Add("Storm Sword");
+
+            List<string> BowNames = new List<string>();
+            BowNames.Add("Earth Bow");
+            BowNames.Add("Warm Bow");
+            BowNames.Add("Storm Bow");
+
+            List<string> StaffNames = new List<string>();
+            StaffNames.Add("Earth Staff");
+            StaffNames.Add("Warm Staff");
+            StaffNames.Add("Storm Staff");
+
+            List<string> WandNames = new List<string>();
+            WandNames.Add("Earth Wand");
+            WandNames.Add("Warm Wand");
+            WandNames.Add("Storm Wand");
+
+            List<string> AxeNames = new List<string>();
+            AxeNames.Add("Earth Axe");
+            AxeNames.Add("Warm Axe");
+            AxeNames.Add("Storm Axe");
+
+            List<string> DaggerNames = new List<string>();
+            DaggerNames.Add("Earth Dagger");
+            DaggerNames.Add("Warm Dagger");
+            DaggerNames.Add("Storm Dagger");
+
+            temp = GameState.NumberGenerator.Next(1, 7);
+            temp2 = GameState.NumberGenerator.Next(1, 4);
+
+            switch (temp)
+            {
+                case 1:
+                    itemType = "Sword";
+                    switch (temp2)
+                    {
+                        case 1:
+                            itemName = SwordNames.ElementAt(0);
+                            break;
+                        case 2:
+                            itemName = SwordNames.ElementAt(1);
+                            break;
+                        case 3:
+                            itemName = SwordNames.ElementAt(2);
+                            break;
+                        default:
+                            Console.WriteLine("\nUh Oh, something went wrong.\n");
+                            break;
+                    }
+                    break;
+                case 2:
+                    itemType = "Bow";
+                    switch (temp2)
+                    {
+                        case 1:
+                            itemName = BowNames.ElementAt(0);
+                            break;
+                        case 2:
+                            itemName = BowNames.ElementAt(1);
+                            break;
+                        case 3:
+                            itemName = BowNames.ElementAt(2);
+                            break;
+                        default:
+                            Console.WriteLine("\nUh Oh, something went wrong.\n");
+                            break;
+                    }
+                    break;
+                case 3:
+                    itemType = "Staff";
+                    switch (temp2)
+                    {
+                        case 1:
+                            itemName = StaffNames.ElementAt(0);
+                            break;
+                        case 2:
+                            itemName = StaffNames.ElementAt(1);
+                            break;
+                        case 3:
+                            itemName = StaffNames.ElementAt(2);
+                            break;
+                        default:
+                            Console.WriteLine("\nUh Oh, something went wrong.\n");
+                            break;
+                    }
+                    break;
+                case 4:
+                    itemType = "Wand";
+                    switch (temp2)
+                    {
+                        case 1:
+                            itemName = WandNames.ElementAt(0);
+                            break;
+                        case 2:
+                            itemName = WandNames.ElementAt(1);
+                            break;
+                        case 3:
+                            itemName = WandNames.ElementAt(2);
+                            break;
+                        default:
+                            Console.WriteLine("\nUh Oh, something went wrong.\n");
+                            break;
+                    }
+                    break;
+                case 5:
+                    itemType = "Dagger";
+                    switch (temp2)
+                    {
+                        case 1:
+                            itemName = DaggerNames.ElementAt(0);
+                            break;
+                        case 2:
+                            itemName = DaggerNames.ElementAt(1);
+                            break;
+                        case 3:
+                            itemName = DaggerNames.ElementAt(2);
+                            break;
+                        default:
+                            Console.WriteLine("\nUh Oh, something went wrong.\n");
+                            break;
+                    }
+                    break;
+                case 6:
+                    itemType = "Axe";
+                    switch (temp2)
+                    {
+                        case 1:
+                            itemName = AxeNames.ElementAt(0);
+                            break;
+                        case 2:
+                            itemName = AxeNames.ElementAt(1);
+                            break;
+                        case 3:
+                            itemName = AxeNames.ElementAt(2);
+                            break;
+                        default:
+                            Console.WriteLine("\nUh Oh, something went wrong.\n");
+                            break;
+                    }
+                    break;
+                default:
+                    Console.WriteLine("\nUh Oh, something went wrong.\n");
+                    break;
+            }
+
+            damage = GameState.NumberGenerator.Next(35, 56);
+            strength = GameState.NumberGenerator.Next(0, 56);
+            agility = GameState.NumberGenerator.Next(0, 56);
+            intelligence = GameState.NumberGenerator.Next(0, 56);
+            health = GameState.NumberGenerator.Next(0, 56);
+            requiredLevel = GameState.NumberGenerator.Next(31, 41);
+            goldFind = 0;
+            magicFind = 0;
+            critChance = 0;
+            critDamage = 0;
+            worth = GameState.NumberGenerator.Next(35, 56);
+
+            switch (itemType)
+            {
+                case "Sword":
+                    aSword = new Weapon(itemName, itemType, damage, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
+                    Console.WriteLine("You loot {0}", itemName);
+                    if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
+                        GameState.Hero.Inventory.Add(aSword);
+                    else
+                        Console.WriteLine("Unfortunately you don't have enough space to store {0} and it will lay forever abandoned and forgotten", itemName);
+                    break;
+
+                case "Bow":
+                    aBow = new Weapon(itemName, itemType, damage, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
+                    Console.WriteLine("You loot {0}", itemName);
+                    if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
+                        GameState.Hero.Inventory.Add(aBow);
+                    else
+                        Console.WriteLine("Unfortunately you don't have enough space to store {0} and it will lay forever abandoned and forgotten", itemName);
+                    break;
+
+                case "Staff":
+                    aStaff = new Weapon(itemName, itemType, damage, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
+                    Console.WriteLine("You loot {0}", itemName);
+                    if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
+                        GameState.Hero.Inventory.Add(aStaff);
+                    else
+                        Console.WriteLine("Unfortunately you don't have enough space to store {0} and it will lay forever abandoned and forgotten", itemName);
+                    break;
+
+                case "Wand":
+                    aWand = new Weapon(itemName, itemType, damage, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
+                    Console.WriteLine("You loot {0}", itemName);
+                    if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
+                        GameState.Hero.Inventory.Add(aWand);
+                    else
+                        Console.WriteLine("Unfortunately you don't have enough space to store {0} and it will lay forever abandoned and forgotten", itemName);
+                    break;
+
+                case "Dagger":
+                    aDagger = new Weapon(itemName, itemType, damage, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
+                    Console.WriteLine("You loot {0}", itemName);
+                    if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
+                        GameState.Hero.Inventory.Add(aDagger);
+                    else
+                        Console.WriteLine("Unfortunately you don't have enough space to store {0} and it will lay forever abandoned and forgotten", itemName);
+                    break;
+
+                case "Axe":
+                    aAxe = new Weapon(itemName, itemType, damage, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
+                    Console.WriteLine("You loot {0}", itemName);
+                    if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
+                        GameState.Hero.Inventory.Add(aAxe);
+                    else
+                        Console.WriteLine("Unfortunately you don't have enough space to store {0} and it will lay forever abandoned and forgotten", itemName);
+                    break;
+
+                default:
+                    Console.WriteLine("\nUh Oh, something went wrong.\n");
+                    break;
+            }
+        }
+
+        public void LevelsThirtyOneToThirtyFiveGetArmor()
+        {
+            rand = new Random();
+
+            Armor aArmor;
+
+            List<string> ArmorNames = new List<string>();
+            ArmorNames.Add("Warm Chainmail");
+            ArmorNames.Add("Earth Leather Armor");
+            ArmorNames.Add("Storm Robes");
+
+
+            temp = GameState.NumberGenerator.Next(1, 4);
+
+            switch (temp)
+            {
+                case 1:
+                    itemName = ArmorNames.ElementAt(0);
+                    itemType = "Mail";
+                    break;
+                case 2:
+                    itemName = ArmorNames.ElementAt(1);
+                    itemType = "Leather";
+                    break;
+                case 3:
+                    itemName = ArmorNames.ElementAt(2);
+                    itemType = "Cloth";
+                    break;
+                default:
+                    Console.WriteLine("\nUh Oh, something went wrong.\n");
+                    break;
+            }
+
+
+            armor = GameState.NumberGenerator.Next(35, 56);
+            strength = GameState.NumberGenerator.Next(0, 56);
+            agility = GameState.NumberGenerator.Next(0, 56);
+            intelligence = GameState.NumberGenerator.Next(0, 56);
+            health = GameState.NumberGenerator.Next(0, 56);
+            requiredLevel = GameState.NumberGenerator.Next(31, 41);
+            goldFind = 0;
+            magicFind = 0;
+            critChance = 0;
+            critDamage = 0;
+            worth = GameState.NumberGenerator.Next(35, 56);
+
+            aArmor = new Armor(itemName, itemType, armor, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
+            Console.WriteLine("You loot {0}", itemName);
+            if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
+                GameState.Hero.Inventory.Add(aArmor);
+            else
+                Console.WriteLine("Unfortunately you don't have enough space to store {0} and it will lay forever abandoned and forgotten", itemName);
+        }
+
+        public void LevelsThirtyOneToThirtyFiveGetHelmet()
+        {
+            rand = new Random();
+
+            Helmet aHelmet;
+
+            List<string> HelmetNames = new List<string>();
+            HelmetNames.Add("Earth Helmet");
+            HelmetNames.Add("Warm Helmet");
+            HelmetNames.Add("Storm Hat");
+
+
+            temp = GameState.NumberGenerator.Next(1, 4);
+
+            switch (temp)
+            {
+                case 1:
+                    itemName = HelmetNames.ElementAt(0);
+                    itemType = "Mail";
+                    break;
+                case 2:
+                    itemName = HelmetNames.ElementAt(1);
+                    itemType = "Leather";
+                    break;
+                case 3:
+                    itemName = HelmetNames.ElementAt(2);
+                    itemType = "Cloth";
+                    break;
+                default:
+                    Console.WriteLine("\nUh Oh, something went wrong.\n");
+                    break;
+            }
+
+
+            armor = GameState.NumberGenerator.Next(35, 56);
+            strength = GameState.NumberGenerator.Next(0, 56);
+            agility = GameState.NumberGenerator.Next(0, 56);
+            intelligence = GameState.NumberGenerator.Next(0, 56);
+            health = GameState.NumberGenerator.Next(0, 56);
+            requiredLevel = GameState.NumberGenerator.Next(31, 41);
+            goldFind = 0;
+            magicFind = 0;
+            critChance = 0;
+            critDamage = 0;
+            worth = GameState.NumberGenerator.Next(35, 56);
+
+            aHelmet = new Helmet(itemName, itemType, armor, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
+            Console.WriteLine("You loot {0}", itemName);
+            if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
+                GameState.Hero.Inventory.Add(aHelmet);
+            else
+                Console.WriteLine("Unfortunately you don't have enough space to store {0} and it will lay forever abandoned and forgotten", itemName);
+        }
+
+        public void LevelsThirtyOneToThirtyFiveGetAmulet()
+        {
+            rand = new Random();
+
+            Amulet aAmulet;
+
+            List<string> AmuletNames = new List<string>();
+            AmuletNames.Add("Earth Amulet");
+            AmuletNames.Add("Warm Amulet");
+            AmuletNames.Add("Storm Amulet");
+
+
+            temp = GameState.NumberGenerator.Next(1, 4);
+
+            switch (temp)
+            {
+                case 1:
+                    itemName = AmuletNames.ElementAt(0);
+                    break;
+                case 2:
+                    itemName = AmuletNames.ElementAt(1);
+                    break;
+                case 3:
+                    itemName = AmuletNames.ElementAt(2);
+                    break;
+                default:
+                    Console.WriteLine("\nUh Oh, something went wrong.\n");
+                    break;
+            }
+
+            itemType = "Amulet";
+
+            armor = GameState.NumberGenerator.Next(35, 56);
+            strength = GameState.NumberGenerator.Next(0, 56);
+            agility = GameState.NumberGenerator.Next(0, 56);
+            intelligence = GameState.NumberGenerator.Next(0, 56);
+            health = GameState.NumberGenerator.Next(0, 56);
+            requiredLevel = GameState.NumberGenerator.Next(31, 41);
+            goldFind = 0;
+            magicFind = 0;
+            critChance = 0;
+            critDamage = 0;
+            worth = GameState.NumberGenerator.Next(35, 56);
+
+            aAmulet = new Amulet(itemName, itemType, armor, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
+            Console.WriteLine("You loot {0}", itemName);
+            if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
+                GameState.Hero.Inventory.Add(aAmulet);
+            else
+                Console.WriteLine("Unfortunately you don't have enough space to store {0} and it will lay forever abandoned and forgotten", itemName);
+        }
+
+        public void LevelsThirtyOneToThirtyFiveGetPotion()
+        {
+            rand = new Random();
+
+            Potion aPotion;
+
+            string potionName = "Warm Potion";
+
+            itemType = "Potion";
+
+            healAmount = GameState.NumberGenerator.Next(150, 301);
+            energyIncreased = GameState.NumberGenerator.Next(500, 851);
+            requiredLevel = 31;
+            worth = GameState.NumberGenerator.Next(35, 56);
+
+            aPotion = new Potion(potionName, healAmount, energyIncreased, requiredLevel, itemType, worth);
+            Console.WriteLine("You loot {0}", potionName);
+            if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
+                GameState.Hero.Inventory.Add(aPotion);
+            else
+                Console.WriteLine("Unfortunately you don't have enough space to store {0} and it will lay forever abandoned and forgotten", itemName);
+        }
     }
 }
