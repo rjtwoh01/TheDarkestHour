@@ -885,13 +885,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             //North Road Two
             if (defeatedMobs)
             {
-                locationDefinition = AnkouBattle.GetTownInstance().GetRoomThreeDefinition();
-                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
-
-                locationDefinition = AnkouBattle.GetTownInstance().GetRoomFourDefinition();
-                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
-
-                locationDefinition = AnkouBattle.GetTownInstance().GetRoomFiveDefinition();
+                locationDefinition = AnkouBattle.GetTownInstance().GetNorthThreeDefinition();
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
             }
 
@@ -956,7 +950,7 @@ namespace The_Darkest_Hour.Towns.Watertown
                 mobs.Add(new Necromancer());
                 mobs.Add(new Necromancer());
                 CombatAction combatAction = new CombatAction("Necromancers", mobs);
-                combatAction.PostCombat += RoomFourGuards;
+                combatAction.PostCombat += NorthThreeMobs;
 
                 locationActions.Add(combatAction);
 
@@ -972,6 +966,11 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = AnkouBattle.GetTownInstance().GetNorthTwoDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
+            if (defeatedMobs)
+            {
+                locationDefinition = AnkouBattle.GetTownInstance().GetNorthFourDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
 
@@ -990,7 +989,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             }
         }
 
-        public LocationDefinition GetRoomThreeDefinition()
+        public LocationDefinition GetNorthThreeDefinition()
         {
             LocationDefinition returnData = new LocationDefinition();
             string locationKey = NORTH_THREE_KEY;
@@ -1048,13 +1047,13 @@ namespace The_Darkest_Hour.Towns.Watertown
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
 
             // The floor below
-            LocationDefinition locationDefinition = AnkouBattle.GetTownInstance().GetNorthTwoDefinition();
+            LocationDefinition locationDefinition = AnkouBattle.GetTownInstance().GetNorthThreeDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
             //North Road Two
             if (defeatedMobs)
             {
-                locationDefinition = AnkouBattle.GetTownInstance().GetNorthClearingDefinition();
+                locationDefinition = AnkouBattle.GetTownInstance().GetNorthFiveDefinition();
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
             }
 
@@ -1076,7 +1075,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             }
         }
 
-        public LocationDefinition GetRoomFourDefinition()
+        public LocationDefinition GetNorthFourDefinition()
         {
             LocationDefinition returnData = new LocationDefinition();
             string locationKey = NORTH_FOUR_KEY;
@@ -1138,10 +1137,15 @@ namespace The_Darkest_Hour.Towns.Watertown
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
 
             // The floor below
-            LocationDefinition locationDefinition = AnkouBattle.GetTownInstance().GetNorthTwoDefinition();
+            LocationDefinition locationDefinition = AnkouBattle.GetTownInstance().GetNorthFourDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
-
+            if (defeatedMobs)
+            {
+                locationDefinition = AnkouBattle.GetTownInstance().GetNorthClearingDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
+            
             returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
 
             return returnData;
@@ -1159,7 +1163,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             }
         }
 
-        public LocationDefinition GetRoomFiveDefinition()
+        public LocationDefinition GetNorthFiveDefinition()
         {
             LocationDefinition returnData = new LocationDefinition();
             string locationKey = NORTH_FIVE_KEY;
@@ -1214,7 +1218,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
 
             // The floor below
-            LocationDefinition locationDefinition = AnkouBattle.GetTownInstance().GetRoomFourDefinition();
+            LocationDefinition locationDefinition = AnkouBattle.GetTownInstance().GetNorthFiveDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
             if (defeatedMobs)
