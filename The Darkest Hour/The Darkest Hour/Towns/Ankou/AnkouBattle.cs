@@ -18,21 +18,33 @@ namespace The_Darkest_Hour.Towns.Watertown
     {
         #region Location Keys
 
-        public const string ENTRANCE_KEY = "AnkouBattle.Entrance";
-        public const string TOWN_CENTER_KEY = "AnkouBattle.TownCenter";
-        public const string WEST_ROAD_KEY = "AnkouBattle.WestRoad";
-        public const string WEST_CLEARING_KEY = "AnkouBattle.WestClearing";
-        public const string SOUTH_ROAD_KEY = "AnkouBattle.SouthRoad";
-        public const string SOUTH_CLEARING_KEY = "AnkouBattle.SouthClearing";
-        public const string EAST_ROAD_KEY = "AnkouBattle.EastRoad";
-        public const string EAST_CLEARING_KEY = "AnkouBattle.EastClearing";
-        public const string DEFEATED_TOWN_HALL_MOBS = "AnkouBattle.DefeatedTownCenterMobs";
-        public const string DEFEATED_WEST_ROAD_BANDITS = "AnkouBattle.DefeatedWestRoadBandits";
-        public const string DEFEATED_BANDIT_ASSAULT_LEADER = "AnkouBattle.DefeatedBanditAssaultLeader";
-        public const string DEFEATED_SOUTH_ROAD_PEASANTS = "AnkouBattle.DefeatedSouthRoadPeasants";
-        public const string DEFEATED_PEASANT_ASSAULT_LEADER = "AnkouBattle.DefeatedPeasantAssaultLeader";
-        public const string DEFEATED_EAST_ROAD_NOBLES = "AnkouBattle.DefeatedEastRoadNobles";
-        public const string DEFEATED_NOBLE_ASSAULT_LEADER = "AnkouBattle.DefeatedNobleAssaultLeader";
+        public const string ENTRANCE_KEY = "Ankou.AnkouBattle.Entrance";
+        public const string TOWN_CENTER_KEY = "Ankou.AnkouBattle.TownCenter";
+        public const string WEST_ROAD_KEY = "Ankou.AnkouBattle.WestRoad";
+        public const string WEST_CLEARING_KEY = "Ankou.AnkouBattle.WestClearing";
+        public const string SOUTH_ROAD_KEY = "Ankou.AnkouBattle.SouthRoad";
+        public const string SOUTH_CLEARING_KEY = "Ankou.AnkouBattle.SouthClearing";
+        public const string EAST_ROAD_KEY = "Ankou.AnkouBattle.EastRoad";
+        public const string EAST_CLEARING_KEY = "Ankou.AnkouBattle.EastClearing";
+        public const string DEFEATED_TOWN_HALL_MOBS = "Ankou.AnkouBattle.DefeatedTownCenterMobs";
+        public const string DEFEATED_WEST_ROAD_BANDITS = "Ankou.AnkouBattle.DefeatedWestRoadBandits";
+        public const string DEFEATED_BANDIT_ASSAULT_LEADER = "Ankou.AnkouBattle.DefeatedBanditAssaultLeader";
+        public const string DEFEATED_SOUTH_ROAD_PEASANTS = "Ankou.AnkouBattle.DefeatedSouthRoadPeasants";
+        public const string DEFEATED_PEASANT_ASSAULT_LEADER = "Ankou.AnkouBattle.DefeatedPeasantAssaultLeader";
+        public const string DEFEATED_EAST_ROAD_NOBLES = "Ankou.AnkouBattle.DefeatedEastRoadNobles";
+        public const string DEFEATED_NOBLE_ASSAULT_LEADER = "Ankou.AnkouBattle.DefeatedNobleAssaultLeader";
+        public const string NORTH_ONE_KEY = "Ankou.AnkouBattle.NorthOne";
+        public const string NORTH_TWO_KEY = "Ankou.AnkouBattle.NorthTwo";
+        public const string NORTH_THREE_KEY = "Ankou.AnkouBattle.NorthThree";
+        public const string NORTH_FOUR_KEY = "Ankou.AnkouBattle.NorthFour";
+        public const string NORTH_FIVE_KEY = "Ankou.AnkouBattle.NorthFive";
+        public const string NORTH_CLEARING_KEY = "Ankou.AnkouBattle.NorthClearing";
+        public const string DEFEATED_ROAD_ONE_MOBS = "Ankou.AnkouBattle.DefeatedRoadOneMobs";
+        public const string DEFEATED_ROAD_TWO_MOBS = "Ankou.AnkouBattle.DefeatedRoadTwoMobs";
+        public const string DEFEATED_ROAD_THREE_MOBS = "Ankou.AnkouBattle.DefeatedRoadThreeMobs";
+        public const string DEFEATED_ROAD_FOUR_MOBS = "Ankou.AnkouBattle.DefeatedRoadFourMobs";
+        public const string DEFEATED_ROAD_FIVE_MOBS = "Ankou.AnkouBattle.DefeatedRoadFiveMobs";
+        public const string DEFEATED_LORD_ARGUS = "Ankou.AnkouBattle.DefeatedLordArgus";
 
         #endregion
 
@@ -43,7 +55,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             return GetEntranceDefinition();
         }
 
-        #region Tower Entrance
+        #region Battle Entrance
 
         public Location LoadEntrance()
         {
@@ -62,7 +74,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
             //Ankou Town Center Under Siege
-            locationDefinition = AnkouBattle.GetTownInstance().GetLargeHallDefinition();
+            locationDefinition = AnkouBattle.GetTownInstance().GetTownCenterDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
 
@@ -94,9 +106,11 @@ namespace The_Darkest_Hour.Towns.Watertown
 
         #endregion
 
+        #region First Half
+
         #region Ankou Town Center Under Siege
 
-        public Location LoadLargeHall()
+        public Location LoadTownCenter()
         {
             Location returnData;
             returnData = new Location();
@@ -147,7 +161,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             if (defeatedMobsOne)
             {
                 //West Road
-                locationDefinition = AnkouBattle.GetTownInstance().GetWestRoadRoomDefinition();
+                locationDefinition = AnkouBattle.GetTownInstance().GetWestRoadDefinition();
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
                 //South Road
@@ -161,9 +175,9 @@ namespace The_Darkest_Hour.Towns.Watertown
 
             if (defeatedBanditAssaultLeader && defeatedNobleAssaultLeader && defeatedPeasantAssaultLeader)
             {
-                //Floor two
-                //locationDefinition = AnkouBattleFloorTwo.GetTownInstance().GetEntranceDefinition();
-                //adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+                //North Road
+                locationDefinition = AnkouBattle.GetTownInstance().GetNorthOneDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
             }
 
             //Floor Two Entrance here.... Need to also check to make sure the player has all of the keys
@@ -186,7 +200,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             }
         }
 
-        public LocationDefinition GetLargeHallDefinition()
+        public LocationDefinition GetTownCenterDefinition()
         {
             LocationDefinition returnData = new LocationDefinition();
             string locationKey = TOWN_CENTER_KEY;
@@ -199,7 +213,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 returnData.LocationKey = locationKey;
                 returnData.Name = "Ankou Town Center Under Siege";
-                returnData.DoLoadLocation = LoadLargeHall;
+                returnData.DoLoadLocation = LoadTownCenter;
 
                 LocationHandler.AddLocation(returnData);
             }
@@ -213,11 +227,11 @@ namespace The_Darkest_Hour.Towns.Watertown
 
         #region West Road
 
-        public Location LoadWestRoadRoom()
+        public Location LoadWestRoad()
         {
             Location returnData;
             returnData = new Location();
-            returnData.Name = "West Road Room";
+            returnData.Name = "West Road";
             bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouBattle.DEFEATED_WEST_ROAD_BANDITS));
 
             if (!defeatedMobs)
@@ -247,7 +261,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
 
             // The Clearing on the outside of this tower.
-            LocationDefinition locationDefinition = AnkouBattle.GetTownInstance().GetLargeHallDefinition();
+            LocationDefinition locationDefinition = AnkouBattle.GetTownInstance().GetTownCenterDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
             //West Clearing here
@@ -274,7 +288,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             }
         }
 
-        public LocationDefinition GetWestRoadRoomDefinition()
+        public LocationDefinition GetWestRoadDefinition()
         {
             LocationDefinition returnData = new LocationDefinition();
             string locationKey = WEST_ROAD_KEY;
@@ -286,8 +300,8 @@ namespace The_Darkest_Hour.Towns.Watertown
             else
             {
                 returnData.LocationKey = locationKey;
-                returnData.Name = "West Road Room";
-                returnData.DoLoadLocation = LoadWestRoadRoom;
+                returnData.Name = "West Road";
+                returnData.DoLoadLocation = LoadWestRoad;
 
                 LocationHandler.AddLocation(returnData);
             }
@@ -328,7 +342,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
 
             // The Clearing on the outside of this tower.
-            LocationDefinition locationDefinition = AnkouBattle.GetTownInstance().GetWestRoadRoomDefinition();
+            LocationDefinition locationDefinition = AnkouBattle.GetTownInstance().GetWestRoadDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
@@ -386,7 +400,7 @@ namespace The_Darkest_Hour.Towns.Watertown
 
         #region South Road
 
-        #region South Road Room One
+        #region South Road North Road One
 
         public Location LoadCenterRoadRoom()
         {
@@ -428,7 +442,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
 
             // The Ankou Town Center Under Siege
-            LocationDefinition locationDefinition = AnkouBattle.GetTownInstance().GetLargeHallDefinition();
+            LocationDefinition locationDefinition = AnkouBattle.GetTownInstance().GetTownCenterDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
             //South Clearing here
@@ -567,7 +581,7 @@ namespace The_Darkest_Hour.Towns.Watertown
 
         #region East Road
 
-        #region East Road Room One
+        #region East Road North Road One
 
         public Location LoadEastRoadRoom()
         {
@@ -601,7 +615,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
 
             // The Ankou Town Center Under Siege
-            LocationDefinition locationDefinition = AnkouBattle.GetTownInstance().GetLargeHallDefinition();
+            LocationDefinition locationDefinition = AnkouBattle.GetTownInstance().GetTownCenterDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
             //South Clearing here
@@ -727,6 +741,530 @@ namespace The_Darkest_Hour.Towns.Watertown
                 returnData.LocationKey = locationKey;
                 returnData.Name = "East Clearing";
                 returnData.DoLoadLocation = LoadEastClearing;
+
+                LocationHandler.AddLocation(returnData);
+            }
+
+            return returnData;
+        }
+
+        #endregion
+
+        #endregion
+
+        #endregion
+
+        #region Second Half
+
+        #region North Road One
+
+        public Location LoadNorthOne()
+        {
+            Location returnData;
+            returnData = new Location();
+            returnData.Name = "North Road One";
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouBattle.DEFEATED_ROAD_ONE_MOBS));
+
+            //Actions
+            if (!defeatedMobs)
+            {
+                returnData.Description = "A room with dead bodies strewn about the floor and skeletons wondering around";
+                // Location Actions
+                List<LocationAction> locationActions = new List<LocationAction>();
+
+                List<Mob> mobs = new List<Mob>();
+                mobs.Add(new Necromancer());
+                mobs.Add(new Necromancer());
+                mobs.Add(new Necromancer());
+                mobs.Add(new Necromancer());
+                CombatAction combatAction = new CombatAction("Necromancers", mobs);
+                combatAction.PostCombat += RoomOneBandits;
+
+                locationActions.Add(combatAction);
+
+                returnData.Actions = locationActions;
+            }
+            else
+                returnData.Description = "A room with dead bodies strewn about the floor.";
+
+            // Adjacent Locations
+            Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
+
+            // Town Center
+            LocationDefinition locationDefinition = AnkouBattle.GetTownInstance().GetTownCenterDefinition();
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+
+            //North Road Two
+            if (defeatedMobs)
+            {
+                locationDefinition = AnkouBattle.GetTownInstance().GetNorthTwoDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
+
+
+            returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
+
+            return returnData;
+        }
+
+        public void RoomOneBandits(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouBattle.DEFEATED_ROAD_ONE_MOBS, true);
+
+                // Reload the Sewer Coordior so it will open up the sewer
+                LocationHandler.ResetLocation(NORTH_ONE_KEY);
+
+            }
+        }
+
+        public LocationDefinition GetNorthOneDefinition()
+        {
+            LocationDefinition returnData = new LocationDefinition();
+            string locationKey = NORTH_ONE_KEY;
+
+            if (LocationHandler.LocationExists(locationKey))
+            {
+                returnData = LocationHandler.GetLocation(locationKey);
+            }
+            else
+            {
+                returnData.LocationKey = locationKey;
+                returnData.Name = "North Road One";
+                returnData.DoLoadLocation = LoadNorthOne;
+
+                LocationHandler.AddLocation(returnData);
+            }
+
+            return returnData;
+        }
+
+        #endregion
+
+        #region North Road Two
+
+        public Location LoadNorthTwo()
+        {
+            Location returnData;
+            returnData = new Location();
+            returnData.Name = "North Road Two";
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouBattle.DEFEATED_ROAD_TWO_MOBS));
+
+            //Actions
+            if (!defeatedMobs)
+            {
+                returnData.Description = "A room filled with tables for eating. There is a group of necromancers and bandits eating";
+                // Location Actions
+                List<LocationAction> locationActions = new List<LocationAction>();
+
+                List<Mob> mobs = new List<Mob>();
+                mobs.Add(new Necromancer());
+                mobs.Add(new Necromancer());
+                mobs.Add(new Necromancer());
+                mobs.Add(new Necromancer());
+                mobs.Add(new Necromancer());
+                mobs.Add(new Necromancer());
+                CombatAction combatAction = new CombatAction("Necromancers", mobs);
+                combatAction.PostCombat += RoomTwoGroup;
+
+                locationActions.Add(combatAction);
+
+                returnData.Actions = locationActions;
+            }
+            else
+                returnData.Description = "A room with dead bodies strewn about the floor.";
+
+            // Adjacent Locations
+            Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
+
+            // The floor below
+            LocationDefinition locationDefinition = AnkouBattle.GetTownInstance().GetNorthOneDefinition();
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+
+            //North Road Two
+            if (defeatedMobs)
+            {
+                locationDefinition = AnkouBattle.GetTownInstance().GetRoomThreeDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+
+                locationDefinition = AnkouBattle.GetTownInstance().GetRoomFourDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+
+                locationDefinition = AnkouBattle.GetTownInstance().GetRoomFiveDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
+
+
+            returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
+
+            return returnData;
+        }
+
+        public void RoomTwoGroup(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouBattle.DEFEATED_ROAD_TWO_MOBS, true);
+
+                // Reload the Sewer Coordior so it will open up the sewer
+                LocationHandler.ResetLocation(NORTH_TWO_KEY);
+
+            }
+        }
+
+        public LocationDefinition GetNorthTwoDefinition()
+        {
+            LocationDefinition returnData = new LocationDefinition();
+            string locationKey = NORTH_TWO_KEY;
+
+            if (LocationHandler.LocationExists(locationKey))
+            {
+                returnData = LocationHandler.GetLocation(locationKey);
+            }
+            else
+            {
+                returnData.LocationKey = locationKey;
+                returnData.Name = "North Road Two";
+                returnData.DoLoadLocation = LoadNorthTwo;
+
+                LocationHandler.AddLocation(returnData);
+            }
+
+            return returnData;
+        }
+
+        #endregion
+
+        #region North Road Three
+
+        public Location LoadNorthThree()
+        {
+            Location returnData;
+            returnData = new Location();
+            returnData.Name = "North Road Three";
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouBattle.DEFEATED_ROAD_THREE_MOBS));
+            
+            //Actions
+            if (!defeatedMobs)
+            {
+                returnData.Description = "A guard room. There is a door on the other signed guarded by four very grim men.";
+                // Location Actions
+                List<LocationAction> locationActions = new List<LocationAction>();
+
+                List<Mob> mobs = new List<Mob>();
+                mobs.Add(new Necromancer());
+                mobs.Add(new Necromancer());
+                CombatAction combatAction = new CombatAction("Necromancers", mobs);
+                combatAction.PostCombat += RoomFourGuards;
+
+                locationActions.Add(combatAction);
+
+                returnData.Actions = locationActions;
+            }
+            else
+                returnData.Description = "A guard room with four failures of guards laying dead on the ground";
+
+            // Adjacent Locations
+            Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
+
+            // The floor below
+            LocationDefinition locationDefinition = AnkouBattle.GetTownInstance().GetNorthTwoDefinition();
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+
+
+            returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
+
+            return returnData;
+        }
+
+        public void NorthThreeMobs(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouBattle.DEFEATED_ROAD_THREE_MOBS, true);
+
+                // Reload the Sewer Coordior so it will open up the sewer
+                LocationHandler.ResetLocation(NORTH_THREE_KEY);
+
+            }
+        }
+
+        public LocationDefinition GetRoomThreeDefinition()
+        {
+            LocationDefinition returnData = new LocationDefinition();
+            string locationKey = NORTH_THREE_KEY;
+
+            if (LocationHandler.LocationExists(locationKey))
+            {
+                returnData = LocationHandler.GetLocation(locationKey);
+            }
+            else
+            {
+                returnData.LocationKey = locationKey;
+                returnData.Name = "North Road Three";
+                returnData.DoLoadLocation = LoadNorthThree;
+
+                LocationHandler.AddLocation(returnData);
+            }
+
+            return returnData;
+        }
+
+        #endregion
+
+        #region North Road Four
+
+        public Location LoadNorthFour()
+        {
+            Location returnData;
+            returnData = new Location();
+            returnData.Name = "North Road Four";
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouBattle.DEFEATED_ROAD_FOUR_MOBS));
+
+            //Actions
+            if (!defeatedMobs)
+            {
+                returnData.Description = "A guard room. There is a door on the other signed guarded by four very grim men.";
+                // Location Actions
+                List<LocationAction> locationActions = new List<LocationAction>();
+
+                List<Mob> mobs = new List<Mob>();
+                mobs.Add(new Necromancer());
+                mobs.Add(new Necromancer());
+                mobs.Add(new Necromancer());
+                mobs.Add(new Necromancer());
+                CombatAction combatAction = new CombatAction("Necromancers", mobs);
+                combatAction.PostCombat += RoomFourGuards;
+
+                locationActions.Add(combatAction);
+
+                returnData.Actions = locationActions;
+            }
+            else
+                returnData.Description = "A guard room with four failures of guards laying dead on the ground";
+
+            // Adjacent Locations
+            Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
+
+            // The floor below
+            LocationDefinition locationDefinition = AnkouBattle.GetTownInstance().GetNorthTwoDefinition();
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+
+            //North Road Two
+            if (defeatedMobs)
+            {
+                locationDefinition = AnkouBattle.GetTownInstance().GetNorthClearingDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
+
+
+            returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
+
+            return returnData;
+        }
+
+        public void RoomFourGuards(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouBattle.DEFEATED_ROAD_FOUR_MOBS, true);
+
+                // Reload the Sewer Coordior so it will open up the sewer
+                LocationHandler.ResetLocation(NORTH_FOUR_KEY);
+
+            }
+        }
+
+        public LocationDefinition GetRoomFourDefinition()
+        {
+            LocationDefinition returnData = new LocationDefinition();
+            string locationKey = NORTH_FOUR_KEY;
+
+            if (LocationHandler.LocationExists(locationKey))
+            {
+                returnData = LocationHandler.GetLocation(locationKey);
+            }
+            else
+            {
+                returnData.LocationKey = locationKey;
+                returnData.Name = "North Road Four";
+                returnData.DoLoadLocation = LoadNorthFour;
+
+                LocationHandler.AddLocation(returnData);
+            }
+
+            return returnData;
+        }
+
+        #endregion
+
+        #region North Road Five
+
+        public Location LoadNorthFive()
+        {
+            Location returnData;
+            returnData = new Location();
+            returnData.Name = "North Road Five";
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouBattle.NORTH_FIVE_KEY));
+
+            //Actions
+            if (!defeatedMobs)
+            {
+                returnData.Description = "A small lounge area for necromancers. There are two necromancers sitting on a couch relaxing.";
+                // Location Actions
+                List<LocationAction> locationActions = new List<LocationAction>();
+
+                List<Mob> mobs = new List<Mob>();
+                mobs.Add(new Necromancer());
+                mobs.Add(new Necromancer());
+                mobs.Add(new Necromancer());
+                mobs.Add(new Necromancer());
+                mobs.Add(new Necromancer());
+                mobs.Add(new Necromancer());
+                mobs.Add(new Necromancer());
+                mobs.Add(new Necromancer());
+                CombatAction combatAction = new CombatAction("Necromancers", mobs);
+                combatAction.PostCombat += RoomFiveNecro;
+
+                locationActions.Add(combatAction);
+
+                returnData.Actions = locationActions;
+            }
+            else
+                returnData.Description = "A small lounge area for necromancers.";
+
+            // Adjacent Locations
+            Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
+
+            // The floor below
+            LocationDefinition locationDefinition = AnkouBattle.GetTownInstance().GetNorthTwoDefinition();
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+
+
+            returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
+
+            return returnData;
+        }
+
+        public void RoomFiveNecro(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouBattle.NORTH_FIVE_KEY, true);
+
+                // Reload the Sewer Coordior so it will open up the sewer
+                LocationHandler.ResetLocation(NORTH_FIVE_KEY);
+
+            }
+        }
+
+        public LocationDefinition GetRoomFiveDefinition()
+        {
+            LocationDefinition returnData = new LocationDefinition();
+            string locationKey = NORTH_FIVE_KEY;
+
+            if (LocationHandler.LocationExists(locationKey))
+            {
+                returnData = LocationHandler.GetLocation(locationKey);
+            }
+            else
+            {
+                returnData.LocationKey = locationKey;
+                returnData.Name = "North Road Five";
+                returnData.DoLoadLocation = LoadNorthFive;
+
+                LocationHandler.AddLocation(returnData);
+            }
+
+            return returnData;
+        }
+
+        #endregion
+
+        #region North Clearing
+
+        public Location LoadNorthClearing()
+        {
+            Location returnData;
+            returnData = new Location();
+            returnData.Name = "North Clearing";
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouBattle.DEFEATED_LORD_ARGUS));
+
+            //Actions
+            if (!defeatedMobs)
+            {
+                returnData.Description = "A large grand room. The Lord Argus is sitting on his throne.";
+                // Location Actions
+                List<LocationAction> locationActions = new List<LocationAction>();
+
+                List<Mob> mobs = new List<Mob>();
+                mobs.Add(new LordArgus());
+                CombatAction combatAction = new CombatAction("Lord Argus", mobs);
+                combatAction.PostCombat += LordArgus;
+
+                locationActions.Add(combatAction);
+
+                returnData.Actions = locationActions;
+            }
+            else
+                returnData.Description = "A large grand room. The Lord Argus lays dead at the foot of his throne.";
+
+            // Adjacent Locations
+            Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
+
+            // The floor below
+            LocationDefinition locationDefinition = AnkouBattle.GetTownInstance().GetRoomFourDefinition();
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+
+            if (defeatedMobs)
+            {
+                locationDefinition = Watertown.GetTownInstance().GetTownCenterDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
+
+            returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
+
+            return returnData;
+        }
+
+        public void LordArgus(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouBattle.DEFEATED_LORD_ARGUS, true);
+
+                // Reload the Sewer Coordior so it will open up the sewer
+                LocationHandler.ResetLocation(NORTH_CLEARING_KEY);
+
+                Item weapon = LordArgusLoot();
+                if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
+                {
+                    GameState.Hero.Inventory.Add(weapon);
+                    Console.WriteLine("You loot \n{0}\n", weapon);
+                }
+                else
+                {
+                    Console.WriteLine("Lord Argus drops \n{0}\nBut you don't have enough space to equip!\n", weapon);
+                }
+                GameState.ClearScreen();
+            }
+        }
+
+        public LocationDefinition GetNorthClearingDefinition()
+        {
+            LocationDefinition returnData = new LocationDefinition();
+            string locationKey = NORTH_CLEARING_KEY;
+
+            if (LocationHandler.LocationExists(locationKey))
+            {
+                returnData = LocationHandler.GetLocation(locationKey);
+            }
+            else
+            {
+                returnData.LocationKey = locationKey;
+                returnData.Name = "North Clearing";
+                returnData.DoLoadLocation = LoadNorthClearing;
 
                 LocationHandler.AddLocation(returnData);
             }
@@ -900,7 +1438,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             return returnData;
         }
 
-        public Item BanditKingLoot()
+        public Item LordArgusLoot()
         {
             Item returnData;
 
