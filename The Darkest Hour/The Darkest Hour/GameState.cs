@@ -46,6 +46,10 @@ namespace The_Darkest_Hour
                     {
                         _StartingTown = The_Darkest_Hour.Towns.Watertown.Ankou.GetTownInstance();
                     }
+                    if (Hero.startingLocation == "Beach Tower")
+                    {
+                        _StartingTown = The_Darkest_Hour.Towns.Watertown.BeachTower.GetTownInstance();
+                    }
                 }
 
                 return _StartingTown;

@@ -292,6 +292,13 @@ namespace The_Darkest_Hour.Towns.Watertown
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
             }
 
+            Accomplishment travelToTower = Ankou.GetAnkouAccomplishments().Find(x => x.Name.Contains("Travel to the Tower"));
+            if (GameState.Hero.Accomplishments.Contains(travelToTower))
+            {
+                locationDefinition = BeachTower.GetTownInstance().GetTownCenterDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
+
             locationDefinition = Watertown.GetTownInstance().GetTownCenterDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
@@ -362,7 +369,7 @@ namespace The_Darkest_Hour.Towns.Watertown
                 bool scoutedUndergroundHideout = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouUndergroundHideOut.TOOK_JOURNAL));
                 bool investigatedPeasantLeader = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouForestCabin.TOOK_MAP));
                 bool investigatedTunnels = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouUndergroundTunnel.TOOK_ATTACK_PLANS));
-                bool battleOfAnkou = false;
+                bool battleOfAnkou = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouBattle.DEFEATED_LORD_ARGUS));
                 List<Rumor> returnData = new List<Rumor>();
                 Rumor rumor;
                 if (!killedMurderer)
@@ -414,6 +421,11 @@ namespace The_Darkest_Hour.Towns.Watertown
                 {
                     rumor = new Rumor("Battle of Ankou", "There's no time! These plans talk about an attack on this very night! We must prepare our defenses, it is far too late to stop this attack. Please, go and defend this city as best you can. I will see you on the other side, " + GameState.Hero.Identifier + "!");
                     rumor.OnHeardRumor = this.HeardBattleOkAnkouRumor;
+                }
+                else if (battleOfAnkou)
+                {
+                    rumor = new Rumor("Travel to the Tower", "You did a really good job in the battle, " + GameState.Hero.Identifier + ", and we really appreciate it. There is a lot of clean up to do here, and I'm thinking we may need to build another prison as all the evidence about who was behind what comes to light. If I have one regret, its that you didn't arrive sooner. You've been a tremendous help here in Ankou. And on behalf of the mayor and the whole city, I thank you for your service. I've sent scouts out trying to find evidence of where Lord Argus went when he left the city five years back. I suspect that is when he turned dark. I'm guessing he met up with a group of necromancers who converted him. We need to find out if this battle was all his doing or if there was someone else who was pulling the strings. I was able to track him up to a tower that guards the western beach side of Asku. If you want to help some more, which I suspect you do, travel there and see if you can find out anymore about what happened here.");
+                    rumor.OnHeardRumor = this.HeardTravelToTowerRumor;
                 }
                 else
                     rumor = new Rumor("How can I help you?", "You have any crimes to report?");
@@ -503,6 +515,14 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationHandler.ResetLocation(TOWN_CENTER_KEY);
         }
 
+        public void HeardTravelToTowerRumor()
+        {
+            Accomplishment accomplishment = Ankou.GetAnkouAccomplishments().Find(x => x.Name.Contains("Travel to the Tower"));
+            GameState.Hero.Accomplishments.Add(accomplishment);
+            //Reload the TownCenter so it will open up the Ariean's Estate
+            LocationHandler.ResetLocation(TOWN_CENTER_KEY);
+        }
+
         //Add the on heard action for the scummy murderer
 
         #endregion
@@ -574,6 +594,12 @@ namespace The_Darkest_Hour.Towns.Watertown
                 accomplishent.NameSpace = "Ankou";
                 accomplishent.Name = "Has heard rumor of the Battle of Ankou";
                 accomplishent.Description = "Has heard the rumor of helpind defend Ankou against the dark forces that rally against it.";
+                _AnkouAccomplishments.Add(accomplishent);
+
+                accomplishent = new Accomplishment();
+                accomplishent.NameSpace = "Ankou";
+                accomplishent.Name = "Has heard rumor of the Travel to the Tower";
+                accomplishent.Description = "Has heard the rumor of traveling to the tower that guards the western beach of Asku and finding out more about Lord Argus's past.";
                 _AnkouAccomplishments.Add(accomplishent);
             }
 
