@@ -97,6 +97,7 @@
     <Compile Include="Characters\Mobs\Bosses\AnkouNecroLeader.cs" />
     <Compile Include="Characters\Mobs\Bosses\Ariean.cs" />
     <Compile Include="Characters\Mobs\Bosses\AttackCoordinator.cs" />
+    <Compile Include="Characters\Mobs\Bosses\BanditAssaultLeader.cs" />
     <Compile Include="Characters\Mobs\Bosses\BanditCaptain.cs" />
     <Compile Include="Characters\Mobs\Bosses\BanditKing.cs" />
     <Compile Include="Characters\Mobs\Bosses\BanditLieutenant.cs" />
@@ -106,11 +107,14 @@
     <Compile Include="Characters\Mobs\Bosses\BanditTorturer.cs" />
     <Compile Include="Characters\Mobs\Bosses\BanditWarden.cs" />
     <Compile Include="Characters\Mobs\Bosses\CrazedOutlawLeader.cs" />
+    <Compile Include="Characters\Mobs\Bosses\LordArgus.cs" />
     <Compile Include="Characters\Mobs\Bosses\NecroContractor.cs" />
     <Compile Include="Characters\Mobs\Bosses\NecroEnvoy.cs" />
     <Compile Include="Characters\Mobs\Bosses\NecromancerLeader.cs" />
     <Compile Include="Characters\Mobs\Bosses\NecroOverseer.cs" />
+    <Compile Include="Characters\Mobs\Bosses\NobleAssaultLeader.cs" />
     <Compile Include="Characters\Mobs\Bosses\OutlawBoss.cs" />
+    <Compile Include="Characters\Mobs\Bosses\PeasantAssaultLeader.cs" />
     <Compile Include="Characters\Mobs\Bosses\PeasantLeader.cs" />
     <Compile Include="Characters\Mobs\Bosses\PossesedGuardBoss.cs" />
     <Compile Include="Characters\Mobs\Bosses\ScummyMurderer.cs" />

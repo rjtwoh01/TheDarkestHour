@@ -23,7 +23,7 @@ namespace The_Darkest_Hour.Towns.Watertown
         public const string WEST_ROAD_KEY = "AnkouBattle.WestRoad";
         public const string WEST_CLEARING_KEY = "AnkouBattle.WestClearing";
         public const string SOUTH_ROAD_KEY = "AnkouBattle.SouthRoad";
-        public const string BANDIT_STUDY_KEY = "AnkouBattle.SouthClearing";
+        public const string SOUTH_CLEARING_KEY = "AnkouBattle.SouthClearing";
         public const string EAST_ROAD_KEY = "AnkouBattle.EastRoad";
         public const string EAST_CLEARING_KEY = "AnkouBattle.EastClearing";
         public const string DEFEATED_TOWN_HALL_MOBS = "AnkouBattle.DefeatedTownCenterMobs";
@@ -101,12 +101,12 @@ namespace The_Darkest_Hour.Towns.Watertown
             Location returnData;
             returnData = new Location();
             returnData.Name = "Ankou Town Center Under Siege";
-            bool defeatedBanditsOne = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouBattle.DEFEATED_TOWN_HALL_MOBS));
-            bool defeatedNecroEnvoy = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouBattle.DEFEATED_BANDIT_ASSAULT_LEADER));
-            bool defeatedBanditScholar = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouBattle.DEFEATED_PEASANT_ASSAULT_LEADER));
-            bool defeatedCrazedOutlawLeader = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouBattle.DEFEATED_NOBLE_ASSAULT_LEADER));
+            bool defeatedMobsOne = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouBattle.DEFEATED_TOWN_HALL_MOBS));
+            bool defeatedBanditAssaultLeader = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouBattle.DEFEATED_BANDIT_ASSAULT_LEADER));
+            bool defeatedPeasantAssaultLeader = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouBattle.DEFEATED_PEASANT_ASSAULT_LEADER));
+            bool defeatedNobleAssaultLeader = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouBattle.DEFEATED_NOBLE_ASSAULT_LEADER));
 
-            if (!defeatedBanditsOne)
+            if (!defeatedMobsOne)
             {
                 returnData.Description = "The town center is burning with several enemies roaming about and killing any innocent they can find";
                 // Location Actions
@@ -144,22 +144,22 @@ namespace The_Darkest_Hour.Towns.Watertown
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
             //Different wings here
-            if (defeatedBanditsOne)
+            if (defeatedMobsOne)
             {
-                //West Wing
-                locationDefinition = AnkouBattle.GetTownInstance().GetWestWingRoomDefinition();
+                //West Road
+                locationDefinition = AnkouBattle.GetTownInstance().GetWestRoadRoomDefinition();
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
-                //Center Wing
-                locationDefinition = AnkouBattle.GetTownInstance().GetCenterWingRoomDefinition();
+                //South Road
+                locationDefinition = AnkouBattle.GetTownInstance().GetCenterRoadRoomDefinition();
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
-                //East Wing
-                locationDefinition = AnkouBattle.GetTownInstance().GetEastWingRoomDefinition();
+                //East Road
+                locationDefinition = AnkouBattle.GetTownInstance().GetEastRoadRoomDefinition();
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
             }
 
-            if (defeatedBanditScholar && defeatedCrazedOutlawLeader && defeatedNecroEnvoy)
+            if (defeatedBanditAssaultLeader && defeatedNobleAssaultLeader && defeatedPeasantAssaultLeader)
             {
                 //Floor two
                 //locationDefinition = AnkouBattleFloorTwo.GetTownInstance().GetEntranceDefinition();
@@ -209,36 +209,39 @@ namespace The_Darkest_Hour.Towns.Watertown
 
         #endregion
 
-        #region West Wing
+        #region West Road
 
-        #region West Wing Room One
+        #region West Road
 
-        public Location LoadWestWingRoom()
+        public Location LoadWestRoadRoom()
         {
             Location returnData;
             returnData = new Location();
-            returnData.Name = "West Wing Room";
-            bool defeatedSkeletons = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouBattle.DEFEATED_WEST_ROAD_BANDITS));
+            returnData.Name = "West Road Room";
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouBattle.DEFEATED_WEST_ROAD_BANDITS));
 
-            if (!defeatedSkeletons)
+            if (!defeatedMobs)
             {
-                returnData.Description = "A medium sized room with three skeletons wondering about it.";
+                returnData.Description = "The road stretches on with smoke making it hard to see far ahead. There are several bandits looting shops along the road.";
                 // Location Actions
                 List<LocationAction> locationActions = new List<LocationAction>();
 
-                List<Mob> skeletons = new List<Mob>();
-                skeletons.Add(new Skeleton());
-                skeletons.Add(new Skeleton());
-                skeletons.Add(new Skeleton());
-                CombatAction combatAction = new CombatAction("Skeletons", skeletons);
-                combatAction.PostCombat += WestWingSkeletons;
+                List<Mob> mobs = new List<Mob>();
+                mobs.Add(new Bandit());
+                mobs.Add(new Bandit());
+                mobs.Add(new Bandit());
+                mobs.Add(new Bandit());
+                mobs.Add(new Bandit());
+                mobs.Add(new Bandit());
+                CombatAction combatAction = new CombatAction("Bandits", mobs);
+                combatAction.PostCombat += WestRoadSkeletons;
 
                 locationActions.Add(combatAction);
 
                 returnData.Actions = locationActions;
             }
             else
-                returnData.Description = "The hall is now empty except for the bandit bodies strewn across it.";
+                returnData.Description = "The road stretches on with smoke making it hard to see far ahead. There are several dead bandits with the items they were looting laying long forgotten on the streets.";
 
             // Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
@@ -247,10 +250,10 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = AnkouBattle.GetTownInstance().GetLargeHallDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            //Large Room here
-            if (defeatedSkeletons)
+            //West Clearing here
+            if (defeatedMobs)
             {
-                locationDefinition = AnkouBattle.GetTownInstance().GetLargeRoomDefinition();
+                locationDefinition = AnkouBattle.GetTownInstance().GetWestClearingDefinition();
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
             }
 
@@ -259,7 +262,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             return returnData;
         }
 
-        public void WestWingSkeletons(object sender, CombatEventArgs combatEventArgs)
+        public void WestRoadSkeletons(object sender, CombatEventArgs combatEventArgs)
         {
             if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
             {
@@ -271,7 +274,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             }
         }
 
-        public LocationDefinition GetWestWingRoomDefinition()
+        public LocationDefinition GetWestRoadRoomDefinition()
         {
             LocationDefinition returnData = new LocationDefinition();
             string locationKey = WEST_ROAD_KEY;
@@ -283,8 +286,8 @@ namespace The_Darkest_Hour.Towns.Watertown
             else
             {
                 returnData.LocationKey = locationKey;
-                returnData.Name = "West Wing Room";
-                returnData.DoLoadLocation = LoadWestWingRoom;
+                returnData.Name = "West Road Room";
+                returnData.DoLoadLocation = LoadWestRoadRoom;
 
                 LocationHandler.AddLocation(returnData);
             }
@@ -294,38 +297,38 @@ namespace The_Darkest_Hour.Towns.Watertown
 
         #endregion
 
-        #region Large Room
+        #region West Clearing
 
-        public Location LoadLargeRoom()
+        public Location LoadWestClearing()
         {
             Location returnData;
             returnData = new Location();
-            returnData.Name = "Large Room";
-            bool defeatedNecroEnvoy = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouBattle.DEFEATED_BANDIT_ASSAULT_LEADER));
+            returnData.Name = "West Clearing";
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouBattle.DEFEATED_BANDIT_ASSAULT_LEADER));
 
-            if (!defeatedNecroEnvoy)
+            if (!defeatedMobs)
             {
-                returnData.Description = "A large room with the necromancer's envoy standing in the middle of it.";
+                returnData.Description = "A large circular clearing with the Bandit Assault Leader admiring the work he's done on the city.";
                 // Location Actions
                 List<LocationAction> locationActions = new List<LocationAction>();
 
-                List<Mob> necroEnvoy = new List<Mob>();
-                necroEnvoy.Add(new NecroEnvoy());
-                CombatAction combatAction = new CombatAction("Necromancer Envoy", necroEnvoy);
-                combatAction.PostCombat += NecroEnvoy;
+                List<Mob> mobs = new List<Mob>();
+                mobs.Add(new BanditAssaultLeader());
+                CombatAction combatAction = new CombatAction("Bandit Assault Leader", mobs);
+                combatAction.PostCombat += BanditAssaultLeader;
 
                 locationActions.Add(combatAction);
 
                 returnData.Actions = locationActions;
             }
             else
-                returnData.Description = "The room is blackened with dark magic from some great struggle.";
+                returnData.Description = "The clearing lays charred from the fires that took place here during the battle. The Bandit Assault Leader lays dead in the middle of the clearing.";
 
             // Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
 
             // The Clearing on the outside of this tower.
-            LocationDefinition locationDefinition = AnkouBattle.GetTownInstance().GetWestWingRoomDefinition();
+            LocationDefinition locationDefinition = AnkouBattle.GetTownInstance().GetWestRoadRoomDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
@@ -333,7 +336,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             return returnData;
         }
 
-        public void NecroEnvoy(object sender, CombatEventArgs combatEventArgs)
+        public void BanditAssaultLeader(object sender, CombatEventArgs combatEventArgs)
         {
             if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
             {
@@ -342,7 +345,7 @@ namespace The_Darkest_Hour.Towns.Watertown
                 // Reload the Sewer Coordior so it will open up the sewer
                 LocationHandler.ResetLocation(WEST_CLEARING_KEY);
 
-                Item armor = NecroEnvoyLoot();
+                Item armor = BanditAssaultLeaderLoot();
                 if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
                 {
                     GameState.Hero.Inventory.Add(armor);
@@ -350,13 +353,13 @@ namespace The_Darkest_Hour.Towns.Watertown
                 }
                 else
                 {
-                    Console.WriteLine("Necromancer Envoy drops \n{0}\nBut you don't have enough space to equip!\n", armor);
+                    Console.WriteLine("Bandit Assault Leader drops \n{0}\nBut you don't have enough space to equip!\n", armor);
                 }
                 GameState.ClearScreen();
             }
         }
 
-        public LocationDefinition GetLargeRoomDefinition()
+        public LocationDefinition GetWestClearingDefinition()
         {
             LocationDefinition returnData = new LocationDefinition();
             string locationKey = WEST_CLEARING_KEY;
@@ -368,8 +371,8 @@ namespace The_Darkest_Hour.Towns.Watertown
             else
             {
                 returnData.LocationKey = locationKey;
-                returnData.Name = "Large Room";
-                returnData.DoLoadLocation = LoadLargeRoom;
+                returnData.Name = "West Clearing";
+                returnData.DoLoadLocation = LoadWestClearing;
 
                 LocationHandler.AddLocation(returnData);
             }
@@ -381,35 +384,45 @@ namespace The_Darkest_Hour.Towns.Watertown
 
         #endregion
 
-        #region Center Wing
+        #region South Road
 
-        #region Center Wing Room One
+        #region South Road Room One
 
-        public Location LoadCenterWingRoom()
+        public Location LoadCenterRoadRoom()
         {
             Location returnData;
             returnData = new Location();
-            returnData.Name = "Center Wing Room";
-            bool defeatedBandits = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouBattle.DEFEATED_SOUTH_ROAD_PEASANTS));
+            returnData.Name = "South Road";
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouBattle.DEFEATED_SOUTH_ROAD_PEASANTS));
 
-            if (!defeatedBandits)
+            if (!defeatedMobs)
             {
-                returnData.Description = "A medium sized room with two bandits roaming about it";
+                returnData.Description = "A small narrow road that is lined with many burning shabby houses. There are a dozen peasants slaughtering any who did not join them in the attack and razing the hell they called home to the ground.";
                 // Location Actions
                 List<LocationAction> locationActions = new List<LocationAction>();
 
-                List<Mob> bandits = new List<Mob>();
-                bandits.Add(new Bandit());
-                bandits.Add(new Bandit());
-                CombatAction combatAction = new CombatAction("Bandits", bandits);
-                combatAction.PostCombat += CenterWingBandits;
+                List<Mob> mobs = new List<Mob>();
+                mobs.Add(new Peasant());
+                mobs.Add(new Peasant());
+                mobs.Add(new Peasant());
+                mobs.Add(new Peasant());
+                mobs.Add(new Peasant());
+                mobs.Add(new Peasant());
+                mobs.Add(new Peasant());
+                mobs.Add(new Peasant());
+                mobs.Add(new Peasant());
+                mobs.Add(new Peasant());
+                mobs.Add(new Peasant());
+                mobs.Add(new Peasant());
+                CombatAction combatAction = new CombatAction("Peasants", mobs);
+                combatAction.PostCombat += CenterRoadBandits;
 
                 locationActions.Add(combatAction);
 
                 returnData.Actions = locationActions;
             }
             else
-                returnData.Description = "A medium sized room with two dead bandit bodies strewn across the floor.";
+                returnData.Description = "A small narrow road that is lined with many burning shabby houses. The roads are littered with many a dead body.";
 
             // Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
@@ -418,10 +431,10 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = AnkouBattle.GetTownInstance().GetLargeHallDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            //Bandit Study here
-            if (defeatedBandits)
+            //South Clearing here
+            if (defeatedMobs)
             {
-                locationDefinition = AnkouBattle.GetTownInstance().GetBanditStudyDefinition();
+                locationDefinition = AnkouBattle.GetTownInstance().GetSouthClearingDefinition();
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
             }
 
@@ -430,7 +443,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             return returnData;
         }
 
-        public void CenterWingBandits(object sender, CombatEventArgs combatEventArgs)
+        public void CenterRoadBandits(object sender, CombatEventArgs combatEventArgs)
         {
             if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
             {
@@ -442,7 +455,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             }
         }
 
-        public LocationDefinition GetCenterWingRoomDefinition()
+        public LocationDefinition GetCenterRoadRoomDefinition()
         {
             LocationDefinition returnData = new LocationDefinition();
             string locationKey = SOUTH_ROAD_KEY;
@@ -454,8 +467,8 @@ namespace The_Darkest_Hour.Towns.Watertown
             else
             {
                 returnData.LocationKey = locationKey;
-                returnData.Name = "Center Wing Room";
-                returnData.DoLoadLocation = LoadCenterWingRoom;
+                returnData.Name = "South Road";
+                returnData.DoLoadLocation = LoadCenterRoadRoom;
 
                 LocationHandler.AddLocation(returnData);
             }
@@ -465,38 +478,38 @@ namespace The_Darkest_Hour.Towns.Watertown
 
         #endregion
 
-        #region Bandit Study
+        #region South Clearing
 
-        public Location LoadBanditStudy()
+        public Location LoadSouthClearing()
         {
             Location returnData;
             returnData = new Location();
-            returnData.Name = "Large Room";
-            bool defeatedBanditScholar = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouBattle.DEFEATED_PEASANT_ASSAULT_LEADER));
+            returnData.Name = "West Clearing";
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouBattle.DEFEATED_PEASANT_ASSAULT_LEADER));
 
-            if (!defeatedBanditScholar)
+            if (!defeatedMobs)
             {
-                returnData.Description = "A small room lined with bookshelves and a desk overflowing with parchments. A scholar is sitting in a chair pouring over various documents.";
+                returnData.Description = "A tiny clearing with a small crazed man laughing hysterically in the middle of it. The Peasant Assault Leader. He has a crazed look in his eyes as the event he's been planning for some time now has finally comed to pass.";
                 // Location Actions
                 List<LocationAction> locationActions = new List<LocationAction>();
 
-                List<Mob> banditScholar = new List<Mob>();
-                banditScholar.Add(new BanditScholar());
-                CombatAction combatAction = new CombatAction("Bandit Scholar", banditScholar);
-                combatAction.PostCombat += BanditScholar;
+                List<Mob> mobs = new List<Mob>();
+                mobs.Add(new PeasantAssaultLeader());
+                CombatAction combatAction = new CombatAction("Peasant Assault Leader", mobs);
+                combatAction.PostCombat += PeasantAssaultLeader;
 
                 locationActions.Add(combatAction);
 
                 returnData.Actions = locationActions;
             }
             else
-                returnData.Description = "A small room lined with bookshelves and a desk overflowing with parchments.";
+                returnData.Description = "A tiny clearing with a small man dead on the edge of it. His life was miserable and now he has finally found peace in death. A tragic ending.";
 
             // Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
 
             // The Clearing on the outside of this tower.
-            LocationDefinition locationDefinition = AnkouBattle.GetTownInstance().GetCenterWingRoomDefinition();
+            LocationDefinition locationDefinition = AnkouBattle.GetTownInstance().GetCenterRoadRoomDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
@@ -504,16 +517,16 @@ namespace The_Darkest_Hour.Towns.Watertown
             return returnData;
         }
 
-        public void BanditScholar(object sender, CombatEventArgs combatEventArgs)
+        public void PeasantAssaultLeader(object sender, CombatEventArgs combatEventArgs)
         {
             if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
             {
                 LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouBattle.DEFEATED_PEASANT_ASSAULT_LEADER, true);
 
                 // Reload the Sewer Coordior so it will open up the sewer
-                LocationHandler.ResetLocation(BANDIT_STUDY_KEY);
+                LocationHandler.ResetLocation(SOUTH_CLEARING_KEY);
 
-                Item helm = BanditScholarLoot();
+                Item helm = PeasantAssaultLeaderLoot();
                 if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
                 {
                     GameState.Hero.Inventory.Add(helm);
@@ -521,16 +534,16 @@ namespace The_Darkest_Hour.Towns.Watertown
                 }
                 else
                 {
-                    Console.WriteLine("Bandit Scholar drops \n{0}\nBut you don't have enough space to equip!\n", helm);
+                    Console.WriteLine("Peasant Assault Leader drops \n{0}\nBut you don't have enough space to equip!\n", helm);
                 }
                 GameState.ClearScreen();
             }
         }
 
-        public LocationDefinition GetBanditStudyDefinition()
+        public LocationDefinition GetSouthClearingDefinition()
         {
             LocationDefinition returnData = new LocationDefinition();
-            string locationKey = BANDIT_STUDY_KEY;
+            string locationKey = SOUTH_CLEARING_KEY;
 
             if (LocationHandler.LocationExists(locationKey))
             {
@@ -539,8 +552,8 @@ namespace The_Darkest_Hour.Towns.Watertown
             else
             {
                 returnData.LocationKey = locationKey;
-                returnData.Name = "Bandit Study";
-                returnData.DoLoadLocation = LoadBanditStudy;
+                returnData.Name = "South Clearing";
+                returnData.DoLoadLocation = LoadSouthClearing;
 
                 LocationHandler.AddLocation(returnData);
             }
@@ -552,35 +565,37 @@ namespace The_Darkest_Hour.Towns.Watertown
 
         #endregion
 
-        #region East Wing
+        #region East Road
 
-        #region East Wing Room One
+        #region East Road Room One
 
-        public Location LoadEastWingRoom()
+        public Location LoadEastRoadRoom()
         {
             Location returnData;
             returnData = new Location();
-            returnData.Name = "East Wing Room";
-            bool defeatedOutlaws = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouBattle.DEFEATED_EAST_ROAD_NOBLES));
+            returnData.Name = "East Road";
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouBattle.DEFEATED_EAST_ROAD_NOBLES));
 
-            if (!defeatedOutlaws)
+            if (!defeatedMobs)
             {
-                returnData.Description = "A small room with four crazed outlaws running around within";
+                returnData.Description = "A large road lined with the most elegent and expensive houses that Ankou has to offer. There is a group of nobles setting fire to the houses of their enemies on the road. There are piles of dead bodies, the victims of this sick attack.";
                 // Location Actions
                 List<LocationAction> locationActions = new List<LocationAction>();
 
-                List<Mob> crazedOutlaws = new List<Mob>();
-                crazedOutlaws.Add(new CrazedOutlaw());
-                crazedOutlaws.Add(new CrazedOutlaw());
-                CombatAction combatAction = new CombatAction("Crazed Outlaws", crazedOutlaws);
-                combatAction.PostCombat += EastWingCrazedOutlaws;
+                List<Mob> mobs = new List<Mob>();
+                mobs.Add(new Noble());
+                mobs.Add(new Noble());
+                mobs.Add(new Noble());
+                mobs.Add(new Noble());
+                CombatAction combatAction = new CombatAction("Nobles", mobs);
+                combatAction.PostCombat += EastRoadNobles;
 
                 locationActions.Add(combatAction);
 
                 returnData.Actions = locationActions;
             }
             else
-                returnData.Description = "A small room overcrowded by the dead outlaw bodies on the floor.";
+                returnData.Description = "A larege road line with the most elegent and expensive houses that Ankou has to offer. There is a pile of dead traitor nobles who set fire to several of the houses. Separated from there traitors is several piles of dead bodies, the victims of this sick attack.";
 
             // Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
@@ -589,10 +604,10 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = AnkouBattle.GetTownInstance().GetLargeHallDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            //Bandit Study here
-            if (defeatedOutlaws)
+            //South Clearing here
+            if (defeatedMobs)
             {
-                locationDefinition = AnkouBattle.GetTownInstance().GetCushionedRoomDefinition();
+                locationDefinition = AnkouBattle.GetTownInstance().GetEastClearingDefinition();
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
             }
 
@@ -601,7 +616,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             return returnData;
         }
 
-        public void EastWingCrazedOutlaws(object sender, CombatEventArgs combatEventArgs)
+        public void EastRoadNobles(object sender, CombatEventArgs combatEventArgs)
         {
             if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
             {
@@ -613,7 +628,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             }
         }
 
-        public LocationDefinition GetEastWingRoomDefinition()
+        public LocationDefinition GetEastRoadRoomDefinition()
         {
             LocationDefinition returnData = new LocationDefinition();
             string locationKey = EAST_ROAD_KEY;
@@ -625,8 +640,8 @@ namespace The_Darkest_Hour.Towns.Watertown
             else
             {
                 returnData.LocationKey = locationKey;
-                returnData.Name = "East Wing Room";
-                returnData.DoLoadLocation = LoadEastWingRoom;
+                returnData.Name = "East Road";
+                returnData.DoLoadLocation = LoadEastRoadRoom;
 
                 LocationHandler.AddLocation(returnData);
             }
@@ -636,38 +651,38 @@ namespace The_Darkest_Hour.Towns.Watertown
 
         #endregion
 
-        #region Cushioned Room
+        #region East Clearing
 
-        public Location LoadCushionedRoom()
+        public Location LoadEastClearing()
         {
             Location returnData;
             returnData = new Location();
-            returnData.Name = "Cushioned Room";
-            bool defeatedCrazedOutlawLeader = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouBattle.DEFEATED_NOBLE_ASSAULT_LEADER));
+            returnData.Name = "East Clearing";
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouBattle.DEFEATED_NOBLE_ASSAULT_LEADER));
 
-            if (!defeatedCrazedOutlawLeader)
+            if (!defeatedMobs)
             {
-                returnData.Description = "A small room that's completely cushioned. There is a man jumping around laughing with a crazed look inside.";
+                returnData.Description = "A large clearing that has a huge expensive fountain in the center. The fountain is of a general long dead who fought in the Asku civil war. The Noble Assault Leader is sitting on the edge of the fountain, flipping a coin repeatedly.";
                 // Location Actions
                 List<LocationAction> locationActions = new List<LocationAction>();
 
-                List<Mob> crazedOutlawLeasder = new List<Mob>();
-                crazedOutlawLeasder.Add(new CrazedOutlawLeader());
-                CombatAction combatAction = new CombatAction("Crazed Outlaw Leader", crazedOutlawLeasder);
-                combatAction.PostCombat += CrazedOutlawLeader;
+                List<Mob> mobs = new List<Mob>();
+                mobs.Add(new NobleAssaultLeader());
+                CombatAction combatAction = new CombatAction("Noble Assault Leader", mobs);
+                combatAction.PostCombat += NobleAssaultLeader;
 
                 locationActions.Add(combatAction);
 
                 returnData.Actions = locationActions;
             }
             else
-                returnData.Description = "A small room that's completely cushioned.";
+                returnData.Description = "A large clearing that has a huge expensive fountain in the center. The fountain is of a general long dead who fought in the Asku civil war. The Noble Assault Leader lays dead in the fountain, the water turned red with his blood.";
 
             // Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
 
             // The Clearing on the outside of this tower.
-            LocationDefinition locationDefinition = AnkouBattle.GetTownInstance().GetEastWingRoomDefinition();
+            LocationDefinition locationDefinition = AnkouBattle.GetTownInstance().GetEastRoadRoomDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
@@ -675,7 +690,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             return returnData;
         }
 
-        public void CrazedOutlawLeader(object sender, CombatEventArgs combatEventArgs)
+        public void NobleAssaultLeader(object sender, CombatEventArgs combatEventArgs)
         {
             if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
             {
@@ -692,13 +707,13 @@ namespace The_Darkest_Hour.Towns.Watertown
                 }
                 else
                 {
-                    Console.WriteLine("Crazed Outlaw Leader drops \n{0}\nBut you don't have enough space to equip!\n", amulet);
+                    Console.WriteLine("Noble Assault Leader drops \n{0}\nBut you don't have enough space to equip!\n", amulet);
                 }
                 GameState.ClearScreen();
             }
         }
 
-        public LocationDefinition GetCushionedRoomDefinition()
+        public LocationDefinition GetEastClearingDefinition()
         {
             LocationDefinition returnData = new LocationDefinition();
             string locationKey = EAST_CLEARING_KEY;
@@ -710,8 +725,8 @@ namespace The_Darkest_Hour.Towns.Watertown
             else
             {
                 returnData.LocationKey = locationKey;
-                returnData.Name = "Cushioned Room";
-                returnData.DoLoadLocation = LoadCushionedRoom;
+                returnData.Name = "East Clearing";
+                returnData.DoLoadLocation = LoadEastClearing;
 
                 LocationHandler.AddLocation(returnData);
             }
@@ -743,44 +758,44 @@ namespace The_Darkest_Hour.Towns.Watertown
 
         #region Boss Loot
 
-        public Item NecroEnvoyLoot()
+        public Item BanditAssaultLeaderLoot()
         {
             Item returnData;
 
             int agility, strength, intelligence, armor, health, critChance, critDamage, requiredLevel, worth;
             agility = strength = intelligence = critDamage = 0;
-            armor = 30;
-            health = 30;
-            critChance = 1;
+            armor = 40;
+            health = 40;
+            critChance = 4;
             requiredLevel = GameState.Hero.level;
-            worth = 100;
+            worth = 400;
             string armorType = "";
-            string name = "Cursed Chest";
+            string name = "Mysterious Chest";
 
             switch (GameState.Hero.Profession.Name)
             {
                 case "Hunter":
-                    agility = 35;
+                    agility = 50;
                     armorType = "Leather";
                     break;
                 case "Rogue":
-                    agility = 35;
+                    agility = 50;
                     armorType = "Leather";
                     break;
                 case "Warrior":
-                    strength = 35;
+                    strength = 50;
                     armorType = "Mail";
                     break;
                 case "Guardian":
-                    strength = 35;
+                    strength = 50;
                     armorType = "Mail";
                     break;
                 case "Mage":
-                    intelligence = 35;
+                    intelligence = 50;
                     armorType = "Cloth";
                     break;
                 case "Cleric":
-                    intelligence = 35;
+                    intelligence = 50;
                     armorType = "Cloth";
                     break;
             }
@@ -790,44 +805,44 @@ namespace The_Darkest_Hour.Towns.Watertown
             return returnData;
         }
 
-        public Item BanditScholarLoot()
+        public Item PeasantAssaultLeaderLoot()
         {
             Item returnData;
 
             int agility, strength, intelligence, armor, health, critChance, critDamage, requiredLevel, worth;
             agility = strength = intelligence = critChance = 0;
-            armor = 28;
-            health = 34;
-            critDamage = 2;
+            armor = 38;
+            health = 44;
+            critDamage = 4;
             requiredLevel = GameState.Hero.level;
-            worth = 100;
+            worth = 400;
             string armorType = "";
-            string name = "Helm of Wisdom";
+            string name = "Ancient King's Helm";
 
             switch (GameState.Hero.Profession.Name)
             {
                 case "Hunter":
-                    agility = 32;
+                    agility = 48;
                     armorType = "Leather";
                     break;
                 case "Rogue":
-                    agility = 32;
+                    agility = 48;
                     armorType = "Leather";
                     break;
                 case "Warrior":
-                    strength = 32;
+                    strength = 48;
                     armorType = "Mail";
                     break;
                 case "Guardian":
-                    strength = 32;
+                    strength = 48;
                     armorType = "Mail";
                     break;
                 case "Mage":
-                    intelligence = 32;
+                    intelligence = 48;
                     armorType = "Cloth";
                     break;
                 case "Cleric":
-                    intelligence = 32;
+                    intelligence = 48;
                     armorType = "Cloth";
                     break;
             }
@@ -843,14 +858,14 @@ namespace The_Darkest_Hour.Towns.Watertown
 
             int agility, strength, intelligence, armor, health, critChance, critDamage, requiredLevel, worth;
             agility = strength = intelligence = 0;
-            armor = 32;
+            armor = 48;
             health = 40;
             critDamage = 5;
             critChance = 2;
             requiredLevel = GameState.Hero.level;
-            worth = 100;
+            worth = 400;
             string armorType = "";
-            string name = "Amulet of the Damned";
+            string name = "Blackened Amulet";
 
             switch (GameState.Hero.Profession.Name)
             {
@@ -891,12 +906,12 @@ namespace The_Darkest_Hour.Towns.Watertown
 
             int agility, strength, intelligence, damage, health, critChance, critDamage, requiredLevel, worth;
             agility = strength = intelligence = 0;
-            damage = 32;
-            health = 35;
-            critDamage = 5;
-            critChance = 2;
+            damage = 50;
+            health = 50;
+            critDamage = 10;
+            critChance = 6;
             requiredLevel = GameState.Hero.level;
-            worth = 100;
+            worth = 400;
             string armorType = "";
             string name = "";
 
@@ -905,32 +920,32 @@ namespace The_Darkest_Hour.Towns.Watertown
                 case "Hunter":
                     agility = 50;
                     armorType = "Bow";
-                    name = "Royalty Killer";
+                    name = "Bone Bow";
                     break;
                 case "Rogue":
                     agility = 50;
                     armorType = "Dagger";
-                    name = "Sabotager";
+                    name = "Twisted Killer";
                     break;
                 case "Warrior":
                     strength = 50;
                     armorType = "Sword";
-                    name = "King Slayer";
+                    name = "Sword of the Ancients";
                     break;
                 case "Guardian":
                     strength = 50;
                     armorType = "Sword";
-                    name = "Protection";
+                    name = "The Lost Blade";
                     break;
                 case "Mage":
                     intelligence = 50;
                     armorType = "Staff";
-                    name = "The Unmaker";
+                    name = "Death's Staff";
                     break;
                 case "Cleric":
                     intelligence = 50;
                     armorType = "Staff";
-                    name = "Holy Smiter";
+                    name = "Staff of the Grand Mother";
                     break;
             }
 

@@ -598,6 +598,8 @@ namespace The_Darkest_Hour.Towns.Watertown
                 List<Mob> crazedOutlaws = new List<Mob>();
                 crazedOutlaws.Add(new CrazedOutlaw());
                 crazedOutlaws.Add(new CrazedOutlaw());
+                crazedOutlaws.Add(new CrazedOutlaw());
+                crazedOutlaws.Add(new CrazedOutlaw());
                 CombatAction combatAction = new CombatAction("Crazed Outlaws", crazedOutlaws);
                 combatAction.PostCombat += EastWingCrazedOutlaws;
 
