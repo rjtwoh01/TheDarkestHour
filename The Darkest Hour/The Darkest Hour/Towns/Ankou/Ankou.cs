@@ -529,7 +529,7 @@ namespace The_Darkest_Hour.Towns.Watertown
 
         #region Accomplishments
 
-        public static Accomplishments _AnkouAccomplishments;
+        private static Accomplishments _AnkouAccomplishments;
         public static Accomplishments GetAnkouAccomplishments()
         {
             if (_AnkouAccomplishments == null)

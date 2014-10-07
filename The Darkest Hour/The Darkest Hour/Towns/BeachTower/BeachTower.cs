@@ -94,6 +94,9 @@ namespace The_Darkest_Hour.Towns.Watertown
 
             LocationAction locationAction;
 
+            locationAction = new RumorAction("NPC - TBD", this.ConstableRumors);
+            locationActions.Add(locationAction);
+
             locationAction = new RestAction(5);
             locationActions.Add(locationAction);
 
@@ -232,6 +235,62 @@ namespace The_Darkest_Hour.Towns.Watertown
             return returnData;
         }
         #endregion
+
+        #endregion
+
+        #region Rumors
+
+        private List<Rumor> ConstableRumors
+        {
+            get
+            {
+                List<Rumor> returnData = new List<Rumor>();
+                Rumor rumor;
+
+                //Bool's to check if the player has completed certain parts of the game
+                bool completedTask = false; //Need to change this bool's name. This is just a placeholder
+
+                if (!completedTask)
+                {
+                    rumor = new Rumor("Task", "Here is a task for you to do.");
+                    rumor.OnHeardRumor = this.HeardTaskRumor;
+                }
+                else
+                    rumor = new Rumor("You want something?", "You want something?");
+
+                returnData.Add(rumor);
+                return returnData;
+            }
+        }
+
+        public void HeardTaskRumor()
+        {
+            Accomplishment accomplishment = BeachTower.GetBeachTowerAccomplishments().Find(x => x.Name.Contains("Task"));
+            GameState.Hero.Accomplishments.Add(accomplishment);
+            //Reload the TownCenter so it will open up the area to Complete the Task that the Task is in
+            LocationHandler.ResetLocation(TOWN_CENTER_KEY);
+        }
+
+        #endregion
+
+        #region Accomplishments
+
+        public static Accomplishments _BeachTowerAccomplishments;
+        public static Accomplishments GetBeachTowerAccomplishments()
+        {
+            if (_BeachTowerAccomplishments == null)
+            {
+                _BeachTowerAccomplishments = new Accomplishments();
+
+                Accomplishment accomplishment = new Accomplishment();
+                accomplishment.NameSpace = "Beach Tower";
+                accomplishment.Name = "Has heard the rumor of Task";
+                accomplishment.Description = "Has heard the rumor of the Task and the thing you need to do to complete said task.";
+                _BeachTowerAccomplishments.Add(accomplishment);
+            }
+
+            return _BeachTowerAccomplishments;
+        }
 
         #endregion
 
