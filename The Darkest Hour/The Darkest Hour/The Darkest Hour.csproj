@@ -220,6 +220,7 @@
     <Compile Include="Towns\Ankou\AnkouSeedyInn.cs" />
     <Compile Include="Towns\Ankou\AnkouUndergroundHideOut.cs" />
     <Compile Include="Towns\Ankou\AnkouUndergroundTunnel.cs" />
+    <Compile Include="Towns\BeachTower\BeachHead.cs" />
     <Compile Include="Towns\BeachTower\BeachTower.cs" />
     <Compile Include="Towns\Rumor.cs" />
     <Compile Include="Towns\StartingArea\InitialGameMenu.cs" />
