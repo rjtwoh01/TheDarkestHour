@@ -147,7 +147,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouNecromancerCamp.DEFEATED_CLUSTER_TENT_NECRO, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(TENT_CLUSTER_KEY);
 
             }
@@ -233,7 +233,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouNecromancerCamp.DEFEATED_COOKING_AREA_MOBS, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(COOKING_AREA_KEY);
 
             }
@@ -323,7 +323,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouNecromancerCamp.DEFEATED_EATING_AREA_MOBS, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(EATING_AREA_KEY);
 
             }
@@ -456,7 +456,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouNecromancerCamp.DEFEATED_CLEARING_ELITE_NECRO_GUARD, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(LARGE_CLEARING_KEY);
 
             }
@@ -564,7 +564,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouNecromancerCamp.DEFEATED_NECRO_LEADER, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(LEADER_TENT_KEY);
 
             }
@@ -576,7 +576,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouNecromancerCamp.OPENED_CHEST, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(LEADER_TENT_KEY);
 
             }
@@ -588,7 +588,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouNecromancerCamp.TOOK_JOURNAL, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(LEADER_TENT_KEY);
 
             }

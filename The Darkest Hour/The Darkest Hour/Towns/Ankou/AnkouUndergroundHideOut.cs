@@ -149,7 +149,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouUndergroundHideOut.DEFEATED_SMALL_PASSAGEWAY_BANDITS, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(SMALL_PASSAGEWAY_KEY);
 
             }
@@ -227,7 +227,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouUndergroundHideOut.DEFEATED_KITCHEN_MOBS, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(KITCHEN_KEY);
 
             }
@@ -320,7 +320,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouUndergroundHideOut.DEFEATED_CONFERENCE_ROOM_MOBS, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(CONFERENCE_ROOM_KEY);
 
             }
@@ -387,7 +387,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouUndergroundHideOut.TOOK_STORAGE_TREASURE, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(STORAGE_KEY);
 
             }
@@ -482,7 +482,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouUndergroundHideOut.DEFEATED_DINNING_HALL_MOBS, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(DINNING_HALL_KEY);
 
             }
@@ -560,7 +560,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouUndergroundHideOut.DEFEATED_BARRACKS_GUARDS, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(BARRACKS_KEY);
 
             }
@@ -672,7 +672,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouUndergroundHideOut.KILLED_NECRO_OVERSEER, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(OVERSEER_QUARTERS_KEY);
 
             }
@@ -684,7 +684,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouUndergroundHideOut.TOOK_NECRO_OVERSEER_TREASURE, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(OVERSEER_QUARTERS_KEY);
 
             }
@@ -696,7 +696,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouUndergroundHideOut.TOOK_JOURNAL, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(OVERSEER_QUARTERS_KEY);
 
             }

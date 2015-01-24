@@ -143,7 +143,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouMurderShack.DEFEATED_STORAGE_ROOM_PEASANTS, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(ROOM_TWO_KEY);
 
             }
@@ -226,7 +226,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouMurderShack.DEFEATED_HALLWAY_PEASANTS, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(HALLWAY_KEY);
 
             }
@@ -313,7 +313,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouMurderShack.DEFEATED_DINNING_ROOM_GUARDS, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(DINNING_ROOM_KEY);
 
             }
@@ -408,7 +408,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouMurderShack.DEFEATED_SCUMMY_MURDERER, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(MASTER_ROOM_KEY);
 
             }
@@ -420,7 +420,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouMurderShack.OPENED_CHEST, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(MASTER_ROOM_KEY);
 
             }

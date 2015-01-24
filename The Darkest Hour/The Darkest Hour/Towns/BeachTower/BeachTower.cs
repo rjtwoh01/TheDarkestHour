@@ -95,7 +95,7 @@ namespace The_Darkest_Hour.Towns.Watertown
 
             LocationAction locationAction;
 
-            locationAction = new RestAction(5);
+            locationAction = new RestAction(100);
             locationActions.Add(locationAction);
 
             locationAction = new BuyTravelRation();
@@ -305,12 +305,17 @@ namespace The_Darkest_Hour.Towns.Watertown
                 Rumor rumor;
 
                 //Bool's to check if the player has completed certain parts of the game
-                bool killedBeachHeadPirates = false; //Need to change this bool's name. This is just a placeholder
+                bool killedBeachHeadPirates = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachHead.CAPTAIN_ORDERS));
+                bool investigatedMysteriousHouse = false;
 
                 if (!killedBeachHeadPirates)
                 {
                     rumor = new Rumor("Beach Head Pirates", "Hey, welcome to our humble little tower here. There's a lot of bad stuff that comes in from the sea and we're the first line of defence against the madness. Unfortunately due to everything that's been going on all over Ankou, we've been short staffed. There's a group of pirates that have been terrorizing people who leave Ankou waters for years, but now they've taken landing on the beach head and assualt anyone that tries to go out there and just enjoy a nice day. This is something that has to stop. People are losing faith in our forces and not without reason. I don't have the men power to put a stop to this. It's hard enough to protect the village up ahead, let alone the whole coastal area like I'm supposed to. Why don't you go out and clean up the pirate mess, and then we can see where to go from there.");
                     rumor.OnHeardRumor = this.HeardBeachHeadPiratesRumor;
+                }
+                else if (!investigatedMysteriousHouse)
+                {
+                    rumor = new Rumor("Investigate Mysterious House", "That piece of parchment you found on the pirate captain's table is truly disturbing. It was a lot easier on the mind to believe that this was just th pirate's becoming cocky and overly aggressive. It happens every so often. But now I have to face the fact that there is some unknown person pulling the strings here. Tell you what, I've heard reports of mysterious activities going on around a secluded house in the woods just off the beach. Go and find out what you can. Report back with any useful info you find. Hopefully it can shed more light on this mystery.");
                 }
                 else
                     rumor = new Rumor("You want something?", "You want something?");

@@ -141,7 +141,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownSewerRight.DEFEATED_SECOND_ROOM_RATS, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(ROOM_TWO_KEY);
 
             }
@@ -272,7 +272,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownSewerRight.INSPECTED_TALISMAN, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(ROOM_FOUR_KEY);
 
             }
@@ -357,7 +357,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownSewerRight.DEFEATED_FIFTH_ROOM_SKELETONS, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(ROOM_FIVE_KEY);
 
             }
@@ -460,7 +460,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownSewerRight.DEFEATED_SKELETON_KING, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(ROOM_SIX_KEY);
 
             }
@@ -472,7 +472,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownSewerRight.OPENED_SKELETON_KING_CHEST, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(ROOM_THREE_KEY);
 
             }

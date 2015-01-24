@@ -99,7 +99,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForestTowerFloorTwo.DEFEATED_ENTRANCE_SKELETONS, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(ENTRANCE_KEY);
 
             }
@@ -183,7 +183,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForestTowerFloorTwo.DEFEATED_ROOM_ONE_BANDITS, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(ROOM_ONE_KEY);
 
             }
@@ -275,7 +275,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForestTowerFloorTwo.DEFEATED_ROOM_TWO_GROUP, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(ROOM_TWO_KEY);
 
             }
@@ -408,7 +408,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForestTowerFloorTwo.DEFEATED_ROOM_FOUR_BANDITS, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(ROOM_FOUR_KEY);
 
             }
@@ -485,7 +485,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForestTowerFloorTwo.DEFEATED_ROOM_FIVE_NECRO, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(ROOM_FIVE_KEY);
 
             }
@@ -566,7 +566,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForestTowerFloorTwo.DEFEATED_BANDIT_KING, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(GRAND_ROOM_KEY);
 
                 Item weapon = BanditKingLoot();

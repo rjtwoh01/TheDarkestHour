@@ -167,7 +167,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouArieansEstate.DEFEATED_ROOM_ONE_GUARDS, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(ROOM_ONE_KEY);
 
             }
@@ -250,7 +250,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouArieansEstate.DEFEATED_ROOM_TWO_GUARDS, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(ROOM_TWO_KEY);
 
             }
@@ -333,7 +333,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouArieansEstate.DEFEATED_ROOM_THREE_GUARDS, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(ROOM_THREE_KEY);
 
             }
@@ -515,7 +515,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouArieansEstate.DEFEATED_BARRACKS_GUARDS, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(BARRACKS_KEY);
 
             }
@@ -612,7 +612,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouArieansEstate.DEFEATED_GREATH_HALL_NOBLES, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(GREAT_HALL_KEY);
 
             }
@@ -754,7 +754,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouArieansEstate.DEFEATED_LANDING_GUARDS, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(LANDING_KEY);
 
             }
@@ -824,7 +824,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouArieansEstate.TOOK_ROOM_FOUR_TREASURE, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(ROOM_FOUR_KEY);
 
             }
@@ -908,7 +908,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouArieansEstate.DEFEATED_MEETING_ROOM_NOBLES, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(MEETING_ROOM_KEY);
 
             }
@@ -1047,7 +1047,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouArieansEstate.DEFEATED_ROOM_FIVE_GUARDS, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(ROOM_FIVE_KEY);
 
             }
@@ -1135,7 +1135,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouArieansEstate.DEFEATED_ROOM_SIX_GUARDS, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(ROOM_SIX_KEY);
 
             }
@@ -1210,7 +1210,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouArieansEstate.DEFEATED_ARMORY_GUARDS, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(ARMORY_KEY);
 
             }
@@ -1286,7 +1286,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouArieansEstate.TOOK_STORAGE_ROOM_GOLD, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(STORAGE_ROOM_KEY);
 
             }
@@ -1298,7 +1298,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouArieansEstate.TOOK_STORAGE_ROOM_TREASURE, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(STORAGE_ROOM_KEY);
 
             }
@@ -1408,7 +1408,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouArieansEstate.KILLED_ARIEAN, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(ARIENS_MASTER_BEDROOM);
 
             }
@@ -1420,7 +1420,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouArieansEstate.TOOK_ARIEAN_CHEST, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(ARIENS_MASTER_BEDROOM);
 
             }
@@ -1432,7 +1432,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouArieansEstate.TOOK_LETTERS, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(ARIENS_MASTER_BEDROOM);
 
             }

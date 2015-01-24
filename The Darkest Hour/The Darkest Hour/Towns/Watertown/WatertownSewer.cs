@@ -169,7 +169,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownSewer.DEFEATED_ENTRANCE_CORRIDOR_SEWER_RATS, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(ENTRANCE_CORRIDOR_KEY);
 
             }
@@ -268,7 +268,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownSewer.DEFEATED_SEWER_KING, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(ENTRANCE_FINAL_KEY);
 
             }

@@ -142,7 +142,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouUndergroundTunnel.DEFEATED_MUDDY_ROOM_BANDITS, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(MUDDY_ROOM_KEY);
 
             }
@@ -225,7 +225,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouUndergroundTunnel.DEFEATED_SMALL_ROOM_MOBS, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(SMALL_ROOM_KEY);
 
             }
@@ -311,7 +311,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouUndergroundTunnel.DEFEATED_BUFFER_ROOM_BANDITS, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(RITUAL_ROOM_KEY);
 
             }
@@ -423,7 +423,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouUndergroundTunnel.KILLED_ATTACK_COORDINATOR, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(COORDINATION_ROOM_KEY);
 
             }
@@ -435,7 +435,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouUndergroundTunnel.TOOK_TREASURE, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(COORDINATION_ROOM_KEY);
 
             }
@@ -447,7 +447,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouUndergroundTunnel.TOOK_ATTACK_PLANS, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(COORDINATION_ROOM_KEY);
 
             }

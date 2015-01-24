@@ -116,6 +116,7 @@
     <Compile Include="Characters\Mobs\Bosses\OutlawBoss.cs" />
     <Compile Include="Characters\Mobs\Bosses\PeasantAssaultLeader.cs" />
     <Compile Include="Characters\Mobs\Bosses\PeasantLeader.cs" />
+    <Compile Include="Characters\Mobs\Bosses\PirateCaptain.cs" />
     <Compile Include="Characters\Mobs\Bosses\PossesedGuardBoss.cs" />
     <Compile Include="Characters\Mobs\Bosses\ScummyMurderer.cs" />
     <Compile Include="Characters\Mobs\Bosses\SewerKing.cs" />
@@ -126,6 +127,7 @@
     <Compile Include="Characters\Mobs\NecromancerEliteGuard.cs" />
     <Compile Include="Characters\Mobs\Noble.cs" />
     <Compile Include="Characters\Mobs\Peasant.cs" />
+    <Compile Include="Characters\Mobs\Pirate.cs" />
     <Compile Include="Characters\Mobs\PossesedVillager.cs" />
     <Compile Include="Characters\Mobs\SewerRat.cs" />
     <Compile Include="Characters\Mobs\Slave.cs" />

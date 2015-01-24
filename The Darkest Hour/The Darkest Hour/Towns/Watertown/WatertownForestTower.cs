@@ -194,7 +194,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForestTower.DEFEATED_LARGE_HALL_BANDITS_ONE, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(LARGE_HALL_KEY);
 
             }
@@ -206,7 +206,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForestTower.DEFEATED_LARGE_HALL_BANDITS_TWO, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(LARGE_HALL_KEY);
 
             }
@@ -291,7 +291,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForestTower.DEFEATED_WEST_WING_ROOM_SKELETONS, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(WEST_WING_ROOM_KEY);
 
             }
@@ -365,7 +365,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForestTower.DEFEATED_NECRO_ENVOY, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(LARGE_ROOM_KEY);
 
                 Item armor = NecroEnvoyLoot();
@@ -462,7 +462,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForestTower.DEFEATED_CENTER_WING_BANDITS, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(CENTER_WING_ROOM_KEY);
 
             }
@@ -536,7 +536,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForestTower.DEFEATED_BANDIT_SCHOLAR, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(BANDIT_STUDY_KEY);
 
                 Item helm = BanditScholarLoot();
@@ -635,7 +635,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForestTower.DEFEATED_EAST_WING_OUTLAWS, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(EAST_WING_ROOM_KEY);
 
             }
@@ -709,7 +709,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForestTower.DEFEATED_CRAZED_OUTLAW_LEADER, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(CUSHIONED_ROOM_KEY);
 
                 Item amulet = CrazedOutlawLoot();

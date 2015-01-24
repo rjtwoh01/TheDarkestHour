@@ -194,7 +194,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouBattle.DEFEATED_TOWN_HALL_MOBS, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(TOWN_CENTER_KEY);
 
             }
@@ -282,7 +282,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouBattle.DEFEATED_WEST_ROAD_BANDITS, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(WEST_ROAD_KEY);
 
             }
@@ -356,7 +356,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouBattle.DEFEATED_BANDIT_ASSAULT_LEADER, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(WEST_CLEARING_KEY);
 
                 Item armor = BanditAssaultLeaderLoot();
@@ -463,7 +463,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouBattle.DEFEATED_SOUTH_ROAD_PEASANTS, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(SOUTH_ROAD_KEY);
 
             }
@@ -537,7 +537,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouBattle.DEFEATED_PEASANT_ASSAULT_LEADER, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(SOUTH_CLEARING_KEY);
 
                 Item helm = PeasantAssaultLeaderLoot();
@@ -636,7 +636,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouBattle.DEFEATED_EAST_ROAD_NOBLES, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(EAST_ROAD_KEY);
 
             }
@@ -710,7 +710,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouBattle.DEFEATED_NOBLE_ASSAULT_LEADER, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(EAST_CLEARING_KEY);
 
                 Item amulet = CrazedOutlawLoot();
@@ -813,7 +813,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouBattle.DEFEATED_ROAD_ONE_MOBS, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(NORTH_ONE_KEY);
 
             }
@@ -904,7 +904,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouBattle.DEFEATED_ROAD_TWO_MOBS, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(NORTH_TWO_KEY);
 
             }
@@ -986,7 +986,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouBattle.DEFEATED_ROAD_THREE_MOBS, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(NORTH_THREE_KEY);
 
             }
@@ -1074,7 +1074,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouBattle.DEFEATED_ROAD_FOUR_MOBS, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(NORTH_FOUR_KEY);
 
             }
@@ -1162,7 +1162,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouBattle.NORTH_FIVE_KEY, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(NORTH_FIVE_KEY);
 
             }
@@ -1245,7 +1245,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, AnkouBattle.DEFEATED_LORD_ARGUS, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(NORTH_CLEARING_KEY);
 
                 Item weapon = LordArgusLoot();

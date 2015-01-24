@@ -160,7 +160,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForestClearingBeforeTower.DEFEATED_CLEARING_SKELETONS_GROUP_ONE, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(CLEARING_KEY);
 
             }
@@ -172,7 +172,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForestClearingBeforeTower.DEFEATED_CLEARING_SKELETONS_GROUP_TWO, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(CLEARING_KEY);
 
             }

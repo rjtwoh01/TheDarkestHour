@@ -144,7 +144,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouBanditAndNecroCave.DEFEATED_DIRTY_ROOM_BANDITS, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(DIRTY_ROOM_KEY);
 
             }
@@ -229,7 +229,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouBanditAndNecroCave.DEFEATED_SMALL_HOVEL_MOBS, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(SMALL_HOVEL_KEY);
 
             }
@@ -319,7 +319,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouBanditAndNecroCave.DEFEATED_LARGE_ROOM_NECROS, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(LARGE_ROOM_KEY);
 
             }
@@ -432,7 +432,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouBanditAndNecroCave.KILLED_NECRO_CONTRACTOR, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(DARK_ROOM_KEY);
 
             }
@@ -444,7 +444,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouBanditAndNecroCave.TOOK_TREASURE, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(DARK_ROOM_KEY);
 
             }
@@ -456,7 +456,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 LocationHandler.SetLocationStateValue(Ankou.LOCATION_STATE_KEY, AnkouBanditAndNecroCave.TOOK_JOURNAL, true);
 
-                // Reload the Sewer Coordior so it will open up the sewer
+                // Reload
                 LocationHandler.ResetLocation(DARK_ROOM_KEY);
 
             }
