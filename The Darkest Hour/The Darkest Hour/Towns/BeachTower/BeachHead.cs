@@ -110,7 +110,6 @@ namespace The_Darkest_Hour.Towns.Watertown
                 returnData.Description = "The northern tents have four pirates roaming about, making every day small talk.";
 
                 List<LocationAction> locationActions = new List<LocationAction>();
-
                 List<Mob> mobs = new List<Mob>();
                 mobs.Add(new Pirate());
                 mobs.Add(new Pirate());
@@ -118,9 +117,7 @@ namespace The_Darkest_Hour.Towns.Watertown
                 mobs.Add(new Pirate());
                 CombatAction combatAction = new CombatAction("Pirates", mobs);
                 combatAction.PostCombat += NorthPirates;
-
                 locationActions.Add(combatAction);
-
                 returnData.Actions = locationActions;
             }
             else

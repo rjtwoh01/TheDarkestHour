@@ -107,6 +107,7 @@
     <Compile Include="Characters\Mobs\Bosses\BanditTorturer.cs" />
     <Compile Include="Characters\Mobs\Bosses\BanditWarden.cs" />
     <Compile Include="Characters\Mobs\Bosses\CrazedOutlawLeader.cs" />
+    <Compile Include="Characters\Mobs\Bosses\DarkMaster.cs" />
     <Compile Include="Characters\Mobs\Bosses\LordArgus.cs" />
     <Compile Include="Characters\Mobs\Bosses\NecroContractor.cs" />
     <Compile Include="Characters\Mobs\Bosses\NecroEnvoy.cs" />
@@ -224,6 +225,7 @@
     <Compile Include="Towns\Ankou\AnkouUndergroundTunnel.cs" />
     <Compile Include="Towns\BeachTower\BeachHead.cs" />
     <Compile Include="Towns\BeachTower\BeachTower.cs" />
+    <Compile Include="Towns\BeachTower\MysteriousHouse.cs" />
     <Compile Include="Towns\Rumor.cs" />
     <Compile Include="Towns\StartingArea\InitialGameMenu.cs" />
     <Compile Include="Towns\Town.cs" />
