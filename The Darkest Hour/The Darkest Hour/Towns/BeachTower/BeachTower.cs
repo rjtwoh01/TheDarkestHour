@@ -213,6 +213,13 @@ namespace The_Darkest_Hour.Towns.Watertown
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
             }
 
+            Accomplishment huntSpies = BeachTower.GetBeachTowerAccomplishments().Find(x => x.Name.Contains("Hunt Spies"));
+            if (GameState.Hero.Accomplishments.Contains(huntSpies))
+            {
+                locationDefinition = BeachTowerSpies.GetTownInstance().GetEntranceDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
+
             locationDefinition = Ankou.GetTownInstance().GetTownCenterDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
@@ -260,10 +267,10 @@ namespace The_Darkest_Hour.Towns.Watertown
             returnData.Name = "Captain's Office";
             returnData.Description = "A small cramped office on the top floor of the tower. The walls are lined with maps that have several markings on them and what looks like troop movements documented. Several areas surrounding the tower are circled in different colors.";
 
-            //Locatio Actions
+            //Location Actions
             List<LocationAction> locationActions = new List<LocationAction>();
 
-            //Adding rumors from Captain in teh Captain Office
+            //Adding rumors from Captain in the Captain Office
             LocationAction CaptainRumorAction = new RumorAction("Mike - Captain of the Guard", this.CaptainRumors);
             locationActions.Add(CaptainRumorAction);
             returnData.Actions = locationActions;
@@ -313,7 +320,8 @@ namespace The_Darkest_Hour.Towns.Watertown
 
                 //Bool's to check if the player has completed certain parts of the game
                 bool killedBeachHeadPirates = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachHead.CAPTAIN_ORDERS));
-                bool investigatedMysteriousHouse = false;
+                bool investigatedMysteriousHouse = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, MysteriousHouse.DARK_MASTER));
+                bool huntSpies = false;
 
                 if (!killedBeachHeadPirates)
                 {
@@ -324,6 +332,11 @@ namespace The_Darkest_Hour.Towns.Watertown
                 {
                     rumor = new Rumor("Investigate Mysterious House", "That piece of parchment you found on the pirate captain's table is truly disturbing. It was a lot easier on the mind to believe that this was just th pirate's becoming cocky and overly aggressive. It happens every so often. But now I have to face the fact that there is some unknown person pulling the strings here. Tell you what, I've heard reports of mysterious activities going on around a secluded house in the woods just off the beach. Go and find out what you can. Report back with any useful info you find. Hopefully it can shed more light on this mystery.");
                     rumor.OnHeardRumor = this.HeardMysteriousHouseRumor;
+                }
+                if (!huntSpies)
+                {
+                    rumor = new Rumor("Hunt Spies", "Spies? In this tower? Oh, this keeps getting worse and worse. We had a very thorough screening process and I just can't believe that someone was able to get through it and spy on us. Oh this is bad news. Who knows what they've seen and reported, we're already standing on our last legs here as it is. I'll send my spies out to discretely find where in the tower these low lives are hiding and once they've identified the area you can go in and do what you must. Let's hope this mess is cleared up soon.");
+                    rumor.OnHeardRumor = this.HeardHuntSpiesRumor;
                 }
                 else
                     rumor = new Rumor("You want something?", "You want something?");
@@ -344,6 +357,14 @@ namespace The_Darkest_Hour.Towns.Watertown
         public void HeardMysteriousHouseRumor()
         {
             Accomplishment accomplishment = BeachTower.GetBeachTowerAccomplishments().Find(x => x.Name.Contains("Mysterious House"));
+            GameState.Hero.Accomplishments.Add(accomplishment);
+            //Reload the TownCenter so it will open up the area to Complete the Task that the Task is in
+            LocationHandler.ResetLocation(TOWN_CENTER_KEY);
+        }
+
+        public void HeardHuntSpiesRumor()
+        {
+            Accomplishment accomplishment = BeachTower.GetBeachTowerAccomplishments().Find(x => x.Name.Contains("Hunt Spies"));
             GameState.Hero.Accomplishments.Add(accomplishment);
             //Reload the TownCenter so it will open up the area to Complete the Task that the Task is in
             LocationHandler.ResetLocation(TOWN_CENTER_KEY);
@@ -370,6 +391,12 @@ namespace The_Darkest_Hour.Towns.Watertown
                 accomplishment.NameSpace = "Beach Tower";
                 accomplishment.Name = "Has heard the rumor of Mysterious House";
                 accomplishment.Description = "Has heard the rumor of the Mysterious House that sits on the edge of the woods.";
+                _BeachTowerAccomplishments.Add(accomplishment);
+
+                accomplishment = new Accomplishment();
+                accomplishment.NameSpace = "Beach Tower";
+                accomplishment.Name = "Has heard the rumor of Hunt Spies";
+                accomplishment.Description = "Has heard the rumor of the Hunt Spies that are within the Beach Tower";
                 _BeachTowerAccomplishments.Add(accomplishment);
             }
 

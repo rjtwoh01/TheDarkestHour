@@ -391,7 +391,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             else
                 returnData.Description = "The office is lit only by a small lamp sitting on the desk in the center of the room. The flames flicker on the walls, briefly illuminating skeletons hanging from them. The Dark Master's body lays collapsed upon his desk.";
 
-            if (defeatedMobs && openedChest)
+            if (defeatedMobs && !openedChest)
             {
                 List<LocationAction> locationActions = new List<LocationAction>();
                 TreasureChestAction itemAction = new TreasureChestAction(5);

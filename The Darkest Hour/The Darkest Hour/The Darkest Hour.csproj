@@ -122,6 +122,7 @@
     <Compile Include="Characters\Mobs\Bosses\ScummyMurderer.cs" />
     <Compile Include="Characters\Mobs\Bosses\SewerKing.cs" />
     <Compile Include="Characters\Mobs\Bosses\SkeletonKing.cs" />
+    <Compile Include="Characters\Mobs\Bosses\SpyMaster.cs" />
     <Compile Include="Characters\Mobs\CrazedOutlaw.cs" />
     <Compile Include="Characters\Mobs\Guard.cs" />
     <Compile Include="Characters\Mobs\Necromancer.cs" />
@@ -132,6 +133,7 @@
     <Compile Include="Characters\Mobs\PossesedVillager.cs" />
     <Compile Include="Characters\Mobs\SewerRat.cs" />
     <Compile Include="Characters\Mobs\Slave.cs" />
+    <Compile Include="Characters\Mobs\Spies.cs" />
     <Compile Include="Combat\Battle.cs" />
     <Compile Include="Characters\Accomplishments.cs" />
     <Compile Include="Characters\Character.cs" />
@@ -225,6 +227,7 @@
     <Compile Include="Towns\Ankou\AnkouUndergroundTunnel.cs" />
     <Compile Include="Towns\BeachTower\BeachHead.cs" />
     <Compile Include="Towns\BeachTower\BeachTower.cs" />
+    <Compile Include="Towns\BeachTower\BeachTowerSpies.cs" />
     <Compile Include="Towns\BeachTower\MysteriousHouse.cs" />
     <Compile Include="Towns\Rumor.cs" />
     <Compile Include="Towns\StartingArea\InitialGameMenu.cs" />
