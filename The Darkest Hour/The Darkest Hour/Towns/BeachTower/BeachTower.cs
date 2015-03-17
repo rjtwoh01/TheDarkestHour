@@ -321,7 +321,8 @@ namespace The_Darkest_Hour.Towns.Watertown
                 //Bool's to check if the player has completed certain parts of the game
                 bool killedBeachHeadPirates = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachHead.CAPTAIN_ORDERS));
                 bool investigatedMysteriousHouse = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, MysteriousHouse.DARK_MASTER));
-                bool huntSpies = false;
+                bool huntSpies = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerSpies.SPY_MASTER));
+                bool investegateReports = false;
 
                 if (!killedBeachHeadPirates)
                 {
@@ -337,6 +338,15 @@ namespace The_Darkest_Hour.Towns.Watertown
                 {
                     rumor = new Rumor("Hunt Spies", "Spies? In this tower? Oh, this keeps getting worse and worse. We had a very thorough screening process and I just can't believe that someone was able to get through it and spy on us. Oh this is bad news. Who knows what they've seen and reported, we're already standing on our last legs here as it is. I'll send my spies out to discretely find where in the tower these low lives are hiding and once they've identified the area you can go in and do what you must. Let's hope this mess is cleared up soon.");
                     rumor.OnHeardRumor = this.HeardHuntSpiesRumor;
+                }
+                if (!huntSpies)
+                {
+                    rumor = new Rumor("Hunt Spies", "Spies? In this tower? Oh, this keeps getting worse and worse. We had a very thorough screening process and I just can't believe that someone was able to get through it and spy on us. Oh this is bad news. Who knows what they've seen and reported, we're already standing on our last legs here as it is. I'll send my spies out to discretely find where in the tower these low lives are hiding and once they've identified the area you can go in and do what you must. Let's hope this mess is cleared up soon.");
+                    rumor.OnHeardRumor = this.HeardHuntSpiesRumor;
+                }
+                if (!investegateReports)
+                {
+                    rumor = new Rumor("Investigate Reports", "I can't thank you enough for the work you did clearing up that spy mess. My agents have gathered intel that the growing darkness the spy master mentioned is deep within the forest surrounding the house you previously investigated. Head to that house and through its back door. From there you can follow the path and hopefully stumble upon something useful.");
                 }
                 else
                     rumor = new Rumor("You want something?", "You want something?");
