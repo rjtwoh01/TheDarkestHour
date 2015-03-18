@@ -202,14 +202,14 @@ namespace The_Darkest_Hour.Towns.Watertown
             Accomplishment beachHeadPirates = BeachTower.GetBeachTowerAccomplishments().Find(x => x.Name.Contains("Beach Head Pirates"));
             if (GameState.Hero.Accomplishments.Contains(beachHeadPirates))
             {
-                locationDefinition = BeachHead.GetTownInstance().GetEntranceDefinition();
+                locationDefinition = BeachTowerBeachHead.GetTownInstance().GetEntranceDefinition();
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
             }
 
             Accomplishment mysteriousHouse = BeachTower.GetBeachTowerAccomplishments().Find(x => x.Name.Contains("Mysterious House"));
             if (GameState.Hero.Accomplishments.Contains(mysteriousHouse))
             {
-                locationDefinition = MysteriousHouse.GetTownInstance().GetEntranceDefinition();
+                locationDefinition = BeachTowerMysteriousHouse.GetTownInstance().GetEntranceDefinition();
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
             }
 
@@ -319,8 +319,8 @@ namespace The_Darkest_Hour.Towns.Watertown
                 Rumor rumor;
 
                 //Bool's to check if the player has completed certain parts of the game
-                bool killedBeachHeadPirates = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachHead.CAPTAIN_ORDERS));
-                bool investigatedMysteriousHouse = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, MysteriousHouse.DARK_MASTER));
+                bool killedBeachHeadPirates = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBeachHead.CAPTAIN_ORDERS));
+                bool investigatedMysteriousHouse = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerMysteriousHouse.DARK_MASTER));
                 bool huntSpies = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerSpies.SPY_MASTER));
                 bool investegateReports = false;
 
@@ -347,6 +347,7 @@ namespace The_Darkest_Hour.Towns.Watertown
                 if (!investegateReports)
                 {
                     rumor = new Rumor("Investigate Reports", "I can't thank you enough for the work you did clearing up that spy mess. My agents have gathered intel that the growing darkness the spy master mentioned is deep within the forest surrounding the house you previously investigated. Head to that house and through its back door. From there you can follow the path and hopefully stumble upon something useful.");
+                    rumor.OnHeardRumor = this.HeardInvestigateReportsRumor;
                 }
                 else
                     rumor = new Rumor("You want something?", "You want something?");
@@ -380,6 +381,14 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationHandler.ResetLocation(TOWN_CENTER_KEY);
         }
 
+        public void HeardInvestigateReportsRumor()
+        {
+            Accomplishment accomplishment = BeachTower.GetBeachTowerAccomplishments().Find(x => x.Name.Contains("Investigate Reports"));
+            GameState.Hero.Accomplishments.Add(accomplishment);
+            //Reload the TownCenter so it will open up the area to Complete the Task that the Task is in
+            LocationHandler.ResetLocation(TOWN_CENTER_KEY);
+        }
+
         #endregion
 
         #region Accomplishments
@@ -407,6 +416,12 @@ namespace The_Darkest_Hour.Towns.Watertown
                 accomplishment.NameSpace = "Beach Tower";
                 accomplishment.Name = "Has heard the rumor of Hunt Spies";
                 accomplishment.Description = "Has heard the rumor of the Hunt Spies that are within the Beach Tower";
+                _BeachTowerAccomplishments.Add(accomplishment);
+
+                accomplishment = new Accomplishment();
+                accomplishment.NameSpace = "Beach Tower";
+                accomplishment.Name = "Has heard the rumor of Investigate Reports";
+                accomplishment.Description = "Has heard the rumor of Investigate Reports of a growing darkness in the east in the forest behind the earlier visited house.";
                 _BeachTowerAccomplishments.Add(accomplishment);
             }
 

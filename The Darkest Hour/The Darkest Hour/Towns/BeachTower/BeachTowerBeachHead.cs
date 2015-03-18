@@ -14,7 +14,7 @@ using The_Darkest_Hour.Common;
 
 namespace The_Darkest_Hour.Towns.Watertown
 {
-    class BeachHead : Town
+    class BeachTowerBeachHead : Town
     {
         #region Location Keys
 
@@ -64,7 +64,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = BeachTower.GetTownInstance().GetTownCenterDefinition();
             adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            locationDefinition = BeachHead.GetTownInstance().GetNorthTentsDefinition();
+            locationDefinition = BeachTowerBeachHead.GetTownInstance().GetNorthTentsDefinition();
             adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
@@ -102,7 +102,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             Location returnData;
             returnData = new Location();
             returnData.Name = "North Tents";
-            bool defeatedPirates = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachHead.NORTH_PIRATES));
+            bool defeatedPirates = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBeachHead.NORTH_PIRATES));
 
             //Actions
             if (!defeatedPirates)
@@ -127,12 +127,12 @@ namespace The_Darkest_Hour.Towns.Watertown
             Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
 
             //Town Center
-            LocationDefinition locationDefinition = BeachHead.GetTownInstance().GetEntranceDefinition();
+            LocationDefinition locationDefinition = BeachTowerBeachHead.GetTownInstance().GetEntranceDefinition();
             adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
             if (defeatedPirates)
             {
-                locationDefinition = BeachHead.GetTownInstance().GetCenterCampDefinition();
+                locationDefinition = BeachTowerBeachHead.GetTownInstance().GetCenterCampDefinition();
                 adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
             }
 
@@ -145,7 +145,7 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
             {
-                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachHead.NORTH_PIRATES, true);
+                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBeachHead.NORTH_PIRATES, true);
 
                 //Reload 
                 LocationHandler.ResetLocation(NORTH_TENTS_KEY);
@@ -182,7 +182,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             Location returnData;
             returnData = new Location();
             returnData.Name = "The Camp's Center";
-            bool defeatedPirates = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachHead.CENTER_PIRATES));
+            bool defeatedPirates = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBeachHead.CENTER_PIRATES));
 
             //Actions
             if (!defeatedPirates)
@@ -214,18 +214,18 @@ namespace The_Darkest_Hour.Towns.Watertown
             Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
 
             //Town Center
-            LocationDefinition locationDefinition = BeachHead.GetTownInstance().GetNorthTentsDefinition();
+            LocationDefinition locationDefinition = BeachTowerBeachHead.GetTownInstance().GetNorthTentsDefinition();
             adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
             if (defeatedPirates)
             {
-                locationDefinition = BeachHead.GetTownInstance().GetEastTentsDefinition();
+                locationDefinition = BeachTowerBeachHead.GetTownInstance().GetEastTentsDefinition();
                 adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
-                locationDefinition = BeachHead.GetTownInstance().GetWestTentsDefinition();
+                locationDefinition = BeachTowerBeachHead.GetTownInstance().GetWestTentsDefinition();
                 adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
-                locationDefinition = BeachHead.GetTownInstance().GetSouthTentsDefinition();
+                locationDefinition = BeachTowerBeachHead.GetTownInstance().GetSouthTentsDefinition();
                 adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
             }
 
@@ -238,7 +238,7 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
             {
-                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachHead.CENTER_PIRATES, true);
+                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBeachHead.CENTER_PIRATES, true);
 
                 //Reload 
                 LocationHandler.ResetLocation(CENTER_CAMP_KEY);
@@ -275,8 +275,8 @@ namespace The_Darkest_Hour.Towns.Watertown
             Location returnData;
             returnData = new Location();
             returnData.Name = "West Tents";
-            bool defeatedPirates = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachHead.WEST_PIRATES));
-            bool tookChest = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachHead.WEST_CHEST));
+            bool defeatedPirates = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBeachHead.WEST_PIRATES));
+            bool tookChest = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBeachHead.WEST_CHEST));
 
             //Actions
             if (!defeatedPirates)
@@ -316,7 +316,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
 
             //Town Center
-            LocationDefinition locationDefinition = BeachHead.GetTownInstance().GetCenterCampDefinition();
+            LocationDefinition locationDefinition = BeachTowerBeachHead.GetTownInstance().GetCenterCampDefinition();
             adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
@@ -328,7 +328,7 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
             {
-                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachHead.WEST_PIRATES, true);
+                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBeachHead.WEST_PIRATES, true);
 
                 //Reload 
                 LocationHandler.ResetLocation(WEST_TENTS_KEY);
@@ -339,7 +339,7 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             if (chestEventArgs.ChestResults == ChestResults.Taken)
             {
-                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachHead.WEST_CHEST, true);
+                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBeachHead.WEST_CHEST, true);
 
                 //Reload
                 LocationHandler.ResetLocation(WEST_TENTS_KEY);
@@ -376,8 +376,8 @@ namespace The_Darkest_Hour.Towns.Watertown
             Location returnData;
             returnData = new Location();
             returnData.Name = "East Tents";
-            bool defeatedPirates = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachHead.EAST_PIRATES));
-            bool tookGold = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachHead.EAST_GOLD));
+            bool defeatedPirates = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBeachHead.EAST_PIRATES));
+            bool tookGold = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBeachHead.EAST_GOLD));
 
             //Actions
             if (!defeatedPirates)
@@ -419,7 +419,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
 
             //Town Center
-            LocationDefinition locationDefinition = BeachHead.GetTownInstance().GetCenterCampDefinition();
+            LocationDefinition locationDefinition = BeachTowerBeachHead.GetTownInstance().GetCenterCampDefinition();
             adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
@@ -431,7 +431,7 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
             {
-                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachHead.EAST_PIRATES, true);
+                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBeachHead.EAST_PIRATES, true);
 
                 //Reload 
                 LocationHandler.ResetLocation(EAST_TENTS_KEY);
@@ -442,7 +442,7 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             if (goldEventArgs.GoldResults == PickUpGoldResults.Taken)
             {
-                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachHead.EAST_GOLD, true);
+                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBeachHead.EAST_GOLD, true);
 
                 //Reload
                 LocationHandler.ResetLocation(EAST_TENTS_KEY);
@@ -479,7 +479,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             Location returnData;
             returnData = new Location();
             returnData.Name = "South Tents";
-            bool defeatedPirates = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachHead.SOUTH_PIRATES));
+            bool defeatedPirates = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBeachHead.SOUTH_PIRATES));
 
             //Actions
             if (!defeatedPirates)
@@ -509,12 +509,12 @@ namespace The_Darkest_Hour.Towns.Watertown
             Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
 
             //Town Center
-            LocationDefinition locationDefinition = BeachHead.GetTownInstance().GetCenterCampDefinition();
+            LocationDefinition locationDefinition = BeachTowerBeachHead.GetTownInstance().GetCenterCampDefinition();
             adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
             if (defeatedPirates)
             {
-                locationDefinition = BeachHead.GetTownInstance().GetSmallPathDefinition();
+                locationDefinition = BeachTowerBeachHead.GetTownInstance().GetSmallPathDefinition();
                 adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
             }
 
@@ -527,7 +527,7 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
             {
-                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachHead.SOUTH_PIRATES, true);
+                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBeachHead.SOUTH_PIRATES, true);
 
                 //Reload 
                 LocationHandler.ResetLocation(SOUTH_TENTS_KEY);
@@ -564,7 +564,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             Location returnData;
             returnData = new Location();
             returnData.Name = "Small Path";
-            bool defeatedPirates = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachHead.SMALL_PATH_PIRATES));
+            bool defeatedPirates = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBeachHead.SMALL_PATH_PIRATES));
 
             //Actions
             if (!defeatedPirates)
@@ -590,12 +590,12 @@ namespace The_Darkest_Hour.Towns.Watertown
             Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
 
             //Town Center
-            LocationDefinition locationDefinition = BeachHead.GetTownInstance().GetCenterCampDefinition();
+            LocationDefinition locationDefinition = BeachTowerBeachHead.GetTownInstance().GetCenterCampDefinition();
             adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
             if (defeatedPirates)
             {
-                locationDefinition = BeachHead.GetTownInstance().GetCaptainTentDefinition();
+                locationDefinition = BeachTowerBeachHead.GetTownInstance().GetCaptainTentDefinition();
                 adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
             }
 
@@ -608,7 +608,7 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
             {
-                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachHead.SMALL_PATH_PIRATES, true);
+                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBeachHead.SMALL_PATH_PIRATES, true);
 
                 //Reload 
                 LocationHandler.ResetLocation(SMALL_PATH_KEY);
@@ -645,9 +645,9 @@ namespace The_Darkest_Hour.Towns.Watertown
             Location returnData;
             returnData = new Location();
             returnData.Name = "Captain's Tent";
-            bool defeatedPirateCaptain = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachHead.PIRATE_CAPTAIN));
-            bool openedChest = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachHead.CAPTAIN_TREASURE));
-            bool tookOrders = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachHead.CAPTAIN_ORDERS));
+            bool defeatedPirateCaptain = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBeachHead.PIRATE_CAPTAIN));
+            bool openedChest = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBeachHead.CAPTAIN_TREASURE));
+            bool tookOrders = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBeachHead.CAPTAIN_ORDERS));
             string parchmentText = "I don't want to hear any more excuses captain. You will lead on the beach head and you will wreck havoc. Kill as many innocents as you can. I don't give a rat's ass if there is a military tower close by. They will not pose a threat. You will decimate them and they won't be able to do anything about it. Victory is at hand!";
 
             //Actions
@@ -700,7 +700,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
 
             //Town Center
-            LocationDefinition locationDefinition = BeachHead.GetTownInstance().GetSmallPathDefinition();
+            LocationDefinition locationDefinition = BeachTowerBeachHead.GetTownInstance().GetSmallPathDefinition();
             adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
             if (defeatedPirateCaptain)
@@ -718,7 +718,7 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
             {
-                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachHead.PIRATE_CAPTAIN, true);
+                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBeachHead.PIRATE_CAPTAIN, true);
 
                 //Reload 
                 LocationHandler.ResetLocation(PIRATE_CAPTAINS_TENT_KEY);
@@ -729,7 +729,7 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             if (chestEventArgs.ChestResults == ChestResults.Taken)
             {
-                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachHead.CAPTAIN_TREASURE, true);
+                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBeachHead.CAPTAIN_TREASURE, true);
 
                 //Reload
                 LocationHandler.ResetLocation(PIRATE_CAPTAINS_TENT_KEY);
@@ -740,7 +740,7 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             if (paperReadEventArgs.PaperResults == PaperReadResults.Read)
             {
-                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachHead.CAPTAIN_ORDERS, true);
+                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBeachHead.CAPTAIN_ORDERS, true);
 
                 //Reload
                 LocationHandler.ResetLocation(PIRATE_CAPTAINS_TENT_KEY);
@@ -774,13 +774,13 @@ namespace The_Darkest_Hour.Towns.Watertown
 
         #region Get Town Instance
 
-        private static BeachHead _BeachHead;
+        private static BeachTowerBeachHead _BeachHead;
 
-        public static BeachHead GetTownInstance()
+        public static BeachTowerBeachHead GetTownInstance()
         {
             if (_BeachHead == null)
             {
-                _BeachHead = new BeachHead();
+                _BeachHead = new BeachTowerBeachHead();
             }
 
             return _BeachHead;
