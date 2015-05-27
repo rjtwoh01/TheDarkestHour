@@ -228,6 +228,7 @@
     <Compile Include="Towns\BeachTower\BeachTowerBeachHead.cs" />
     <Compile Include="Towns\BeachTower\BeachTower.cs" />
     <Compile Include="Towns\BeachTower\BeachTowerGloomyForest.cs" />
+    <Compile Include="Towns\BeachTower\BeachTowerHiddenCamp.cs" />
     <Compile Include="Towns\BeachTower\BeachTowerSpies.cs" />
     <Compile Include="Towns\BeachTower\BeachTowerMysteriousHouse.cs" />
     <Compile Include="Towns\Rumor.cs" />
