@@ -319,6 +319,18 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = BeachTowerBeachHead.GetTownInstance().GetCenterCampDefinition();
             adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
+            if (defeatedPirates)
+            {
+                Accomplishment report = BeachTower.GetBeachTowerAccomplishments().Find(x => x.Name.Contains("Pirate Ships"));
+                if (GameState.Hero.Accomplishments.Contains(report))
+                {
+                    locationDefinition = BeachTowerPirateShips.GetTownInstance().GetEntranceDefinition();
+                    adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+                }
+
+                returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
+            }
+
             returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
 
             return returnData;

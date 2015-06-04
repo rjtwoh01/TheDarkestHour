@@ -322,7 +322,8 @@ namespace The_Darkest_Hour.Towns.Watertown
                 bool killedBeachHeadPirates = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBeachHead.CAPTAIN_ORDERS));
                 bool investigatedMysteriousHouse = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerMysteriousHouse.DARK_MASTER));
                 bool huntSpies = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerSpies.SPY_MASTER));
-                bool investegateReports = false;
+                bool investegateReports = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerHiddenCamp.DOCUMENT));
+                bool pirateShips = false;
 
                 if (!killedBeachHeadPirates)
                 {
@@ -348,6 +349,11 @@ namespace The_Darkest_Hour.Towns.Watertown
                 {
                     rumor = new Rumor("Investigate Reports", "I can't thank you enough for the work you did clearing up that spy mess. My agents have gathered intel that the growing darkness the spy master mentioned is deep within the forest surrounding the house you previously investigated. Head to that house and through its back door. From there you can follow the path and hopefully stumble upon something useful.");
                     rumor.OnHeardRumor = this.HeardInvestigateReportsRumor;
+                }
+                if (!pirateShips)
+                {
+                    rumor = new Rumor("Pirate Ships", "Hmmm, this is an interesting document you found. Unfortunately it doesn't seem to contain all of the intel we need. I'll have my spies looking for the rest of the intel. What you had to say about the amount of skeletons you encountered is highly disturbing. There hasn't been this level of necromancer activity in a very long time. The fact that they seem to be raising the dead en mass is a great cause for concern. And we can't seem to catch a break either, its not our only cause for concern. Remember the pirates you cleaned out of the beach head? Well it doesn't seem to have been that big of a deterrent. There are pirate ships gathering close to the shore. My agents have prepared a small boat to take you to the ships off the west end tents. Do what you can to impede them.");
+                    rumor.OnHeardRumor = this.HeardPirateShipsRumor; 
                 }
                 else
                     rumor = new Rumor("You want something?", "You want something?");
@@ -389,6 +395,14 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationHandler.ResetLocation(TOWN_CENTER_KEY);
         }
 
+        public void HeardPirateShipsRumor()
+        {
+            Accomplishment accomplishment = BeachTower.GetBeachTowerAccomplishments().Find(x => x.Name.Contains("Pirate Ships"));
+            GameState.Hero.Accomplishments.Add(accomplishment);
+            //Reload the TownCenter so it will open up the area to Complete the Task that the Task is in
+            LocationHandler.ResetLocation(TOWN_CENTER_KEY);
+        }
+
         #endregion
 
         #region Accomplishments
@@ -422,6 +436,12 @@ namespace The_Darkest_Hour.Towns.Watertown
                 accomplishment.NameSpace = "Beach Tower";
                 accomplishment.Name = "Has heard the rumor of Investigate Reports";
                 accomplishment.Description = "Has heard the rumor of Investigate Reports of a growing darkness in the east in the forest behind the earlier visited house.";
+                _BeachTowerAccomplishments.Add(accomplishment);
+
+                accomplishment = new Accomplishment();
+                accomplishment.NameSpace = "Beach Tower";
+                accomplishment.Name = "Has heard the rumor of Pirate Ships";
+                accomplishment.Description = "Has heard the rumor of Pirate Ships gathering on the coast.";
                 _BeachTowerAccomplishments.Add(accomplishment);
             }
 
