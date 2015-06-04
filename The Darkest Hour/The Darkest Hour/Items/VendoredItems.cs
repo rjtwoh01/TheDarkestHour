@@ -27,6 +27,7 @@ namespace The_Darkest_Hour.Items
             //}
         }
 
+        #region Loot Selection
         public void LevelsOneToFiveLoot()
         {
             rand = new Random();
@@ -209,8 +210,60 @@ namespace The_Darkest_Hour.Items
             }
         }
 
+        public void LevelsThirtySixToFortyLoot()
+        {
+            rand = new Random();
+            temp = GameState.NumberGenerator.Next(1, 6);
+            switch (temp)
+            {
+                case 1:
+                    LevelsThirtySixToFortyGetWeapon();
+                    break;
+                case 2:
+                    LevelsThirtySixToFortyGetArmor();
+                    break;
+                case 3:
+                    LevelsThirtySixToFortyGetHelmet();
+                    break;
+                case 4:
+                    LevelsThirtySixToFortyGetAmulet();
+                    break;
+                case 5:
+                    LevelsThirtySixToFortyGetPotion();
+                    break;
+                default:
+                    break;
+            }
+        }
 
+        public void LevelsFortyOneToFortyFiveLoot()
+        {
+            rand = new Random();
+            temp = GameState.NumberGenerator.Next(1, 6);
+            switch (temp)
+            {
+                case 1:
+                    LevelsFortyOneToFortyFiveGetWeapon();
+                    break;
+                case 2:
+                    LevelsFortyOneToFortyFiveGetArmor();
+                    break;
+                case 3:
+                    LevelsFortyOneToFortyFiveGetHelmet();
+                    break;
+                case 4:
+                    LevelsFortyOneToFortyFiveGetAmulet();
+                    break;
+                case 5:
+                    LevelsFortyOneToFortyFiveGetPotion();
+                    break;
+                default:
+                    break;
+            }
+        }
+        #endregion
 
+        #region Levels 1-5
         public Item LevelsOneToFiveGetWeapon()
         {
             Item returnData = new Item();
@@ -567,7 +620,9 @@ namespace The_Darkest_Hour.Items
 
             return returnData;
         }
+        #endregion
 
+        #region Levels 6-10
         public Item LevelsSixToTenGetWeapon()
         {
             Item returnData = new Item();
@@ -921,7 +976,9 @@ namespace The_Darkest_Hour.Items
 
             return returnData;
         }
+        #endregion
 
+        #region Levels 11-15
         public Item LevelsElevenToFifteenGetWeapon()
         {
             Item returnData = new Item();
@@ -1275,7 +1332,9 @@ namespace The_Darkest_Hour.Items
 
             return returnData;
         }
+        #endregion
 
+        #region Levels 16-20
         public Item LevelsSixteenToTwentyGetWeapon()
         {
             Item returnData = new Item();
@@ -1629,7 +1688,9 @@ namespace The_Darkest_Hour.Items
 
             return returnData;
         }
+        #endregion
 
+        #region Levels 21-25
         public Item LevelsTwentyOneToTwentyFiveGetWeapon()
         {
             Item returnData = new Item();
@@ -1983,7 +2044,9 @@ namespace The_Darkest_Hour.Items
 
             return returnData;
         }
+        #endregion
 
+        #region Levels 26-30
         public Item LevelsTwentySixToThirtyGetWeapon()
         {
             Item returnData = new Item();
@@ -2337,7 +2400,9 @@ namespace The_Darkest_Hour.Items
 
             return returnData;
         }
+        #endregion
 
+        #region Levels 31-35
         public Item LevelsThirtyOneToThirtyFiveGetWeapon()
         {
             Item returnData = new Item();
@@ -2498,7 +2563,7 @@ namespace The_Darkest_Hour.Items
             agility = GameState.NumberGenerator.Next(0, 56);
             intelligence = GameState.NumberGenerator.Next(0, 56);
             health = GameState.NumberGenerator.Next(0, 56);
-            requiredLevel = GameState.NumberGenerator.Next(31, 41);
+            requiredLevel = GameState.NumberGenerator.Next(31, 35);
             goldFind = 0;
             magicFind = 0;
             critChance = 0;
@@ -2553,7 +2618,7 @@ namespace The_Darkest_Hour.Items
             agility = GameState.NumberGenerator.Next(0, 56);
             intelligence = GameState.NumberGenerator.Next(0, 56);
             health = GameState.NumberGenerator.Next(0, 56);
-            requiredLevel = GameState.NumberGenerator.Next(31, 41);
+            requiredLevel = GameState.NumberGenerator.Next(31, 35);
             goldFind = 0;
             magicFind = 0;
             critChance = 0;
@@ -2606,7 +2671,7 @@ namespace The_Darkest_Hour.Items
             agility = GameState.NumberGenerator.Next(0, 56);
             intelligence = GameState.NumberGenerator.Next(0, 56);
             health = GameState.NumberGenerator.Next(0, 56);
-            requiredLevel = GameState.NumberGenerator.Next(31, 41);
+            requiredLevel = GameState.NumberGenerator.Next(31, 35);
             goldFind = 0;
             magicFind = 0;
             critChance = 0;
@@ -2657,7 +2722,7 @@ namespace The_Darkest_Hour.Items
             agility = GameState.NumberGenerator.Next(0, 56);
             intelligence = GameState.NumberGenerator.Next(0, 56);
             health = GameState.NumberGenerator.Next(0, 56);
-            requiredLevel = GameState.NumberGenerator.Next(31, 41);
+            requiredLevel = GameState.NumberGenerator.Next(31, 35);
             goldFind = 0;
             magicFind = 0;
             critChance = 0;
@@ -2691,5 +2756,718 @@ namespace The_Darkest_Hour.Items
 
             return returnData;
         }
+        #endregion
+
+        #region Levels 36-40
+        public Item LevelsThirtySixToFortyGetWeapon()
+        {
+            Item returnData = new Item();
+            rand = new Random();
+
+            Weapon aWeapon;
+
+            List<string> SwordNames = new List<string>();
+            SwordNames.Add("Cold Sword");
+            SwordNames.Add("Jagged Sword");
+            SwordNames.Add("Fire Sword");
+
+            List<string> BowNames = new List<string>();
+            BowNames.Add("Cold Bow");
+            BowNames.Add("Jagged Bow");
+            BowNames.Add("Fire Bow");
+
+            List<string> StaffNames = new List<string>();
+            StaffNames.Add("Cold Staff");
+            StaffNames.Add("Jagged Staff");
+            StaffNames.Add("Fire Staff");
+
+            List<string> WandNames = new List<string>();
+            WandNames.Add("Cold Wand");
+            WandNames.Add("Jagged Wand");
+            WandNames.Add("Fire Wand");
+
+            List<string> AxeNames = new List<string>();
+            AxeNames.Add("Worn Axe");
+            AxeNames.Add("Jagged Axe");
+            AxeNames.Add("Fire Axe");
+
+            List<string> DaggerNames = new List<string>();
+            DaggerNames.Add("Worn Dagger");
+            DaggerNames.Add("Dull Dagger");
+            DaggerNames.Add("Fire Dagger");
+
+            temp = GameState.NumberGenerator.Next(1, 7);
+            temp2 = GameState.NumberGenerator.Next(1, 4);
+
+            switch (temp)
+            {
+                case 1:
+                    itemType = "Sword";
+                    switch (temp2)
+                    {
+                        case 1:
+                            itemName = SwordNames.ElementAt(0);
+                            break;
+                        case 2:
+                            itemName = SwordNames.ElementAt(1);
+                            break;
+                        case 3:
+                            itemName = SwordNames.ElementAt(2);
+                            break;
+                        default:
+                            Console.WriteLine("\nUh Oh, something went wrong.\n");
+                            break;
+                    }
+                    break;
+                case 2:
+                    itemType = "Bow";
+                    switch (temp2)
+                    {
+                        case 1:
+                            itemName = BowNames.ElementAt(0);
+                            break;
+                        case 2:
+                            itemName = BowNames.ElementAt(1);
+                            break;
+                        case 3:
+                            itemName = BowNames.ElementAt(2);
+                            break;
+                        default:
+                            Console.WriteLine("\nUh Oh, something went wrong.\n");
+                            break;
+                    }
+                    break;
+                case 3:
+                    itemType = "Staff";
+                    switch (temp2)
+                    {
+                        case 1:
+                            itemName = StaffNames.ElementAt(0);
+                            break;
+                        case 2:
+                            itemName = StaffNames.ElementAt(1);
+                            break;
+                        case 3:
+                            itemName = StaffNames.ElementAt(2);
+                            break;
+                        default:
+                            Console.WriteLine("\nUh Oh, something went wrong.\n");
+                            break;
+                    }
+                    break;
+                case 4:
+                    itemType = "Wand";
+                    switch (temp2)
+                    {
+                        case 1:
+                            itemName = WandNames.ElementAt(0);
+                            break;
+                        case 2:
+                            itemName = WandNames.ElementAt(1);
+                            break;
+                        case 3:
+                            itemName = WandNames.ElementAt(2);
+                            break;
+                        default:
+                            Console.WriteLine("\nUh Oh, something went wrong.\n");
+                            break;
+                    }
+                    break;
+                case 5:
+                    itemType = "Dagger";
+                    switch (temp2)
+                    {
+                        case 1:
+                            itemName = DaggerNames.ElementAt(0);
+                            break;
+                        case 2:
+                            itemName = DaggerNames.ElementAt(1);
+                            break;
+                        case 3:
+                            itemName = DaggerNames.ElementAt(2);
+                            break;
+                        default:
+                            Console.WriteLine("\nUh Oh, something went wrong.\n");
+                            break;
+                    }
+                    break;
+                case 6:
+                    itemType = "Axe";
+                    switch (temp2)
+                    {
+                        case 1:
+                            itemName = AxeNames.ElementAt(0);
+                            break;
+                        case 2:
+                            itemName = AxeNames.ElementAt(1);
+                            break;
+                        case 3:
+                            itemName = AxeNames.ElementAt(2);
+                            break;
+                        default:
+                            Console.WriteLine("\nUh Oh, something went wrong.\n");
+                            break;
+                    }
+                    break;
+                default:
+                    Console.WriteLine("\nUh Oh, something went wrong.\n");
+                    break;
+            }
+
+            damage = GameState.NumberGenerator.Next(40, 56);
+            strength = GameState.NumberGenerator.Next(0, 56);
+            agility = GameState.NumberGenerator.Next(0, 56);
+            intelligence = GameState.NumberGenerator.Next(0, 56);
+            health = GameState.NumberGenerator.Next(0, 56);
+            requiredLevel = GameState.NumberGenerator.Next(36, 41);
+            goldFind = 0;
+            magicFind = 0;
+            critChance = 0;
+            critDamage = 0;
+            worth = GameState.NumberGenerator.Next(40, 56);
+
+
+            aWeapon = new Weapon(itemName, itemType, damage, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
+            returnData = aWeapon;
+
+            return returnData;
+        }
+
+        public Item LevelsThirtySixToFortyGetArmor()
+        {
+            Item returnData = new Item();
+            rand = new Random();
+
+            Armor aArmor;
+
+            List<string> ArmorNames = new List<string>();
+            ArmorNames.Add("Cold Chainmail");
+            ArmorNames.Add("Jagged Leather Armor");
+            ArmorNames.Add("Fire Robes");
+
+
+            temp = GameState.NumberGenerator.Next(1, 4);
+
+            switch (temp)
+            {
+                case 1:
+                    itemName = ArmorNames.ElementAt(0);
+                    itemType = "Mail";
+                    break;
+                case 2:
+                    itemName = ArmorNames.ElementAt(1);
+                    itemType = "Leather";
+                    break;
+                case 3:
+                    itemName = ArmorNames.ElementAt(2);
+                    itemType = "Cloth";
+                    break;
+                default:
+                    Console.WriteLine("\nUh Oh, something went wrong.\n");
+                    break;
+            }
+
+
+
+            armor = GameState.NumberGenerator.Next(40, 56);
+            strength = GameState.NumberGenerator.Next(0, 56);
+            agility = GameState.NumberGenerator.Next(0, 56);
+            intelligence = GameState.NumberGenerator.Next(0, 56);
+            health = GameState.NumberGenerator.Next(0, 56);
+            requiredLevel = GameState.NumberGenerator.Next(36, 41);
+            goldFind = 0;
+            magicFind = 0;
+            critChance = 0;
+            critDamage = 0;
+            worth = GameState.NumberGenerator.Next(40, 56);
+
+            aArmor = new Armor(itemName, itemType, armor, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
+            returnData = aArmor;
+
+            return returnData;
+        }
+
+        public Item LevelsThirtySixToFortyGetHelmet()
+        {
+            Item returnData = new Item();
+            rand = new Random();
+
+            Helmet aHelmet;
+
+            List<string> HelmetNames = new List<string>();
+            HelmetNames.Add("Cold Helmet");
+            HelmetNames.Add("Jagged Helmet");
+            HelmetNames.Add("Fire Hat");
+
+
+            temp = GameState.NumberGenerator.Next(1, 4);
+
+            switch (temp)
+            {
+                case 1:
+                    itemName = HelmetNames.ElementAt(0);
+                    itemType = "Mail";
+                    break;
+                case 2:
+                    itemName = HelmetNames.ElementAt(1);
+                    itemType = "Leather";
+                    break;
+                case 3:
+                    itemName = HelmetNames.ElementAt(2);
+                    itemType = "Cloth";
+                    break;
+                default:
+                    Console.WriteLine("\nUh Oh, something went wrong.\n");
+                    break;
+            }
+
+
+            armor = GameState.NumberGenerator.Next(40, 56);
+            strength = GameState.NumberGenerator.Next(0, 56);
+            agility = GameState.NumberGenerator.Next(0, 56);
+            intelligence = GameState.NumberGenerator.Next(0, 56);
+            health = GameState.NumberGenerator.Next(0, 56);
+            requiredLevel = GameState.NumberGenerator.Next(36, 41);
+            goldFind = 0;
+            magicFind = 0;
+            critChance = 0;
+            critDamage = 0;
+            worth = GameState.NumberGenerator.Next(40, 56);
+
+            aHelmet = new Helmet(itemName, itemType, armor, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
+            returnData = aHelmet;
+
+            return returnData;
+        }
+
+        public Item LevelsThirtySixToFortyGetAmulet()
+        {
+            Item returnData = new Item();
+            rand = new Random();
+
+            Amulet aAmulet;
+
+            List<string> AmuletNames = new List<string>();
+            AmuletNames.Add("Cold Amulet");
+            AmuletNames.Add("Jagged Amulet");
+            AmuletNames.Add("Fire Amulet");
+
+
+            temp = GameState.NumberGenerator.Next(1, 4);
+
+            switch (temp)
+            {
+                case 1:
+                    itemName = AmuletNames.ElementAt(0);
+                    break;
+                case 2:
+                    itemName = AmuletNames.ElementAt(1);
+                    break;
+                case 3:
+                    itemName = AmuletNames.ElementAt(2);
+                    break;
+                default:
+                    Console.WriteLine("\nUh Oh, something went wrong.\n");
+                    break;
+            }
+
+            itemType = "Amulet";
+
+            armor = GameState.NumberGenerator.Next(40, 56);
+            strength = GameState.NumberGenerator.Next(0, 56);
+            agility = GameState.NumberGenerator.Next(0, 56);
+            intelligence = GameState.NumberGenerator.Next(0, 56);
+            health = GameState.NumberGenerator.Next(0, 56);
+            requiredLevel = GameState.NumberGenerator.Next(36, 41);
+            goldFind = 0;
+            magicFind = 0;
+            critChance = 0;
+            critDamage = 0;
+            worth = GameState.NumberGenerator.Next(40, 56);
+
+            aAmulet = new Amulet(itemName, itemType, armor, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
+            returnData = aAmulet;
+
+            return returnData;
+        }
+
+        public Item LevelsThirtySixToFortyGetPotion()
+        {
+            Item returnData = new Item();
+            rand = new Random();
+
+            Potion aPotion;
+
+            string potionName = "Dull Potion";
+
+            itemType = "Potion";
+
+            healAmount = GameState.NumberGenerator.Next(200, 351);
+            energyIncreased = GameState.NumberGenerator.Next(550, 901);
+            requiredLevel = 1;
+            worth = GameState.NumberGenerator.Next(40, 56);
+
+            aPotion = new Potion(potionName, healAmount, energyIncreased, requiredLevel, itemType, worth);
+            returnData = aPotion;
+
+            return returnData;
+        }
+        #endregion
+
+        #region Levels 41-45
+        public Item LevelsFortyOneToFortyFiveGetWeapon()
+        {
+            Item returnData = new Item();
+            rand = new Random();
+
+            Weapon aWeapon;
+
+            List<string> SwordNames = new List<string>();
+            SwordNames.Add("Champion's Sword");
+            SwordNames.Add("Honor Sword");
+            SwordNames.Add("Black Market Sword");
+
+            List<string> BowNames = new List<string>();
+            BowNames.Add("Champion's Bow");
+            BowNames.Add("Honor Bow");
+            BowNames.Add("Black Market Bow");
+
+            List<string> StaffNames = new List<string>();
+            StaffNames.Add("Champion's Staff");
+            StaffNames.Add("Honor Staff");
+            StaffNames.Add("Black Market Staff");
+
+            List<string> WandNames = new List<string>();
+            WandNames.Add("Champion's Wand");
+            WandNames.Add("Honor Wand");
+            WandNames.Add("Black Market Wand");
+
+            List<string> AxeNames = new List<string>();
+            AxeNames.Add("Worn Axe");
+            AxeNames.Add("Honor Axe");
+            AxeNames.Add("Black Market Axe");
+
+            List<string> DaggerNames = new List<string>();
+            DaggerNames.Add("Worn Dagger");
+            DaggerNames.Add("Dull Dagger");
+            DaggerNames.Add("Black Market Dagger");
+
+            temp = GameState.NumberGenerator.Next(1, 7);
+            temp2 = GameState.NumberGenerator.Next(1, 4);
+
+            switch (temp)
+            {
+                case 1:
+                    itemType = "Sword";
+                    switch (temp2)
+                    {
+                        case 1:
+                            itemName = SwordNames.ElementAt(0);
+                            break;
+                        case 2:
+                            itemName = SwordNames.ElementAt(1);
+                            break;
+                        case 3:
+                            itemName = SwordNames.ElementAt(2);
+                            break;
+                        default:
+                            Console.WriteLine("\nUh Oh, something went wrong.\n");
+                            break;
+                    }
+                    break;
+                case 2:
+                    itemType = "Bow";
+                    switch (temp2)
+                    {
+                        case 1:
+                            itemName = BowNames.ElementAt(0);
+                            break;
+                        case 2:
+                            itemName = BowNames.ElementAt(1);
+                            break;
+                        case 3:
+                            itemName = BowNames.ElementAt(2);
+                            break;
+                        default:
+                            Console.WriteLine("\nUh Oh, something went wrong.\n");
+                            break;
+                    }
+                    break;
+                case 3:
+                    itemType = "Staff";
+                    switch (temp2)
+                    {
+                        case 1:
+                            itemName = StaffNames.ElementAt(0);
+                            break;
+                        case 2:
+                            itemName = StaffNames.ElementAt(1);
+                            break;
+                        case 3:
+                            itemName = StaffNames.ElementAt(2);
+                            break;
+                        default:
+                            Console.WriteLine("\nUh Oh, something went wrong.\n");
+                            break;
+                    }
+                    break;
+                case 4:
+                    itemType = "Wand";
+                    switch (temp2)
+                    {
+                        case 1:
+                            itemName = WandNames.ElementAt(0);
+                            break;
+                        case 2:
+                            itemName = WandNames.ElementAt(1);
+                            break;
+                        case 3:
+                            itemName = WandNames.ElementAt(2);
+                            break;
+                        default:
+                            Console.WriteLine("\nUh Oh, something went wrong.\n");
+                            break;
+                    }
+                    break;
+                case 5:
+                    itemType = "Dagger";
+                    switch (temp2)
+                    {
+                        case 1:
+                            itemName = DaggerNames.ElementAt(0);
+                            break;
+                        case 2:
+                            itemName = DaggerNames.ElementAt(1);
+                            break;
+                        case 3:
+                            itemName = DaggerNames.ElementAt(2);
+                            break;
+                        default:
+                            Console.WriteLine("\nUh Oh, something went wrong.\n");
+                            break;
+                    }
+                    break;
+                case 6:
+                    itemType = "Axe";
+                    switch (temp2)
+                    {
+                        case 1:
+                            itemName = AxeNames.ElementAt(0);
+                            break;
+                        case 2:
+                            itemName = AxeNames.ElementAt(1);
+                            break;
+                        case 3:
+                            itemName = AxeNames.ElementAt(2);
+                            break;
+                        default:
+                            Console.WriteLine("\nUh Oh, something went wrong.\n");
+                            break;
+                    }
+                    break;
+                default:
+                    Console.WriteLine("\nUh Oh, something went wrong.\n");
+                    break;
+            }
+
+            damage = GameState.NumberGenerator.Next(45, 86);
+            strength = GameState.NumberGenerator.Next(0, 86);
+            agility = GameState.NumberGenerator.Next(0, 86);
+            intelligence = GameState.NumberGenerator.Next(0, 86);
+            health = GameState.NumberGenerator.Next(0, 86);
+            requiredLevel = GameState.NumberGenerator.Next(40, 46);
+            goldFind = 0;
+            magicFind = 0;
+            critChance = 0;
+            critDamage = 0;
+            worth = GameState.NumberGenerator.Next(45, 86);
+
+
+            aWeapon = new Weapon(itemName, itemType, damage, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
+            returnData = aWeapon;
+
+            return returnData;
+        }
+
+        public Item LevelsFortyOneToFortyFiveGetArmor()
+        {
+            Item returnData = new Item();
+            rand = new Random();
+
+            Armor aArmor;
+
+            List<string> ArmorNames = new List<string>();
+            ArmorNames.Add("Champion's Chainmail");
+            ArmorNames.Add("Honor Leather Armor");
+            ArmorNames.Add("Black Market Robes");
+
+
+            temp = GameState.NumberGenerator.Next(1, 4);
+
+            switch (temp)
+            {
+                case 1:
+                    itemName = ArmorNames.ElementAt(0);
+                    itemType = "Mail";
+                    break;
+                case 2:
+                    itemName = ArmorNames.ElementAt(1);
+                    itemType = "Leather";
+                    break;
+                case 3:
+                    itemName = ArmorNames.ElementAt(2);
+                    itemType = "Cloth";
+                    break;
+                default:
+                    Console.WriteLine("\nUh Oh, something went wrong.\n");
+                    break;
+            }
+
+
+
+            armor = GameState.NumberGenerator.Next(45, 86);
+            strength = GameState.NumberGenerator.Next(0, 86);
+            agility = GameState.NumberGenerator.Next(0, 86);
+            intelligence = GameState.NumberGenerator.Next(0, 86);
+            health = GameState.NumberGenerator.Next(0, 86);
+            requiredLevel = GameState.NumberGenerator.Next(40, 46);
+            goldFind = 0;
+            magicFind = 0;
+            critChance = 0;
+            critDamage = 0;
+            worth = GameState.NumberGenerator.Next(45, 86);
+
+            aArmor = new Armor(itemName, itemType, armor, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
+            returnData = aArmor;
+
+            return returnData;
+        }
+
+        public Item LevelsFortyOneToFortyFiveGetHelmet()
+        {
+            Item returnData = new Item();
+            rand = new Random();
+
+            Helmet aHelmet;
+
+            List<string> HelmetNames = new List<string>();
+            HelmetNames.Add("Champion's Helmet");
+            HelmetNames.Add("Honor Helmet");
+            HelmetNames.Add("Black Market Hat");
+
+
+            temp = GameState.NumberGenerator.Next(1, 4);
+
+            switch (temp)
+            {
+                case 1:
+                    itemName = HelmetNames.ElementAt(0);
+                    itemType = "Mail";
+                    break;
+                case 2:
+                    itemName = HelmetNames.ElementAt(1);
+                    itemType = "Leather";
+                    break;
+                case 3:
+                    itemName = HelmetNames.ElementAt(2);
+                    itemType = "Cloth";
+                    break;
+                default:
+                    Console.WriteLine("\nUh Oh, something went wrong.\n");
+                    break;
+            }
+
+
+            armor = GameState.NumberGenerator.Next(45, 86);
+            strength = GameState.NumberGenerator.Next(0, 86);
+            agility = GameState.NumberGenerator.Next(0, 86);
+            intelligence = GameState.NumberGenerator.Next(0, 86);
+            health = GameState.NumberGenerator.Next(0, 86);
+            requiredLevel = GameState.NumberGenerator.Next(40, 46);
+            goldFind = 0;
+            magicFind = 0;
+            critChance = 0;
+            critDamage = 0;
+            worth = GameState.NumberGenerator.Next(45, 86);
+
+            aHelmet = new Helmet(itemName, itemType, armor, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
+            returnData = aHelmet;
+
+            return returnData;
+        }
+
+        public Item LevelsFortyOneToFortyFiveGetAmulet()
+        {
+            Item returnData = new Item();
+            rand = new Random();
+
+            Amulet aAmulet;
+
+            List<string> AmuletNames = new List<string>();
+            AmuletNames.Add("Champion's Amulet");
+            AmuletNames.Add("Honor Amulet");
+            AmuletNames.Add("Black Market Amulet");
+
+
+            temp = GameState.NumberGenerator.Next(1, 4);
+
+            switch (temp)
+            {
+                case 1:
+                    itemName = AmuletNames.ElementAt(0);
+                    break;
+                case 2:
+                    itemName = AmuletNames.ElementAt(1);
+                    break;
+                case 3:
+                    itemName = AmuletNames.ElementAt(2);
+                    break;
+                default:
+                    Console.WriteLine("\nUh Oh, something went wrong.\n");
+                    break;
+            }
+
+            itemType = "Amulet";
+
+            armor = GameState.NumberGenerator.Next(45, 86);
+            strength = GameState.NumberGenerator.Next(0, 86);
+            agility = GameState.NumberGenerator.Next(0, 86);
+            intelligence = GameState.NumberGenerator.Next(0, 86);
+            health = GameState.NumberGenerator.Next(0, 86);
+            requiredLevel = GameState.NumberGenerator.Next(40, 46);
+            goldFind = 0;
+            magicFind = 0;
+            critChance = 0;
+            critDamage = 0;
+            worth = GameState.NumberGenerator.Next(45, 86);
+
+            aAmulet = new Amulet(itemName, itemType, armor, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
+            returnData = aAmulet;
+
+            return returnData;
+        }
+
+        public Item LevelsFortyOneToFortyFiveGetPotion()
+        {
+            Item returnData = new Item();
+            rand = new Random();
+
+            Potion aPotion;
+
+            string potionName = "Dull Potion";
+
+            itemType = "Potion";
+
+            healAmount = GameState.NumberGenerator.Next(200, 351);
+            energyIncreased = GameState.NumberGenerator.Next(550, 901);
+            requiredLevel = 1;
+            worth = GameState.NumberGenerator.Next(45, 86);
+
+            aPotion = new Potion(potionName, healAmount, energyIncreased, requiredLevel, itemType, worth);
+            returnData = aPotion;
+
+            return returnData;
+        }
+        #endregion
     }
 }

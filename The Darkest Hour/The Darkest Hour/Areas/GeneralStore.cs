@@ -160,13 +160,39 @@ namespace The_Darkest_Hour.Areas
                         itemsToBuy.Add(aAmulet);
                         itemsToBuy.Add(aPotion);
                     }
-                    if (GameState.Hero.level >= 31 && GameState.Hero.level <= 50)
+                    if (GameState.Hero.level >= 31 && GameState.Hero.level <= 35)
                     {
                         aWeapon = vendor.LevelsThirtyOneToThirtyFiveGetWeapon();
                         aArmor = vendor.LevelsThirtyOneToThirtyFiveGetArmor();
                         aHelmet = vendor.LevelsThirtyOneToThirtyFiveGetHelmet();
                         aAmulet = vendor.LevelsThirtyOneToThirtyFiveGetAmulet();
                         aPotion = vendor.LevelsThirtyOneToThirtyFiveGetPotion();
+                        itemsToBuy.Add(aWeapon);
+                        itemsToBuy.Add(aArmor);
+                        itemsToBuy.Add(aHelmet);
+                        itemsToBuy.Add(aAmulet);
+                        itemsToBuy.Add(aPotion);
+                    }
+                    if (GameState.Hero.level >= 36 && GameState.Hero.level <= 40)
+                    {
+                        aWeapon = vendor.LevelsThirtySixToFortyGetWeapon();
+                        aArmor = vendor.LevelsThirtySixToFortyGetArmor();
+                        aHelmet = vendor.LevelsThirtySixToFortyGetHelmet();
+                        aAmulet = vendor.LevelsThirtySixToFortyGetAmulet();
+                        aPotion = vendor.LevelsThirtySixToFortyGetPotion();
+                        itemsToBuy.Add(aWeapon);
+                        itemsToBuy.Add(aArmor);
+                        itemsToBuy.Add(aHelmet);
+                        itemsToBuy.Add(aAmulet);
+                        itemsToBuy.Add(aPotion);
+                    }
+                    if (GameState.Hero.level >= 41 && GameState.Hero.level <= 50)
+                    {
+                        aWeapon = vendor.LevelsFortyOneToFortyFiveGetWeapon();
+                        aArmor = vendor.LevelsFortyOneToFortyFiveGetArmor();
+                        aHelmet = vendor.LevelsFortyOneToFortyFiveGetHelmet();
+                        aAmulet = vendor.LevelsFortyOneToFortyFiveGetAmulet();
+                        aPotion = vendor.LevelsFortyOneToFortyFiveGetPotion();
                         itemsToBuy.Add(aWeapon);
                         itemsToBuy.Add(aArmor);
                         itemsToBuy.Add(aHelmet);
