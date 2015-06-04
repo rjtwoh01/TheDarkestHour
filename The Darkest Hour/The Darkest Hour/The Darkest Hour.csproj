@@ -111,6 +111,7 @@
     <Compile Include="Characters\Mobs\Bosses\LordArgus.cs" />
     <Compile Include="Characters\Mobs\Bosses\NecroContractor.cs" />
     <Compile Include="Characters\Mobs\Bosses\NecroEnvoy.cs" />
+    <Compile Include="Characters\Mobs\Bosses\NecroIntelligenceOfficer.cs" />
     <Compile Include="Characters\Mobs\Bosses\NecromancerLeader.cs" />
     <Compile Include="Characters\Mobs\Bosses\NecroOverseer.cs" />
     <Compile Include="Characters\Mobs\Bosses\NobleAssaultLeader.cs" />
