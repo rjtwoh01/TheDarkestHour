@@ -335,22 +335,22 @@ namespace The_Darkest_Hour.Towns.Watertown
                     rumor = new Rumor("Investigate Mysterious House", "That piece of parchment you found on the pirate captain's table is truly disturbing. It was a lot easier on the mind to believe that this was just th pirate's becoming cocky and overly aggressive. It happens every so often. But now I have to face the fact that there is some unknown person pulling the strings here. Tell you what, I've heard reports of mysterious activities going on around a secluded house in the woods just off the beach. Go and find out what you can. Report back with any useful info you find. Hopefully it can shed more light on this mystery.");
                     rumor.OnHeardRumor = this.HeardMysteriousHouseRumor;
                 }
-                if (!huntSpies)
+                else if (!huntSpies)
                 {
                     rumor = new Rumor("Hunt Spies", "Spies? In this tower? Oh, this keeps getting worse and worse. We had a very thorough screening process and I just can't believe that someone was able to get through it and spy on us. Oh this is bad news. Who knows what they've seen and reported, we're already standing on our last legs here as it is. I'll send my spies out to discretely find where in the tower these low lives are hiding and once they've identified the area you can go in and do what you must. Let's hope this mess is cleared up soon.");
                     rumor.OnHeardRumor = this.HeardHuntSpiesRumor;
                 }
-                if (!huntSpies)
+                else if (!huntSpies)
                 {
                     rumor = new Rumor("Hunt Spies", "Spies? In this tower? Oh, this keeps getting worse and worse. We had a very thorough screening process and I just can't believe that someone was able to get through it and spy on us. Oh this is bad news. Who knows what they've seen and reported, we're already standing on our last legs here as it is. I'll send my spies out to discretely find where in the tower these low lives are hiding and once they've identified the area you can go in and do what you must. Let's hope this mess is cleared up soon.");
                     rumor.OnHeardRumor = this.HeardHuntSpiesRumor;
                 }
-                if (!investegateReports)
+                else if (!investegateReports)
                 {
                     rumor = new Rumor("Investigate Reports", "I can't thank you enough for the work you did clearing up that spy mess. My agents have gathered intel that the growing darkness the spy master mentioned is deep within the forest surrounding the house you previously investigated. Head to that house and through its back door. From there you can follow the path and hopefully stumble upon something useful.");
                     rumor.OnHeardRumor = this.HeardInvestigateReportsRumor;
                 }
-                if (!pirateShips)
+                else if (!pirateShips)
                 {
                     rumor = new Rumor("Pirate Ships", "Hmmm, this is an interesting document you found. Unfortunately it doesn't seem to contain all of the intel we need. I'll have my spies looking for the rest of the intel. What you had to say about the amount of skeletons you encountered is highly disturbing. There hasn't been this level of necromancer activity in a very long time. The fact that they seem to be raising the dead en mass is a great cause for concern. And we can't seem to catch a break either, its not our only cause for concern. Remember the pirates you cleaned out of the beach head? Well it doesn't seem to have been that big of a deterrent. There are pirate ships gathering close to the shore. My agents have prepared a small boat to take you to the ships off the west end tents. Do what you can to impede them.");
                     rumor.OnHeardRumor = this.HeardPirateShipsRumor; 
