@@ -26,8 +26,10 @@ namespace The_Darkest_Hour.Towns.Watertown
         public const string SHIP_ONE_MOBS = "BeachTower.BeachTowerPirateShips.ShipOneMobs";
         public const string SHIP_TWO_MOBS = "BeachTower.BeachTowerPirateShips.ShipTwoMobs";
         public const string SHIP_THREE_MOBS = "BeachTower.BeachTowerPirateShips.ShipThreeMobs";
+        public const string SHIP_THREE_SLAVES = "BeachTower.BeachTowerPirateShips.ShipThreeSlaves";
         public const string SHIP_FOUR_MOBS = "BeachTower.BeachTowerPirateShips.ShipFourMobs";
         public const string FLEET_MASTER = "BeachTower.BeachTowerPirateShips.PirateFleetMaster";
+        public const string FLEET_MASTER_CHEST = "BeachTower.BeachTowerPirateShips.FleetMasterChest";
 
         #endregion
 
@@ -92,8 +94,30 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             Location returnData;
             returnData = new Location();
-            returnData.Name = "Pirate Ship One";
-            returnData.Description = "A large ship full of pirates and food.";
+            returnData.Name = "Pirate Ship One";          
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerPirateShips.SHIP_ONE_MOBS));
+
+            if (!defeatedMobs)
+            {
+                returnData.Description = "A large ship full of pirates and food.";
+
+                List<LocationAction> locationActions = new List<LocationAction>();
+                List<Mob> mobs = new List<Mob>();
+                mobs.Add(new Pirate());
+                mobs.Add(new Pirate());
+                mobs.Add(new Pirate());
+                mobs.Add(new Pirate());
+                mobs.Add(new Pirate());
+                mobs.Add(new Pirate());
+                mobs.Add(new Pirate());
+                mobs.Add(new Pirate());
+                CombatAction combatAction = new CombatAction("Pirates", mobs);
+                combatAction.PostCombat += ShipOneMobs;
+                locationActions.Add(combatAction);
+                returnData.Actions = locationActions;
+            }
+            else
+                returnData.Description = "A large ship full of dead pirates and food.";
 
 
             //Adjacent Locations
@@ -103,12 +127,26 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = BeachTowerPirateShips.GetTownInstance().GetEntranceDefinition();
             adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            locationDefinition = BeachTowerPirateShips.GetTownInstance().GetShipTwoDefinition();
-            adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            if (defeatedMobs)
+            {
+                locationDefinition = BeachTowerPirateShips.GetTownInstance().GetShipTwoDefinition();
+                adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
 
             return returnData;
+        }
+
+        public void ShipOneMobs(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerPirateShips.SHIP_ONE_MOBS, true);
+
+                //Reload 
+                LocationHandler.ResetLocation(SHIP_ONE_KEY);
+            }
         }
 
         public LocationDefinition GetShipOneDefinition()
@@ -141,8 +179,25 @@ namespace The_Darkest_Hour.Towns.Watertown
             Location returnData;
             returnData = new Location();
             returnData.Name = "Pirate Ship Two";
-            returnData.Description = "A large ship full of pirates and arms.";
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerPirateShips.SHIP_TWO_MOBS));
 
+            if (!defeatedMobs)
+            {
+                returnData.Description = "A large ship full of pirates and arms.";
+
+                List<LocationAction> locationActions = new List<LocationAction>();
+                List<Mob> mobs = new List<Mob>();
+                mobs.Add(new Pirate());
+                mobs.Add(new Pirate());
+                mobs.Add(new Pirate());
+                mobs.Add(new Pirate());
+                CombatAction combatAction = new CombatAction("Pirates", mobs);
+                combatAction.PostCombat += ShipTwoMobs;
+                locationActions.Add(combatAction);
+                returnData.Actions = locationActions;
+            }
+            else
+                returnData.Description = "A large ship full of dead pirates and arms.";
 
             //Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
@@ -151,12 +206,26 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = BeachTowerPirateShips.GetTownInstance().GetShipOneDefinition();
             adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            locationDefinition = BeachTowerPirateShips.GetTownInstance().GetShipThreeDefinition();
-            adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            if (defeatedMobs)
+            {
+                locationDefinition = BeachTowerPirateShips.GetTownInstance().GetShipThreeDefinition();
+                adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
 
             return returnData;
+        }
+
+        public void ShipTwoMobs(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerPirateShips.SHIP_TWO_MOBS, true);
+
+                //Reload 
+                LocationHandler.ResetLocation(SHIP_TWO_KEY);
+            }
         }
 
         public LocationDefinition GetShipTwoDefinition()
@@ -190,6 +259,44 @@ namespace The_Darkest_Hour.Towns.Watertown
             returnData = new Location();
             returnData.Name = "Pirate Ship Three";
             returnData.Description = "A large ship full of pirate slave masters and slaves.";
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerPirateShips.SHIP_THREE_MOBS));
+            bool freedSlaves = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerPirateShips.SHIP_THREE_SLAVES));
+
+            if (!defeatedMobs)
+            {
+                returnData.Description = "A large ship full of pirateslave masters and slaves.";
+
+                List<LocationAction> locationActions = new List<LocationAction>();
+                List<Mob> mobs = new List<Mob>();
+                mobs.Add(new SlaveMaster());
+                mobs.Add(new Slave());
+                mobs.Add(new Slave());
+                mobs.Add(new Slave());
+                mobs.Add(new SlaveMaster());
+                mobs.Add(new Slave());
+                mobs.Add(new Slave());
+                mobs.Add(new Slave());
+                mobs.Add(new SlaveMaster());
+                mobs.Add(new Slave());
+                mobs.Add(new Slave());
+                mobs.Add(new Slave());
+                mobs.Add(new SlaveMaster());
+                CombatAction combatAction = new CombatAction("Slave Masters and Slaves", mobs);
+                combatAction.PostCombat += ShipThreeMobs;
+                locationActions.Add(combatAction);
+                returnData.Actions = locationActions;
+            }
+            else
+                returnData.Description = "A large ship full of dead pirateslave masters and slaves.";
+
+            if (defeatedMobs && !freedSlaves)
+            {
+                List<LocationAction> locationActions = new List<LocationAction>();
+                TakeItemAction itemAction = new TakeItemAction("Free", "Slaves", "You free the remaining slaves and send them back toward the shore, hoping the Beach Tower guard can get to them before any other pirates find them.");
+                locationActions.Add(itemAction);
+                itemAction.PostItem += FreeSlavesShipThree;
+                returnData.Actions = locationActions;
+            }
 
 
             //Adjacent Locations
@@ -199,12 +306,37 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = BeachTowerPirateShips.GetTownInstance().GetShipTwoDefinition();
             adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            locationDefinition = BeachTowerPirateShips.GetTownInstance().GetShipFourDefinition();
-            adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            if (defeatedMobs && freedSlaves)
+            {
+                locationDefinition = BeachTowerPirateShips.GetTownInstance().GetShipFourDefinition();
+                adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
 
             return returnData;
+        }
+
+        public void ShipThreeMobs(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerPirateShips.SHIP_THREE_MOBS, true);
+
+                //Reload 
+                LocationHandler.ResetLocation(SHIP_THREE_KEY);
+            }
+        }
+
+        public void FreeSlavesShipThree(object sender, TakeItemEventArgs itemEventArgs)
+        {
+            if (itemEventArgs.ItemResults == TakeItemResults.Taken)
+            {
+                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerPirateShips.SHIP_THREE_SLAVES, true);
+
+                //Reload
+                LocationHandler.ResetLocation(SHIP_THREE_KEY);
+            }
         }
 
         public LocationDefinition GetShipThreeDefinition()
@@ -237,8 +369,31 @@ namespace The_Darkest_Hour.Towns.Watertown
             Location returnData;
             returnData = new Location();
             returnData.Name = "Pirate Ship Four";
-            returnData.Description = "A large ship full of the pirate's elite raiders";
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerPirateShips.SHIP_FOUR_MOBS));
 
+            if (!defeatedMobs)
+            {
+                returnData.Description = "A large ship full of pirate's elite raiders.";
+
+                List<LocationAction> locationActions = new List<LocationAction>();
+                List<Mob> mobs = new List<Mob>();
+                mobs.Add(new ElitePirateRaider());
+                mobs.Add(new ElitePirateRaider());
+                mobs.Add(new ElitePirateRaider());
+                mobs.Add(new ElitePirateRaider());
+                mobs.Add(new ElitePirateRaider());
+                mobs.Add(new ElitePirateRaider());
+                mobs.Add(new ElitePirateRaider());
+                mobs.Add(new ElitePirateRaider());
+                mobs.Add(new ElitePirateRaider());
+                mobs.Add(new ElitePirateRaider());
+                CombatAction combatAction = new CombatAction("Elite Pirate Raiders", mobs);
+                combatAction.PostCombat += ShipFourMobs;
+                locationActions.Add(combatAction);
+                returnData.Actions = locationActions;
+            }
+            else
+                returnData.Description = "A large ship full of the pirate's dead elite raiders.";
 
             //Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
@@ -247,12 +402,26 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = BeachTowerPirateShips.GetTownInstance().GetShipThreeDefinition();
             adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            locationDefinition = BeachTowerPirateShips.GetTownInstance().GetPirateFleetMastersShipDefinition();
-            adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            if (defeatedMobs)
+            {
+                locationDefinition = BeachTowerPirateShips.GetTownInstance().GetPirateFleetMastersShipDefinition();
+                adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
 
             return returnData;
+        }
+
+        public void ShipFourMobs(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerPirateShips.SHIP_FOUR_MOBS, true);
+
+                //Reload 
+                LocationHandler.ResetLocation(SHIP_FOUR_KEY);
+            }
         }
 
         public LocationDefinition GetShipFourDefinition()
@@ -285,7 +454,32 @@ namespace The_Darkest_Hour.Towns.Watertown
             Location returnData;
             returnData = new Location();
             returnData.Name = "Pirate Fleet Master's Ship";
-            returnData.Description = "A large ship belonging to the pirate fleet master. He is standing at the bridge of the ship with one hand on the wheel, observing the shore.";
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerPirateShips.FLEET_MASTER));
+            bool openedChest = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerPirateShips.FLEET_MASTER_CHEST));
+
+            if (!defeatedMobs)
+            {
+                returnData.Description = "A large ship belonging to the pirate fleet master. He is standing at the bridge of the ship with one hand on the wheel, observing the shore.";
+
+                List<LocationAction> locationActions = new List<LocationAction>();
+                List<Mob> mobs = new List<Mob>();
+                mobs.Add(new PirateFleetMaster());
+                CombatAction combatAction = new CombatAction("Pirate Fleet Master", mobs);
+                combatAction.PostCombat += FleetMaster;
+                locationActions.Add(combatAction);
+                returnData.Actions = locationActions;
+            }
+            else
+                returnData.Description = "A large ship belonging to the pirate fleet master. He is standing in the middle of the ship, dead as the victims of Davy Jones.";
+
+            if (defeatedMobs && !openedChest)
+            {
+                List<LocationAction> locationActions = new List<LocationAction>();
+                TreasureChestAction itemAction = new TreasureChestAction(5);
+                locationActions.Add(itemAction);
+                itemAction.PostItem += FleetMasterChest;
+                returnData.Actions = locationActions;
+            }
 
 
             //Adjacent Locations
@@ -295,12 +489,37 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = BeachTowerPirateShips.GetTownInstance().GetShipFourDefinition();
             adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            locationDefinition = BeachTower.GetTownInstance().GetTownCenterDefinition();
-            adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            if (defeatedMobs)
+            {
+                locationDefinition = BeachTower.GetTownInstance().GetTownCenterDefinition();
+                adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
 
             return returnData;
+        }
+
+        public void FleetMaster(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerPirateShips.FLEET_MASTER, true);
+
+                //Reload 
+                LocationHandler.ResetLocation(FLEET_MASTERS_SHIP_KEY);
+            }
+        }
+
+        public void FleetMasterChest(object sender, ChestEventArgs chestEventArgs)
+        {
+            if (chestEventArgs.ChestResults == ChestResults.Taken)
+            {
+                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerPirateShips.FLEET_MASTER_CHEST, true);
+
+                //Reload
+                LocationHandler.ResetLocation(FLEET_MASTERS_SHIP_KEY);
+            }
         }
 
         public LocationDefinition GetPirateFleetMastersShipDefinition()
