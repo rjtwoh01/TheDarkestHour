@@ -460,7 +460,7 @@ namespace The_Darkest_Hour.Towns.Watertown
                 List<Mob> mobs = new List<Mob>();
                 mobs.Add(new NecroIntelligenceOfficer());
 
-                CombatAction combatAction = new CombatAction("Necromancer Intelligence Officer", mobs);
+                CombatAction combatAction = new CombatAction("Necromancer Intelligence Officer", mobs, NecroOfficerSpeachBefore, NecroOfficerSpeachAfter);
                 combatAction.PostCombat += NecroIntelligenceOfficer;
                 locationActions.Add(combatAction);
                 returnData.Actions = locationActions;

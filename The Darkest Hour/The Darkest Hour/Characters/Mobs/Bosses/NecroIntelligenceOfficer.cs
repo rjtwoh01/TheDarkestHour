@@ -17,7 +17,7 @@ namespace The_Darkest_Hour.Characters.Mobs.Bosses
             this.level = 1;
             this.gold = 1200;
             this.xp = 1700;
-            this.Identifier = "Spy Master";
+            this.Identifier = "Necromancer Intelligence Officer";
         }
     }
 }
