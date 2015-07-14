@@ -231,6 +231,7 @@
     <Compile Include="Towns\Ankou\AnkouUndergroundTunnel.cs" />
     <Compile Include="Towns\BeachTower\BeachTowerBeachHead.cs" />
     <Compile Include="Towns\BeachTower\BeachTower.cs" />
+    <Compile Include="Towns\BeachTower\BeachTowerCapturedVillage.cs" />
     <Compile Include="Towns\BeachTower\BeachTowerGloomyForest.cs" />
     <Compile Include="Towns\BeachTower\BeachTowerHiddenCamp.cs" />
     <Compile Include="Towns\BeachTower\BeachTowerPirateShips.cs" />

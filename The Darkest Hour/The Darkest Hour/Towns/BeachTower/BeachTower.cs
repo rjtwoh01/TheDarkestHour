@@ -220,6 +220,13 @@ namespace The_Darkest_Hour.Towns.Watertown
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
             }
 
+            Accomplishment freeVillage = BeachTower.GetBeachTowerAccomplishments().Find(x => x.Name.Contains("Recaptured Village"));
+            if (GameState.Hero.Accomplishments.Contains(freeVillage))
+            {
+                locationDefinition = BeachTowerCapturedVillage.GetTownInstance().GetEntranceDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
+
             locationDefinition = Ankou.GetTownInstance().GetTownCenterDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
@@ -359,6 +366,7 @@ namespace The_Darkest_Hour.Towns.Watertown
                 else if (!recapturedVillage)
                 {
                     rumor = new Rumor("Recaptured Village", "Thank you for dealing with the pirates that were gathering off the coast. They posed a very large threat and it certainly makes my day brighter knowing that they are gone and I don't have to deal with them. Unfortunately their presence has already caused enough damage. Local bandits were inspired by the chaos that the pirates caused and took over a small village off the coast, looting and pillaging with glee. We've rescued a few refugees but I believe some are still trapped there. Please retake the village with all hast and rescue the villagers while they still breathe.");
+                    rumor.OnHeardRumor = this.HeardCapturedVillageRumor;
                 }
                 else
                     rumor = new Rumor("You want something?", "You want something?");
@@ -408,6 +416,14 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationHandler.ResetLocation(TOWN_CENTER_KEY);
         }
 
+        public void HeardCapturedVillageRumor()
+        {
+            Accomplishment accomplishment = BeachTower.GetBeachTowerAccomplishments().Find(x => x.Name.Contains("Pirate Ships"));
+            GameState.Hero.Accomplishments.Add(accomplishment);
+            //Reload the TownCenter so it will open up the area to Complete the Task that the Task is in
+            LocationHandler.ResetLocation(TOWN_CENTER_KEY);
+        }
+
         #endregion
 
         #region Accomplishments
@@ -447,6 +463,12 @@ namespace The_Darkest_Hour.Towns.Watertown
                 accomplishment.NameSpace = "Beach Tower";
                 accomplishment.Name = "Has heard the rumor of Pirate Ships";
                 accomplishment.Description = "Has heard the rumor of Pirate Ships gathering on the coast.";
+                _BeachTowerAccomplishments.Add(accomplishment);
+
+                accomplishment = new Accomplishment();
+                accomplishment.NameSpace = "Beach Tower";
+                accomplishment.Name = "Has heard the rumor of the Captured Village";
+                accomplishment.Description = "Has heard the rumor of the bandits that captured a village.";
                 _BeachTowerAccomplishments.Add(accomplishment);
             }
 
