@@ -323,7 +323,8 @@ namespace The_Darkest_Hour.Towns.Watertown
                 bool investigatedMysteriousHouse = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerMysteriousHouse.DARK_MASTER));
                 bool huntSpies = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerSpies.SPY_MASTER));
                 bool investegateReports = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerHiddenCamp.DOCUMENT));
-                bool pirateShips = false;
+                bool pirateShips = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerPirateShips.FLEET_MASTER));
+                bool recapturedVillage = false;
 
                 if (!killedBeachHeadPirates)
                 {
@@ -354,6 +355,10 @@ namespace The_Darkest_Hour.Towns.Watertown
                 {
                     rumor = new Rumor("Pirate Ships", "Hmmm, this is an interesting document you found. Unfortunately it doesn't seem to contain all of the intel we need. I'll have my spies looking for the rest of the intel. What you had to say about the amount of skeletons you encountered is highly disturbing. There hasn't been this level of necromancer activity in a very long time. The fact that they seem to be raising the dead en mass is a great cause for concern. And we can't seem to catch a break either, its not our only cause for concern. Remember the pirates you cleaned out of the beach head? Well it doesn't seem to have been that big of a deterrent. There are pirate ships gathering close to the shore. My agents have prepared a small boat to take you to the ships off the west end tents. Do what you can to impede them.");
                     rumor.OnHeardRumor = this.HeardPirateShipsRumor; 
+                }
+                else if (!recapturedVillage)
+                {
+                    rumor = new Rumor("Recaptured Village", "Thank you for dealing with the pirates that were gathering off the coast. They posed a very large threat and it certainly makes my day brighter knowing that they are gone and I don't have to deal with them. Unfortunately their presence has already caused enough damage. Local bandits were inspired by the chaos that the pirates caused and took over a small village off the coast, looting and pillaging with glee. We've rescued a few refugees but I believe some are still trapped there. Please retake the village with all hast and rescue the villagers while they still breathe.");
                 }
                 else
                     rumor = new Rumor("You want something?", "You want something?");

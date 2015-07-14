@@ -61,7 +61,7 @@ namespace The_Darkest_Hour {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The Chronicles of Asku: The Darkest Hour Alpha Version 3.0.
+        ///   Looks up a localized string similar to The Chronicles of Asku: The Darkest Hour Alpha Version 3.1.
         /// </summary>
         internal static string TitleAndVersion {
             get {
