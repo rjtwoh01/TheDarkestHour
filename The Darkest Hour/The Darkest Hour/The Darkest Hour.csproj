@@ -109,6 +109,7 @@
     <Compile Include="Characters\Mobs\Bosses\CrazedOutlawLeader.cs" />
     <Compile Include="Characters\Mobs\Bosses\DarkMaster.cs" />
     <Compile Include="Characters\Mobs\Bosses\LordArgus.cs" />
+    <Compile Include="Characters\Mobs\Bosses\MaskedBandit.cs" />
     <Compile Include="Characters\Mobs\Bosses\NecroContractor.cs" />
     <Compile Include="Characters\Mobs\Bosses\NecroEnvoy.cs" />
     <Compile Include="Characters\Mobs\Bosses\NecroIntelligenceOfficer.cs" />
