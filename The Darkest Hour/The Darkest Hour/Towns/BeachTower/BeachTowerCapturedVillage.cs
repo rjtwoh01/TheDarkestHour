@@ -54,17 +54,23 @@ namespace The_Darkest_Hour.Towns.Watertown
             returnData.Description = "A small village located a few miles to the south of the Beach Tower. The village is overrun with bandits who have set several of the buildings ablaze. The smoke rises into the air and can be seen for miles off.";
 
             //Adjacent Locations
-            Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
+            Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
 
             //Town Center
             LocationDefinition locationDefinition = BeachTower.GetTownInstance().GetTownCenterDefinition();
-            adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
             locationDefinition = BeachTowerCapturedVillage.GetTownInstance().GetTownCenterDefinition();
-            adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
+            Accomplishment trackBandit = BeachTower.GetBeachTowerAccomplishments().Find(x => x.Name.Contains("Tracked Down Masked Bandit"));
+            if (GameState.Hero.Accomplishments.Contains(trackBandit))
+            {
+                locationDefinition = BeachTowerCapturedVillage.GetTownInstance().GetEntranceDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
 
-            returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
+            returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
 
             return returnData;
         }
@@ -126,26 +132,26 @@ namespace The_Darkest_Hour.Towns.Watertown
                 returnData.Description = "The center of the small village. What used to be a tall monument that represented the pride of the locals now lays shattered on the ground, stained with the blood of unknown victims.";
 
             //Adjacent Locations
-            Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
+            Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
 
             //Town Center
             LocationDefinition locationDefinition = BeachTowerCapturedVillage.GetTownInstance().GetEntranceDefinition();
-            adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
             locationDefinition = BeachTowerCapturedVillage.GetTownInstance().GetMarketStreetDefinition();
-            adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
             locationDefinition = BeachTowerCapturedVillage.GetTownInstance().GetPrisonDefinition();
-            adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
             locationDefinition = BeachTowerCapturedVillage.GetTownInstance().GetTownHallDefinition();
-            adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
             locationDefinition = BeachTowerCapturedVillage.GetTownInstance().GetHouseDistrictDefinition();
-            adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
 
-            returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
+            returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
 
             return returnData;
         }
@@ -213,13 +219,13 @@ namespace The_Darkest_Hour.Towns.Watertown
                 returnData.Description = "The market street is barely recognizable to those who would have frequented it before. Several of the carts lay broken on the ground and even more are just piles of ash. The remaining goods have been saved from the bandits.";
 
             //Adjacent Locations
-            Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
+            Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
 
             //Town Center
             LocationDefinition locationDefinition = BeachTowerCapturedVillage.GetTownInstance().GetTownCenterDefinition();
-            adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
+            returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
 
             return returnData;
         }
@@ -297,14 +303,14 @@ namespace The_Darkest_Hour.Towns.Watertown
                 returnData.Description = "A small prison with all of the jail cells broken open.";
 
             //Adjacent Locations
-            Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
+            Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
 
             //Town Center
             LocationDefinition locationDefinition = BeachTowerCapturedVillage.GetTownInstance().GetTownCenterDefinition();
-            adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
 
-            returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
+            returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
 
             return returnData;
         }
@@ -385,13 +391,13 @@ namespace The_Darkest_Hour.Towns.Watertown
                 returnData.Description = "A collection of buildings that were the former government buildings of the village are set ablaze, no longer the pillars of society.";
 
             //Adjacent Locations
-            Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
+            Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
 
             //Town Center
             LocationDefinition locationDefinition = BeachTowerCapturedVillage.GetTownInstance().GetTownCenterDefinition();
-            adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
+            returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
 
             return returnData;
         }
@@ -469,17 +475,17 @@ namespace The_Darkest_Hour.Towns.Watertown
                 returnData.Description = "The house district showcases the true nature of the locals. The houses are all large but simple, reflecting their life style philosophy.";
 
             //Adjacent Locations
-            Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
+            Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
 
             //Town Center
             LocationDefinition locationDefinition = BeachTowerCapturedVillage.GetTownInstance().GetTownCenterDefinition();
-            adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
             //Player must defeat bandits and free villagers to advance
             locationDefinition = BeachTowerCapturedVillage.GetTownInstance().GetMayorsHouseDefinition();
-            adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
+            returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
 
             return returnData;
         }
@@ -580,20 +586,20 @@ namespace The_Darkest_Hour.Towns.Watertown
                 returnData.Description = "At the center of the House District is the Mayor's House. A large house, at least twice as large as the houses that surround it. It looks to be untouched by the bandits, but you can hear screaming from within - as if people are being tortured inside.";
 
             //Adjacent Locations
-            Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
+            Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
 
             //Town Center
             LocationDefinition locationDefinition = BeachTowerCapturedVillage.GetTownInstance().GetHouseDistrictDefinition();
-            adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
             //This is just a temporary port back to Beach Tower TownHall for in development testing (since next quest isn't in yet)
             if (openedChest)
             {
                 locationDefinition = BeachTower.GetTownInstance().GetTownCenterDefinition();
-                adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
             }
 
-            returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
+            returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
 
             return returnData;
         }

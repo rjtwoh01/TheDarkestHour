@@ -13,7 +13,7 @@ using The_Darkest_Hour.Common;
 
 namespace The_Darkest_Hour.Towns.Watertown
 {
-    class BeachTowerMayorHouse : Town
+    class BeachTowerMayorHouse //Make inherit Town
     {
     }
 }
