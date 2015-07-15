@@ -331,7 +331,8 @@ namespace The_Darkest_Hour.Towns.Watertown
                 bool huntSpies = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerSpies.SPY_MASTER));
                 bool investegateReports = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerHiddenCamp.DOCUMENT));
                 bool pirateShips = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerPirateShips.FLEET_MASTER));
-                bool recapturedVillage = false;
+                bool recapturedVillage = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerCapturedVillage.MAYOR_HOUSE_DOOR));
+                bool trackedDownMaskedBandit = false;
 
                 if (!killedBeachHeadPirates)
                 {
@@ -367,6 +368,11 @@ namespace The_Darkest_Hour.Towns.Watertown
                 {
                     rumor = new Rumor("Recaptured Village", "Thank you for dealing with the pirates that were gathering off the coast. They posed a very large threat and it certainly makes my day brighter knowing that they are gone and I don't have to deal with them. Unfortunately their presence has already caused enough damage. Local bandits were inspired by the chaos that the pirates caused and took over a small village off the coast, looting and pillaging with glee. We've rescued a few refugees but I believe some are still trapped there. Please retake the village with all hast and rescue the villagers while they still breathe.");
                     rumor.OnHeardRumor = this.HeardCapturedVillageRumor;
+                }
+                else if (!trackedDownMaskedBandit)
+                {
+                    rumor = new Rumor("Tracked Down Masked Bandit", "First I want to thank you for your work recapturing the village. We have received the refugees and they are all receiving medical attention. Now, to the urgent matter at hand. You said you could not get into the mayor's house? Well that presents a major problem. The mayor is still stuck inside his house, and he is our top priority. He may be the mayor of a small town, but the town is in a strategic location and he has many connections throughout the kingdom, and foreign as well. Him being held hostage does not bode well for Asku. I have sent my spies out to track down this masked bandit. They have reported that there were sightings of a strange masked man heading into catacombs in a cemetary just off the village. Go there, and find out what you can. This is vital.");
+                    rumor.OnHeardRumor = this.HeardTrackedDownMaskedBanditRumor;
                 }
                 else
                     rumor = new Rumor("You want something?", "You want something?");
@@ -424,6 +430,14 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationHandler.ResetLocation(TOWN_CENTER_KEY);
         }
 
+        public void HeardTrackedDownMaskedBanditRumor()
+        {
+            Accomplishment accomplishment = BeachTower.GetBeachTowerAccomplishments().Find(x => x.Name.Contains("Pirate Ships"));
+            GameState.Hero.Accomplishments.Add(accomplishment);
+            //Reload the TownCenter so it will open up the area to Complete the Task that the Task is in
+            LocationHandler.ResetLocation(TOWN_CENTER_KEY);
+        }
+
         #endregion
 
         #region Accomplishments
@@ -468,7 +482,12 @@ namespace The_Darkest_Hour.Towns.Watertown
                 accomplishment = new Accomplishment();
                 accomplishment.NameSpace = "Beach Tower";
                 accomplishment.Name = "Has heard the rumor of the Captured Village";
-                accomplishment.Description = "Has heard the rumor of the bandits that captured a village.";
+                accomplishment.Description = "Has heard the rumor of the bandits that have Captured Village.";
+                _BeachTowerAccomplishments.Add(accomplishment);
+                accomplishment = new Accomplishment();
+                accomplishment.NameSpace = "Beach Tower";
+                accomplishment.Name = "Has heard the rumor of Tracked Down Masked Bandit";
+                accomplishment.Description = "Has heard the rumor of Tracked Down Masked Bandit to try and get into the mayor's house which is protected by some type of magical barrier.";
                 _BeachTowerAccomplishments.Add(accomplishment);
             }
 

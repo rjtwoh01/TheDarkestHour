@@ -60,7 +60,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = BeachTower.GetTownInstance().GetTownCenterDefinition();
             adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            locationDefinition = BeachTower.GetTownInstance().GetTownCenterDefinition();
+            locationDefinition = BeachTowerCapturedVillage.GetTownInstance().GetTownCenterDefinition();
             adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
 
