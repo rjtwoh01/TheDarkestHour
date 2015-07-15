@@ -24,6 +24,11 @@ namespace The_Darkest_Hour.Towns.Watertown
         public const string RIGHT_TOMBS_KEY = "BeachTower.BeachTowerCatacomb.RightTombs";
         public const string SECRET_PASSAGE_WAY_KEY = "BeachTower.BeachTowerCatacomb.SecretPassageWay";
         public const string SECRET_TOMB_KEY = "BeachTower.BeachTowerCatacomb.SecretTomb";
+        public const string LEFT_TOMBS_MOBS = "BeachTower.BeachTowerCatacomb.LeftTombMobs";
+        public const string RIGHT_TOMBS_MOBS = "BeachTower.BeachTowerCatacomb.RightTombMobs";
+        public const string CONFRONT_MASKED_BANDIT = "BeachTower.BeachTowerCatacomb.ConfrontMaskedBandit";
+        public const string DEFEAT_NECROMANCER = "BeachTower.BeachTowerCatacomb.DefeatNecromancer";
+        public const string TREASURE_CHEST = "BeachTower.BeachTowerCatacomb.TreasureChest";
 
         #endregion
 
@@ -140,9 +145,25 @@ namespace The_Darkest_Hour.Towns.Watertown
             Location returnData;
             returnData = new Location();
             returnData.Name = "Left Tombs";
-            returnData.Description = "There are tombs stacked one ontop of another against all sides of the wall. There are risen skeletons mingling about.";
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerCatacomb.LEFT_TOMBS_MOBS));            
 
-            //Add skeletons
+            if (!defeatedMobs)
+            {
+                returnData.Description = "There are tombs stacked one ontop of another against all sides of the wall. There are risen skeletons mingling about.";
+
+                List<LocationAction> locationActions = new List<LocationAction>();
+                List<Mob> mobs = new List<Mob>();
+                mobs.Add(new Skeleton());
+                mobs.Add(new Skeleton());
+                mobs.Add(new Skeleton());
+                mobs.Add(new Skeleton());
+                CombatAction combatAction = new CombatAction("Skeletons", mobs);
+                combatAction.PostCombat += LeftTombMobs;
+                locationActions.Add(combatAction);
+                returnData.Actions = locationActions;
+            }
+            else
+                returnData.Description = "There are tombs stacked one ontop of another against all sides of the wall.";
 
             //Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
@@ -154,6 +175,17 @@ namespace The_Darkest_Hour.Towns.Watertown
             returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
 
             return returnData;
+        }
+
+        public void LeftTombMobs(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerCatacomb.LEFT_TOMBS_MOBS, true);
+
+                //Reload 
+                LocationHandler.ResetLocation(LEFT_TOMBS_KEY);
+            }
         }
 
         public LocationDefinition GetLeftTombsDefinition()
@@ -168,7 +200,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             else
             {
                 returnData.LocationKey = locationKey;
-                returnData.Name = "Old Graves";
+                returnData.Name = "Left Tombs";
                 returnData.DoLoadLocation = LoadLeftTombs;
 
                 LocationHandler.AddLocation(returnData);
@@ -185,10 +217,28 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             Location returnData;
             returnData = new Location();
-            returnData.Name = "Right Tombs";
-            returnData.Description = "There are lots of tombs stacked ontop of eachother on the walls. There are several skeletons meandering around.";
+            returnData.Name = "Right Tombs";            
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerCatacomb.RIGHT_TOMBS_KEY));
 
-            //Add skeletons
+            if (!defeatedMobs)
+            {
+                returnData.Description = "There are lots of tombs stacked ontop of eachother on the walls. There are several skeletons meandering around.";
+
+                List<LocationAction> locationActions = new List<LocationAction>();
+                List<Mob> mobs = new List<Mob>();
+                mobs.Add(new Skeleton());
+                mobs.Add(new Skeleton());
+                mobs.Add(new Skeleton());
+                mobs.Add(new Skeleton());
+                mobs.Add(new Skeleton());
+                mobs.Add(new Skeleton());
+                CombatAction combatAction = new CombatAction("Skeletons", mobs);
+                combatAction.PostCombat += LeftTombMobs;
+                locationActions.Add(combatAction);
+                returnData.Actions = locationActions;
+            }
+            else
+                returnData.Description = "There are lots of tombs stacked ontop of eachother on the walls.";
 
             //Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
@@ -197,13 +247,27 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = BeachTowerCatacomb.GetTownInstance().GetSmallHallwayDefinition();
             adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            locationDefinition = BeachTowerCatacomb.GetTownInstance().GetSecretPassageWayDefinition();
-            adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            if (defeatedMobs)
+            {
+                locationDefinition = BeachTowerCatacomb.GetTownInstance().GetSecretPassageWayDefinition();
+                adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
 
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
 
             return returnData;
+        }
+
+        public void RightTombMobs(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerCatacomb.RIGHT_TOMBS_MOBS, true);
+
+                //Reload 
+                LocationHandler.ResetLocation(RIGHT_TOMBS_KEY);
+            }
         }
 
         public LocationDefinition GetRightTombsDefinition()
@@ -283,14 +347,54 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             Location returnData;
             returnData = new Location();
-            returnData.Name = "Secret Tomb";
-            returnData.Description = "A large room with a tomb against the back wall. There is a large mural painting behind the tomb depicting what appears to be a person of royalty. This tomb must belong to a very important person. The masked bandit is kneeling before the tomb, his back turned to you";
+            returnData.Name = "Secret Tomb";            
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerCatacomb.RIGHT_TOMBS_KEY));
+            bool confrontBandit = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerCatacomb.CONFRONT_MASKED_BANDIT));
+            bool openChest = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerCatacomb.TREASURE_CHEST));
+
+            string before = "Welcome, " + GameState.Hero.Identifier + ". What a welcome surprise to see you here. I assume you've tracked this fool before me. He obviously failed at his job. No matter, I'll finish you myself.";
+            string after = "The Necromancer gasp for air as you kneel over him, a dagger you found on the floor lodged in his chest. You can see into his hood and red eyes are staring back at you. As he takes his last breath a major burst of energy releases from his body, knocking you back onto the ground. You slowly stand up, hoping that broke the barrier to the Mayor's House. Either way, you need to report to the Captain of the Guard.";
 
             //Add action to confront masked bandit
             //After confronting the masked bandit a necromancer steps out from the shadows and kills the masked bandit
             //Fight the necromancer
             //Killing the necromancer releases the shield on the mayor's house stopping you from getting back.
+            if (!confrontBandit)
+            {
+                returnData.Description = "A large room with a tomb against the back wall. There is a large mural painting behind the tomb depicting what appears to be a person of royalty. This tomb must belong to a very important person. The masked bandit is kneeling before the tomb, his back turned to you";
+                List<LocationAction> locationActions = new List<LocationAction>();
+                TakeItemAction itemAction = new TakeItemAction("Confront", "Masked Bandit", "You walk up behind the Masked Bandit. He stands upm turning around to face you. Just as he's about to say something his body is crushed by an invisible force and crumples to the ground, dead. Out from a darkened corner steps a necromancer, a dark hood covering his face. You feel trepidation as evil pours off his body like a waterfall.");
+                itemAction.PostItem += ConfrontMaskedBandit;
+                locationActions.Add(itemAction);
+                returnData.Actions = locationActions;
+            }
 
+            else if (!defeatedMobs)
+            {
+                returnData.Description = "A large room with a tomb against the back wall. There is a large mural painting behind the tomb depicting what appears to be a person of royalty. This tomb must belong to a very important person. The masked bandit's body lays crumpled on the floor as the necromancer stands over it, glaring menacingly at you.";
+
+                List<LocationAction> locationActions = new List<LocationAction>();
+                List<Mob> mobs = new List<Mob>();
+                mobs.Add(new CatacombsNecromancer());
+                CombatAction combatAction = new CombatAction("Catacombs Necromancer", mobs, before, after);
+                combatAction.PostCombat += LeftTombMobs;
+                locationActions.Add(combatAction);
+                returnData.Actions = locationActions;
+            }
+
+            else if (defeatedMobs && !openChest)
+            {
+                returnData.Description = "A large room with a tomb against the back wall. There is a large mural painting behind the tomb depicting what appears to be a person of royalty. This tomb must belong to a very important person. There is a treasure chest behind the tomb.";
+                List<LocationAction> locationActions = new List<LocationAction>();
+                TreasureChestAction itemAction = new TreasureChestAction(5);
+                locationActions.Add(itemAction);
+                itemAction.PostItem += TreasureChest;
+                returnData.Actions = locationActions;
+            }
+            else
+                returnData.Description = "A large room with a tomb against the back wall. There is a large mural painting behind the tomb depicting what appears to be a person of royalty. This tomb must belong to a very important person.";
+
+            
             //Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
 
@@ -301,16 +405,52 @@ namespace The_Darkest_Hour.Towns.Watertown
 
             //Figure out where you want the player to go after this
             //Maybe both
-            locationDefinition = BeachTowerCapturedVillage.GetTownInstance().GetEntranceDefinition();
-            adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            if (openChest)
+            {
+                locationDefinition = BeachTowerCapturedVillage.GetTownInstance().GetEntranceDefinition();
+                adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            locationDefinition = BeachTower.GetTownInstance().GetTownCenterDefinition();
-            adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+                locationDefinition = BeachTower.GetTownInstance().GetTownCenterDefinition();
+                adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
 
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
 
             return returnData;
+        }
+
+        public void Necromancer(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerCatacomb.DEFEAT_NECROMANCER, true);
+
+                //Reload 
+                LocationHandler.ResetLocation(SECRET_TOMB_KEY);
+            }
+        }
+
+        public void ConfrontMaskedBandit(object sender, TakeItemEventArgs itemEventArgs)
+        {
+            if (itemEventArgs.ItemResults == TakeItemResults.Taken)
+            {
+                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerCatacomb.CONFRONT_MASKED_BANDIT, true);
+
+                //Reload 
+                LocationHandler.ResetLocation(SECRET_TOMB_KEY);
+            }
+        }
+
+        public void TreasureChest(object sender, ChestEventArgs chestEventArgs)
+        {
+            if (chestEventArgs.ChestResults == ChestResults.Taken)
+            {
+                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerCatacomb.TREASURE_CHEST, true);
+
+                //Reload
+                LocationHandler.ResetLocation(SECRET_TOMB_KEY);
+            }
         }
 
         public LocationDefinition GetSecretTombDefintion()

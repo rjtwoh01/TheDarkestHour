@@ -106,6 +106,7 @@
     <Compile Include="Characters\Mobs\Bosses\BanditSupplyCaptain.cs" />
     <Compile Include="Characters\Mobs\Bosses\BanditTorturer.cs" />
     <Compile Include="Characters\Mobs\Bosses\BanditWarden.cs" />
+    <Compile Include="Characters\Mobs\Bosses\CatacombsNecromancer.cs" />
     <Compile Include="Characters\Mobs\Bosses\CrazedOutlawLeader.cs" />
     <Compile Include="Characters\Mobs\Bosses\DarkMaster.cs" />
     <Compile Include="Characters\Mobs\Bosses\LordArgus.cs" />
