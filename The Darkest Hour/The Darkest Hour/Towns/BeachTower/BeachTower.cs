@@ -490,7 +490,7 @@ namespace The_Darkest_Hour.Towns.Watertown
 
                 accomplishment = new Accomplishment();
                 accomplishment.NameSpace = "Beach Tower";
-                accomplishment.Name = "Has heard the rumor of the Captured Village";
+                accomplishment.Name = "Has heard the rumor of the Recaptured Village";
                 accomplishment.Description = "Has heard the rumor of the bandits that have Captured Village.";
                 _BeachTowerAccomplishments.Add(accomplishment);
 
