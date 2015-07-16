@@ -541,7 +541,7 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             Location returnData;
             returnData = new Location();
-            returnData.Name = "The Mayor's House";            
+            returnData.Name = "Outside the Mayor's House";            
             //Add a confront masked bandit action
             //There will be a conversation with the bandit, followed by a brief fight
             //After the fight the bandit will throw out an insult and flee
@@ -599,6 +599,13 @@ namespace The_Darkest_Hour.Towns.Watertown
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
             }
 
+            Accomplishment freeMayor = BeachTower.GetBeachTowerAccomplishments().Find(x => x.Name.Contains("Free Mayor"));
+            if (GameState.Hero.Accomplishments.Contains(freeMayor))
+            {
+                locationDefinition = BeachTowerMayorHouse.GetTownInstance().GetEntranceDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
+
             returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
 
             return returnData;
@@ -649,7 +656,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             else
             {
                 returnData.LocationKey = locationKey;
-                returnData.Name = "Mayor's House";
+                returnData.Name = "Outside the Mayor's House";
                 returnData.DoLoadLocation = LoadMayorsHouse;
 
                 LocationHandler.AddLocation(returnData);
