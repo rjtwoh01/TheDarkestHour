@@ -36,6 +36,7 @@ namespace The_Darkest_Hour.Towns.Watertown
         public const string DEFEAT_BANDIT_RAID_LEADER = "BeachTower.BeachTowerMayorHouse.DefeatBanditRaidLeader";
         public const string TREASURE_CHEST = "BeachTower.BeachTowerMayorHouse.TreasureChest";
         public const string STOLEN_KEY_USED = "BeachTower.BeachTowerMayorHouse.StolenKeyUsed";
+        public const string DUMBY_KEY_DOOR = "BeachTower.BeachTowerMayorHouse.DumbyKeyDoor"; //A dumby key to try to open the door since need one
 
         #endregion
 
@@ -100,8 +101,28 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             Location returnData;
             returnData = new Location();
-            returnData.Name = "Living Room";
-            returnData.Description = "A large living room with several pieces of furniture and a table in the middle. There are cards scattered about the table from an abandoned game. There are bandits inspecting different parts of the room, but holding off theft or ransacking for some odd reason.";
+            returnData.Name = "Living Room";            
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerMayorHouse.LIVING_ROOM_MOBS));
+
+            if (!defeatedMobs)
+            {
+                returnData.Description = "A large living room with several pieces of furniture and a table in the middle. There are cards scattered about the table from an abandoned game. There are bandits inspecting different parts of the room, but holding off theft or ransacking for some odd reason.";
+
+                List<LocationAction> locationActions = new List<LocationAction>();
+                List<Mob> mobs = new List<Mob>();
+                mobs.Add(new Bandit());
+                mobs.Add(new Bandit());
+                mobs.Add(new Bandit());
+                mobs.Add(new Bandit());
+                mobs.Add(new Bandit());
+                mobs.Add(new Bandit());
+                CombatAction combatAction = new CombatAction("Bandits", mobs);
+                combatAction.PostCombat += LivingRoomMobs;
+                locationActions.Add(combatAction);
+                returnData.Actions = locationActions;
+            }
+            else
+                returnData.Description = "A large living room with several pieces of furniture and a table in the middle. There are cards scattered about the table from an abandoned game.";
 
             //Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
@@ -110,12 +131,26 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = BeachTowerMayorHouse.GetTownInstance().GetEntranceDefinition();
             adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            locationDefinition = BeachTowerMayorHouse.GetTownInstance().GetKitchenDefinition();
-            adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            if (defeatedMobs)
+            {
+                locationDefinition = BeachTowerMayorHouse.GetTownInstance().GetKitchenDefinition();
+                adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
 
             return returnData;
+        }
+
+        public void LivingRoomMobs(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerMayorHouse.LIVING_ROOM_MOBS, true);
+
+                //Reload 
+                LocationHandler.ResetLocation(LIVING_ROOM_KEY);
+            }
         }
 
         public LocationDefinition GetLivingRoomDefinition()
@@ -147,8 +182,26 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             Location returnData;
             returnData = new Location();
-            returnData.Name = "Kitchen";
-            returnData.Description = "A large kitchen. There is both a cooking area and a large table to serve many guest at once. It is clear that the Mayor is used to entertaining a lot of people for meals. There are several bandits going through the Mayor's food stores.";
+            returnData.Name = "Kitchen";            
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerMayorHouse.KITCHEN_MOBS));
+
+            if (!defeatedMobs)
+            {
+                returnData.Description = "A large kitchen. There is both a cooking area and a large table to serve many guest at once. It is clear that the Mayor is used to entertaining a lot of people for meals. There are several bandits going through the Mayor's food stores.";
+
+                List<LocationAction> locationActions = new List<LocationAction>();
+                List<Mob> mobs = new List<Mob>();
+                mobs.Add(new Bandit());
+                mobs.Add(new Bandit());
+                mobs.Add(new Bandit());
+                mobs.Add(new Bandit());
+                CombatAction combatAction = new CombatAction("Bandits", mobs);
+                combatAction.PostCombat += KitchenMobs;
+                locationActions.Add(combatAction);
+                returnData.Actions = locationActions;
+            }
+            else
+                returnData.Description = "A large kitchen. There is both a cooking area and a large table to serve many guest at once. It is clear that the Mayor is used to entertaining a lot of people for meals.";
 
             //Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
@@ -157,12 +210,26 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = BeachTowerMayorHouse.GetTownInstance().GetLivingRoomDefinition();
             adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            locationDefinition = BeachTowerMayorHouse.GetTownInstance().GetMeetingRoomDefinition();
-            adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            if (defeatedMobs)
+            {
+                locationDefinition = BeachTowerMayorHouse.GetTownInstance().GetMeetingRoomDefinition();
+                adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
 
             return returnData;
+        }
+
+        public void KitchenMobs(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerMayorHouse.KITCHEN_MOBS, true);
+
+                //Reload 
+                LocationHandler.ResetLocation(KITCHEN_KEY);
+            }
         }
 
         public LocationDefinition GetKitchenDefinition()
@@ -194,8 +261,25 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             Location returnData;
             returnData = new Location();
-            returnData.Name = "Meeting Room";
-            returnData.Description = "This is a relatively small room compared to the others in the house. However it is still rather large compared to rooms in most houses. There is a large table in the middle of the room with documents scattered about, dealing with various parts of the town. There are some necromancers inspecting the documents.";
+            returnData.Name = "Meeting Room";            
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerMayorHouse.MEETING_ROOM_MOBS));
+
+            if (!defeatedMobs)
+            {
+                returnData.Description = "This is a relatively small room compared to the others in the house. However it is still rather large compared to rooms in most houses. There is a large table in the middle of the room with documents scattered about, dealing with various parts of the town. There are some necromancers inspecting the documents.";
+
+                List<LocationAction> locationActions = new List<LocationAction>();
+                List<Mob> mobs = new List<Mob>();
+                mobs.Add(new Necromancer());
+                mobs.Add(new Necromancer());
+                mobs.Add(new Necromancer());
+                CombatAction combatAction = new CombatAction("Necromancers", mobs);
+                combatAction.PostCombat += MeetingRoomMobs;
+                locationActions.Add(combatAction);
+                returnData.Actions = locationActions;
+            }
+            else
+                returnData.Description = "This is a relatively small room compared to the others in the house. However it is still rather large compared to rooms in most houses. There is a large table in the middle of the room with documents scattered about, dealing with various parts of the town.";
 
             //Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
@@ -204,12 +288,26 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = BeachTowerMayorHouse.GetTownInstance().GetKitchenDefinition();
             adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            locationDefinition = BeachTowerMayorHouse.GetTownInstance().GetStairsDefinition();
-            adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            if (defeatedMobs)
+            {
+                locationDefinition = BeachTowerMayorHouse.GetTownInstance().GetStairsDefinition();
+                adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
 
             return returnData;
+        }
+
+        public void MeetingRoomMobs(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerMayorHouse.MEETING_ROOM_MOBS, true);
+
+                //Reload 
+                LocationHandler.ResetLocation(MEETING_ROOM_KEY);
+            }
         }
 
         public LocationDefinition GetMeetingRoomDefinition()
@@ -289,13 +387,54 @@ namespace The_Darkest_Hour.Towns.Watertown
             Location returnData;
             returnData = new Location();
             returnData.Name = "Upstairs Hallway";
-            returnData.Description = "A large hallway with only two rooms connected to it. There are some bandits standing guard at both doors.";
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerMayorHouse.UPSTAIRS_HALLWAY_MOBS));
+            bool haveKey = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerMayorHouse.STOLEN_KEY_TO_MASTER_BEDROOM));
+            bool doorUnlocked = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerMayorHouse.STOLEN_KEY_USED));
 
+            if (!defeatedMobs)
+            {
+                returnData.Description = "A large hallway with only two rooms connected to it. There are some bandits standing guard at both doors.";
+
+                List<LocationAction> locationActions = new List<LocationAction>();
+                List<Mob> mobs = new List<Mob>();
+                mobs.Add(new Bandit());
+                mobs.Add(new Bandit());
+                mobs.Add(new Bandit());
+                mobs.Add(new Bandit());
+                CombatAction combatAction = new CombatAction("Bandits", mobs);
+                combatAction.PostCombat += HallwayMobs;
+                locationActions.Add(combatAction);
+                returnData.Actions = locationActions;
+            }
+            
             //Add an action to try and open the Master Bedroom Door for as long as player doesn't have the stolen key
             //i.e. if(!stolenKey) { //Open Door }
             //Once the player has the stolen key they will actually have to unlock it with an action
             //i.e. if(stolenKey && !stolenKeyUsed) { //Unlock Door }
             //Once the player unlocks the door an adjacent location for the Master Bedroom will appear
+
+            else if (!haveKey && defeatedMobs)
+            {
+                returnData.Description = "A large hallway with only two rooms connected to it.";
+                List<LocationAction> locationActions = new List<LocationAction>();
+                TakeItemAction itemAction = new TakeItemAction("Open", "Door to Master Bedroom", "You try to open the door. It's locked. Maybe you should go find a key.");
+                itemAction.PostItem += TryDoor;
+                locationActions.Add(itemAction);
+                returnData.Actions = locationActions;
+            }
+
+            else if (haveKey && defeatedMobs)
+            {
+                returnData.Description = "A large hallway with only two rooms connected to it.";
+                List<LocationAction> locationActions = new List<LocationAction>();
+                TakeItemAction itemAction = new TakeItemAction("Unlock", "Door to Master Bedroom", "You unlock the door to the master bedroom. You may now enter.");
+                itemAction.PostItem += UnlockDoor;
+                locationActions.Add(itemAction);
+                returnData.Actions = locationActions;
+            }
+
+            else
+                returnData.Description = "A large hallway with only two rooms connected to it. The master bedroom is now unlocked.";
 
             //Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
@@ -307,12 +446,49 @@ namespace The_Darkest_Hour.Towns.Watertown
             locationDefinition = BeachTowerMayorHouse.GetTownInstance().GetGuestBedroomDefinition();
             adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            locationDefinition = BeachTowerMayorHouse.GetTownInstance().GetMasterBedroomDefinition();
-            adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            if (defeatedMobs && doorUnlocked)
+            {
+                locationDefinition = BeachTowerMayorHouse.GetTownInstance().GetMasterBedroomDefinition();
+                adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
 
             return returnData;
+        }
+
+        public void HallwayMobs(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {                
+                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerMayorHouse.UPSTAIRS_HALLWAY_MOBS, true);
+
+                //Reload 
+                LocationHandler.ResetLocation(UPSTAIRS_HALLWAY_KEY);
+            }
+        }
+
+        public void TryDoor(object sender, TakeItemEventArgs itemEventArgs)
+        {
+            if (itemEventArgs.ItemResults == TakeItemResults.Taken)
+            {
+                //This may or may not work. If it works it may only work once. That's not acceptable
+                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerMayorHouse.DUMBY_KEY_DOOR, true);
+
+                //Reload 
+                LocationHandler.ResetLocation(UPSTAIRS_HALLWAY_KEY);
+            }
+        }
+
+        public void UnlockDoor(object sender, TakeItemEventArgs itemEventArgs)
+        {
+            if (itemEventArgs.ItemResults == TakeItemResults.Taken)
+            {
+                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerMayorHouse.STOLEN_KEY_USED, true);
+
+                //Reload 
+                LocationHandler.ResetLocation(UPSTAIRS_HALLWAY_KEY);
+            }
         }
 
         public LocationDefinition GetUpstairsHallwayDefinition()
@@ -343,11 +519,51 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             Location returnData;
             returnData = new Location();
-            returnData.Name = "Guest Bedroom";
-            returnData.Description = "A rather simple bedroom. There is a bed in a corner with a nightstand next to it. There is a bookshelf on the wall next to the window. The bookshelf has a mix of books on this part of Asku and some fictional books. There are several villagers tied up and shoved in the corner next to the bookshelf. There are several bandits watching over them.";
+            returnData.Name = "Guest Bedroom";            
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerMayorHouse.GUEST_BEDROOM_MOBS));
+            bool freeVillagers = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerMayorHouse.CAPTURED_VILLAGERS_GUEST_BEDROOM));
+            bool tookKey = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerMayorHouse.STOLEN_KEY_TO_MASTER_BEDROOM));
+
+            if (!defeatedMobs)
+            {
+                returnData.Description = "A rather simple bedroom. There is a bed in a corner with a nightstand next to it. There is a bookshelf on the wall next to the window. The bookshelf has a mix of books on this part of Asku and some fictional books. There are several villagers tied up and shoved in the corner next to the bookshelf.";
+
+                List<LocationAction> locationActions = new List<LocationAction>();
+                List<Mob> mobs = new List<Mob>();
+                mobs.Add(new Bandit());
+                mobs.Add(new Bandit());
+                mobs.Add(new Bandit());
+                mobs.Add(new Bandit());
+                CombatAction combatAction = new CombatAction("Bandits", mobs);
+                combatAction.PostCombat += GuestBedroomMobs;
+                locationActions.Add(combatAction);
+                returnData.Actions = locationActions;
+            }
 
             //After defeating the mobs there will be an action to take a stolen key that you see on a bandit's body
             //Remember action to free prisoners
+
+            else if (defeatedMobs && !freeVillagers)
+            {
+                returnData.Description = "A rather simple bedroom. There is a bed in a corner with a nightstand next to it. There is a bookshelf on the wall next to the window. The bookshelf has a mix of books on this part of Asku and some fictional books. There are several villagers tied up and shoved in the corner next to the bookshelf.";
+                List<LocationAction> locationActions = new List<LocationAction>();
+                TakeItemAction itemAction = new TakeItemAction("Free", "Captured Villagers", "You free the captured villagers. You inform them to head to the Beach Tower to recieve medical attention. You let them know that soldiers are stationed throughout the city helping with the clean up and that they will help escort them. As one of the villagers rushes to leave the room, she trips over a dead bandit's body, knocking it over and revealing a key tied to his belt.");
+                itemAction.PostItem += TryDoor;
+                locationActions.Add(itemAction);
+                returnData.Actions = locationActions;
+            }
+
+            else if (defeatedMobs && freeVillagers && !tookKey)
+            {
+                returnData.Description = "A rather simple bedroom. There is a bed in a corner with a nightstand next to it. There is a bookshelf on the wall next to the window. The bookshelf has a mix of books on this part of Asku and some fictional books. One of the dead bandit's has a key tied to his belt.";
+                List<LocationAction> locationActions = new List<LocationAction>();
+                TakeItemAction itemAction = new TakeItemAction("Take", "Key from the dead Bandit", "You cut the piece of leather tying the key to the bandit's belt and put it in your pocket. This key might be useful later.");
+                itemAction.PostItem += TakeKey;
+                locationActions.Add(itemAction);
+                returnData.Actions = locationActions;
+            }
+            else
+                returnData.Description = "A rather simple bedroom. There is a bed in a corner with a nightstand next to it. There is a bookshelf on the wall next to the window. The bookshelf has a mix of books on this part of Asku and some fictional books.";
 
             //Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
@@ -359,6 +575,39 @@ namespace The_Darkest_Hour.Towns.Watertown
             returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
 
             return returnData;
+        }
+
+        public void GuestBedroomMobs(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerMayorHouse.GUEST_BEDROOM_MOBS, true);
+
+                //Reload 
+                LocationHandler.ResetLocation(UPSTAIRS_GUEST_BEDROOM_KEY);
+            }
+        }
+
+        public void FreeVillagers(object sender, TakeItemEventArgs itemEventArgs)
+        {
+            if (itemEventArgs.ItemResults == TakeItemResults.Taken)
+            {
+                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerMayorHouse.CAPTURED_VILLAGERS_GUEST_BEDROOM, true);
+
+                //Reload 
+                LocationHandler.ResetLocation(UPSTAIRS_GUEST_BEDROOM_KEY);
+            }
+        }
+
+        public void TakeKey(object sender, TakeItemEventArgs itemEventArgs)
+        {
+            if (itemEventArgs.ItemResults == TakeItemResults.Taken)
+            {
+                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerMayorHouse.STOLEN_KEY_TO_MASTER_BEDROOM, true);
+
+                //Reload 
+                LocationHandler.ResetLocation(UPSTAIRS_GUEST_BEDROOM_KEY);
+            }
         }
 
         public LocationDefinition GetGuestBedroomDefinition()
@@ -389,10 +638,44 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             Location returnData;
             returnData = new Location();
-            returnData.Name = "Master Bedroom";
-            returnData.Description = "A large bedroom with a large elegent bed in the center of the fall wall. There are several bookshelves full of a wide variety of literature. There is a desk against a side wall with several documents and parchment scattered about it. It is clear the Mayor is quite a scholar. The Mayor is tied up to the front of his bed post, and a Bandit Raid Leader is standing in front of him with his sword drawn and pointed to the Mayor's neck.";
+            returnData.Name = "Master Bedroom";         
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerMayorHouse.DEFEAT_BANDIT_RAID_LEADER));
+            bool freeMayor = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerMayorHouse.CAPTURED_MAYOR));
+            bool tookTreasure = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerMayorHouse.TREASURE_CHEST));
 
-            //Remember action to free the Mayor
+            if (!defeatedMobs)
+            {
+                returnData.Description = "A large bedroom with a large elegent bed in the center of the fall wall. There are several bookshelves full of a wide variety of literature. There is a desk against a side wall with several documents and parchment scattered about it. It is clear the Mayor is quite a scholar. The Mayor is tied up to the front of his bed post, and a Bandit Raid Leader is standing in front of him with his sword drawn and pointed to the Mayor's neck.";
+
+                List<LocationAction> locationActions = new List<LocationAction>();
+                List<Mob> mobs = new List<Mob>();
+                mobs.Add(new BanditRaidLeader());
+                CombatAction combatAction = new CombatAction("Bandit Raid Leader", mobs);
+                combatAction.PostCombat += BanditRaidLeader;
+                locationActions.Add(combatAction);
+                returnData.Actions = locationActions;
+            }
+
+            else if (defeatedMobs && !freeMayor)
+            {
+                returnData.Description = "A large bedroom with a large elegent bed in the center of the fall wall. There are several bookshelves full of a wide variety of literature. There is a desk against a side wall with several documents and parchment scattered about it. It is clear the Mayor is quite a scholar. The Mayor is tied up to the front of his bed post.";
+                List<LocationAction> locationActions = new List<LocationAction>();
+                TakeItemAction itemAction = new TakeItemAction("Free", "Mayor", "You cut the ties that are binding the mayor to the bed. He thanks you and promptly leaves the house to asses the damage done to his town. You should report back to Mike at the Beach Tower to let him know that the Mayor is free and the town has been completely liberated.");
+                itemAction.PostItem += FreeMayor;
+                locationActions.Add(itemAction);
+                returnData.Actions = locationActions;
+            }
+
+            else if (defeatedMobs && freeMayor && !tookTreasure)
+            {
+                returnData.Description = "A large bedroom with a large elegent bed in the center of the fall wall. There are several bookshelves full of a wide variety of literature. There is a desk against a side wall with several documents and parchment scattered about it. It is clear the Mayor is quite a scholar.";
+                List<LocationAction> locationActions = new List<LocationAction>();
+                TreasureChestAction itemAction = new TreasureChestAction(5);
+                locationActions.Add(itemAction);
+                itemAction.PostItem += TreasureChest;
+                returnData.Actions = locationActions;
+            }
+            returnData.Description = "A large bedroom with a large elegent bed in the center of the fall wall. There are several bookshelves full of a wide variety of literature. There is a desk against a side wall with several documents and parchment scattered about it. It is clear the Mayor is quite a scholar. The Mayor is tied up to the front of his bed post.";
 
             //Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
@@ -401,12 +684,48 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = BeachTowerMayorHouse.GetTownInstance().GetUpstairsHallwayDefinition();
             adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            locationDefinition = BeachTower.GetTownInstance().GetTownCenterDefinition();
-            adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            if (defeatedMobs && freeMayor)
+            {
+                locationDefinition = BeachTower.GetTownInstance().GetTownCenterDefinition();
+                adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
 
             return returnData;
+        }
+
+        public void BanditRaidLeader(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerMayorHouse.DEFEAT_BANDIT_RAID_LEADER, true);
+
+                //Reload 
+                LocationHandler.ResetLocation(UPSTAIRS_MASTER_BEDROOM_KEY);
+            }
+        }
+
+        public void FreeMayor(object sender, TakeItemEventArgs itemEventArgs)
+        {
+            if (itemEventArgs.ItemResults == TakeItemResults.Taken)
+            {
+                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerMayorHouse.CAPTURED_MAYOR, true);
+
+                //Reload 
+                LocationHandler.ResetLocation(UPSTAIRS_MASTER_BEDROOM_KEY);
+            }
+        }
+
+        public void TreasureChest(object sender, ChestEventArgs chestEventArgs)
+        {
+            if (chestEventArgs.ChestResults == ChestResults.Taken)
+            {
+                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerMayorHouse.TREASURE_CHEST, true);
+
+                //Reload
+                LocationHandler.ResetLocation(UPSTAIRS_MASTER_BEDROOM_KEY);
+            }
         }
 
         public LocationDefinition GetMasterBedroomDefinition()
