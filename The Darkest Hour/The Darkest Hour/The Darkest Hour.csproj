@@ -107,6 +107,10 @@
     <Compile Include="Characters\Mobs\Bosses\BanditSupplyCaptain.cs" />
     <Compile Include="Characters\Mobs\Bosses\BanditTorturer.cs" />
     <Compile Include="Characters\Mobs\Bosses\BanditWarden.cs" />
+    <Compile Include="Characters\Mobs\Bosses\Beach Tower\Battle for the Sea\AssaultAdmiral.cs" />
+    <Compile Include="Characters\Mobs\Bosses\Beach Tower\Battle for the Sea\LandAssaultLeader.cs" />
+    <Compile Include="Characters\Mobs\Bosses\Beach Tower\Battle for the Sea\LandingOfficer.cs" />
+    <Compile Include="Characters\Mobs\Bosses\Beach Tower\Battle for the Sea\SailorCaptain.cs" />
     <Compile Include="Characters\Mobs\Bosses\Beach Tower\CatacombsNecromancer.cs" />
     <Compile Include="Characters\Mobs\Bosses\CrazedOutlawLeader.cs" />
     <Compile Include="Characters\Mobs\Bosses\DarkMaster.cs" />
@@ -124,7 +128,7 @@
     <Compile Include="Characters\Mobs\Bosses\Beach Tower\PirateCaptain.cs" />
     <Compile Include="Characters\Mobs\Bosses\Beach Tower\PirateFleetMaster.cs" />
     <Compile Include="Characters\Mobs\Bosses\PossesedGuardBoss.cs" />
-    <Compile Include="Characters\Mobs\Bosses\ScoutLeader.cs" />
+    <Compile Include="Characters\Mobs\Bosses\Beach Tower\ScoutLeader.cs" />
     <Compile Include="Characters\Mobs\Bosses\ScummyMurderer.cs" />
     <Compile Include="Characters\Mobs\Bosses\SewerKing.cs" />
     <Compile Include="Characters\Mobs\Bosses\SkeletonKing.cs" />
@@ -138,10 +142,12 @@
     <Compile Include="Characters\Mobs\Peasant.cs" />
     <Compile Include="Characters\Mobs\Pirate.cs" />
     <Compile Include="Characters\Mobs\PossesedVillager.cs" />
+    <Compile Include="Characters\Mobs\Sailor.cs" />
     <Compile Include="Characters\Mobs\Scout.cs" />
     <Compile Include="Characters\Mobs\SewerRat.cs" />
     <Compile Include="Characters\Mobs\Slave.cs" />
     <Compile Include="Characters\Mobs\SlaveMaster.cs" />
+    <Compile Include="Characters\Mobs\Soldier.cs" />
     <Compile Include="Characters\Mobs\Spies.cs" />
     <Compile Include="Combat\Battle.cs" />
     <Compile Include="Characters\Accomplishments.cs" />
@@ -300,7 +306,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Characters\Mobs\Bosses\Ankou\" />
-    <Folder Include="Characters\Mobs\Bosses\Beach Tower\Battle for the Sea\" />
     <Folder Include="Characters\Mobs\Bosses\Watertown\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

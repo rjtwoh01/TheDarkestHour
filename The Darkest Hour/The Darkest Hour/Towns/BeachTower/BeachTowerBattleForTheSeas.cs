@@ -29,6 +29,21 @@ namespace The_Darkest_Hour.Towns.Watertown
         public const string STAIRS_KEY = "BeachTower.BeachTowerBattleForTheSeas.Stairs";
         public const string DECK_KEY = "BeachTower.BeachTowerBattleForTheSeas.Deck";
         public const string ADMIRAL_DECK_KEY = "BeachTower.BeachTowerBattleForTheSeas.AdmiralDeck";
+        public const string BLOODIED_PATH_MOBS = "BeachTower.BeachTowerBattleForTheSeas.BloodiedPathMobs";
+        public const string LAND_ASSAULT_LEADER = "BeachTower.BeachTowerBattleForTheSeas.LandAssaultLeader";
+        public const string DOCKS_MOBS = "BeachTower.BeachTowerBattleForTheSeas.DocksMobs";
+        public const string LANDING_OFFICER = "BeachTower.BeachTowerBattleForTheSeas.LandingOfficer";
+        public const string ENEMY_BOAT_MOBS = "BeachTower.BeachTowerBattleForTheSeas.EnemyBoatMobs";
+        public const string SAILOR_CAPTAIN = "BeachTower.BeachTowerBattleForTheSeas.SailorCaptain";
+        public const string SAIL = "BeachTower.BeachTowerBattleForTheSeas.Sail";
+        public const string SINK_ENEMY_SHIP = "BeachTower.BeachTowerBattleForTheSeas.SinkEnemyShip";
+        public const string FIRE_ON_ENEMY = "BeachTower.BeachTowerBattleForTheSeas.FireOnEnemy";
+        public const string BOARD_SHIP = "BeachTower.BeachTowerBattleForTheSeas.BoardShip";
+        public const string HOLE_MOBS = "BeachTower.BeachTowerBattleForTheSeas.HoleMobs";
+        public const string DINNING_AREA_MOBS = "BeachTower.BeachTowerBattleForTheSeas.DinningAreaMobs";
+        public const string STAIRS_MOBS = "BeachTower.BeachTowerBattleForTheSeas.StairsMobs";
+        public const string DECK_MOBS = "BeachTower.BeachTowerBattleForTheSeas.DeckMobs";
+        public const string ASSAULT_ADMIRAL = "BeachTower.BeachTowerBattleForTheSeas.AssaultAdmiral";
 
         #endregion
 
@@ -94,8 +109,27 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             Location returnData;
             returnData = new Location();
-            returnData.Name = "Bloodied Beach Path";
-            returnData.Description = "The beach path is bloodied with war. Soldiers from both sides lay dead or dying on the ground. The air is full of the sounds of war. The clash of metal on metal, the screams of soldiers, the cries of the wounded, and force of magic. Several enemy soldiers block your path forward.";
+            returnData.Name = "Bloodied Beach Path";            
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBattleForTheSeas.BLOODIED_PATH_MOBS));
+
+            if (!defeatedMobs)
+            {
+                returnData.Description = "The beach path is bloodied with war. Soldiers from both sides lay dead or dying on the ground. The air is full of the sounds of war. The clash of metal on metal, the screams of soldiers, the cries of the wounded, and force of magic. Several enemy soldiers block your path forward.";
+
+                List<LocationAction> locationActions = new List<LocationAction>();
+                List<Mob> mobs = new List<Mob>();
+                mobs.Add(new Soldier());
+                mobs.Add(new Soldier());
+                mobs.Add(new Soldier());
+                mobs.Add(new Soldier());
+                mobs.Add(new Soldier());
+                CombatAction combatAction = new CombatAction("Soldiers", mobs);
+                combatAction.PostCombat += BloodiedPathMobs;
+                locationActions.Add(combatAction);
+                returnData.Actions = locationActions;
+            }
+            else
+                returnData.Description = "The beach path is bloodied with war. Soldiers from both sides lay dead or dying on the ground. The air is full of the sounds of war. The clash of metal on metal, the screams of soldiers, the cries of the wounded, and force of magic.";
 
             //Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
@@ -104,12 +138,26 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = BeachTowerBattleForTheSeas.GetTownInstance().GetEntranceDefinition();
             adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            locationDefinition = BeachTowerBattleForTheSeas.GetTownInstance().GetHighBeachCliffDefinition();
-            adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            if (defeatedMobs)
+            {
+                locationDefinition = BeachTowerBattleForTheSeas.GetTownInstance().GetHighBeachCliffDefinition();
+                adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
 
             return returnData;
+        }
+
+        public void BloodiedPathMobs(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBattleForTheSeas.BLOODIED_PATH_MOBS, true);
+
+                //Reload 
+                LocationHandler.ResetLocation(BLOODIED_BEACH_PATH_KEY);
+            }
         }
 
         public LocationDefinition GetBloodiedBeachpathDefinition()
@@ -141,8 +189,23 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             Location returnData;
             returnData = new Location();
-            returnData.Name = "High Beach Cliff";
-            returnData.Description = "A high cliff on the beach that overlooks the battle raging on. The Land Assault Leader stand ontop of the cliff, watching the battle beneathe him.";
+            returnData.Name = "High Beach Cliff";            
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBattleForTheSeas.LAND_ASSAULT_LEADER));
+
+            if (!defeatedMobs)
+            {
+                returnData.Description = "A high cliff on the beach that overlooks the battle raging on. The Land Assault Leader stand ontop of the cliff, watching the battle beneathe him.";
+
+                List<LocationAction> locationActions = new List<LocationAction>();
+                List<Mob> mobs = new List<Mob>();
+                mobs.Add(new LandAssaultLeader());
+                CombatAction combatAction = new CombatAction("Land Assault Leader", mobs);
+                combatAction.PostCombat += LandAssaultLeader;
+                locationActions.Add(combatAction);
+                returnData.Actions = locationActions;
+            }
+            else
+                returnData.Description = "A high cliff on the beach that overlooks the battle raging on.";
 
             //Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
@@ -157,6 +220,17 @@ namespace The_Darkest_Hour.Towns.Watertown
             returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
 
             return returnData;
+        }
+
+        public void LandAssaultLeader(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBattleForTheSeas.LAND_ASSAULT_LEADER, true);
+
+                //Reload 
+                LocationHandler.ResetLocation(HIGH_BEACH_CLIFF_KEY);
+            }
         }
 
         public LocationDefinition GetHighBeachCliffDefinition()
@@ -188,8 +262,32 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             Location returnData;
             returnData = new Location();
-            returnData.Name = "Docks";
-            returnData.Description = "The docks are just beyond the High Beach Cliff. They extend to the end of the shallow waters. They are currently overrun with enemy soldiers.";
+            returnData.Name = "Docks";            
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBattleForTheSeas.DOCKS_MOBS));
+
+            if (!defeatedMobs)
+            {
+                returnData.Description = "The docks are just beyond the High Beach Cliff. They extend to the end of the shallow waters. They are currently overrun with enemy soldiers.";
+
+                List<LocationAction> locationActions = new List<LocationAction>();
+                List<Mob> mobs = new List<Mob>();
+                mobs.Add(new Soldier());
+                mobs.Add(new Soldier());
+                mobs.Add(new Soldier());
+                mobs.Add(new Soldier());
+                mobs.Add(new Soldier());
+                mobs.Add(new Soldier());
+                mobs.Add(new Soldier());
+                mobs.Add(new Soldier());
+                mobs.Add(new Soldier());
+                mobs.Add(new Soldier());
+                CombatAction combatAction = new CombatAction("Soldiers", mobs);
+                combatAction.PostCombat += DocksMobs;
+                locationActions.Add(combatAction);
+                returnData.Actions = locationActions;
+            }
+            else
+                returnData.Description = "The docks are just beyond the High Beach Cliff. They extend to the end of the shallow waters. They are littered with the bloody bodies of enemy soldiers.";
 
             //Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
@@ -198,12 +296,26 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = BeachTowerBattleForTheSeas.GetTownInstance().GetHighBeachCliffDefinition();
             adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            locationDefinition = BeachTowerBattleForTheSeas.GetTownInstance().GetSeaOverwatchDefinition();
-            adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            if (defeatedMobs)
+            {
+                locationDefinition = BeachTowerBattleForTheSeas.GetTownInstance().GetSeaOverwatchDefinition();
+                adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
 
             return returnData;
+        }
+
+        public void DocksMobs(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBattleForTheSeas.DOCKS_MOBS, true);
+
+                //Reload 
+                LocationHandler.ResetLocation(DOCKS_KEY);
+            }
         }
 
         public LocationDefinition GetDocksDefinition()
@@ -235,8 +347,23 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             Location returnData;
             returnData = new Location();
-            returnData.Name = "Sea Overwatch";
-            returnData.Description = "There is a platform at the end of the docks that is raised high into the air to overlook the seas. The Landing Officer is standing up there, surveying the landing of the enemy for their assault.";
+            returnData.Name = "Sea Overwatch";            
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBattleForTheSeas.LANDING_OFFICER));
+
+            if (!defeatedMobs)
+            {
+                returnData.Description = "There is a platform at the end of the docks that is raised high into the air to overlook the seas. The Landing Officer is standing up there, surveying the landing of the enemy for their assault.";
+
+                List<LocationAction> locationActions = new List<LocationAction>();
+                List<Mob> mobs = new List<Mob>();
+                mobs.Add(new LandingOfficer());
+                CombatAction combatAction = new CombatAction("Landing Officer", mobs);
+                combatAction.PostCombat += LandingOfficer;
+                locationActions.Add(combatAction);
+                returnData.Actions = locationActions;
+            }
+            else
+                returnData.Description = "There is a platform at the end of the docks that is raised high into the air to overlook the seas.";
 
             //Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
@@ -251,6 +378,17 @@ namespace The_Darkest_Hour.Towns.Watertown
             returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
 
             return returnData;
+        }
+
+        public void LandingOfficer(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBattleForTheSeas.LANDING_OFFICER, true);
+
+                //Reload 
+                LocationHandler.ResetLocation(SEA_OVERWATCH_KEY);
+            }
         }
 
         public LocationDefinition GetSeaOverwatchDefinition()
@@ -282,8 +420,29 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             Location returnData;
             returnData = new Location();
-            returnData.Name = "Enemy Boat";
-            returnData.Description = "The enemy boat currently docked is a mid sized one. Not all of its crew have left the boat yet to aid in the invasion.";
+            returnData.Name = "Enemy Boat";            
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBattleForTheSeas.ENEMY_BOAT_MOBS));
+
+            if (!defeatedMobs)
+            {
+                returnData.Description = "The enemy boat currently docked is a mid sized one. Not all of its crew have left the boat yet to aid in the invasion.";
+
+                List<LocationAction> locationActions = new List<LocationAction>();
+                List<Mob> mobs = new List<Mob>();
+                mobs.Add(new Soldier());
+                mobs.Add(new Soldier());
+                mobs.Add(new Soldier());
+                mobs.Add(new Soldier());
+                mobs.Add(new Sailor());
+                mobs.Add(new Sailor());
+                mobs.Add(new Sailor());
+                CombatAction combatAction = new CombatAction("Soldiers and Sailors", mobs);
+                combatAction.PostCombat += BoatMobs;
+                locationActions.Add(combatAction);
+                returnData.Actions = locationActions;
+            }
+            else
+                returnData.Description = "The enemy boat currently docked is a mid sized one. It's crew lays dead about its deck.";
 
             //Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
@@ -292,12 +451,26 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = BeachTowerBattleForTheSeas.GetTownInstance().GetStairsDefinition();
             adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            locationDefinition = BeachTowerBattleForTheSeas.GetTownInstance().GetCaptainDeckDefinition();
-            adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            if (defeatedMobs)
+            {
+                locationDefinition = BeachTowerBattleForTheSeas.GetTownInstance().GetCaptainDeckDefinition();
+                adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
 
             return returnData;
+        }
+
+        public void BoatMobs(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBattleForTheSeas.ENEMY_BOAT_MOBS, true);
+
+                //Reload 
+                LocationHandler.ResetLocation(ENEMY_BOAT_KEY);
+            }
         }
 
         public LocationDefinition GetEnemyBoatDefinition()
@@ -329,8 +502,66 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             Location returnData;
             returnData = new Location();
-            returnData.Name = "Captain's Deck";
-            returnData.Description = "The Captain's Deck rest at the right end of the boat. The Captain is currently standing up there.";
+            returnData.Name = "Captain's Deck";            
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBattleForTheSeas.SAILOR_CAPTAIN));
+            bool sailed = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBattleForTheSeas.SAIL));
+            bool sinkShip = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBattleForTheSeas.SINK_ENEMY_SHIP));
+            bool fireOnAssaultShip = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBattleForTheSeas.FIRE_ON_ENEMY));
+            bool boardEnemy = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBattleForTheSeas.BOARD_SHIP)); 
+
+            if (!defeatedMobs)
+            {
+                returnData.Description = "The Captain's Deck rest at the right end of the boat. The Captain is currently standing up there.";
+
+                List<LocationAction> locationActions = new List<LocationAction>();
+                List<Mob> mobs = new List<Mob>();
+                mobs.Add(new SailorCaptain());
+                CombatAction combatAction = new CombatAction("Sailor Captain", mobs);
+                combatAction.PostCombat += SailorCaptain;
+                locationActions.Add(combatAction);
+                returnData.Actions = locationActions;
+            }
+            else if (!sailed)
+            {
+                returnData.Description = "The Captain's Deck rest at the right end of the boat. The captain is dead with his body pushed off to the side, soon to be forgotten.";
+
+                List<LocationAction> locationActions = new List<LocationAction>();
+                TakeItemAction itemAction = new TakeItemAction("Sail", "Ship", "You sail the ship away from the docks into the battle raging on the seas.");
+                itemAction.PostItem += Sail;
+                locationActions.Add(itemAction);
+                returnData.Actions = locationActions;
+            }
+            else if (!sinkShip)
+            {
+                returnData.Description = "The Captain's Deck rest at the right end of the boat. You are sailing the ship. As you sail, an enemy ship comes within range and fires upon you.";
+
+                List<LocationAction> locationActions = new List<LocationAction>();
+                TakeItemAction itemAction = new TakeItemAction("Sink", "Enemy Ship", "You fire upon the enemy ship, scoring a direct hit with one of their mages. The mage was in the middle of casting a fire spell, and as the cannon ball tears his body apart the control over the spell is lost, and the fire he was controlling rapidly engulfs the whole ship. The ship burns brightly.");
+                itemAction.PostItem += SinkShip;
+                locationActions.Add(itemAction);
+                returnData.Actions = locationActions;
+            }
+            else if (!fireOnAssaultShip)
+            {
+                returnData.Description = "The Captain's Deck rest at the right end of the boat. You are sailing the ship. After sinking the enemy ship, you continue to sail into the heart of the battle. You come upon the enemies' lead assault ship.";
+
+                List<LocationAction> locationActions = new List<LocationAction>();
+                TakeItemAction itemAction = new TakeItemAction("Fire Upon", "Enemy Lead Assault Ship", "You fire upon the lead assault ship. It's a miss. After a brief round of crossfire between your ship and the lead assault ship, you blow a hole into the side of the enemy ship.");
+                itemAction.PostItem += FireOnEnemy;
+                locationActions.Add(itemAction);
+                returnData.Actions = locationActions;
+            }
+            else if (!boardEnemy)
+            {
+                returnData.Description = "The Captain's Deck rest at the right end of the boat. You are sailing the ship. You have drawn near the enemy's lead assault ship. The enemy ship has a large gaping hole in the side of it from the firefight between the two ships.";
+
+                List<LocationAction> locationActions = new List<LocationAction>();
+                TakeItemAction itemAction = new TakeItemAction("Board", "Enemy Lead Assault Ship", "You get in a small boat and sail it over to the enemy's lead assault ship. As you get below the hole you blew in it, you climb up the ship and get ready to go into the hole.");
+                itemAction.PostItem += BoardEnemy;
+                locationActions.Add(itemAction);
+                returnData.Actions = locationActions;
+            }
+            returnData.Description = "The Captain's Deck rest at the right end of the boat. You are sailing the ship. The ship is pulled up next to the enemy's lead assault ship. There is a small boat in the water below the hole blown in the enemy's ship during a brief firefight.";
 
             //Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
@@ -339,12 +570,70 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = BeachTowerBattleForTheSeas.GetTownInstance().GetEnemyBoatDefinition();
             adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            locationDefinition = BeachTowerBattleForTheSeas.GetTownInstance().GetHoleInShipDefinition();
-            adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            if (boardEnemy)
+            {
+                locationDefinition = BeachTowerBattleForTheSeas.GetTownInstance().GetHoleInShipDefinition();
+                adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
 
             return returnData;
+        }
+
+        public void SailorCaptain(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBattleForTheSeas.SAILOR_CAPTAIN, true);
+
+                //Reload 
+                LocationHandler.ResetLocation(CAPTAIN_DECK_KEY);
+            }
+        }
+
+        public void Sail(object sender, TakeItemEventArgs itemEventArgs)
+        {
+            if (itemEventArgs.ItemResults == TakeItemResults.Taken)
+            {
+                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBattleForTheSeas.SAIL, true);
+
+                //Reload 
+                LocationHandler.ResetLocation(CAPTAIN_DECK_KEY);
+            }
+        }
+
+        public void SinkShip(object sender, TakeItemEventArgs itemEventArgs)
+        {
+            if (itemEventArgs.ItemResults == TakeItemResults.Taken)
+            {
+                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBattleForTheSeas.SINK_ENEMY_SHIP, true);
+
+                //Reload 
+                LocationHandler.ResetLocation(CAPTAIN_DECK_KEY);
+            }
+        }
+
+        public void FireOnEnemy(object sender, TakeItemEventArgs itemEventArgs)
+        {
+            if (itemEventArgs.ItemResults == TakeItemResults.Taken)
+            {
+                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBattleForTheSeas.FIRE_ON_ENEMY, true);
+
+                //Reload 
+                LocationHandler.ResetLocation(CAPTAIN_DECK_KEY);
+            }
+        }
+
+        public void BoardEnemy(object sender, TakeItemEventArgs itemEventArgs)
+        {
+            if (itemEventArgs.ItemResults == TakeItemResults.Taken)
+            {
+                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBattleForTheSeas.BOARD_SHIP, true);
+
+                //Reload 
+                LocationHandler.ResetLocation(CAPTAIN_DECK_KEY);
+            }
         }
 
         public LocationDefinition GetCaptainDeckDefinition()
@@ -380,8 +669,24 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             Location returnData;
             returnData = new Location();
-            returnData.Name = "Hole in Lead Assault Ship";
-            returnData.Description = "There is a hole in the side of the Lead Assault Ship. Standing gaurd at the newly formed hole is two soldiers.";
+            returnData.Name = "Hole in Lead Assault Ship";            
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBattleForTheSeas.HOLE_MOBS));
+
+            if (!defeatedMobs)
+            {
+                returnData.Description = "There is a hole in the side of the Lead Assault Ship. Standing gaurd at the newly formed hole is two soldiers.";
+
+                List<LocationAction> locationActions = new List<LocationAction>();
+                List<Mob> mobs = new List<Mob>();
+                mobs.Add(new Soldier());
+                mobs.Add(new Soldier());
+                CombatAction combatAction = new CombatAction("Soldiers", mobs);
+                combatAction.PostCombat += HoleSoldiers;
+                locationActions.Add(combatAction);
+                returnData.Actions = locationActions;
+            }
+            else
+                returnData.Description = "There is a hole in the side of the Lead Assault Ship.";
 
             //Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
@@ -390,12 +695,26 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = BeachTowerBattleForTheSeas.GetTownInstance().GetCaptainDeckDefinition();
             adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            locationDefinition = BeachTowerBattleForTheSeas.GetTownInstance().GetCrewDiningAreaDefinition();
-            adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            if (defeatedMobs)
+            {
+                locationDefinition = BeachTowerBattleForTheSeas.GetTownInstance().GetCrewDiningAreaDefinition();
+                adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
 
             return returnData;
+        }
+
+        public void HoleSoldiers(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBattleForTheSeas.HOLE_MOBS, true);
+
+                //Reload 
+                LocationHandler.ResetLocation(HOLE_IN_SHIP_KEY);
+            }
         }
 
         public LocationDefinition GetHoleInShipDefinition()
@@ -427,8 +746,28 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             Location returnData;
             returnData = new Location();
-            returnData.Name = "Crew Dinning Area";
-            returnData.Description = "Just off of the hole that was blown into the ship is the dinning area of the crew. There are several soldiers and sailors mingling about.";
+            returnData.Name = "Crew Dinning Area";            
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBattleForTheSeas.DINNING_AREA_MOBS));
+
+            if (!defeatedMobs)
+            {
+                returnData.Description = "Just off of the hole that was blown into the ship is the dinning area of the crew. There are several soldiers and sailors mingling about.";
+
+                List<LocationAction> locationActions = new List<LocationAction>();
+                List<Mob> mobs = new List<Mob>();
+                mobs.Add(new Soldier());
+                mobs.Add(new Soldier());
+                mobs.Add(new Soldier());
+                mobs.Add(new Soldier());
+                mobs.Add(new Sailor());
+                mobs.Add(new Sailor());
+                CombatAction combatAction = new CombatAction("Soldiers and Sailors", mobs);
+                combatAction.PostCombat += DinningHallMobs;
+                locationActions.Add(combatAction);
+                returnData.Actions = locationActions;
+            }
+            else
+                returnData.Description = "Just off of the hole that was blown into the ship is the dinning area of the crew.";
 
             //Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
@@ -437,12 +776,26 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = BeachTowerBattleForTheSeas.GetTownInstance().GetHoleInShipDefinition();
             adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            locationDefinition = BeachTowerBattleForTheSeas.GetTownInstance().GetStairsDefinition();
-            adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            if (defeatedMobs)
+            {
+                locationDefinition = BeachTowerBattleForTheSeas.GetTownInstance().GetStairsDefinition();
+                adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
 
             return returnData;
+        }
+
+        public void DinningHallMobs(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBattleForTheSeas.DINNING_AREA_MOBS, true);
+
+                //Reload 
+                LocationHandler.ResetLocation(CREW_DINING_AREA_KEY);
+            }
         }
 
         public LocationDefinition GetCrewDiningAreaDefinition()
@@ -474,8 +827,25 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             Location returnData;
             returnData = new Location();
-            returnData.Name = "Stairs";
-            returnData.Description = "Stairs leading up to the top of the ship. There are several soldiers moving up and down them.";
+            returnData.Name = "Stairs";            
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBattleForTheSeas.STAIRS_MOBS));
+
+            if (!defeatedMobs)
+            {
+                returnData.Description = "Stairs leading up to the top of the ship. There are several soldiers moving up and down them.";
+
+                List<LocationAction> locationActions = new List<LocationAction>();
+                List<Mob> mobs = new List<Mob>();
+                mobs.Add(new Soldier());
+                mobs.Add(new Soldier());
+                mobs.Add(new Soldier());
+                CombatAction combatAction = new CombatAction("Soldiers", mobs);
+                combatAction.PostCombat += StairsMobs;
+                locationActions.Add(combatAction);
+                returnData.Actions = locationActions;
+            }
+            else
+                returnData.Description = "Stairs leading up to the top of the ship. There are several dead bodies laying on the stairs.";
 
             //Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
@@ -484,13 +854,26 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = BeachTowerBattleForTheSeas.GetTownInstance().GetCrewDiningAreaDefinition();
             adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            locationDefinition = BeachTowerBattleForTheSeas.GetTownInstance().GetDeckDefinition();
-            adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
-
+            if (defeatedMobs)
+            {
+                locationDefinition = BeachTowerBattleForTheSeas.GetTownInstance().GetDeckDefinition();
+                adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
 
             return returnData;
+        }
+
+        public void StairsMobs(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBattleForTheSeas.STAIRS_MOBS, true);
+
+                //Reload 
+                LocationHandler.ResetLocation(STAIRS_KEY);
+            }
         }
 
         public LocationDefinition GetStairsDefinition()
@@ -522,8 +905,32 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             Location returnData;
             returnData = new Location();
-            returnData.Name = "Deck";
-            returnData.Description = "The Deck of the ship is large, with many soldiers and sailors running around on it, doing various things to help the invasion. There are cannons every few feet. This is not a ship to be messed with.";
+            returnData.Name = "Deck";            
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBattleForTheSeas.DECK_MOBS));
+
+            if (!defeatedMobs)
+            {
+                returnData.Description = "The Deck of the ship is large, with many soldiers and sailors running around on it, doing various things to help the invasion. There are cannons every few feet. This is not a ship to be messed with.";
+
+                List<LocationAction> locationActions = new List<LocationAction>();
+                List<Mob> mobs = new List<Mob>();
+                mobs.Add(new Soldier());
+                mobs.Add(new Soldier());
+                mobs.Add(new Soldier());
+                mobs.Add(new Soldier());
+                mobs.Add(new Soldier());
+                mobs.Add(new Soldier());
+                mobs.Add(new Sailor());
+                mobs.Add(new Sailor());
+                mobs.Add(new Sailor());
+                mobs.Add(new Sailor());
+                CombatAction combatAction = new CombatAction("Soldiers and Sailors", mobs);
+                combatAction.PostCombat += DeckMobs;
+                locationActions.Add(combatAction);
+                returnData.Actions = locationActions;
+            }
+            else
+                returnData.Description = "The Deck of the ship is large, with many dead bodies from soldiers and sailors. There are cannons every few feet. This is not a ship to be messed with, yet you did it anyway.";
 
             //Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
@@ -532,12 +939,26 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = BeachTowerBattleForTheSeas.GetTownInstance().GetStairsDefinition();
             adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            locationDefinition = BeachTowerBattleForTheSeas.GetTownInstance().GetAdmiralDeckDefinition();
-            adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            if (defeatedMobs)
+            {
+                locationDefinition = BeachTowerBattleForTheSeas.GetTownInstance().GetAdmiralDeckDefinition();
+                adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
 
             return returnData;
+        }
+
+        public void DeckMobs(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBattleForTheSeas.DECK_MOBS, true);
+
+                //Reload 
+                LocationHandler.ResetLocation(DECK_KEY);
+            }
         }
 
         public LocationDefinition GetDeckDefinition()
@@ -569,9 +990,27 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             Location returnData;
             returnData = new Location();
-            returnData.Name = "Admiral's Deck";
-            returnData.Description = "The Admiral's Deck is on the right side of the ship. The Admiral is standing on the top of it, sailing the ship.";
+            returnData.Name = "Admiral's Deck";            
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBattleForTheSeas.ASSAULT_ADMIRAL));
 
+            string before = "So, you've made it this far. No matter, this war will continue. You will die here today, " + GameState.Hero.Identifier + ".";
+            string after = "''You think this changes things? This changes nothing. Asku will burn.'' You don't want to hear anymore so you pick a sword up off the ground and slice the Admiral's head off. His words unsettle you. You've heard enemies declare something similar. Everything here was just a precusor for something much, much worse to come.";
+
+            if (!defeatedMobs)
+            {
+                returnData.Description = "The Admiral's Deck is on the right side of the ship. The Admiral is standing on the top of it, sailing the ship.";
+
+                List<LocationAction> locationActions = new List<LocationAction>();
+                List<Mob> mobs = new List<Mob>();
+                mobs.Add(new AssaultAdmiral());
+                CombatAction combatAction = new CombatAction("Assault Admiral", mobs, before, after);
+                combatAction.PostCombat += AssaultAdmiral;
+                locationActions.Add(combatAction);
+                returnData.Actions = locationActions;
+            }
+            else
+                returnData.Description = "The Admiral's Deck is on the right side of the ship. The Admiral lays dead before his wheel. Ships are on fire throughout the whole sea. The battle was fierce and bloody. But it is over now.";
+            
             //Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
 
@@ -579,12 +1018,26 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = BeachTowerBattleForTheSeas.GetTownInstance().GetDeckDefinition();
             adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            locationDefinition = BeachTower.GetTownInstance().GetTownCenterDefinition();
-            adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            if (defeatedMobs)
+            {
+                locationDefinition = BeachTower.GetTownInstance().GetTownCenterDefinition();
+                adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
 
             return returnData;
+        }
+
+        public void AssaultAdmiral(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBattleForTheSeas.ASSAULT_ADMIRAL, true);
+
+                //Reload 
+                LocationHandler.ResetLocation(ADMIRAL_DECK_KEY);
+            }
         }
 
         public LocationDefinition GetAdmiralDeckDefinition()
@@ -611,6 +1064,12 @@ namespace The_Darkest_Hour.Towns.Watertown
         #endregion
 
         #endregion
+
+        #endregion
+
+        #region Loot
+
+        //Need to add boss loot still
 
         #endregion
 
