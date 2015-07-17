@@ -101,17 +101,17 @@
     <Compile Include="Characters\Mobs\Bosses\BanditCaptain.cs" />
     <Compile Include="Characters\Mobs\Bosses\BanditKing.cs" />
     <Compile Include="Characters\Mobs\Bosses\BanditLieutenant.cs" />
-    <Compile Include="Characters\Mobs\Bosses\BanditRaidLeader.cs" />
+    <Compile Include="Characters\Mobs\Bosses\Beach Tower\BanditRaidLeader.cs" />
     <Compile Include="Characters\Mobs\Bosses\BanditScholar.cs" />
     <Compile Include="Characters\Mobs\Bosses\BanditSpy.cs" />
     <Compile Include="Characters\Mobs\Bosses\BanditSupplyCaptain.cs" />
     <Compile Include="Characters\Mobs\Bosses\BanditTorturer.cs" />
     <Compile Include="Characters\Mobs\Bosses\BanditWarden.cs" />
-    <Compile Include="Characters\Mobs\Bosses\CatacombsNecromancer.cs" />
+    <Compile Include="Characters\Mobs\Bosses\Beach Tower\CatacombsNecromancer.cs" />
     <Compile Include="Characters\Mobs\Bosses\CrazedOutlawLeader.cs" />
     <Compile Include="Characters\Mobs\Bosses\DarkMaster.cs" />
     <Compile Include="Characters\Mobs\Bosses\LordArgus.cs" />
-    <Compile Include="Characters\Mobs\Bosses\MaskedBandit.cs" />
+    <Compile Include="Characters\Mobs\Bosses\Beach Tower\MaskedBandit.cs" />
     <Compile Include="Characters\Mobs\Bosses\NecroContractor.cs" />
     <Compile Include="Characters\Mobs\Bosses\NecroEnvoy.cs" />
     <Compile Include="Characters\Mobs\Bosses\NecroIntelligenceOfficer.cs" />
@@ -121,14 +121,14 @@
     <Compile Include="Characters\Mobs\Bosses\OutlawBoss.cs" />
     <Compile Include="Characters\Mobs\Bosses\PeasantAssaultLeader.cs" />
     <Compile Include="Characters\Mobs\Bosses\PeasantLeader.cs" />
-    <Compile Include="Characters\Mobs\Bosses\PirateCaptain.cs" />
-    <Compile Include="Characters\Mobs\Bosses\PirateFleetMaster.cs" />
+    <Compile Include="Characters\Mobs\Bosses\Beach Tower\PirateCaptain.cs" />
+    <Compile Include="Characters\Mobs\Bosses\Beach Tower\PirateFleetMaster.cs" />
     <Compile Include="Characters\Mobs\Bosses\PossesedGuardBoss.cs" />
     <Compile Include="Characters\Mobs\Bosses\ScoutLeader.cs" />
     <Compile Include="Characters\Mobs\Bosses\ScummyMurderer.cs" />
     <Compile Include="Characters\Mobs\Bosses\SewerKing.cs" />
     <Compile Include="Characters\Mobs\Bosses\SkeletonKing.cs" />
-    <Compile Include="Characters\Mobs\Bosses\SpyMaster.cs" />
+    <Compile Include="Characters\Mobs\Bosses\Beach Tower\SpyMaster.cs" />
     <Compile Include="Characters\Mobs\CrazedOutlaw.cs" />
     <Compile Include="Characters\Mobs\ElitePirateRaider.cs" />
     <Compile Include="Characters\Mobs\Guard.cs" />
@@ -234,6 +234,7 @@
     <Compile Include="Towns\Ankou\AnkouSeedyInn.cs" />
     <Compile Include="Towns\Ankou\AnkouUndergroundHideOut.cs" />
     <Compile Include="Towns\Ankou\AnkouUndergroundTunnel.cs" />
+    <Compile Include="Towns\BeachTower\BeachTowerBattleForTheSeas.cs" />
     <Compile Include="Towns\BeachTower\BeachTowerBeachHead.cs" />
     <Compile Include="Towns\BeachTower\BeachTower.cs" />
     <Compile Include="Towns\BeachTower\BeachTowerCapturedVillage.cs" />
@@ -296,6 +297,11 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Characters\Mobs\Bosses\Ankou\" />
+    <Folder Include="Characters\Mobs\Bosses\Beach Tower\Battle for the Sea\" />
+    <Folder Include="Characters\Mobs\Bosses\Watertown\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
