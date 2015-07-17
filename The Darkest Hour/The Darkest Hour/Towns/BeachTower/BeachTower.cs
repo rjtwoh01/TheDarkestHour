@@ -333,7 +333,8 @@ namespace The_Darkest_Hour.Towns.Watertown
                 bool pirateShips = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerPirateShips.FLEET_MASTER));
                 bool recapturedVillage = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerCapturedVillage.MAYOR_HOUSE_DOOR));
                 bool trackedDownMaskedBandit = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerCatacomb.DEFEAT_NECROMANCER));
-                bool freeMayor = false;
+                bool freeMayor = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerMayorHouse.CAPTURED_MAYOR));
+                bool scoutingParty = false;
 
                 if (!killedBeachHeadPirates)
                 {
@@ -374,6 +375,11 @@ namespace The_Darkest_Hour.Towns.Watertown
                 {
                     rumor = new Rumor("Free Mayor", "Good work tracking down the masked bandit and dealing with that situation. It seems as if the necromancer he worked for was behind locking up the Mayor's House. If that is indeed the case, the barrier should be down. Make forth with all due haste and free the mayor.");
                     rumor.OnHeardRumor = this.HeardFreeMayorRumor;
+                }
+                else if (!scoutingParty)
+                {
+                    rumor = new Rumor("Scouting Party", "You did a real good job freeing the Mayor. However I have some really bad news. Our lookouts noticed what appears to be a scouting party that has docked on the northern end of the beach. We believe they are currently camped on the edge of the woods. We don't know if everything that's happened has been designed to weaken us for invasion, or if an invasion is just a result of what happened. Either option is a extremely bad news. Please, go eliminate the scouting party. Find out what you can if possible, but the top priority is to stop them from reporting back to whoever they belong to. You will find them if you head to the beach head and continue beyond the Captain's Tent from the pirates you slew earlier.");
+                    rumor.OnHeardRumor = this.HeardScoutingPartyRumor;
                 }
                 else
                     rumor = new Rumor("You want something?", "You want something?");
@@ -447,6 +453,14 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationHandler.ResetLocation(TOWN_CENTER_KEY);
         }
 
+        public void HeardScoutingPartyRumor()
+        {
+            Accomplishment accomplishment = BeachTower.GetBeachTowerAccomplishments().Find(x => x.Name.Contains("Scouting Party"));
+            GameState.Hero.Accomplishments.Add(accomplishment);
+            //Reload the TownCenter so it will open up the area to Complete the Task that the Task is in
+            LocationHandler.ResetLocation(TOWN_CENTER_KEY);
+        }
+
         #endregion
 
         #region Accomplishments
@@ -504,6 +518,12 @@ namespace The_Darkest_Hour.Towns.Watertown
                 accomplishment.NameSpace = "Beach Tower";
                 accomplishment.Name = "Has heard the rumor of Free Mayr";
                 accomplishment.Description = "Has heard the rumor of breaking into the Mayor's House to Free Mayor and defeat whoever is inside.";
+                _BeachTowerAccomplishments.Add(accomplishment);
+
+                accomplishment = new Accomplishment();
+                accomplishment.NameSpace = "Beach Tower";
+                accomplishment.Name = "Has heard the rumor of the Scouting Party";
+                accomplishment.Description = "Has heard the rumor of tracking down the scouting party and eliminating them.";
                 _BeachTowerAccomplishments.Add(accomplishment);
             }
 

@@ -38,6 +38,9 @@ namespace The_Darkest_Hour.Towns.Watertown
         public const string CAPTAIN_TREASURE = "BeachTower.BeachHead.CaptainTreasure";
         public const string CAPTAIN_ORDERS = "BeachTower.BeachHead.CaptainOrders";
 
+        //For later content
+        public const string PATH_NORTH_KEY = "BeachTower.BeachHead.PathNorth";
+
         #endregion
 
         #region Locations
@@ -773,6 +776,57 @@ namespace The_Darkest_Hour.Towns.Watertown
                 returnData.LocationKey = locationKey;
                 returnData.Name = "Captain's Tent";
                 returnData.DoLoadLocation = LoadCaptainTent;
+
+                LocationHandler.AddLocation(returnData);
+            }
+
+            return returnData;
+        }
+
+        #endregion
+
+        #region Path North
+
+        public Location LoadPathNorth()
+        {
+            Location returnData;
+            returnData = new Location();
+            returnData.Name = "Path North";
+            returnData.Description = "The path is long and open. It leads as far north as the eyes can see.";
+
+            //Adjacent Locations
+            Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
+
+            //Town Center
+            LocationDefinition locationDefinition = BeachTowerBeachHead.GetTownInstance().GetCenterCampDefinition();
+            adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+
+            Accomplishment scoutingParty = BeachTower.GetBeachTowerAccomplishments().Find(x => x.Name.Contains("Scouting Party"));
+            if (GameState.Hero.Accomplishments.Contains(scoutingParty))
+            {
+                locationDefinition = BeachTowerScoutingParty.GetTownInstance().GetEntranceDefinition();
+                adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
+
+            returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
+
+            return returnData;
+        }
+
+        public LocationDefinition GetPathNorthDefintion()
+        {
+            LocationDefinition returnData = new LocationDefinition();
+            string locationKey = PATH_NORTH_KEY;
+
+            if (LocationHandler.LocationExists(locationKey))
+            {
+                returnData = LocationHandler.GetLocation(locationKey);
+            }
+            else
+            {
+                returnData.LocationKey = locationKey;
+                returnData.Name = "Path North";
+                returnData.DoLoadLocation = LoadPathNorth;
 
                 LocationHandler.AddLocation(returnData);
             }

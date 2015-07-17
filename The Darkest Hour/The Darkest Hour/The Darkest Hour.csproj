@@ -124,6 +124,7 @@
     <Compile Include="Characters\Mobs\Bosses\PirateCaptain.cs" />
     <Compile Include="Characters\Mobs\Bosses\PirateFleetMaster.cs" />
     <Compile Include="Characters\Mobs\Bosses\PossesedGuardBoss.cs" />
+    <Compile Include="Characters\Mobs\Bosses\ScoutLeader.cs" />
     <Compile Include="Characters\Mobs\Bosses\ScummyMurderer.cs" />
     <Compile Include="Characters\Mobs\Bosses\SewerKing.cs" />
     <Compile Include="Characters\Mobs\Bosses\SkeletonKing.cs" />
@@ -137,6 +138,7 @@
     <Compile Include="Characters\Mobs\Peasant.cs" />
     <Compile Include="Characters\Mobs\Pirate.cs" />
     <Compile Include="Characters\Mobs\PossesedVillager.cs" />
+    <Compile Include="Characters\Mobs\Scout.cs" />
     <Compile Include="Characters\Mobs\SewerRat.cs" />
     <Compile Include="Characters\Mobs\Slave.cs" />
     <Compile Include="Characters\Mobs\SlaveMaster.cs" />
@@ -243,6 +245,7 @@
     <Compile Include="Towns\BeachTower\BeachTowerPirateShips.cs" />
     <Compile Include="Towns\BeachTower\BeachTowerSpies.cs" />
     <Compile Include="Towns\BeachTower\BeachTowerMysteriousHouse.cs" />
+    <Compile Include="Towns\BeachTower\BeachTowerScoutingParty.cs" />
     <Compile Include="Towns\Rumor.cs" />
     <Compile Include="Towns\StartingArea\InitialGameMenu.cs" />
     <Compile Include="Towns\Town.cs" />
