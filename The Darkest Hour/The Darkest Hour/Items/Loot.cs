@@ -337,7 +337,10 @@ namespace The_Darkest_Hour.Items
             }
         }
 
-        #region Levels 41-45
+        #endregion
+
+        #region Items
+
         public void GetWeapon(string nameOne, string nameTwo, string nameThree, int minStat, int maxStat, int minRequired, int maxRequired)
         {
             rand = new Random();
@@ -753,7 +756,6 @@ namespace The_Darkest_Hour.Items
             else
                 Console.WriteLine("Unfortunately you don't have enough space to store {0} and it will lay forever abandoned and forgotten", itemName);
         }
-        #endregion
 
         #endregion
     }
