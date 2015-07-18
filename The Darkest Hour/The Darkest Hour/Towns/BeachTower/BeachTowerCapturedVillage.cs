@@ -138,18 +138,20 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = BeachTowerCapturedVillage.GetTownInstance().GetEntranceDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            locationDefinition = BeachTowerCapturedVillage.GetTownInstance().GetMarketStreetDefinition();
-            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            if (defeatedMobs)
+            {
+                locationDefinition = BeachTowerCapturedVillage.GetTownInstance().GetMarketStreetDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            locationDefinition = BeachTowerCapturedVillage.GetTownInstance().GetPrisonDefinition();
-            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+                locationDefinition = BeachTowerCapturedVillage.GetTownInstance().GetPrisonDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            locationDefinition = BeachTowerCapturedVillage.GetTownInstance().GetTownHallDefinition();
-            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+                locationDefinition = BeachTowerCapturedVillage.GetTownInstance().GetTownHallDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            locationDefinition = BeachTowerCapturedVillage.GetTownInstance().GetHouseDistrictDefinition();
-            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
-
+                locationDefinition = BeachTowerCapturedVillage.GetTownInstance().GetHouseDistrictDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
 

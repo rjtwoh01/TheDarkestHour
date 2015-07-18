@@ -227,6 +227,15 @@ namespace The_Darkest_Hour.Towns.Watertown
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
             }
 
+            Accomplishment battleForTheSeas = BeachTower.GetBeachTowerAccomplishments().Find(x => x.Name.Contains("Battle for the Seas"));
+            if (GameState.Hero.Accomplishments.Contains(battleForTheSeas))
+            {
+                locationDefinition = BeachTowerBattleForTheSeas.GetTownInstance().GetEntranceDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
+
+            //Add code to travel to the new town Banken for act 4
+
             locationDefinition = Ankou.GetTownInstance().GetTownCenterDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
@@ -334,7 +343,8 @@ namespace The_Darkest_Hour.Towns.Watertown
                 bool recapturedVillage = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerCapturedVillage.MAYOR_HOUSE_DOOR));
                 bool trackedDownMaskedBandit = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerCatacomb.DEFEAT_NECROMANCER));
                 bool freeMayor = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerMayorHouse.CAPTURED_MAYOR));
-                bool scoutingParty = false;
+                bool scoutingParty = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerScoutingParty.SCOUT_LEADER));
+                bool battleForTheSeas = Convert.ToBoolean(LocationHandler.GetLocationStateValue(BeachTower.LOCATION_STATE_KEY, BeachTowerBattleForTheSeas.ASSAULT_ADMIRAL));
 
                 if (!killedBeachHeadPirates)
                 {
@@ -381,6 +391,16 @@ namespace The_Darkest_Hour.Towns.Watertown
                 {
                     rumor = new Rumor("Scouting Party", "You did a real good job freeing the Mayor. However I have some really bad news. Our lookouts noticed what appears to be a scouting party that has docked on the northern end of the beach. We believe they are currently camped on the edge of the woods. We don't know if everything that's happened has been designed to weaken us for invasion, or if an invasion is just a result of what happened. Either option is a extremely bad news. Please, go eliminate the scouting party. Find out what you can if possible, but the top priority is to stop them from reporting back to whoever they belong to. You will find them if you head to the beach head and continue beyond the Captain's Tent from the pirates you slew earlier.");
                     rumor.OnHeardRumor = this.HeardScoutingPartyRumor;
+                }
+                else if (!battleForTheSeas)
+                {
+                    rumor = new Rumor("Battle for the Seas", "Well, I guess it all comes down to this, doesn't it? All of this was just a precursor for an invasion. This is not good. I will rally my guards and troops to engange the enemy both in the sea and on the land. I will need your help to push back the invasion. We must do this. For the Beach Tower. For the villages that depend on us. For Asku. We go to war at dawn.");
+                    rumor.OnHeardRumor = this.HeardBattleForTheSeasRumor;
+                }
+                else if (battleForTheSeas)
+                {
+                    rumor = new Rumor("Travel to Banken", "The day is won! A glorious sun for a glorious victory! I must congratulate you on your fine work in battle. You have done much for us here in the Beach Tower, and we will never forget it. You will always be welcome here. In the mean time, our lookouts have spotted trouble surrounding the ranger town of Banken. It is a small town located in the Ashen Forest. Go, travel to the town and speak to Gildan, the head of the Ranger War Council. I wish you luck, )" + GameState.Hero.Identifier + ".");
+                    rumor.OnHeardRumor = this.HeardBankenRumor;
                 }
                 else
                     rumor = new Rumor("You want something?", "You want something?");
@@ -462,6 +482,22 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationHandler.ResetLocation(TOWN_CENTER_KEY);
         }
 
+        public void HeardBattleForTheSeasRumor()
+        {
+            Accomplishment accomplishment = BeachTower.GetBeachTowerAccomplishments().Find(x => x.Name.Contains("Battle for the Seas"));
+            GameState.Hero.Accomplishments.Add(accomplishment);
+            //Reload the TownCenter so it will open up the area to Complete the Task that the Task is in
+            LocationHandler.ResetLocation(TOWN_CENTER_KEY);
+        }
+
+        public void HeardBankenRumor()
+        {
+            Accomplishment accomplishment = BeachTower.GetBeachTowerAccomplishments().Find(x => x.Name.Contains("Travel to Banken"));
+            GameState.Hero.Accomplishments.Add(accomplishment);
+            //Reload the TownCenter so it will open up the area to Complete the Task that the Task is in
+            LocationHandler.ResetLocation(TOWN_CENTER_KEY);
+        }
+
         #endregion
 
         #region Accomplishments
@@ -525,6 +561,18 @@ namespace The_Darkest_Hour.Towns.Watertown
                 accomplishment.NameSpace = "Beach Tower";
                 accomplishment.Name = "Has heard the rumor of the Scouting Party";
                 accomplishment.Description = "Has heard the rumor of tracking down the scouting party and eliminating them.";
+                _BeachTowerAccomplishments.Add(accomplishment);
+
+                accomplishment = new Accomplishment();
+                accomplishment.NameSpace = "Beach Tower";
+                accomplishment.Name = "Has heard the rumor of the Battle for the Seas";
+                accomplishment.Description = "Has heard the rumor of repelling the invasion in the Battle for the Seas";
+                _BeachTowerAccomplishments.Add(accomplishment);
+
+                accomplishment = new Accomplishment();
+                accomplishment.NameSpace = "Beach Tower";
+                accomplishment.Name = "Has heard the rumor of Travel to Banken";
+                accomplishment.Description = "Has heard the rumor of Travel to Banken to talk to the head ranger Gildan about the bad events plauging the forest town.";
                 _BeachTowerAccomplishments.Add(accomplishment);
             }
 
