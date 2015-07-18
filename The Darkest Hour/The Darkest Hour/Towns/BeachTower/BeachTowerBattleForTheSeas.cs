@@ -10,6 +10,7 @@ using The_Darkest_Hour.Characters;
 using The_Darkest_Hour.Characters.Mobs;
 using The_Darkest_Hour.Characters.Mobs.Bosses;
 using The_Darkest_Hour.Common;
+using The_Darkest_Hour.Items;
 
 namespace The_Darkest_Hour.Towns.Watertown
 {
@@ -230,6 +231,17 @@ namespace The_Darkest_Hour.Towns.Watertown
 
                 //Reload 
                 LocationHandler.ResetLocation(HIGH_BEACH_CLIFF_KEY);
+
+                //Loot
+                Item item = LandAssaultLeaderLoot();
+                if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
+                {
+                    GameState.Hero.Inventory.Add(item);
+                    Console.WriteLine("You loot \n{0}\n", item);
+                }
+                else
+                    Console.WriteLine("Land Assault Leader drops \n{0}\nBut you don't have enough space to equip it!\n", item);
+                GameState.ClearScreen();
             }
         }
 
@@ -388,6 +400,17 @@ namespace The_Darkest_Hour.Towns.Watertown
 
                 //Reload 
                 LocationHandler.ResetLocation(SEA_OVERWATCH_KEY);
+
+                //Loot
+                Item item = LandingOfficerLoot();
+                if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
+                {
+                    GameState.Hero.Inventory.Add(item);
+                    Console.WriteLine("You loot \n{0}\n", item);
+                }
+                else
+                    Console.WriteLine("Landing Officer drops \n{0}\nBut you don't have enough space to equip it!\n", item);
+                GameState.ClearScreen();
             }
         }
 
@@ -590,6 +613,17 @@ namespace The_Darkest_Hour.Towns.Watertown
                 //Reload 
                 LocationHandler.ResetLocation(CAPTAIN_DECK_KEY);
             }
+
+            //Loot
+            Item item = SailorCaptainLoot();
+            if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
+            {
+                GameState.Hero.Inventory.Add(item);
+                Console.WriteLine("You loot \n{0}\n", item);
+            }
+            else
+                Console.WriteLine("Sailor Captain drops \n{0}\nBut you don't have enough space to equip it!\n", item);
+            GameState.ClearScreen();
         }
 
         public void Sail(object sender, TakeItemEventArgs itemEventArgs)
@@ -1038,6 +1072,17 @@ namespace The_Darkest_Hour.Towns.Watertown
                 //Reload 
                 LocationHandler.ResetLocation(ADMIRAL_DECK_KEY);
             }
+
+            //Loot
+            Item item = AssaultAdmiralLoot();
+            if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
+            {
+                GameState.Hero.Inventory.Add(item);
+                Console.WriteLine("You loot \n{0}\n", item);
+            }
+            else
+                Console.WriteLine("Assault Admiral drops \n{0}\nBut you don't have enough space to equip it!\n", item);
+            GameState.ClearScreen();
         }
 
         public LocationDefinition GetAdmiralDeckDefinition()
@@ -1069,7 +1114,205 @@ namespace The_Darkest_Hour.Towns.Watertown
 
         #region Loot
 
-        //Need to add boss loot still
+        public Item LandAssaultLeaderLoot()
+        {
+            Item returnData;
+
+            int agility, strength, intelligence, armor, health, critChance, critDamage, requiredLevel, worth;
+
+            agility = strength = intelligence = critDamage = 0;
+            armor = 80;
+            health = 80;
+            critChance = 5;
+            requiredLevel = GameState.Hero.level;
+            worth = 500;
+            string armorType = "";
+            string name = "War Helm";
+
+            switch (GameState.Hero.Profession.Name)
+            {
+                case "Hunter":
+                    agility = 90;
+                    armorType = "Leather";
+                    break;
+                case "Rogue":
+                    agility = 90;
+                    armorType = "Leather";
+                    break;
+                case "Warrior":
+                    strength = 90;
+                    armorType = "Mail";
+                    break;
+                case "Guardian":
+                    strength = 90;
+                    armorType = "Mail";
+                    break;
+                case "Mage":
+                    intelligence = 90;
+                    armorType = "Cloth";
+                    break;
+                case "Cleric":
+                    intelligence = 90;
+                    armorType = "Cloth";
+                    break;
+            }
+
+            returnData = new Helmet(name, armorType, armor, strength, agility, intelligence, health, 0, 0, requiredLevel, critChance, critDamage, worth);
+
+            return returnData;
+        }
+
+        public Item LandingOfficerLoot()
+        {
+            Item returnData;
+
+            int agility, strength, intelligence, armor, health, critChance, critDamage, requiredLevel, worth;
+
+            agility = strength = intelligence = critDamage = 0;
+            armor = 80;
+            health = 80;
+            critChance = 5;
+            requiredLevel = GameState.Hero.level;
+            worth = 500;
+            string armorType = "";
+            string name = "War Chest";
+
+            switch(GameState.Hero.Profession.Name)
+            {
+                case "Hunter":
+                    agility = 90;
+                    armorType = "Leather";
+                    break;
+                case "Rogue":
+                    agility = 90;
+                    armorType = "Leather";
+                    break;
+                case "Warrior":
+                    strength = 90;
+                    armorType = "Mail";
+                    break;
+                case "Guardian":
+                    strength = 90;
+                    armorType = "Mail";
+                    break;
+                case "Mage":
+                    intelligence = 90;
+                    armorType = "Cloth";
+                    break;
+                case "Cleric":
+                    intelligence = 90;
+                    armorType = "Cloth";
+                    break;
+            }
+
+            returnData = new Armor(name, armorType, armor, strength, agility, intelligence, health, 0, 0, requiredLevel, critChance, critDamage, worth);
+
+            return returnData;
+        }
+
+        public Item SailorCaptainLoot()
+        {
+            Item returnData;
+
+            int agility, strength, intelligence, armor, health, critChance, critDamage, requiredLevel, worth;
+
+            agility = strength = intelligence = critDamage = 0;
+            armor = 80;
+            health = 80;
+            critChance = 5;
+            critDamage = 10;
+            requiredLevel = GameState.Hero.level;
+            worth = 500;
+            string armorType = "";
+            string name = "War Amulet";
+
+            switch (GameState.Hero.Profession.Name)
+            {
+                case "Hunter":
+                    agility = 90;
+                    armorType = "Leather";
+                    break;
+                case "Rogue":
+                    agility = 90;
+                    armorType = "Leather";
+                    break;
+                case "Warrior":
+                    strength = 90;
+                    armorType = "Mail";
+                    break;
+                case "Guardian":
+                    strength = 90;
+                    armorType = "Mail";
+                    break;
+                case "Mage":
+                    intelligence = 90;
+                    armorType = "Cloth";
+                    break;
+                case "Cleric":
+                    intelligence = 90;
+                    armorType = "Cloth";
+                    break;
+            }
+
+            returnData = new Amulet(name, armorType, armor, strength, agility, intelligence, health, 0, 0, requiredLevel, critChance, critDamage, worth);
+
+            return returnData;
+        }
+
+        public Item AssaultAdmiralLoot()
+        {
+            Item returnData;
+
+            int agility, strength, intelligence, damage, health, critChance, critDamage, requiredLevel, worth;
+
+            agility = strength = intelligence = critDamage = 0;
+            damage = 110;
+            health = 80;
+            critChance = 10;
+            critDamage = 20;
+            requiredLevel = GameState.Hero.level;
+            worth = 500;
+            string weaponType = "";
+            string name = "";
+
+            switch (GameState.Hero.Profession.Name)
+            {
+                case "Hunter":
+                    agility = 100;
+                    weaponType = "Bow";
+                    name = "Whale Hunter";
+                    break;
+                case "Rogue":
+                    agility = 100;
+                    weaponType = "Dagger";
+                    name = "Serpent Sting";
+                    break;
+                case "Warrior":
+                    strength = 100;
+                    weaponType = "Sword";
+                    name = "Throat Slasher";
+                    break;
+                case "Guardian":
+                    strength = 100;
+                    weaponType = "Sword";
+                    name = "High Defender";
+                    break;
+                case "Mage":
+                    intelligence = 100;
+                    weaponType = "Staff";
+                    name = "Storm Wager";
+                    break;
+                case "Cleric":
+                    intelligence = 100;
+                    weaponType = "Staff";
+                    name = "Posidon's Bane";
+                    break;
+            }
+
+            returnData = new Weapon(name, weaponType, damage, strength, agility, intelligence, health, 0, 0, requiredLevel, critChance, critDamage, worth);
+
+            return returnData;
+        }
 
         #endregion
 
