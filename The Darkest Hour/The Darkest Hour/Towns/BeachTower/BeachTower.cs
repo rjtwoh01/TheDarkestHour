@@ -355,6 +355,7 @@ namespace The_Darkest_Hour.Towns.Watertown
                 {
                     rumor = new Rumor("Investigate Reports", "I can't thank you enough for the work you did clearing up that spy mess. My agents have gathered intel that the growing darkness the spy master mentioned is deep within the forest surrounding the house you previously investigated. Head to that house and through its back door. From there you can follow the path and hopefully stumble upon something useful.");
                     rumor.OnHeardRumor = this.HeardInvestigateReportsRumor;
+
                 }
                 else if (!pirateShips)
                 {
