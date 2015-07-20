@@ -198,6 +198,13 @@ namespace The_Darkest_Hour.Towns.Watertown
             locationDefinition = GetWarCouncilDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
+            Accomplishment investigateShrine = Banken.GetBankenAccomplishments().Find(x => x.Name.Contains("Investigate Religious Shrine"));
+            if (GameState.Hero.Accomplishments.Contains(investigateShrine))
+            {
+                locationDefinition = BankenAshenForest.GetTownInstance().GetEntranceDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
+
             locationDefinition = BeachTower.GetTownInstance().GetTownCenterDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
