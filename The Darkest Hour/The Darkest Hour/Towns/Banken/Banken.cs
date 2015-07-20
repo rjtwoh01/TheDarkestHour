@@ -17,7 +17,7 @@ namespace The_Darkest_Hour.Towns.Watertown
         public const string ARENA_KEY = "Banken.Arena";
         public const string TOWN_CENTER_KEY = "Banken.TownCenter";
         public const string INN_KEY = "Banken.Inn";
-        public const string CAPTAIN_OFFICE_KEY = "Banken.Captainoffice";
+        public const string WAR_COUNCIL_KEY = "Banken.WarCouncil";
         public const string LOCATION_STATE_KEY = "Banken";
 
         #endregion
@@ -144,8 +144,6 @@ namespace The_Darkest_Hour.Towns.Watertown
             }
 
             return returnData;
-
-
         }
         #endregion
 
@@ -158,7 +156,7 @@ namespace The_Darkest_Hour.Towns.Watertown
 
             returnData = new Location();
             returnData.Name = "Banken";
-            returnData.Description = "Place Holder description of Banken";
+            returnData.Description = "The small town of Banken, located in the middle of the Ashen Forest. There are several wooden buildings throughout the town. The town is mainly populated by Forest Rangers, but there are some civilians living there as well.";
 
             // Location Actions
             List<LocationAction> locationActions = new List<LocationAction>();
@@ -195,6 +193,9 @@ namespace The_Darkest_Hour.Towns.Watertown
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
             locationDefinition = GetInnDefinition();
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+
+            locationDefinition = GetWarCouncilDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
             locationDefinition = BeachTower.GetTownInstance().GetTownCenterDefinition();
@@ -235,11 +236,64 @@ namespace The_Darkest_Hour.Towns.Watertown
         }
         #endregion
 
+        #region War Council
+        public Location LoadWarCouncil()
+        {
+            Location returnData;
+
+
+            returnData = new Location();
+            returnData.Name = "Banken War Council";
+            returnData.Description = "One of the largest buildings in the town, the War Council resides in a large room with a circular table residing in the center. On the table there are various maps and strategies scattered about it. Gildan sits at the head of the table. You take one of the few open seats.";
+
+            // Location Actions
+            List<LocationAction> locationActions = new List<LocationAction>();
+
+            LocationAction GildanRumorAction = new RumorAction("Gildan - Head of the Ranger War Council", this.GildanRumors);
+            locationActions.Add(GildanRumorAction);
+            returnData.Actions = locationActions;
+
+            returnData.Actions = locationActions;
+
+            // Adjacent Locations
+            Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
+
+            LocationDefinition locationDefinition = GetTownCenterDefinition();
+
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+
+            returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
+
+            return returnData;
+        }
+
+        public LocationDefinition GetWarCouncilDefinition()
+        {
+            LocationDefinition returnData = new LocationDefinition();
+            string locationKey = WAR_COUNCIL_KEY;
+
+            if (LocationHandler.LocationExists(locationKey))
+            {
+                returnData = LocationHandler.GetLocation(locationKey);
+            }
+            else
+            {
+                returnData.LocationKey = locationKey;
+                returnData.Name = "Banken War Council";
+                returnData.DoLoadLocation = LoadWarCouncil;
+
+                LocationHandler.AddLocation(returnData);
+            }
+
+            return returnData;
+        }
+        #endregion
+
         #endregion
 
         #region Rumors
 
-        private List<Rumor> PlaceHolderRumors
+        private List<Rumor> GildanRumors
         {
             get
             {
@@ -250,8 +304,8 @@ namespace The_Darkest_Hour.Towns.Watertown
                 bool quest = false;
                 if (!quest)
                 {
-                    rumor = new Rumor("Place Holder", "Place Holder Quest Text");
-                    rumor.OnHeardRumor = this.HeardPlaceHolder;
+                    rumor = new Rumor("Investigate Religious Shrine", "Welcome to Banken, " + GameState.Hero.Identifier + ". It seems you have accomplished quite a lot in the recent months. Impressive. It seems as if darkness is plauging all of Asku at the moment, and it troubles me. The Ashen Forest wasn't named out of random. It is the job of my Rangers to keep the darkness at bay. However, its becoming more and more apparent that, that's something that we can't do by ourselves anymore. We need help. I have a task for you. There is a religious shrine about a mile outside of the town, in a small clearing in the forest. People regularly travel there to pay their worship to the Gods. However, as of late they have been coming back pale and shaken. Unwilling to speak of what happened. I feel as if something evil has taken root at or near the shrine. My Rangers are spread thin at the moment. Can you go investigate for me? Do what you have to do.");
+                    rumor.OnHeardRumor = this.HeardInvestigateReligiousShrineRumor;
                 }
                 else
                     rumor = new Rumor("You want something?", "You want something?");
@@ -261,9 +315,9 @@ namespace The_Darkest_Hour.Towns.Watertown
             }
         }
 
-        public void HeardPlaceHolder()
+        public void HeardInvestigateReligiousShrineRumor()
         {
-            Accomplishment accomplishment = Banken.GetBankenAccomplishments().Find(x => x.Name.Contains("Place Holder"));
+            Accomplishment accomplishment = Banken.GetBankenAccomplishments().Find(x => x.Name.Contains("Investigate Religious Shrine"));
             GameState.Hero.Accomplishments.Add(accomplishment);
             //Reload the TownCenter so it will open up the area to Complete the Task that the Task is in
             LocationHandler.ResetLocation(TOWN_CENTER_KEY);
@@ -282,8 +336,8 @@ namespace The_Darkest_Hour.Towns.Watertown
 
                 Accomplishment accomplishment = new Accomplishment();
                 accomplishment.NameSpace = "Banken";
-                accomplishment.Name = "Has heard the rumor of Place Holder";
-                accomplishment.Description = "Has heard the rumor of the Place Holder";
+                accomplishment.Name = "Has heard the rumor of Investigate Religious Shrine";
+                accomplishment.Description = "Has heard the rumor of traveling to the small forest clearing a mile out of Banken and Investigate Religious Shrine";
                 _BankenAccomplishments.Add(accomplishment);
             }
 
