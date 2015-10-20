@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace The_Darkest_Hour
 {
@@ -11,8 +12,17 @@ namespace The_Darkest_Hour
     {
         static void Main(string[] args)
         {
-
-            Console.SetWindowSize(100, 54);
+            try
+            {
+                Console.SetWindowSize(100, 54);
+            }
+            catch (System.ArgumentOutOfRangeException e)
+            {
+                int height = Console.LargestWindowHeight - 10;
+                Console.SetWindowSize(100, height);
+                Debug.WriteLine(e);
+                
+            }
             Console.Title = GeneralGameResources.TitleAndVersion;
             MainGame mainGame = new MainGame();
             
