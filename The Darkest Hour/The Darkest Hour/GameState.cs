@@ -50,6 +50,10 @@ namespace The_Darkest_Hour
                     {
                         _StartingTown = The_Darkest_Hour.Towns.Watertown.BeachTower.GetTownInstance();
                     }
+                    if (Hero.startingLocation == "Banken")
+                    {
+                        _StartingTown = The_Darkest_Hour.Towns.Watertown.Banken.GetTownInstance();
+                    }
                 }
 
                 return _StartingTown;

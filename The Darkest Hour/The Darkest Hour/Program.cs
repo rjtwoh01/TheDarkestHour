@@ -14,7 +14,9 @@ namespace The_Darkest_Hour
         {
             try
             {
-                Console.SetWindowSize(100, 54);
+                int height = Console.LargestWindowHeight;
+                int width = Console.LargestWindowWidth;
+                Console.SetWindowSize(width, height);
             }
             catch (System.ArgumentOutOfRangeException e)
             {

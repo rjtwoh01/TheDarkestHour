@@ -308,8 +308,8 @@ namespace The_Darkest_Hour.Towns.Watertown
                 Rumor rumor;
 
                 //Bool's to check if the player has completed certain parts of the game
-                bool quest = false;
-                if (!quest)
+                bool investigateReligiousShrine = false;
+                if (!investigateReligiousShrine)
                 {
                     rumor = new Rumor("Investigate Religious Shrine", "Welcome to Banken, " + GameState.Hero.Identifier + ". It seems you have accomplished quite a lot in the recent months. Impressive. It seems as if darkness is plauging all of Asku at the moment, and it troubles me. The Ashen Forest wasn't named out of random. It is the job of my Rangers to keep the darkness at bay. However, its becoming more and more apparent that, that's something that we can't do by ourselves anymore. We need help. I have a task for you. There is a religious shrine about a mile outside of the town, in a small clearing in the forest. People regularly travel there to pay their worship to the Gods. However, as of late they have been coming back pale and shaken. Unwilling to speak of what happened. I feel as if something evil has taken root at or near the shrine. My Rangers are spread thin at the moment. Can you go investigate for me? Do what you have to do.");
                     rumor.OnHeardRumor = this.HeardInvestigateReligiousShrineRumor;
