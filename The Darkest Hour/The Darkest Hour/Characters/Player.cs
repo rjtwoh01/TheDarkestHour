@@ -25,7 +25,7 @@ namespace The_Darkest_Hour.Characters
         public string requiredWeaponType;
         public string requiredArmorType;
         public string requiredAmuletType = "Amulet";
-        public string startingLocation = "Watertown";
+        public string startingLocation;
         public bool isHardCore = false;
         public bool isAlive = true;
         public bool WeaponsFull = false;
@@ -73,6 +73,8 @@ namespace The_Darkest_Hour.Characters
                 ClearScreen();
                 Console.WriteLine(CharacterResources.IntroPartThree, this.Identifier);
                 ClearScreen();
+
+                this.startingLocation = "Watertown";
             }
         }
 

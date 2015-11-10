@@ -154,6 +154,7 @@ namespace The_Darkest_Hour
         {
             _GameLocations = null;
             _GameLocationStates = null;
+            _StartingTown = null;
             Hero = null;
             CurrentLocation = null;
             UpcomingLocation = null;
