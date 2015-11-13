@@ -97,7 +97,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             locationDefinition = BankenAshenForest.GetTownInstance().GetForestWildernessDefinition();
             adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            locationDefinition = BankenAshenForest.GetTownInstance().GetForestPathWorshipRegionDefinition();
+            locationDefinition = BankenAshenForestWorshipRegion.GetTownInstance().GetEntranceDefinition();
             adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
@@ -172,49 +172,50 @@ namespace The_Darkest_Hour.Towns.Watertown
 
         #endregion
 
-        #region Forest Path Worship Region
+        
+        //#region Forest Path Worship Region
 
-        public Location LoadForestPathWorshipRegion()
-        {
-            Location returnData;
-            returnData = new Location();
-            returnData.Name = "Ashen Forest Path - Worship Region";
-            returnData.Description = "You enter the worship region of the Ashen Forest. Many people travel here to pay homage in some kind to whatever Gods they believe in. This is ancient ground, that some believe used to be holy. But now, a dark presence is defiling it. Faint, but there none-the-less.";
+        //public Location LoadForestPathWorshipRegion()
+        //{
+        //    Location returnData;
+        //    returnData = new Location();
+        //    returnData.Name = "Ashen Forest Path - Worship Region";
+        //    returnData.Description = "You enter the worship region of the Ashen Forest. Many people travel here to pay homage in some kind to whatever Gods they believe in. This is ancient ground, that some believe used to be holy. But now, a dark presence is defiling it. Faint, but there none-the-less.";
 
-            //Adjacent Locations
-            Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
+        //    //Adjacent Locations
+        //    Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
 
-            //Town Center
-            LocationDefinition locationDefinition = BankenAshenForest.GetTownInstance().GetForestPathStartDefinition();
-            adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+        //    //Town Center
+        //    LocationDefinition locationDefinition = BankenAshenForest.GetTownInstance().GetForestPathStartDefinition();
+        //    adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
+        //    returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
 
-            return returnData;
-        }
+        //    return returnData;
+        //}
 
-        public LocationDefinition GetForestPathWorshipRegionDefinition()
-        {
-            LocationDefinition returnData = new LocationDefinition();
-            string locationKey = FOREST_PATH_WORSHIP_REGION_KEY;
+        //public LocationDefinition GetForestPathWorshipRegionDefinition()
+        //{
+        //    LocationDefinition returnData = new LocationDefinition();
+        //    string locationKey = FOREST_PATH_WORSHIP_REGION_KEY;
 
-            if (LocationHandler.LocationExists(locationKey))
-            {
-                returnData = LocationHandler.GetLocation(locationKey);
-            }
-            else
-            {
-                returnData.LocationKey = locationKey;
-                returnData.Name = "Ashen Forest Path - Worship Region";
-                returnData.DoLoadLocation = LoadForestPathWorshipRegion;
+        //    if (LocationHandler.LocationExists(locationKey))
+        //    {
+        //        returnData = LocationHandler.GetLocation(locationKey);
+        //    }
+        //    else
+        //    {
+        //        returnData.LocationKey = locationKey;
+        //        returnData.Name = "Ashen Forest Path - Worship Region";
+        //        returnData.DoLoadLocation = LoadForestPathWorshipRegion;
 
-                LocationHandler.AddLocation(returnData);
-            }
+        //        LocationHandler.AddLocation(returnData);
+        //    }
 
-            return returnData;
-        }
+        //    return returnData;
+        //}
 
-        #endregion
+        //#endregion
 
         #endregion
 

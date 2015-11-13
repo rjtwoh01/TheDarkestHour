@@ -74,7 +74,7 @@ namespace The_Darkest_Hour.Characters
                 Console.WriteLine(CharacterResources.IntroPartThree, this.Identifier);
                 ClearScreen();
 
-                this.startingLocation = "Watertown";
+                this.startingLocation = "Banken";
             }
         }
 
