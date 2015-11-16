@@ -221,16 +221,16 @@ namespace The_Darkest_Hour.Towns.Watertown
 
         #region Get Town Instance
 
-        private static BankenAshenForest _BeachTownScoutingParty;
+        private static BankenAshenForest _BankenAshenForest;
 
         public static BankenAshenForest GetTownInstance()
         {
-            if (_BeachTownScoutingParty == null)
+            if (_BankenAshenForest == null)
             {
-                _BeachTownScoutingParty = new BankenAshenForest();
+                _BankenAshenForest = new BankenAshenForest();
             }
 
-            return _BeachTownScoutingParty;
+            return _BankenAshenForest;
         }
 
         #endregion

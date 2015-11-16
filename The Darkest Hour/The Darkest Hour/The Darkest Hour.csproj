@@ -101,6 +101,7 @@
     <Compile Include="Characters\Mobs\Bosses\BanditCaptain.cs" />
     <Compile Include="Characters\Mobs\Bosses\BanditKing.cs" />
     <Compile Include="Characters\Mobs\Bosses\BanditLieutenant.cs" />
+    <Compile Include="Characters\Mobs\Bosses\Banken\DemonicNecro.cs" />
     <Compile Include="Characters\Mobs\Bosses\Beach Tower\BanditRaidLeader.cs" />
     <Compile Include="Characters\Mobs\Bosses\BanditScholar.cs" />
     <Compile Include="Characters\Mobs\Bosses\BanditSpy.cs" />
@@ -135,6 +136,7 @@
     <Compile Include="Characters\Mobs\Bosses\Beach Tower\SpyMaster.cs" />
     <Compile Include="Characters\Mobs\CrazedOutlaw.cs" />
     <Compile Include="Characters\Mobs\ElitePirateRaider.cs" />
+    <Compile Include="Characters\Mobs\GiantSpider.cs" />
     <Compile Include="Characters\Mobs\Guard.cs" />
     <Compile Include="Characters\Mobs\Necromancer.cs" />
     <Compile Include="Characters\Mobs\NecromancerEliteGuard.cs" />
