@@ -88,19 +88,26 @@ namespace The_Darkest_Hour.Towns.Watertown
             returnData.Description = "The beginning of the Path in the Ashen Forest stems from one of the makeshift roads through Banken. It goes deep within the forest for miles, forking and turning unexpectedly. It is easy to get lost on.";
 
             //Adjacent Locations
-            Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
+            Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
 
             //Town Center
             LocationDefinition locationDefinition = BankenAshenForest.GetTownInstance().GetEntranceDefinition();
-            adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
             locationDefinition = BankenAshenForest.GetTownInstance().GetForestWildernessDefinition();
-            adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
             locationDefinition = BankenAshenForestWorshipRegion.GetTownInstance().GetEntranceDefinition();
-            adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
+            Accomplishment rescueRangers = Banken.GetBankenAccomplishments().Find(x => x.Name.Contains("Rescue Rangers"));
+            if (GameState.Hero.Accomplishments.Contains(rescueRangers))
+            {
+                locationDefinition = BankenAshenForestRangerPaths.GetTownInstance().GetEntranceDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
+
+            returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
 
             return returnData;
         }

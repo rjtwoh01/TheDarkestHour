@@ -244,6 +244,7 @@
     <Compile Include="Towns\Ankou\AnkouUndergroundTunnel.cs" />
     <Compile Include="Towns\Banken\Banken.cs" />
     <Compile Include="Towns\Banken\BankenAshenForest.cs" />
+    <Compile Include="Towns\Banken\BankenAshenForestRangerPaths.cs" />
     <Compile Include="Towns\Banken\BankenAshenForestWorshipRegion.cs" />
     <Compile Include="Towns\BeachTower\BeachTowerBattleForTheSeas.cs" />
     <Compile Include="Towns\BeachTower\BeachTowerBeachHead.cs" />

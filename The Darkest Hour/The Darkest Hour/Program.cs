@@ -20,8 +20,9 @@ namespace The_Darkest_Hour
             }
             catch (System.ArgumentOutOfRangeException e)
             {
-                int height = Console.LargestWindowHeight - 10;
-                Console.SetWindowSize(100, height);
+                int height = Console.LargestWindowHeight;
+                int width = Console.LargestWindowWidth;
+                Console.SetWindowSize(width, height);
                 Debug.WriteLine(e);
                 
             }

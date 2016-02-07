@@ -362,7 +362,7 @@ namespace The_Darkest_Hour.Towns.Watertown
 
                 accomplishment = new Accomplishment();
                 accomplishment.NameSpace = "Banken";
-                accomplishment.Name = "Has heard the rumor of Investigate Religious Shrine";
+                accomplishment.Name = "Has heard the rumor of Rescue Rangers";
                 accomplishment.Description = "Has heard the rumor of traveling into the Ashen Forest and Rescue Rangers";
                 _BankenAccomplishments.Add(accomplishment);
             }
