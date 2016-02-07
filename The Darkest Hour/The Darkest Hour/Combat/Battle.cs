@@ -191,6 +191,7 @@ namespace The_Darkest_Hour.Combat
                 myHero.ResetHealth();
                 Console.WriteLine("The battle is over and you lost. Better luck next time ya idiot.");
                 playerLost = false;
+                actionStarted = false;
             }
             else if (mobLost)
             {
@@ -200,11 +201,13 @@ namespace The_Darkest_Hour.Combat
                 myHero.gold += mob.gold;
                 myHero.GetLevel();
                 mobLost = false;
+                actionStarted = false;
             }
             else if (hasFled)
             {
                 Console.WriteLine("\nYou run away with your tail in between your legs like a puppy. BABY!");
                 hasFled = false;
+                actionStarted = false;
             }
 
             ClearScreen();
