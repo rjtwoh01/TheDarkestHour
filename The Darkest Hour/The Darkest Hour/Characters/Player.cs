@@ -17,6 +17,7 @@ namespace The_Darkest_Hour.Characters
         public int requiredXP = 100;
         public int armor = 0; //Needs to be implemented
         public int inventoryCap = 60;
+        public int potionBagCap = 30;
         public int maxGold = 1000000;
         public int travelRations = 0;
         public double magicFind;
@@ -37,6 +38,7 @@ namespace The_Darkest_Hour.Characters
         public bool isInCombat = false;
         public List<Item> Inventory = new List<Item>();
         public List<Item> EquippedItems = new List<Item>();
+        public List<Item> PotionBag = new List<Item>();
         public Profession Profession;
         public Accomplishments Accomplishments = new Accomplishments();
 
@@ -268,6 +270,64 @@ Name:           Level:          Health:           Damage:
                 }
             }
 
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+
+        public void DisplayPotionBag()
+        {
+            Console.WriteLine();
+            int i = 1;
+            foreach (Item displayItems in this.PotionBag)
+            {
+                Console.WriteLine(i + ". " + displayItems);
+                i++;
+            }
+
+            try
+            {
+                Console.WriteLine("\n\nDo you want to use any of the items in your potion bag?");
+                Console.WriteLine("(1) Yes (2) No\n");
+                string answer = Console.ReadLine();
+                int answerParsed = Int32.Parse(answer);
+                if (answerParsed == 1)
+                {
+                    Console.WriteLine("\nWhich item do you want to use?\n");
+                    answer = Console.ReadLine();
+                    int selected = Int32.Parse(answer);
+                    selected -= 1;
+
+                    Item selectedItem = this.PotionBag.ElementAt(selected);
+
+                    //Console.WriteLine("\nYou Selected: {0}", selectedItem);
+
+
+                    if (selectedItem.isPotion)
+                    {
+                        this.health += selectedItem.healthHeal;
+                        if (this.health >= this.maxHealth)
+                            this.health = this.maxHealth;
+                        this.energy += selectedItem.energyHeal;
+                        if (this.energy >= this.maxEnergy)
+                            this.energy = this.maxEnergy;
+
+                        ClearScreen(false);
+
+                        Console.WriteLine("\nYou use {0}", selectedItem.name);
+                        if (selectedItem.healthHeal > 0)
+                            Console.WriteLine("{0} heals you for {1}. \nYou now have {2} health", selectedItem.name, selectedItem.healthHeal, this.health);
+                        if (selectedItem.energyHeal > 0)
+                            Console.WriteLine("{0} increases your energy by {1}. \nYou now have {2} energy", selectedItem.name, selectedItem.energyHeal, this.energy);
+
+                        this.Inventory.Remove(selectedItem);
+
+                        if (this.isInCombat)
+                            this.usedPotionCombat = true;
+                    }
+                }
+            }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);

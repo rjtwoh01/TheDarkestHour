@@ -175,6 +175,46 @@ namespace The_Darkest_Hour.Combat
                     ClearScreen();
                 }
 
+                else if (answer == "Potions")
+                {
+                    battleInProgress = true;
+                    hasFled = false;
+                    myHero.DisplayPotionBag();
+                    if (GameState.Hero.usedPotionCombat)
+                    {
+                        actionStarted = true;
+                        if (mob.health <= 0)
+                        {
+                            mob.health = 0;
+                            mobLost = true;
+                            battleInProgress = false;
+                            returnData = CombatResult.PlayerVictory;
+                        }
+                        else
+                        {
+                            if (attack != "Distracting Shot" && attack != "Frozen" && attack != "Dust in the Eyes" && attack != "Low Cut" && attack != "Block" && attack != "Blinding Light")
+                            {
+                                mobDamage = mob.GetDamage(mob);
+                                mobDamage -= myHero.armor;
+                                myHero.health -= mobDamage;
+                                if (myHero.health <= 0)
+                                {
+                                    //If player is HC, add code here to delete the character
+                                    myHero.health = 0;
+                                    playerLost = true;
+                                    battleInProgress = false;
+                                    returnData = CombatResult.PlayerLoss;
+                                }
+                            }
+
+                            Console.WriteLine("\n{0} attacks you for {1} damage.", mob.Identifier, mobDamage);
+                            Console.WriteLine("{0} has {1} health left.\n\n", myHero.Identifier, myHero.health);
+                        }
+                        GameState.Hero.usedPotionCombat = false;
+                    }
+                    ClearScreen();
+                }
+
                 else if (answer == "Flee")
                 {
                     battleInProgress = false;
@@ -243,12 +283,13 @@ Do you want to:
 2) Inventory
 3) View Equipped Items
 4) Use Travel Ration {0}
-5) Flee
+5) Use Potions
+6) Flee
 ", myHero.travelRations);
                 answer = Console.ReadLine();
-                if (answer != "1" && answer != "2" && answer != "3" && answer != "4" && answer != "5")
+                if (answer != "1" && answer != "2" && answer != "3" && answer != "4" && answer != "5" && answer != "6")
                     Console.Clear();
-            } while (answer != "1" && answer != "2" && answer != "3" && answer != "4" && answer != "5");
+            } while (answer != "1" && answer != "2" && answer != "3" && answer != "4" && answer != "5" && answer != "6");
 
             if (answer == "1")
                 answer = "Attack";
@@ -259,6 +300,8 @@ Do you want to:
             else if (answer == "4")
                 answer = "Ration";
             else if (answer == "5")
+                answer = "Potions";
+            else if (answer == "6")
                 answer = "Flee";
 
             return answer;

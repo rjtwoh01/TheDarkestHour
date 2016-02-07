@@ -751,8 +751,8 @@ namespace The_Darkest_Hour.Items
 
             aPotion = new Potion(potionName, healAmount, energyIncreased, requiredLevel, itemType, worth);
             Console.WriteLine("You loot {0}", potionName);
-            if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
-                GameState.Hero.Inventory.Add(aPotion);
+            if (GameState.Hero.PotionBag.Count < GameState.Hero.potionBagCap)
+                GameState.Hero.PotionBag.Add(aPotion);
             else
                 Console.WriteLine("Unfortunately you don't have enough space to store {0} and it will lay forever abandoned and forgotten", itemName);
         }
