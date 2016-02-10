@@ -321,7 +321,7 @@ Name:           Level:          Health:           Damage:
                         if (selectedItem.energyHeal > 0)
                             Console.WriteLine("{0} increases your energy by {1}. \nYou now have {2} energy", selectedItem.name, selectedItem.energyHeal, this.energy);
 
-                        this.Inventory.Remove(selectedItem);
+                        this.PotionBag.Remove(selectedItem);
 
                         if (this.isInCombat)
                             this.usedPotionCombat = true;
