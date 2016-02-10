@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace The_Darkest_Hour.Locations.Actions
 {
-    class DisplayInventoryAction : LocationAction
+    class DisplayPotionBagAction : LocationAction
     {
-        public DisplayInventoryAction()
+        public DisplayPotionBagAction()
         {
-            this.Name = "Display Inventory";
-            this.Description = "Display Inventory";
+            this.Name = "Display Potion Bag";
+            this.Description = "Display Potion Bag";
         }
 
         public override LocationDefinition DoAction()
@@ -20,7 +20,7 @@ namespace The_Darkest_Hour.Locations.Actions
 
             this.ClearScreen(false);
 
-            GameState.Hero.DisplayInventory();
+            GameState.Hero.DisplayPotionBag();
 
             this.ClearScreen();
 

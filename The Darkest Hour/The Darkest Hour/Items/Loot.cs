@@ -345,12 +345,7 @@ namespace The_Darkest_Hour.Items
         {
             rand = new Random();
 
-            Weapon aSword;
-            Weapon aBow;
-            Weapon aStaff;
-            Weapon aAxe;
-            Weapon aDagger;
-            Weapon aWand;
+            Weapon aWeapon;
 
             List<string> SwordNames = new List<string>();
             SwordNames.Add(nameOne +" Sword");
@@ -512,66 +507,12 @@ namespace The_Darkest_Hour.Items
             critDamage = 0;
             worth = GameState.NumberGenerator.Next(minStat, maxStat);
 
-            switch (itemType)
-            {
-                case "Sword":
-                    aSword = new Weapon(itemName, itemType, damage, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
-                    Console.WriteLine("You loot {0}", itemName);
-                    if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
-                        GameState.Hero.Inventory.Add(aSword);
-                    else
-                        Console.WriteLine("Unfortunately you don't have enough space to store {0} and it will lay forever abandoned and forgotten", itemName);
-                    break;
-
-                case "Bow":
-                    aBow = new Weapon(itemName, itemType, damage, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
-                    Console.WriteLine("You loot {0}", itemName);
-                    if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
-                        GameState.Hero.Inventory.Add(aBow);
-                    else
-                        Console.WriteLine("Unfortunately you don't have enough space to store {0} and it will lay forever abandoned and forgotten", itemName);
-                    break;
-
-                case "Staff":
-                    aStaff = new Weapon(itemName, itemType, damage, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
-                    Console.WriteLine("You loot {0}", itemName);
-                    if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
-                        GameState.Hero.Inventory.Add(aStaff);
-                    else
-                        Console.WriteLine("Unfortunately you don't have enough space to store {0} and it will lay forever abandoned and forgotten", itemName);
-                    break;
-
-                case "Wand":
-                    aWand = new Weapon(itemName, itemType, damage, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
-                    Console.WriteLine("You loot {0}", itemName);
-                    if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
-                        GameState.Hero.Inventory.Add(aWand);
-                    else
-                        Console.WriteLine("Unfortunately you don't have enough space to store {0} and it will lay forever abandoned and forgotten", itemName);
-                    break;
-
-                case "Dagger":
-                    aDagger = new Weapon(itemName, itemType, damage, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
-                    Console.WriteLine("You loot {0}", itemName);
-                    if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
-                        GameState.Hero.Inventory.Add(aDagger);
-                    else
-                        Console.WriteLine("Unfortunately you don't have enough space to store {0} and it will lay forever abandoned and forgotten", itemName);
-                    break;
-
-                case "Axe":
-                    aAxe = new Weapon(itemName, itemType, damage, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
-                    Console.WriteLine("You loot {0}", itemName);
-                    if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
-                        GameState.Hero.Inventory.Add(aAxe);
-                    else
-                        Console.WriteLine("Unfortunately you don't have enough space to store {0} and it will lay forever abandoned and forgotten", itemName);
-                    break;
-
-                default:
-                    Console.WriteLine("\nUh Oh, something went wrong.\n");
-                    break;
-            }
+            aWeapon = new Weapon(itemName, itemType, damage, strength, agility, intelligence, health, goldFind, magicFind, requiredLevel, critChance, critDamage, worth);
+            Console.WriteLine("You loot {0}", itemName);
+            if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap)
+                GameState.Hero.Inventory.Add(aWeapon);
+            else
+                Console.WriteLine("Unfortunately you don't have enough space to store {0} and it will lay forever abandoned and forgotten", itemName);
         }
 
         public void GetArmor(string nameOne, string nameTwo, string nameThree, int minStat, int maxStat, int minRequired, int maxRequired)

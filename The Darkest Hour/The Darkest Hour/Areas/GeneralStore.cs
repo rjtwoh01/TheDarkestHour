@@ -84,11 +84,11 @@ namespace The_Darkest_Hour.Areas
                 {
                     if (GameState.Hero.level >= 1 && GameState.Hero.level <= 5)
                     {
-                        aWeapon = vendor.LevelsOneToFiveGetWeapon();
-                        aArmor = vendor.LevelsOneToFiveGetArmor();
-                        aHelmet = vendor.LevelsOneToFiveGetHelmet();
-                        aAmulet = vendor.LevelsOneToFiveGetAmulet();
-                        aPotion = vendor.LevelsOneToFiveGetPotion();
+                        aWeapon = vendor.GetWeapon("Slightly Broken", "Chipped", "Simple", 1, 6, 1, 6);
+                        aArmor = vendor.GetArmor("Rusted", "Torn", "Patched", 1, 6, 1, 6);
+                        aHelmet = vendor.GetHelmet("Rusted", "Torn", "Patched", 1, 6, 1, 6);
+                        aAmulet = vendor.GetAmulet("Rusted", "Chipped", "Cracked", 1, 6, 1, 6);
+                        aPotion = vendor.GetPotion("Old", 1, 11, 1, 251, 1, 11);
                         itemsToBuy.Add(aWeapon);
                         itemsToBuy.Add(aArmor);
                         itemsToBuy.Add(aHelmet);
@@ -97,11 +97,11 @@ namespace The_Darkest_Hour.Areas
                     }
                     if (GameState.Hero.level >= 6 && GameState.Hero.level <= 10)
                     {
-                        aWeapon = vendor.LevelsSixToTenGetWeapon();
-                        aArmor = vendor.LevelsSixToTenGetArmor();
-                        aHelmet = vendor.LevelsSixToTenGetHelmet();
-                        aAmulet = vendor.LevelsSixToTenGetAmulet();
-                        aPotion = vendor.LevelsSixToTenGetPotion();
+                        aWeapon = vendor.GetWeapon("Worn", "Dull", "Old", 5, 16, 5, 11);
+                        aArmor = vendor.GetArmor("Worn", "Dull", "Old", 5, 16, 5, 11);
+                        aHelmet = vendor.GetHelmet("Worn", "Dull", "Old", 5, 16, 5, 11);
+                        aAmulet = vendor.GetAmulet("Worn", "Dull", "Old", 5, 16, 5, 11);
+                        aPotion = vendor.GetPotion("Dull", 5, 16, 100, 451, 5, 16);
                         itemsToBuy.Add(aWeapon);
                         itemsToBuy.Add(aArmor);
                         itemsToBuy.Add(aHelmet);
@@ -110,11 +110,11 @@ namespace The_Darkest_Hour.Areas
                     }
                     if (GameState.Hero.level >= 11 && GameState.Hero.level <= 15)
                     {
-                        aWeapon = vendor.LevelsElevenToFifteenGetWeapon();
-                        aArmor = vendor.LevelsElevenToFifteenGetArmor();
-                        aHelmet = vendor.LevelsElevenToFifteenGetHelmet();
-                        aAmulet = vendor.LevelsElevenToFifteenGetAmulet();
-                        aPotion = vendor.LevelsElevenToFifteenGetPotion();
+                        aWeapon = vendor.GetWeapon("New", "Curved", "Glossed", 10, 26, 11, 16);
+                        aArmor = vendor.GetArmor("New", "Curved", "Glossed", 10, 26, 11, 16);
+                        aHelmet = vendor.GetHelmet("New", "Curved", "Glossed", 10, 26, 11, 16);
+                        aAmulet = vendor.GetAmulet("New", "Curved", "Glossed", 10, 26, 11, 16);
+                        aPotion = vendor.GetPotion("New", 10, 26, 200, 551, 10, 26);
                         itemsToBuy.Add(aWeapon);
                         itemsToBuy.Add(aArmor);
                         itemsToBuy.Add(aHelmet);
@@ -123,11 +123,11 @@ namespace The_Darkest_Hour.Areas
                     }
                     if (GameState.Hero.level >= 16 && GameState.Hero.level <= 20)
                     {
-                        aWeapon = vendor.LevelsSixteenToTwentyGetWeapon();
-                        aArmor = vendor.LevelsSixteenToTwentyGetArmor();
-                        aHelmet = vendor.LevelsSixteenToTwentyGetHelmet();
-                        aAmulet = vendor.LevelsSixteenToTwentyGetAmulet();
-                        aPotion = vendor.LevelsSixteenToTwentyGetPotion();
+                        aWeapon = vendor.GetWeapon("Stable", "Strong", "Sturdy", 20, 31, 16, 21);
+                        aArmor = vendor.GetArmor("Stable", "Strong", "Sturdy", 20, 31, 16, 21);
+                        aHelmet = vendor.GetHelmet("Stable", "Strong", "Sturdy", 20, 31, 16, 21);
+                        aAmulet = vendor.GetAmulet("Stable", "Strong", "Sturdy", 20, 31, 16, 21);
+                        aPotion = vendor.GetPotion("Strong", 20, 31, 200, 601, 20, 31);
                         itemsToBuy.Add(aWeapon);
                         itemsToBuy.Add(aArmor);
                         itemsToBuy.Add(aHelmet);
@@ -136,11 +136,11 @@ namespace The_Darkest_Hour.Areas
                     }
                     if (GameState.Hero.level >= 21 && GameState.Hero.level <= 25)
                     {
-                        aWeapon = vendor.LevelsTwentyOneToTwentyFiveGetWeapon();
-                        aArmor = vendor.LevelsTwentyOneToTwentyFiveGetArmor();
-                        aHelmet = vendor.LevelsTwentyOneToTwentyFiveGetHelmet();
-                        aAmulet = vendor.LevelsTwentyOneToTwentyFiveGetAmulet();
-                        aPotion = vendor.LevelsTwentyOneToTwentyFiveGetPotion();
+                        aWeapon = vendor.GetWeapon("Resolute", "Resiliant", "Polished", 25, 36, 21, 26);
+                        aArmor = vendor.GetArmor("Resolute", "Resiliant", "Polished", 25, 36, 21, 26);
+                        aHelmet = vendor.GetHelmet("Resolute", "Resiliant", "Polished", 25, 36, 21, 26);
+                        aAmulet = vendor.GetAmulet("Resolute", "Resiliant", "Polished", 25, 36, 21, 26);
+                        aPotion = vendor.GetPotion("Resiliant", 30, 41, 300, 651, 25, 36);
                         itemsToBuy.Add(aWeapon);
                         itemsToBuy.Add(aArmor);
                         itemsToBuy.Add(aHelmet);
@@ -149,11 +149,11 @@ namespace The_Darkest_Hour.Areas
                     }
                     if (GameState.Hero.level >= 26 && GameState.Hero.level <= 30)
                     {
-                        aWeapon = vendor.LevelsTwentySixToThirtyGetWeapon();
-                        aArmor = vendor.LevelsTwentySixToThirtyGetArmor();
-                        aHelmet = vendor.LevelsTwentySixToThirtyGetHelmet();
-                        aAmulet = vendor.LevelsTwentySixToThirtyGetAmulet();
-                        aPotion = vendor.LevelsTwentySixToThirtyGetPotion();
+                        aWeapon = vendor.GetWeapon("Blackened", "Cold", "Fire", 30, 41, 26, 31);
+                        aArmor = vendor.GetArmor("Blackened", "Cold", "Fire", 30, 41, 26, 31);
+                        aHelmet = vendor.GetHelmet("Blackened", "Cold", "Fire", 30, 41, 26, 31);
+                        aAmulet = vendor.GetAmulet("Blackened", "Cold", "Fire", 30, 41, 26, 31);
+                        aPotion = vendor.GetPotion("Cold", 100, 201, 400, 751, 30, 41);
                         itemsToBuy.Add(aWeapon);
                         itemsToBuy.Add(aArmor);
                         itemsToBuy.Add(aHelmet);
@@ -162,11 +162,11 @@ namespace The_Darkest_Hour.Areas
                     }
                     if (GameState.Hero.level >= 31 && GameState.Hero.level <= 35)
                     {
-                        aWeapon = vendor.LevelsThirtyOneToThirtyFiveGetWeapon();
-                        aArmor = vendor.LevelsThirtyOneToThirtyFiveGetArmor();
-                        aHelmet = vendor.LevelsThirtyOneToThirtyFiveGetHelmet();
-                        aAmulet = vendor.LevelsThirtyOneToThirtyFiveGetAmulet();
-                        aPotion = vendor.LevelsThirtyOneToThirtyFiveGetPotion();
+                        aWeapon = vendor.GetWeapon("Earth", "Warm", "Storm", 35, 56, 31, 36);
+                        aArmor = vendor.GetArmor("Earth", "Warm", "Storm", 35, 56, 31, 36);
+                        aHelmet = vendor.GetHelmet("Earth", "Warm", "Storm", 35, 56, 31, 36);
+                        aAmulet = vendor.GetAmulet("Earth", "Warm", "Storm", 35, 56, 31, 36);
+                        aPotion = vendor.GetPotion("Warm", 150, 301, 500, 851, 35, 56);
                         itemsToBuy.Add(aWeapon);
                         itemsToBuy.Add(aArmor);
                         itemsToBuy.Add(aHelmet);
@@ -175,11 +175,11 @@ namespace The_Darkest_Hour.Areas
                     }
                     if (GameState.Hero.level >= 36 && GameState.Hero.level <= 40)
                     {
-                        aWeapon = vendor.LevelsThirtySixToFortyGetWeapon();
-                        aArmor = vendor.LevelsThirtySixToFortyGetArmor();
-                        aHelmet = vendor.LevelsThirtySixToFortyGetHelmet();
-                        aAmulet = vendor.LevelsThirtySixToFortyGetAmulet();
-                        aPotion = vendor.LevelsThirtySixToFortyGetPotion();
+                        aWeapon = vendor.GetWeapon("Jagged", "Cold", "Fire", 40, 76, 36, 41);
+                        aArmor = vendor.GetArmor("Jagged", "Cold", "Fire", 40, 76, 36, 41);
+                        aHelmet = vendor.GetHelmet("Jagged", "Cold", "Fire", 40, 76, 36, 41);
+                        aAmulet = vendor.GetAmulet("Jagged", "Cold", "Fire", 40, 76, 36, 41);
+                        aPotion = vendor.GetPotion("Cold", 200, 351, 550, 901, 40, 76);
                         itemsToBuy.Add(aWeapon);
                         itemsToBuy.Add(aArmor);
                         itemsToBuy.Add(aHelmet);
@@ -188,11 +188,11 @@ namespace The_Darkest_Hour.Areas
                     }
                     if (GameState.Hero.level >= 41 && GameState.Hero.level <= 50)
                     {
-                        aWeapon = vendor.LevelsFortyOneToFortyFiveGetWeapon();
-                        aArmor = vendor.LevelsFortyOneToFortyFiveGetArmor();
-                        aHelmet = vendor.LevelsFortyOneToFortyFiveGetHelmet();
-                        aAmulet = vendor.LevelsFortyOneToFortyFiveGetAmulet();
-                        aPotion = vendor.LevelsFortyOneToFortyFiveGetPotion();
+                        aWeapon = vendor.GetWeapon("Champion's", "Honor", "Black Market", 45, 86, 41, 46);
+                        aArmor = vendor.GetArmor("Champion's", "Honor", "Black Market", 45, 86, 41, 46);
+                        aHelmet = vendor.GetHelmet("Champion's", "Honor", "Black Market", 45, 86, 41, 46);
+                        aAmulet = vendor.GetAmulet("Champion's", "Honor", "Black Market", 45, 86, 41, 46);
+                        aPotion = vendor.GetPotion("Honor", 250, 401, 600, 951, 45, 86);
                         itemsToBuy.Add(aWeapon);
                         itemsToBuy.Add(aArmor);
                         itemsToBuy.Add(aHelmet);
@@ -218,23 +218,45 @@ namespace The_Darkest_Hour.Areas
                     selected -= 1;
 
                     Item selectedItem = itemsToBuy.ElementAt(selected);
-
-                    if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap && GameState.Hero.gold >= selectedItem.worth)
+                    if (selectedItem.itemType != "Potion")
                     {
-                        GameState.Hero.Inventory.Add(selectedItem);
-                        Console.WriteLine("You bought {0} for {1} gold and you now have {2} gold left.\n\n", selectedItem.name, selectedItem.worth, GameState.Hero.gold);
+                        if (GameState.Hero.Inventory.Count < GameState.Hero.inventoryCap && GameState.Hero.gold >= selectedItem.worth)
+                        {
+                            GameState.Hero.Inventory.Add(selectedItem);
+                            Console.WriteLine("You bought {0} for {1} gold and you now have {2} gold left.\n\n", selectedItem.name, selectedItem.worth, GameState.Hero.gold);
+                        }
+                        else if (GameState.Hero.Inventory.Count > GameState.Hero.inventoryCap)
+                        {
+                            Console.WriteLine("You have too many items in your inventory. Maybe you should sell something to me first.\n\n");
+                        }
+                        else if (GameState.Hero.gold < selectedItem.worth)
+                        {
+                            Console.WriteLine("You don't have enough money for that\n\n");
+                        }
+                        else if (GameState.Hero.Inventory.Count > GameState.Hero.inventoryCap && GameState.Hero.gold < selectedItem.worth)
+                        {
+                            Console.WriteLine("You have too many items in your inventory, and you don't have enough gold. Maybe you should sell something to me first.\n\n");
+                        }
                     }
-                    else if (GameState.Hero.Inventory.Count > GameState.Hero.inventoryCap)
+                    else if (selectedItem.itemType == "Potion")
                     {
-                        Console.WriteLine("You have too many items in your inventory. Maybe you should sell something to me first.\n\n");
-                    }
-                    else if (GameState.Hero.gold < selectedItem.worth)
-                    {
-                        Console.WriteLine("You don't have enough money for that\n\n");
-                    }
-                    else if (GameState.Hero.Inventory.Count > GameState.Hero.inventoryCap && GameState.Hero.gold < selectedItem.worth)
-                    {
-                        Console.WriteLine("You have too many items in your inventory, and you don't have enough gold. Maybe you should sell something to me first.\n\n");
+                        if (GameState.Hero.PotionBag.Count < GameState.Hero.potionBagCap && GameState.Hero.gold >= selectedItem.worth)
+                        {
+                            GameState.Hero.PotionBag.Add(selectedItem);
+                            Console.WriteLine("You bought {0} for {1} gold and you now have {2} gold left.\n\n", selectedItem.name, selectedItem.worth, GameState.Hero.gold);
+                        }
+                        else if (GameState.Hero.PotionBag.Count > GameState.Hero.potionBagCap)
+                        {
+                            Console.WriteLine("You have too many items in your inventory. Maybe you should sell something to me first.\n\n");
+                        }
+                        else if (GameState.Hero.gold < selectedItem.worth)
+                        {
+                            Console.WriteLine("You don't have enough money for that\n\n");
+                        }
+                        else if (GameState.Hero.PotionBag.Count > GameState.Hero.potionBagCap && GameState.Hero.gold < selectedItem.worth)
+                        {
+                            Console.WriteLine("You have too many items in your inventory, and you don't have enough gold. Maybe you should sell something to me first.\n\n");
+                        }
                     }
                 }
                 else if (answer == "2")

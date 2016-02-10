@@ -206,6 +206,7 @@
     <Compile Include="Locations\Actions\CreateNewCharacterAction.cs" />
     <Compile Include="Locations\Actions\DisplayEquippedAction.cs" />
     <Compile Include="Locations\Actions\DisplayInventoryAction.cs" />
+    <Compile Include="Locations\Actions\DisplayPotionBagAction.cs" />
     <Compile Include="Locations\Actions\DisplayStatsAction.cs" />
     <Compile Include="Locations\Actions\ExitGame.cs" />
     <Compile Include="Locations\Actions\InvalidSelectionAction.cs" />
