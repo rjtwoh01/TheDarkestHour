@@ -151,6 +151,7 @@
     <Compile Include="Characters\Mobs\SlaveMaster.cs" />
     <Compile Include="Characters\Mobs\Soldier.cs" />
     <Compile Include="Characters\Mobs\Spies.cs" />
+    <Compile Include="Characters\Mobs\EvilSpirit.cs" />
     <Compile Include="Combat\Battle.cs" />
     <Compile Include="Characters\Accomplishments.cs" />
     <Compile Include="Characters\Character.cs" />

@@ -124,6 +124,12 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = BankenAshenForestRangerPaths.GetTownInstance().GetEntranceDefinition();
             adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
+            if (defeatedMobs)
+            {
+                locationDefinition = BankenAshenForestRangerPaths.GetTownInstance().GetRangerCampDefinition();
+                adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
+
             returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
 
             return returnData;
@@ -153,6 +159,154 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 returnData.LocationKey = locationKey;
                 returnData.Name = "Small Path";
+                returnData.DoLoadLocation = LoadSmallPath;
+
+                LocationHandler.AddLocation(returnData);
+            }
+
+            return returnData;
+        }
+
+        #endregion
+
+        #region Ranger Camp
+
+        public Location RangerCamp()
+        {
+            Location returnData;
+            returnData = new Location();
+            returnData.Name = "Ranger Camp";
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenAshenForestRangerPaths.RANGER_CAMP_SPIRITS));
+
+            if (!defeatedMobs)
+            {
+                returnData.Description = "A small camp with a couple of sleeping bags surrounding a dimly lit fire. The camp seems to have been abandoned not that long ago. There are evil spirits lurking nearby in the shadows cast by the dim flame.";
+
+                List<LocationAction> locationActions = new List<LocationAction>();
+                List<Mob> mobs = new List<Mob>();
+                mobs.Add(new EvilSpirit());
+                mobs.Add(new EvilSpirit());
+                mobs.Add(new EvilSpirit());
+                mobs.Add(new EvilSpirit());
+                mobs.Add(new EvilSpirit());
+                CombatAction combatAction = new CombatAction("Spirits", mobs);
+                combatAction.PostCombat += RangerCampSpirits;
+                locationActions.Add(combatAction);
+                returnData.Actions = locationActions;
+            }
+            else
+                returnData.Description = "A small camp with a couple of sleeping bags surrounding a dimly lit fire. The camp seems to have been abandoned not that long ago. The cries of the spirits remains echoing faintly in the air.";
+
+            //Adjacent Locations
+            Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
+
+            //Town Center
+            LocationDefinition locationDefinition = BankenAshenForestRangerPaths.GetTownInstance().GetSmallPathDefinition();
+            adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+
+            if (defeatedMobs)
+            {
+                locationDefinition = BankenAshenForestRangerPaths.GetTownInstance().GetBurntOpeningDefinition();
+                adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
+
+            returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
+
+            return returnData;
+        }
+
+        public void RangerCampSpirits(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenAshenForestRangerPaths.RANGER_CAMP_SPIRITS, true);
+
+                //Reload 
+                LocationHandler.ResetLocation(RANGER_CAMP_KEY);
+            }
+        }
+
+        public LocationDefinition GetRangerCampDefinition()
+        {
+            LocationDefinition returnData = new LocationDefinition();
+            string locationKey = RANGER_CAMP_KEY;
+
+            if (LocationHandler.LocationExists(locationKey))
+            {
+                returnData = LocationHandler.GetLocation(locationKey);
+            }
+            else
+            {
+                returnData.LocationKey = locationKey;
+                returnData.Name = "Ranger Camp";
+                returnData.DoLoadLocation = LoadSmallPath;
+
+                LocationHandler.AddLocation(returnData);
+            }
+
+            return returnData;
+        }
+
+        #endregion
+
+        #region Burnt Opening
+
+        public Location BurntOpening()
+        {
+            Location returnData;
+            returnData = new Location();
+            returnData.Name = "Burnt Opening";
+            bool hiddenRanger = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenAshenForestRangerPaths.HIDING_RANGER));
+
+            returnData.Description = "There is a burnt opening in a thick cluster of trees. Within the opening there is a secret ranger path that leads deeper within the forest. Hidden amongst the trees is one of Banken's rangers.";
+
+            List<LocationAction> locationActions = new List<LocationAction>();
+            TakeItemAction itemAction = new TakeItemAction("Talk to", "the hidden ranger", "You walk up to the ranger and signal that you're a friend and ask, 'What's going on here? Where's the rest of your company, ranger?' The ranger speaks from his hidden position, 'I don't know where everyone else went. Those spirits came with the darkness. I was knocked out. Next thing I knew everyone was gone and the spirits were still here. I need to stay and see if anyone returns. Go through the path here. You should find the answers we both seek.'");
+            locationActions.Add(itemAction);
+            itemAction.PostItem += HiddenRanger;
+            returnData.Actions = locationActions;
+
+            //Adjacent Locations
+            Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
+
+            //Town Center
+            LocationDefinition locationDefinition = BankenAshenForestRangerPaths.GetTownInstance().GetSmallPathDefinition();
+            adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+
+            if (hiddenRanger)
+            {
+                //Insert code to continue on here
+            }
+
+            returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
+
+            return returnData;
+        }
+
+        public void HiddenRanger(object sender, TakeItemEventArgs itemEventArgs)
+        {
+            if (itemEventArgs.ItemResults == TakeItemResults.Taken)
+            {
+                LocationHandler.SetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenAshenForestRangerPaths.BURNT_OPENING_KEY, true);
+
+                //Reload
+                LocationHandler.ResetLocation(HIDING_RANGER);
+            }
+        }
+
+        public LocationDefinition GetBurntOpeningDefinition()
+        {
+            LocationDefinition returnData = new LocationDefinition();
+            string locationKey = BURNT_OPENING_KEY;
+
+            if (LocationHandler.LocationExists(locationKey))
+            {
+                returnData = LocationHandler.GetLocation(locationKey);
+            }
+            else
+            {
+                returnData.LocationKey = locationKey;
+                returnData.Name = "Burnt Opening";
                 returnData.DoLoadLocation = LoadSmallPath;
 
                 LocationHandler.AddLocation(returnData);
