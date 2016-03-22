@@ -28,6 +28,7 @@ namespace The_Darkest_Hour.Towns.Watertown
         public const string SMALL_PATH_SPIDERS = "Banken.BankenAshenForestRangerPaths.SmallPathSpiders";
         public const string RANGER_CAMP_SPIRITS = "Banken.BankenAshenForestRangerPaths.RangerCampSpirits";
         public const string HIDING_RANGER = "Banken.BankenAshenForestRangerPaths.HidingRanger";
+        public const string LOOK_FOR_PATH = "Banken.BankenAshenForestRangerPath.LookForPath";
         public const string BURNT_OPENING_SHADOW_DEMONS = "Banken.BankenAshenForestRangerPaths.BurntOpeningShadowDemons";
         public const string TWISTING_PATH_SKELETONS = "Banken.BankenAshenForestRangerPaths.TwistingPathSkeletons";
         public const string NARROW_CREEK_WATER_SPIRITS = "Banken.BankenAshenForestRangerPaths.NarrowCreekWaterSpirits";
@@ -171,7 +172,7 @@ namespace The_Darkest_Hour.Towns.Watertown
 
         #region Ranger Camp
 
-        public Location RangerCamp()
+        public Location LoadRangerCamp()
         {
             Location returnData;
             returnData = new Location();
@@ -239,7 +240,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 returnData.LocationKey = locationKey;
                 returnData.Name = "Ranger Camp";
-                returnData.DoLoadLocation = LoadSmallPath;
+                returnData.DoLoadLocation = LoadRangerCamp;
 
                 LocationHandler.AddLocation(returnData);
             }
@@ -251,29 +252,55 @@ namespace The_Darkest_Hour.Towns.Watertown
 
         #region Burnt Opening
 
-        public Location BurntOpening()
+        public Location LoadBurntOpening()
         {
             Location returnData;
             returnData = new Location();
             returnData.Name = "Burnt Opening";
             bool hiddenRanger = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenAshenForestRangerPaths.HIDING_RANGER));
+            bool lookForPath = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenAshenForestRangerPaths.LOOK_FOR_PATH));
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenAshenForestRangerPaths.BURNT_OPENING_SHADOW_DEMONS));
 
             returnData.Description = "There is a burnt opening in a thick cluster of trees. Within the opening there is a secret ranger path that leads deeper within the forest. Hidden amongst the trees is one of Banken's rangers.";
 
             List<LocationAction> locationActions = new List<LocationAction>();
-            TakeItemAction itemAction = new TakeItemAction("Talk to", "the hidden ranger", "You walk up to the ranger and signal that you're a friend and ask, 'What's going on here? Where's the rest of your company, ranger?' The ranger speaks from his hidden position, 'I don't know where everyone else went. Those spirits came with the darkness. I was knocked out. Next thing I knew everyone was gone and the spirits were still here. I need to stay and see if anyone returns. Go through the path here. You should find the answers we both seek.'");
+            TakeItemAction itemAction = new TakeItemAction("Talk to", "the hidden ranger", "You walk up to the ranger and signal that you're a friend and ask, 'What's going on here? Where's the rest of your company, ranger?' The ranger speaks from his hidden position, 'I don't know where everyone else went. Those spirits came with the darkness. I was knocked out. Next thing I knew everyone was gone and the spirits were still here. I need to stay and see if anyone returns. There is a path nearby. Find it and you should find the answers we both seek.'");
             locationActions.Add(itemAction);
             itemAction.PostItem += HiddenRanger;
             returnData.Actions = locationActions;
+
+            if (hiddenRanger && !lookForPath)
+            {
+                locationActions = new List<LocationAction>();
+                TakeItemAction lookActiopn = new TakeItemAction("Look for ", "the path", "You search around the burnt opening for the path that the ranger spoke of. You find it and make to walk toward it but instead you're assaulted by shadow demons from all sides.");
+                locationActions.Add(lookActiopn);
+                lookActiopn.PostItem += LookForPath;
+                returnData.Actions = locationActions;
+            }
+
+            else if (lookForPath && !defeatedMobs)
+            {
+                locationActions = new List<LocationAction>();
+                List<Mob> mobs = new List<Mob>();
+                mobs.Add(new ShadowDemon());
+                mobs.Add(new ShadowDemon());
+                mobs.Add(new ShadowDemon());
+                mobs.Add(new ShadowDemon());
+                mobs.Add(new ShadowDemon());
+                CombatAction combatAction = new CombatAction("Shadow Demons", mobs);
+                combatAction.PostCombat += BurntOpeningShadowDemons;
+                locationActions.Add(combatAction);
+                returnData.Actions = locationActions;
+            }
 
             //Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
 
             //Town Center
-            LocationDefinition locationDefinition = BankenAshenForestRangerPaths.GetTownInstance().GetSmallPathDefinition();
+            LocationDefinition locationDefinition = BankenAshenForestRangerPaths.GetTownInstance().GetRangerCampDefinition();
             adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            if (hiddenRanger)
+            if (hiddenRanger && lookForPath && defeatedMobs)
             {
                 //Insert code to continue on here
             }
@@ -283,14 +310,36 @@ namespace The_Darkest_Hour.Towns.Watertown
             return returnData;
         }
 
+        public void BurntOpeningShadowDemons(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenAshenForestRangerPaths.BURNT_OPENING_SHADOW_DEMONS, true);
+
+                //Reload 
+                LocationHandler.ResetLocation(BURNT_OPENING_KEY);
+            }
+        }
+
         public void HiddenRanger(object sender, TakeItemEventArgs itemEventArgs)
         {
             if (itemEventArgs.ItemResults == TakeItemResults.Taken)
             {
-                LocationHandler.SetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenAshenForestRangerPaths.BURNT_OPENING_KEY, true);
+                LocationHandler.SetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenAshenForestRangerPaths.HIDING_RANGER, true);
 
                 //Reload
-                LocationHandler.ResetLocation(HIDING_RANGER);
+                LocationHandler.ResetLocation(BURNT_OPENING_KEY);
+            }
+        }
+
+        public void LookForPath(object sender, TakeItemEventArgs itemEventArgs)
+        {
+            if (itemEventArgs.ItemResults == TakeItemResults.Taken)
+            {
+                LocationHandler.SetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenAshenForestRangerPaths.LOOK_FOR_PATH, true);
+
+                //Reload
+                LocationHandler.ResetLocation(BURNT_OPENING_KEY);
             }
         }
 
@@ -307,7 +356,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             {
                 returnData.LocationKey = locationKey;
                 returnData.Name = "Burnt Opening";
-                returnData.DoLoadLocation = LoadSmallPath;
+                returnData.DoLoadLocation = LoadBurntOpening;
 
                 LocationHandler.AddLocation(returnData);
             }
