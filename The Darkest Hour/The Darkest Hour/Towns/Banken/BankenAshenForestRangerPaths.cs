@@ -302,7 +302,8 @@ namespace The_Darkest_Hour.Towns.Watertown
 
             if (hiddenRanger && lookForPath && defeatedMobs)
             {
-                //Insert code to continue on here
+                locationDefinition = BankenAshenForestRangerPaths.GetTownInstance().GetTwistingPathDefinition();
+                adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
             }
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
@@ -357,6 +358,263 @@ namespace The_Darkest_Hour.Towns.Watertown
                 returnData.LocationKey = locationKey;
                 returnData.Name = "Burnt Opening";
                 returnData.DoLoadLocation = LoadBurntOpening;
+
+                LocationHandler.AddLocation(returnData);
+            }
+
+            return returnData;
+        }
+
+        #endregion
+
+        #region Twisting Path
+
+        public Location LoadTwistingPath()
+        {
+            Location returnData;
+            returnData = new Location();
+            returnData.Name = "Twisting Path";
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenAshenForestRangerPaths.RANGER_CAMP_SPIRITS));
+
+            if (!defeatedMobs)
+            {
+                returnData.Description = "A long twisting path leading into the dark depths of the forest. There are skeletons blocking the way forward.";
+
+                List<LocationAction> locationActions = new List<LocationAction>();
+                List<Mob> mobs = new List<Mob>();
+                mobs.Add(new Skeleton());
+                mobs.Add(new Skeleton());
+                mobs.Add(new Skeleton());
+                CombatAction combatAction = new CombatAction("Skeletons", mobs);
+                combatAction.PostCombat += TwistingPathSkeletons;
+                locationActions.Add(combatAction);
+                returnData.Actions = locationActions;
+            }
+            else
+                returnData.Description = "A long twisting path leading into the dark depths of the forest. Bones lay scattered across the ground.";
+
+            //Adjacent Locations
+            Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
+
+            //Town Center
+            LocationDefinition locationDefinition = BankenAshenForestRangerPaths.GetTownInstance().GetBurntOpeningDefinition();
+            adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+
+            if (defeatedMobs)
+            {
+                locationDefinition = BankenAshenForestRangerPaths.GetTownInstance().GetNarrowCreekDefinition();
+                adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
+
+            returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
+
+            return returnData;
+        }
+
+        public void TwistingPathSkeletons(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenAshenForestRangerPaths.TWISTING_PATH_SKELETONS, true);
+
+                //Reload 
+                LocationHandler.ResetLocation(TWISTING_PATH_KEY);
+            }
+        }
+
+        public LocationDefinition GetTwistingPathDefinition()
+        {
+            LocationDefinition returnData = new LocationDefinition();
+            string locationKey = TWISTING_PATH_KEY;
+
+            if (LocationHandler.LocationExists(locationKey))
+            {
+                returnData = LocationHandler.GetLocation(locationKey);
+            }
+            else
+            {
+                returnData.LocationKey = locationKey;
+                returnData.Name = "Twisting Path";
+                returnData.DoLoadLocation = LoadTwistingPath;
+
+                LocationHandler.AddLocation(returnData);
+            }
+
+            return returnData;
+        }
+
+        #endregion
+
+        #region Narrow Creek
+
+        public Location LoadNarrowCreek()
+        {
+            Location returnData;
+            returnData = new Location();
+            returnData.Name = "Narrow Creek";
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenAshenForestRangerPaths.NARROW_CREEK_WATER_SPIRITS));
+
+            if (!defeatedMobs)
+            {
+                returnData.Description = "There is a narrow creek separating the forest paths from a tiny island. The water gushes along the creek with violent force preventing anyone from crossing it. Water Spirits roam freely along the creek.";
+
+                List<LocationAction> locationActions = new List<LocationAction>();
+                List<Mob> mobs = new List<Mob>();
+                mobs.Add(new WaterSpirit());
+                mobs.Add(new WaterSpirit());
+                mobs.Add(new WaterSpirit());
+                mobs.Add(new WaterSpirit());
+                CombatAction combatAction = new CombatAction("Water Spirits", mobs);
+                combatAction.PostCombat += NarrowCreekSpirits;
+                locationActions.Add(combatAction);
+                returnData.Actions = locationActions;
+            }
+            else
+                returnData.Description = "There is a narrow creek separating the forest paths from a tiny island. The Water Spirits have been laid to rest and the creek is once again peaceful.";
+
+            //Adjacent Locations
+            Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
+
+            //Town Center
+            LocationDefinition locationDefinition = BankenAshenForestRangerPaths.GetTownInstance().GetTwistingPathDefinition();
+            adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+
+            if (defeatedMobs)
+            {
+                locationDefinition = BankenAshenForestRangerPaths.GetTownInstance().GetTinyIslandDefinition();
+                adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
+
+            returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
+
+            return returnData;
+        }
+
+        public void NarrowCreekSpirits(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenAshenForestRangerPaths.NARROW_CREEK_WATER_SPIRITS, true);
+
+                //Reload 
+                LocationHandler.ResetLocation(NARROW_CREEK_KEY);
+            }
+        }
+
+        public LocationDefinition GetNarrowCreekDefinition()
+        {
+            LocationDefinition returnData = new LocationDefinition();
+            string locationKey = NARROW_CREEK_KEY;
+
+            if (LocationHandler.LocationExists(locationKey))
+            {
+                returnData = LocationHandler.GetLocation(locationKey);
+            }
+            else
+            {
+                returnData.LocationKey = locationKey;
+                returnData.Name = "Narrow Creek";
+                returnData.DoLoadLocation = LoadNarrowCreek;
+
+                LocationHandler.AddLocation(returnData);
+            }
+
+            return returnData;
+        }
+
+        #endregion
+
+        #region Tiny Island
+
+        public Location LoadTinyIsland()
+        {
+            Location returnData;
+            returnData = new Location();
+            returnData.Name = "Narrow Creek";
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenAshenForestRangerPaths.GIANT_SHADOW_DEMON));
+            bool tookTreasure = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenAshenForestRangerPaths.TREASURE_CHEST));
+            string before = "You walk onto the island and the Giant Shadow Demon fixes its gaze upon you. Dread seeps into your body as you clench you weapon tighter, ready for whatever horror you're about to face.";
+            string after = "The shadows seep quickly away from the demon. You walk up to it and ask, 'Where are the rangers? What did you do with them?' \nThe Giant Shadow Demon fixes you with a cold and hateful stare and growls, 'Puppets for my master.' You raise your weapon to strike in anger but the demon slips into the void before you can land a strike.";
+
+            if (!defeatedMobs)
+            {
+                returnData.Description = "A tiny island resides in the forest. The trees have lost all leaves and the bark is blackened as if burnt. The ground is void of grass and is instead blackened as if scorched. Hovering in the middle of the island is a giant shadow demon. He must be behind the corruption of this part of the forest.";
+
+                List<LocationAction> locationActions = new List<LocationAction>();
+                List<Mob> mobs = new List<Mob>();
+                mobs.Add(new GiantShadowDemon());
+                CombatAction combatAction = new CombatAction("Giant Shadow Demon", mobs, before, after);
+                combatAction.PostCombat += TinyIslandGiantShadowDemon;
+                locationActions.Add(combatAction);
+                returnData.Actions = locationActions;
+            }
+            else if (!tookTreasure)
+            {
+                returnData.Description = "There is a narrow creek separating the forest paths from a tiny island. The Water Spirits have been laid to rest and the creek is once again peaceful. There is a treasure chest in the middle of the island";
+
+                List<LocationAction> locationActions = new List<LocationAction>();
+                TreasureChestAction itemAction = new TreasureChestAction(5);
+                locationActions.Add(itemAction);
+                itemAction.PostItem += TreasureChest;
+                returnData.Actions = locationActions;
+            }
+            else
+                returnData.Description = "There is a narrow creek separating the forest paths from a tiny island. The Water Spirits have been laid to rest and the creek is once again peaceful.";
+
+            //Adjacent Locations
+            Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
+
+            //Town Center
+            LocationDefinition locationDefinition = BankenAshenForestRangerPaths.GetTownInstance().GetNarrowCreekDefinition();
+            adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+
+            if (defeatedMobs && tookTreasure)
+            {
+                locationDefinition = Banken.GetTownInstance().GetTownCenterDefinition();
+                adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
+
+            returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
+
+            return returnData;
+        }
+
+        public void TinyIslandGiantShadowDemon(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenAshenForestRangerPaths.GIANT_SHADOW_DEMON, true);
+
+                //Reload 
+                LocationHandler.ResetLocation(TINY_ISLAND_KEY);
+            }
+        }
+
+        public void TreasureChest(object sender, ChestEventArgs chestEventArgs)
+        {
+            if (chestEventArgs.ChestResults == ChestResults.Taken)
+            {
+                LocationHandler.SetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenAshenForestRangerPaths.TREASURE_CHEST, true);
+
+                //Reload
+                LocationHandler.ResetLocation(TINY_ISLAND_KEY);
+            }
+        }
+
+        public LocationDefinition GetTinyIslandDefinition()
+        {
+            LocationDefinition returnData = new LocationDefinition();
+            string locationKey = TINY_ISLAND_KEY;
+
+            if (LocationHandler.LocationExists(locationKey))
+            {
+                returnData = LocationHandler.GetLocation(locationKey);
+            }
+            else
+            {
+                returnData.LocationKey = locationKey;
+                returnData.Name = "Tiny Island";
+                returnData.DoLoadLocation = LoadTinyIsland;
 
                 LocationHandler.AddLocation(returnData);
             }

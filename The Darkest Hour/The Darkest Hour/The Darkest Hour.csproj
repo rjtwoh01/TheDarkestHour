@@ -102,6 +102,7 @@
     <Compile Include="Characters\Mobs\Bosses\BanditKing.cs" />
     <Compile Include="Characters\Mobs\Bosses\BanditLieutenant.cs" />
     <Compile Include="Characters\Mobs\Bosses\Banken\DemonicNecro.cs" />
+    <Compile Include="Characters\Mobs\Bosses\Banken\GiantShadowDemon.cs" />
     <Compile Include="Characters\Mobs\Bosses\Beach Tower\BanditRaidLeader.cs" />
     <Compile Include="Characters\Mobs\Bosses\BanditScholar.cs" />
     <Compile Include="Characters\Mobs\Bosses\BanditSpy.cs" />
@@ -153,6 +154,7 @@
     <Compile Include="Characters\Mobs\Soldier.cs" />
     <Compile Include="Characters\Mobs\Spies.cs" />
     <Compile Include="Characters\Mobs\EvilSpirit.cs" />
+    <Compile Include="Characters\Mobs\WaterSpirit.cs" />
     <Compile Include="Combat\Battle.cs" />
     <Compile Include="Characters\Accomplishments.cs" />
     <Compile Include="Characters\Character.cs" />
