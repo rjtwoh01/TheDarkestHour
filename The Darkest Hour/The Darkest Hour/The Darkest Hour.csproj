@@ -101,6 +101,7 @@
     <Compile Include="Characters\Mobs\Bosses\BanditCaptain.cs" />
     <Compile Include="Characters\Mobs\Bosses\BanditKing.cs" />
     <Compile Include="Characters\Mobs\Bosses\BanditLieutenant.cs" />
+    <Compile Include="Characters\Mobs\Bosses\Banken\Ackhan.cs" />
     <Compile Include="Characters\Mobs\Bosses\Banken\DemonicNecro.cs" />
     <Compile Include="Characters\Mobs\Bosses\Banken\GiantShadowDemon.cs" />
     <Compile Include="Characters\Mobs\Bosses\Beach Tower\BanditRaidLeader.cs" />
