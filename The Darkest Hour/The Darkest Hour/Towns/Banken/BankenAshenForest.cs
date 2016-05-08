@@ -98,7 +98,6 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = BankenAshenForest.GetTownInstance().GetEntranceDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            //Will load the Ashen Forest Wilderness within this class if the player isn't on the quest that unlocks the actual wilderness
             locationDefinition = BankenAshenForest.GetTownInstance().GetForestWildernessDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
@@ -162,6 +161,13 @@ namespace The_Darkest_Hour.Towns.Watertown
             //Town Center
             LocationDefinition locationDefinition = BankenAshenForest.GetTownInstance().GetForestPathStartDefinition();
             adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+
+            Accomplishment shadeLord = Banken.GetBankenAccomplishments().Find(x => x.Name.Contains("Shade Lord"));
+            if (GameState.Hero.Accomplishments.Contains(shadeLord))
+            {
+                locationDefinition = BankenForestWilderness.GetTownInstance().GetEntranceDefinition();
+                adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
 

@@ -312,7 +312,8 @@ namespace The_Darkest_Hour.Towns.Watertown
                 //Bool's to check if the player has completed certain parts of the game
                 bool investigateReligiousShrine = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenAshenForestWorshipRegion.JOURNAL));
                 bool rescueRangers = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenAshenForestRangerPaths.GIANT_SHADOW_DEMON));
-                bool ancientBurialGrounds = false;
+                bool ancientBurialGrounds = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenAncientBurialGrounds.ACKHAN));
+                bool shadeLordDefeated = false;
                 if (!investigateReligiousShrine)
                 {
                     rumor = new Rumor("Investigate Religious Shrine", "Welcome to Banken, " + GameState.Hero.Identifier + ". It seems you have accomplished quite a lot in the recent months. Impressive. It seems as if darkness is plauging all of Asku at the moment, and it troubles me. The Ashen Forest wasn't named out of random. It is the job of my Rangers to keep the darkness at bay. However, its becoming more and more apparent that, that's something that we can't do by ourselves anymore. We need help. I have a task for you. There is a religious shrine about a mile outside of the town, in a small clearing in the forest. People regularly travel there to pay their worship to the Gods. However, as of late they have been coming back pale and shaken. Unwilling to speak of what happened. I feel as if something evil has taken root at or near the shrine. My Rangers are spread thin at the moment. Can you go investigate for me? Do what you have to do.");
@@ -327,6 +328,11 @@ namespace The_Darkest_Hour.Towns.Watertown
                 {
                     rumor = new Rumor("Ancient Burial Grounds", " So you weren't able to find out any more about the missing rangers? I'm not a fan of how this is turning out. There is something dark at work here. Some unseen force of evil... I'll tell you what. There is an ancient burial ground somewhere up to the north. We don't venture near it because of the dark forces that inhabit the area. We just keep it contained. But if that's spreading, the answers to our questions may be found there. Go investigate. Good luck, " + GameState.Hero.Identifier + ".");
                     rumor.OnHeardRumor = this.HeardAncientBurialGroundsRumor;
+                }
+                else if (!shadeLordDefeated)
+                {
+                    rumor = new Rumor("Shade Lord", "I have no idea what these tombs are that Ackhan spoke about. I really don't know where to continue looking for these rangers. Go scout the wilderness and see if you can stumble upon anything. Doubtful because of how much nothing there is but one can hope.");
+                    rumor.OnHeardRumor = this.HearShadeLordRumor;
                 }
                 else
                     rumor = new Rumor("You want something?", "You want something?");
@@ -360,6 +366,14 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationHandler.ResetLocation(TOWN_CENTER_KEY);
         }
 
+        public void HearShadeLordRumor()
+        {
+            Accomplishment accomplishment = Banken.GetBankenAccomplishments().Find(x => x.Name.Contains("Shade Lord"));
+            GameState.Hero.Accomplishments.Add(accomplishment);
+            //Reload the TownCenter so it will open up the area to Complete the Task that the Task is in
+            LocationHandler.ResetLocation(TOWN_CENTER_KEY);
+        }
+
         #endregion
 
         #region Accomplishments
@@ -387,6 +401,12 @@ namespace The_Darkest_Hour.Towns.Watertown
                 accomplishment.NameSpace = "Banken";
                 accomplishment.Name = "Has heard the rumor of Ancient Burial Grounds";
                 accomplishment.Description = "Has heard the rumor of traveling into the Ashen Forest and investigating the Ancient Burial grounds which are located someplace in the north.";
+                _BankenAccomplishments.Add(accomplishment);
+
+                accomplishment = new Accomplishment();
+                accomplishment.NameSpace = "Banken";
+                accomplishment.Name = "Has heard the rumor of Shade Lord";
+                accomplishment.Description = "Has heard the rumor of traveling into the Ashen Forest going into the wilderness where you will eventually encounter a Shade Lord.";
                 _BankenAccomplishments.Add(accomplishment);
             }
 
