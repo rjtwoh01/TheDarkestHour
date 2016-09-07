@@ -41,6 +41,12 @@ namespace The_Darkest_Hour.Locations.Actions
             this.Description = this._text;
         }
 
+        public TakeItemAction(string action, string item)
+        {
+            this.Name = action + " " + item;
+            this.Description = action + " " + item;
+        }
+
         public override LocationDefinition DoAction()
         {
             LocationDefinition returnData = GameState.CurrentLocation;

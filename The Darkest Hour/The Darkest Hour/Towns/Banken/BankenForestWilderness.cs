@@ -29,7 +29,7 @@ namespace The_Darkest_Hour.Towns.Watertown
         public const string ABANDONED_FORTRESS_GATES = "Banken.BankenForestWilderness.AbandonedFortress";
         public const string TREACHEROUS_PATH_MOBS = "Banken.BankenForestWilderness.TreacherousPathMobs";
         public const string BURNT_CLEARING_MOBS = "Banken.BankenForestWilderness.BurntClearingMobs";
-        public const string SPIDERS_HALLOW_MOBS = "Banken.BankenForestWilderness.SpidersHallowMobs";
+        public const string SPIDERS_HOLLOW_MOBS = "Banken.BankenForestWilderness.SpidersHallowMobs";
         public const string TREACHEROUS_PATH_TWO_MOBS = "Banken.BankenForestWilderness.TreacherousPathTwoMobs";
         public const string DENSE_WOODS_MOBS = "Banken.BankenForestWilderness.DenseWoodsMobs";
         public const string WIDE_CREEK_MOBS = "Banken.BankenForestWilderness.WideCreekMobs";
@@ -39,6 +39,9 @@ namespace The_Darkest_Hour.Towns.Watertown
         public const string SHADE_LORD = "Banken.BankenForestWilderness.ShadeLord";
         public const string TREASURE = "Banken.BankenForestWilderness.Treasure";
         public const string INSPECT_GATE = "Banken.BankenForestWilderness.InspectGate";
+        public const string COLLECT_WOOD_KEY = "Banken.BankenForestWilderness.CollectWood";
+        private bool _collectedWood = false;
+        private bool _builtRaft = false;
 
         #endregion
 
@@ -104,11 +107,10 @@ namespace The_Darkest_Hour.Towns.Watertown
             returnData = new Location();
             returnData.Name = "Treacherous Path";
             bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenForestWilderness.TREACHEROUS_PATH_MOBS));
-            returnData.Description = "The path leading into the wilderness is long, twisty, and very unforgiving to those that travel it. There are several spiders that block the path further";
-            
+
             if (!defeatedMobs)
             {
-                returnData.Description = "A narrow twisting path that goes deep within the forest. The air is heavy and the skies dark. There are faint cries in the distance, and mist forms on the ground. Giant spiders are descending down threateningly toward you.";
+                returnData.Description = "The path leading into the wilderness is long, twisty, and very unforgiving to those that travel it. There are several spiders that block the path further";
 
                 List<LocationAction> locationActions = new List<LocationAction>();
                 List<Mob> mobs = new List<Mob>();
@@ -122,6 +124,8 @@ namespace The_Darkest_Hour.Towns.Watertown
                 locationActions.Add(combatAction);
                 returnData.Actions = locationActions;
             }
+            else
+                returnData.Description = "The path leading into the wilderness is long, twisty, and very unforgiving to those that travel it. Giant spider corpses lay decaying on the ground.";
 
             //Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
@@ -130,11 +134,14 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = BankenForestWilderness.GetTownInstance().GetEntranceDefinition();
             adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            locationDefinition = BankenForestWilderness.GetTownInstance().GetBurntClearingDefinition();
-            adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            if (defeatedMobs)
+            {
+                locationDefinition = BankenForestWilderness.GetTownInstance().GetBurntClearingDefinition();
+                adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            locationDefinition = BankenForestWilderness.GetTownInstance().GetTrecherousPathTwoDefinintion();
-            adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+                locationDefinition = BankenForestWilderness.GetTownInstance().GetTrecherousPathTwoDefinintion();
+                adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
 
@@ -182,7 +189,25 @@ namespace The_Darkest_Hour.Towns.Watertown
             Location returnData;
             returnData = new Location();
             returnData.Name = "Burnt Clearing";
-            returnData.Description = "A clearing off the side of the path has been burnt to the ground long ago by some ancient evil. The air still reeks from its presence and several shades feed off the dark energy nearby.";
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenForestWilderness.BURNT_CLEARING_MOBS));
+
+            if (!defeatedMobs)
+            {
+                returnData.Description = "A clearing off the side of the path has been burnt to the ground long ago by some ancient evil. The air still reeks from its presence and several shades feed off the dark energy nearby.";
+
+                List<LocationAction> locationActions = new List<LocationAction>();
+                List<Mob> mobs = new List<Mob>();
+                mobs.Add(new Shade());
+                mobs.Add(new Shade());
+                mobs.Add(new Shade());
+                mobs.Add(new Shade());
+                CombatAction combatAction = new CombatAction("Shades", mobs);
+                combatAction.PostCombat += BurntClearingShades;
+                locationActions.Add(combatAction); 
+                returnData.Actions = locationActions;
+            }
+            else
+                returnData.Description = "A clearing off the side of the path has been burnt to the ground long ago by some ancient evil. The air still reeks from its presence and there are echoes in the air of banished shades.";
 
             //Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
@@ -191,12 +216,26 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = BankenForestWilderness.GetTownInstance().GetTrecherousPathDefinition();
             adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            locationDefinition = BankenForestWilderness.GetTownInstance().GetSpidersHollowDefinition();
-            adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            if (defeatedMobs)
+            {
+                locationDefinition = BankenForestWilderness.GetTownInstance().GetSpidersHollowDefinition();
+                adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
 
             return returnData;
+        }
+
+        public void BurntClearingShades(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenForestWilderness.BURNT_CLEARING_MOBS, true);
+
+                //Reload 
+                LocationHandler.ResetLocation(BURNT_CLEARING);
+            }
         }
 
         public LocationDefinition GetBurntClearingDefinition()
@@ -229,7 +268,31 @@ namespace The_Darkest_Hour.Towns.Watertown
             Location returnData;
             returnData = new Location();
             returnData.Name = "Spider's Hollow";
-            returnData.Description = "A large hollow just a small distance from the clearing. The hollow is the home to many of the forest spiders. Thankfully most of them are off elsewhere. ";
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenForestWilderness.SPIDERS_HOLLOW_MOBS));
+
+            if (!defeatedMobs)
+            {
+                returnData.Description = "A large hollow just a small distance from the clearing. The hollow is the home to many of the forest spiders. Thankfully most of them are off elsewhere. ";
+
+                List<LocationAction> locationActions = new List<LocationAction>();
+                List<Mob> mobs = new List<Mob>();
+                mobs.Add(new GiantSpider());
+                mobs.Add(new GiantSpider());
+                mobs.Add(new GiantSpider());
+                mobs.Add(new GiantSpider());
+                mobs.Add(new GiantSpider());
+                mobs.Add(new GiantSpider());
+                mobs.Add(new GiantSpider());
+                mobs.Add(new GiantSpider());
+                mobs.Add(new GiantSpider());
+                mobs.Add(new GiantSpider());
+                CombatAction combatAction = new CombatAction("Giant Spiders", mobs);
+                combatAction.PostCombat += SpidersHollowMobs;
+                locationActions.Add(combatAction);
+                returnData.Actions = locationActions;
+            }
+            else
+                returnData.Description = "A large hollow just a small distance from the clearing. The hollow is the home to many of the forest spiders. Thankfully most of them are off elsewhere, though they will be angered when they're greeted by the sight of their dead.";
 
             //Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
@@ -241,6 +304,17 @@ namespace The_Darkest_Hour.Towns.Watertown
             returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
 
             return returnData;
+        }
+
+        public void SpidersHollowMobs(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenForestWilderness.SPIDERS_HOLLOW_MOBS, true);
+
+                //Reload 
+                LocationHandler.ResetLocation(SPIDERS_HOLLOW);
+            }
         }
 
         public LocationDefinition GetSpidersHollowDefinition()
@@ -272,8 +346,26 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             Location returnData;
             returnData = new Location();
-            returnData.Name = "Treacherous Path 2";
-            returnData.Description = "The path continues ever deeper into the forest. A dark presence blocks your progress to the end of the dangerous path.";
+            returnData.Name = "Treacherous Path 2";           
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenForestWilderness.TREACHEROUS_PATH_TWO_MOBS));
+
+            if (!defeatedMobs)
+            {
+                returnData.Description = "The path continues ever deeper into the forest. A dark presence blocks your progress to the end of the dangerous path.";
+
+                List<LocationAction> locationActions = new List<LocationAction>();
+                List<Mob> mobs = new List<Mob>();
+                mobs.Add(new Shade());
+                mobs.Add(new Shade());
+                mobs.Add(new Shade());
+                mobs.Add(new Shade());
+                CombatAction combatAction = new CombatAction("Shades", mobs);
+                combatAction.PostCombat += TreacherousPathTwoMobs;
+                locationActions.Add(combatAction);
+                returnData.Actions = locationActions;
+            }
+            else
+                returnData.Description = "The path continues ever deeper into the forest.";
 
             //Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
@@ -282,15 +374,29 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = BankenForestWilderness.GetTownInstance().GetTrecherousPathDefinition();
             adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            locationDefinition = BankenForestWilderness.GetTownInstance().GetDenseWoodsDefinition();
-            adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            if (defeatedMobs)
+            {
+                locationDefinition = BankenForestWilderness.GetTownInstance().GetDenseWoodsDefinition();
+                adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            locationDefinition = BankenForestWilderness.GetTownInstance().GetWideCreekDefinition();
-            adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+                locationDefinition = BankenForestWilderness.GetTownInstance().GetWideCreekDefinition();
+                adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
 
             return returnData;
+        }
+
+        public void TreacherousPathTwoMobs(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenForestWilderness.TREACHEROUS_PATH_TWO_MOBS, true);
+
+                //Reload 
+                LocationHandler.ResetLocation(TREACHEROUS_PATH_TWO);
+            }
         }
 
         public LocationDefinition GetTrecherousPathTwoDefinintion()
@@ -322,8 +428,41 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             Location returnData;
             returnData = new Location();
-            returnData.Name = "Dense Woods";
-            returnData.Description = "The trees just off the path are very dense and could be used to collect wood...\nThere are several spiders roaming about the trees.";
+            returnData.Name = "Dense Woods";            
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenForestWilderness.DENSE_WOODS_MOBS));
+            _collectedWood = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, BankenForestWilderness.COLLECT_WOOD_KEY));
+            string action = "Collect";
+            string itemName = "Wood";
+            string actionText = "You chop down several trees to collect wood.";
+
+            List<LocationAction> locationActions = new List<LocationAction>();
+
+            if (!defeatedMobs)
+            {
+                returnData.Description = "The trees just off the path are very dense and could be used to collect wood...\nThere are several spiders roaming about the trees.";
+
+                List<Mob> mobs = new List<Mob>();
+                mobs.Add(new GiantSpider());
+                mobs.Add(new GiantSpider());
+                mobs.Add(new GiantSpider());
+                mobs.Add(new GiantSpider());
+                CombatAction combatAction = new CombatAction("Giant Spiders", mobs);
+                combatAction.PostCombat += DenseWoodMobs;
+                locationActions.Add(combatAction);
+                returnData.Actions = locationActions;
+            }
+            else
+                returnData.Description = "The trees just off the path are very dense and could be used to collect wood...";
+
+            // Location Actions
+
+            if (!_collectedWood && defeatedMobs)
+            {
+                TakeItemAction itemAction = new TakeItemAction(action, itemName, actionText);
+                locationActions.Add(itemAction);
+                itemAction.PostItem += WoodResults;
+                returnData.Actions = locationActions;
+            }
 
             //Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
@@ -335,6 +474,28 @@ namespace The_Darkest_Hour.Towns.Watertown
             returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
 
             return returnData;
+        }
+
+        public void DenseWoodMobs(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenForestWilderness.DENSE_WOODS_MOBS, true);
+
+                //Reload 
+                LocationHandler.ResetLocation(DENSE_WOODS);
+            }
+        }
+
+        public void WoodResults(object sender, TakeItemEventArgs itemEventArgs)
+        {
+            if (itemEventArgs.ItemResults == TakeItemResults.Taken)
+            {
+                LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, BankenForestWilderness.COLLECT_WOOD_KEY, true);
+
+                // Reload the forest straight path
+                LocationHandler.ResetLocation(DENSE_WOODS);
+            }
         }
 
         public LocationDefinition GetDenseWoodsDefinition()

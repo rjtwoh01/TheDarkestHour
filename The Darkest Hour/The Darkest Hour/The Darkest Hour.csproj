@@ -149,6 +149,7 @@
     <Compile Include="Characters\Mobs\Sailor.cs" />
     <Compile Include="Characters\Mobs\Scout.cs" />
     <Compile Include="Characters\Mobs\SewerRat.cs" />
+    <Compile Include="Characters\Mobs\Shade.cs" />
     <Compile Include="Characters\Mobs\ShadowDemon.cs" />
     <Compile Include="Characters\Mobs\Slave.cs" />
     <Compile Include="Characters\Mobs\SlaveMaster.cs" />
