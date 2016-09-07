@@ -134,6 +134,7 @@
     <Compile Include="Characters\Mobs\Bosses\Beach Tower\ScoutLeader.cs" />
     <Compile Include="Characters\Mobs\Bosses\ScummyMurderer.cs" />
     <Compile Include="Characters\Mobs\Bosses\SewerKing.cs" />
+    <Compile Include="Characters\Mobs\Bosses\Banken\ShadeLord.cs" />
     <Compile Include="Characters\Mobs\Bosses\SkeletonKing.cs" />
     <Compile Include="Characters\Mobs\Bosses\Beach Tower\SpyMaster.cs" />
     <Compile Include="Characters\Mobs\CrazedOutlaw.cs" />

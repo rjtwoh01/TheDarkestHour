@@ -527,9 +527,43 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             Location returnData;
             returnData = new Location();
-            returnData.Name = "Wide Creek";
-            returnData.Description = "The creek is very wide and you'll need a small raft to cross it safely.";
+            returnData.Name = "Wide Creek";            
             //Once the player builds the raft 6 skeletons will come out from the water to attack him/her.
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenForestWilderness.DENSE_WOODS_MOBS));
+            _builtRaft = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, BankenForestWilderness.BUILD_RAFT));
+            string action = "Build";
+            string itemName = "Raft";
+            string actionText = "You build a raft to cross the creek with the wood you collected. As you complete the small boat several skeletons rise from the water, ready to stop you from proceeding.";
+
+            List<LocationAction> locationActions = new List<LocationAction>();
+
+            // Location Actions
+
+            if (!_collectedWood)
+            {
+                returnData.Description = "The creek is very wide and you'll need a small raft to cross it safely.";
+                TakeItemAction itemAction = new TakeItemAction(action, itemName, actionText);
+                locationActions.Add(itemAction);
+                itemAction.PostItem += RaftResults;
+                returnData.Actions = locationActions;
+            }
+
+            else if (!defeatedMobs & _builtRaft)
+            {
+                returnData.Description = "The creek is very wide. Skeletons rise from the water, ready to stop whoever dares cross it.";
+
+                List<Mob> mobs = new List<Mob>();
+                mobs.Add(new GiantSpider());
+                mobs.Add(new GiantSpider());
+                mobs.Add(new GiantSpider());
+                mobs.Add(new GiantSpider());
+                CombatAction combatAction = new CombatAction("Giant Spiders", mobs);
+                combatAction.PostCombat += WideCreekMobs;
+                locationActions.Add(combatAction);
+                returnData.Actions = locationActions;
+            }
+            else
+                returnData.Description = "The creek is very wide. The shattered bones of skeletons float in the now peaceful water.";
 
             //Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
@@ -538,12 +572,37 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = BankenForestWilderness.GetTownInstance().GetTrecherousPathTwoDefinintion();
             adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            locationDefinition = BankenForestWilderness.GetTownInstance().GetCreekLandingDefinition();
-            adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            if (_builtRaft && defeatedMobs)
+            {
+                locationDefinition = BankenForestWilderness.GetTownInstance().GetCreekLandingDefinition();
+                adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
 
             return returnData;
+        }
+
+        public void WideCreekMobs(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenForestWilderness.WIDE_CREEK_MOBS, true);
+
+                //Reload 
+                LocationHandler.ResetLocation(WIDE_CREEK);
+            }
+        }
+
+        public void RaftResults(object sender, TakeItemEventArgs itemEventArgs)
+        {
+            if (itemEventArgs.ItemResults == TakeItemResults.Taken)
+            {
+                LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, BankenForestWilderness.BUILD_RAFT, true);
+
+                // Reload the forest straight path
+                LocationHandler.ResetLocation(WIDE_CREEK);
+            }
         }
 
         public LocationDefinition GetWideCreekDefinition()
@@ -575,8 +634,31 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             Location returnData;
             returnData = new Location();
-            returnData.Name = "Creek Landing";
-            returnData.Description = "The creek landing is small but the air feels much heavier on this side of the water. Shades lurk at the edge of the woods.";
+            returnData.Name = "Creek Landing";            
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenForestWilderness.CREEK_LANDING_MOBS));
+
+            List<LocationAction> locationActions = new List<LocationAction>();
+
+            if (!defeatedMobs)
+            {
+                returnData.Description = "The creek landing is small but the air feels much heavier on this side of the water. Shades lurk at the edge of the woods.";
+
+                List<Mob> mobs = new List<Mob>();
+                mobs.Add(new Shade());
+                mobs.Add(new Shade());
+                mobs.Add(new Shade());
+                mobs.Add(new Shade());
+                mobs.Add(new Shade());
+                mobs.Add(new Shade());
+                mobs.Add(new Shade());
+                mobs.Add(new Shade());
+                CombatAction combatAction = new CombatAction("Shades", mobs);
+                combatAction.PostCombat += CreekLandingMobs;
+                locationActions.Add(combatAction);
+                returnData.Actions = locationActions;
+            }
+            else
+                returnData.Description = "The creek landing is small but the air feels much heavier on this side of the water.";
 
             //Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
@@ -585,12 +667,26 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = BankenForestWilderness.GetTownInstance().GetWideCreekDefinition();
             adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            locationDefinition = BankenForestWilderness.GetTownInstance().GetAbandonedFortressGatesDefinition();
-            adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            if (defeatedMobs)
+            {
+                locationDefinition = BankenForestWilderness.GetTownInstance().GetAbandonedFortressGatesDefinition();
+                adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
 
             return returnData;
+        }
+
+        public void CreekLandingMobs(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenForestWilderness.CREEK_LANDING_MOBS, true);
+
+                //Reload 
+                LocationHandler.ResetLocation(CREEK_LANDING);
+            }
         }
 
         public LocationDefinition GetCreekLandingDefinition()
@@ -622,14 +718,76 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             Location returnData;
             returnData = new Location();
-            returnData.Name = "Abandoned Fortress Gates";
-            returnData.Description = "Just beyond the creek landing are the gates to an abandoned fortress. The gates appear sealed shut by some dark magic. A large group of shades hover before the gate to vanquish any that dare approach it.";
+            returnData.Name = "Abandoned Fortress Gates";            
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenForestWilderness.CREEK_LANDING_MOBS));
+            bool defeatedShadeLord = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenForestWilderness.SHADE_LORD));
+            bool inspectGate = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenForestWilderness.INSPECT_GATE));
+            bool tookTreasure = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenForestWilderness.TREASURE));
+            string before = GameState.Hero.Identifier + ", you dare enter my domain? This fortress stands as a testement to my masters. The void shall claim you!";
+            string after = "The shade lord cries out a piercing scream as it fades back into the void that spawned it.";
+            string action = "Inspect";
+            string itemName = "Gate";
+            string actionText = "You inspect the gate. It seems to be sealed by very powerful dark magic. You'll have to go back to Banken and see if the rangers know of any mages that could help you unseal the gates. \nBefore you can turn back around to head back to town a Shade Lord materializes at the entrance of the gates and terror fills your heart.";
             
             //Once the player defeats the shades, have him/her try to open the gate
             //That will fail and a Shade Lord will appear.
             //The player will have to report back to Gilan after defeating the Shade Lord
             //Gilan will then tell the player that (s)he will have to find
-            //some very power mages to help him/her blast open the gate
+            //some very power mages to help him/her blast open the gate            
+
+            List<LocationAction> locationActions = new List<LocationAction>();
+
+            if (!defeatedMobs)
+            {
+                returnData.Description = "Just beyond the creek landing are the gates to an abandoned fortress. The gates appear sealed shut by some dark magic. A large group of shades hover before the gate to vanquish any that dare approach it.";
+
+                List<Mob> mobs = new List<Mob>();
+                mobs.Add(new Shade());
+                mobs.Add(new Shade());
+                mobs.Add(new Shade());
+                mobs.Add(new Shade());
+                mobs.Add(new Shade());
+                mobs.Add(new Shade());
+                mobs.Add(new Shade());
+                mobs.Add(new Shade());
+                mobs.Add(new Shade());
+                mobs.Add(new Shade());
+                CombatAction combatAction = new CombatAction("Shades", mobs);
+                combatAction.PostCombat += AbandonedFortressMobs;
+                locationActions.Add(combatAction);
+                returnData.Actions = locationActions;
+            }
+            else if (!inspectGate)
+            {
+                //Change description
+                returnData.Description = "Just beyond the creek landing are the gates to an abandoned fortress. The gates appear sealed shut by some dark magic. A large group of shades hover before the gate to vanquish any that dare approach it.";
+                returnData.Description = "The creek is very wide and you'll need a small raft to cross it safely.";
+                TakeItemAction itemAction = new TakeItemAction(action, itemName, actionText);
+                locationActions.Add(itemAction);
+                itemAction.PostItem += GateResults;
+                returnData.Actions = locationActions;
+            }
+            else if (!defeatedShadeLord)
+            {
+                //Change description
+                returnData.Description = "Just beyond the creek landing are the gates to an abandoned fortress. The gates appear sealed shut by some dark magic. A large group of shades hover before the gate to vanquish any that dare approach it.";
+
+                List<Mob> mobs = new List<Mob>();
+                mobs.Add(new ShadeLord());
+                CombatAction combatAction = new CombatAction("Shade Lord", mobs, before, after);
+                combatAction.PostCombat += ShadeLord;
+                locationActions.Add(combatAction);
+                returnData.Actions = locationActions;
+            }
+            else if (!tookTreasure)
+            {
+                //Change description
+                returnData.Description = "On the other side of the dense fog is a circular arrea that used to be used as ritual grounds. The grounds have long since been abandoned. However, a new resident has taken up home here and is spewing dark magic into the lands. There is a black scorch mark where Ackhan used to be. There is an unopened treasure chest on the edge of the circle.";
+                TreasureChestAction itemAction = new TreasureChestAction(5);
+                locationActions.Add(itemAction);
+                itemAction.PostItem += TreasureChest;
+                returnData.Actions = locationActions;
+            }
 
             //Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
@@ -644,6 +802,50 @@ namespace The_Darkest_Hour.Towns.Watertown
             returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
 
             return returnData;
+        }
+
+        public void AbandonedFortressMobs(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenForestWilderness.ABANDONED_FORTRESS_MOBS, true);
+
+                //Reload 
+                LocationHandler.ResetLocation(ABANDONED_FORTRESS_GATES);
+            }
+        }
+
+        public void GateResults(object sender, TakeItemEventArgs itemEventArgs)
+        {
+            if (itemEventArgs.ItemResults == TakeItemResults.Taken)
+            {
+                LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, BankenForestWilderness.INSPECT_GATE, true);
+
+                // Reload the forest straight path
+                LocationHandler.ResetLocation(ABANDONED_FORTRESS_GATES);
+            }
+        }
+
+        public void ShadeLord(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenForestWilderness.SHADE_LORD, true);
+
+                //Reload 
+                LocationHandler.ResetLocation(ABANDONED_FORTRESS_GATES);
+            }
+        }
+
+        public void TreasureChest(object sender, ChestEventArgs chestEventArgs)
+        {
+            if (chestEventArgs.ChestResults == ChestResults.Taken)
+            {
+                LocationHandler.SetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenForestWilderness.TREASURE, true);
+
+                //Reload
+                LocationHandler.ResetLocation(ABANDONED_FORTRESS_GATES);
+            }
         }
 
         public LocationDefinition GetAbandonedFortressGatesDefinition()
