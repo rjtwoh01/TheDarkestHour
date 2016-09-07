@@ -27,6 +27,18 @@ namespace The_Darkest_Hour.Towns.Watertown
         public const string WIDE_CREEK = "Banken.BankenForestWilderness.WideCreek";
         public const string CREEK_LANDING = "Banken.BankenForestWilderness.CreekLanding";
         public const string ABANDONED_FORTRESS_GATES = "Banken.BankenForestWilderness.AbandonedFortress";
+        public const string TREACHEROUS_PATH_MOBS = "Banken.BankenForestWilderness.TreacherousPathMobs";
+        public const string BURNT_CLEARING_MOBS = "Banken.BankenForestWilderness.BurntClearingMobs";
+        public const string SPIDERS_HALLOW_MOBS = "Banken.BankenForestWilderness.SpidersHallowMobs";
+        public const string TREACHEROUS_PATH_TWO_MOBS = "Banken.BankenForestWilderness.TreacherousPathTwoMobs";
+        public const string DENSE_WOODS_MOBS = "Banken.BankenForestWilderness.DenseWoodsMobs";
+        public const string WIDE_CREEK_MOBS = "Banken.BankenForestWilderness.WideCreekMobs";
+        public const string BUILD_RAFT = "Banken.BankenForestWilderness.BuildRaft";
+        public const string CREEK_LANDING_MOBS = "Banken.BankenForestWilderness.CreekLandingMobs";
+        public const string ABANDONED_FORTRESS_MOBS = "Banken.BankenForestWilderness.AbandonedFortressMobs";
+        public const string SHADE_LORD = "Banken.BankenForestWilderness.ShadeLord";
+        public const string TREASURE = "Banken.BankenForestWilderness.Treasure";
+        public const string INSPECT_GATE = "Banken.BankenForestWilderness.InspectGate";
 
         #endregion
 
@@ -91,7 +103,25 @@ namespace The_Darkest_Hour.Towns.Watertown
             Location returnData;
             returnData = new Location();
             returnData.Name = "Treacherous Path";
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenForestWilderness.TREACHEROUS_PATH_MOBS));
             returnData.Description = "The path leading into the wilderness is long, twisty, and very unforgiving to those that travel it. There are several spiders that block the path further";
+            
+            if (!defeatedMobs)
+            {
+                returnData.Description = "A narrow twisting path that goes deep within the forest. The air is heavy and the skies dark. There are faint cries in the distance, and mist forms on the ground. Giant spiders are descending down threateningly toward you.";
+
+                List<LocationAction> locationActions = new List<LocationAction>();
+                List<Mob> mobs = new List<Mob>();
+                mobs.Add(new GiantSpider());
+                mobs.Add(new GiantSpider());
+                mobs.Add(new GiantSpider());
+                mobs.Add(new GiantSpider());
+                mobs.Add(new GiantSpider());
+                CombatAction combatAction = new CombatAction("Giant Spiders", mobs);
+                combatAction.PostCombat += TreacherousPathSpiders;
+                locationActions.Add(combatAction);
+                returnData.Actions = locationActions;
+            }
 
             //Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
@@ -109,6 +139,17 @@ namespace The_Darkest_Hour.Towns.Watertown
             returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
 
             return returnData;
+        }
+
+        public void TreacherousPathSpiders(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenForestWilderness.TREACHEROUS_PATH_MOBS, true);
+
+                //Reload 
+                LocationHandler.ResetLocation(TREACHEROUS_PATH);
+            }
         }
 
         public LocationDefinition GetTrecherousPathDefinition()
