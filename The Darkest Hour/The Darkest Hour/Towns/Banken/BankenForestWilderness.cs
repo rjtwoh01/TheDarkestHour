@@ -529,8 +529,9 @@ namespace The_Darkest_Hour.Towns.Watertown
             returnData = new Location();
             returnData.Name = "Wide Creek";            
             //Once the player builds the raft 6 skeletons will come out from the water to attack him/her.
-            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenForestWilderness.DENSE_WOODS_MOBS));
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenForestWilderness.WIDE_CREEK_MOBS));
             _builtRaft = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, BankenForestWilderness.BUILD_RAFT));
+            _collectedWood = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, BankenForestWilderness.COLLECT_WOOD_KEY));
             string action = "Build";
             string itemName = "Raft";
             string actionText = "You build a raft to cross the creek with the wood you collected. As you complete the small boat several skeletons rise from the water, ready to stop you from proceeding.";
@@ -539,7 +540,7 @@ namespace The_Darkest_Hour.Towns.Watertown
 
             // Location Actions
 
-            if (!_collectedWood)
+            if (_collectedWood && !_builtRaft)
             {
                 returnData.Description = "The creek is very wide and you'll need a small raft to cross it safely.";
                 TakeItemAction itemAction = new TakeItemAction(action, itemName, actionText);
@@ -553,11 +554,13 @@ namespace The_Darkest_Hour.Towns.Watertown
                 returnData.Description = "The creek is very wide. Skeletons rise from the water, ready to stop whoever dares cross it.";
 
                 List<Mob> mobs = new List<Mob>();
-                mobs.Add(new GiantSpider());
-                mobs.Add(new GiantSpider());
-                mobs.Add(new GiantSpider());
-                mobs.Add(new GiantSpider());
-                CombatAction combatAction = new CombatAction("Giant Spiders", mobs);
+                mobs.Add(new Skeleton());
+                mobs.Add(new Skeleton());
+                mobs.Add(new Skeleton());
+                mobs.Add(new Skeleton());
+                mobs.Add(new Skeleton());
+                mobs.Add(new Skeleton());
+                CombatAction combatAction = new CombatAction("Skeletons", mobs);
                 combatAction.PostCombat += WideCreekMobs;
                 locationActions.Add(combatAction);
                 returnData.Actions = locationActions;
@@ -719,7 +722,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             Location returnData;
             returnData = new Location();
             returnData.Name = "Abandoned Fortress Gates";            
-            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenForestWilderness.CREEK_LANDING_MOBS));
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenForestWilderness.ABANDONED_FORTRESS_MOBS));
             bool defeatedShadeLord = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenForestWilderness.SHADE_LORD));
             bool inspectGate = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenForestWilderness.INSPECT_GATE));
             bool tookTreasure = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenForestWilderness.TREASURE));
@@ -759,9 +762,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             }
             else if (!inspectGate)
             {
-                //Change description
-                returnData.Description = "Just beyond the creek landing are the gates to an abandoned fortress. The gates appear sealed shut by some dark magic. A large group of shades hover before the gate to vanquish any that dare approach it.";
-                returnData.Description = "The creek is very wide and you'll need a small raft to cross it safely.";
+                returnData.Description = "Just beyond the creek landing are the gates to an abandoned fortress. The gates appear sealed shut by some dark magic.";
                 TakeItemAction itemAction = new TakeItemAction(action, itemName, actionText);
                 locationActions.Add(itemAction);
                 itemAction.PostItem += GateResults;
@@ -769,8 +770,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             }
             else if (!defeatedShadeLord)
             {
-                //Change description
-                returnData.Description = "Just beyond the creek landing are the gates to an abandoned fortress. The gates appear sealed shut by some dark magic. A large group of shades hover before the gate to vanquish any that dare approach it.";
+                returnData.Description = "Just beyond the creek landing are the gates to an abandoned fortress. The gates appear sealed shut by some dark magic. A Shade Lord hovers before the gates, dark energy radiating from its body in waves.";
 
                 List<Mob> mobs = new List<Mob>();
                 mobs.Add(new ShadeLord());
@@ -781,13 +781,16 @@ namespace The_Darkest_Hour.Towns.Watertown
             }
             else if (!tookTreasure)
             {
-                //Change description
-                returnData.Description = "On the other side of the dense fog is a circular arrea that used to be used as ritual grounds. The grounds have long since been abandoned. However, a new resident has taken up home here and is spewing dark magic into the lands. There is a black scorch mark where Ackhan used to be. There is an unopened treasure chest on the edge of the circle.";
+                returnData.Description = "Just beyond the creek landing are the gates to an abandoned fortress. The gates appear sealed shut by some dark magic. There is a treasure chest in front of the gates.";
                 TreasureChestAction itemAction = new TreasureChestAction(5);
                 locationActions.Add(itemAction);
                 itemAction.PostItem += TreasureChest;
                 returnData.Actions = locationActions;
             }
+            else
+                returnData.Description = "Just beyond the creek landing are the gates to an abandoned fortress. The gates appear sealed shut by some dark magic.";
+
+            //Once the player gets the mages there will be an action to begin unsealing the gate and then the player can proceed into the "abandoned" fortress
 
             //Adjacent Locations
             Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
@@ -796,8 +799,11 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = BankenForestWilderness.GetTownInstance().GetCreekLandingDefinition();
             adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            locationDefinition = Banken.GetTownInstance().GetTownCenterDefinition();
-            adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            if (defeatedMobs && inspectGate && defeatedShadeLord)
+            {
+                locationDefinition = Banken.GetTownInstance().GetTownCenterDefinition();
+                adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
 
@@ -819,7 +825,7 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             if (itemEventArgs.ItemResults == TakeItemResults.Taken)
             {
-                LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, BankenForestWilderness.INSPECT_GATE, true);
+                LocationHandler.SetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenForestWilderness.INSPECT_GATE, true);
 
                 // Reload the forest straight path
                 LocationHandler.ResetLocation(ABANDONED_FORTRESS_GATES);
