@@ -237,9 +237,13 @@ namespace The_Darkest_Hour.Towns.Watertown
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
             }
 
-            //Make it a requirement to finish the act to travel to Banken
-            locationDefinition = Banken.GetTownInstance().GetStartingLocationDefinition();
-            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            //Travel to Banken
+            Accomplishment travelToBanken = BeachTower.GetBeachTowerAccomplishments().Find(x => x.Name.Contains("Travel to Banken"));
+            if (GameState.Hero.Accomplishments.Contains(battleForTheSeas))
+            {
+                locationDefinition = Banken.GetTownInstance().GetStartingLocationDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
 
             locationDefinition = Ankou.GetTownInstance().GetTownCenterDefinition();
             adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
