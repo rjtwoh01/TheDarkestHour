@@ -283,13 +283,13 @@ namespace The_Darkest_Hour.Items
             BowNames.Add(nameThree + " Bow");
 
             List<string> StaffNames = new List<string>();
-            StaffNames.Add(nameOne + "Champion's Staff");
-            StaffNames.Add(nameTwo + "Honor Staff");
+            StaffNames.Add(nameOne + " Staff");
+            StaffNames.Add(nameTwo + " Staff");
             StaffNames.Add(nameThree + " Staff");
 
             List<string> WandNames = new List<string>();
-            WandNames.Add(nameOne + "Champion's Wand");
-            WandNames.Add(nameTwo + "Honor Wand");
+            WandNames.Add(nameOne + " Wand");
+            WandNames.Add(nameTwo + " Wand");
             WandNames.Add(nameThree + " Wand");
 
             List<string> AxeNames = new List<string>();
