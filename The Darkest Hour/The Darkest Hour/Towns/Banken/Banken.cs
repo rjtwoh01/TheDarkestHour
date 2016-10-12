@@ -313,7 +313,8 @@ namespace The_Darkest_Hour.Towns.Watertown
                 bool investigateReligiousShrine = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenAshenForestWorshipRegion.JOURNAL));
                 bool rescueRangers = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenAshenForestRangerPaths.GIANT_SHADOW_DEMON));
                 bool ancientBurialGrounds = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenAncientBurialGrounds.ACKHAN));
-                bool shadeLordDefeated = false;
+                bool shadeLordDefeated = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenForestWilderness.SHADE_LORD));
+                bool recruitMage = false;
                 if (!investigateReligiousShrine)
                 {
                     rumor = new Rumor("Investigate Religious Shrine", "Welcome to Banken, " + GameState.Hero.Identifier + ". It seems you have accomplished quite a lot in the recent months. Impressive. It seems as if darkness is plauging all of Asku at the moment, and it troubles me. The Ashen Forest wasn't named out of random. It is the job of my Rangers to keep the darkness at bay. However, its becoming more and more apparent that, that's something that we can't do by ourselves anymore. We need help. I have a task for you. There is a religious shrine about a mile outside of the town, in a small clearing in the forest. People regularly travel there to pay their worship to the Gods. However, as of late they have been coming back pale and shaken. Unwilling to speak of what happened. I feel as if something evil has taken root at or near the shrine. My Rangers are spread thin at the moment. Can you go investigate for me? Do what you have to do.");
@@ -333,6 +334,11 @@ namespace The_Darkest_Hour.Towns.Watertown
                 {
                     rumor = new Rumor("Shade Lord", "I have no idea what these tombs are that Ackhan spoke about. I really don't know where to continue looking for these rangers. Go scout the wilderness and see if you can stumble upon anything. Doubtful because of how much nothing there is but one can hope.");
                     rumor.OnHeardRumor = this.HearShadeLordRumor;
+                }
+                else if (!recruitMage)
+                {
+                    rumor = new Rumor("Recruit Mage", "So you say the gate is sealed by dark magic? The only thing I can think of is talking to a mage that lives in the forest from time to time. He has a retreat house off the worship region of the forest. If memory servers correctly, its just off the clearing where the shrine is kept. Go there and see if she has any thoughts on how to deal with this.");
+                    rumor.OnHeardRumor = this.HeardRecruitMageRumor;
                 }
                 else
                     rumor = new Rumor("You want something?", "You want something?");
@@ -374,6 +380,14 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationHandler.ResetLocation(TOWN_CENTER_KEY);
         }
 
+        public void HeardRecruitMageRumor()
+        {
+            Accomplishment accomplishment = Banken.GetBankenAccomplishments().Find(x => x.Name.Contains("Recruit Mage"));
+            GameState.Hero.Accomplishments.Add(accomplishment);
+            //Reload the TownCenter so it will open up the area to Complete the Task that the Task is in
+            LocationHandler.ResetLocation(TOWN_CENTER_KEY);
+        }
+
         #endregion
 
         #region Accomplishments
@@ -407,6 +421,12 @@ namespace The_Darkest_Hour.Towns.Watertown
                 accomplishment.NameSpace = "Banken";
                 accomplishment.Name = "Has heard the rumor of Shade Lord";
                 accomplishment.Description = "Has heard the rumor of traveling into the Ashen Forest going into the wilderness where you will eventually encounter a Shade Lord.";
+                _BankenAccomplishments.Add(accomplishment);
+
+                accomplishment = new Accomplishment();
+                accomplishment.NameSpace = "Banken";
+                accomplishment.Name = "Has heard the rumor of Recruit Mage";
+                accomplishment.Description = "Has heard the rumor of traveling into the Ashen forest and finding the mage's retreat house to Recruit Mage.";
                 _BankenAccomplishments.Add(accomplishment);
             }
 
