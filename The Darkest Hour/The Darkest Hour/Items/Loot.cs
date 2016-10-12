@@ -94,9 +94,13 @@ namespace The_Darkest_Hour.Items
             {
                 LevelsThirtySixToFortyLoot();
             }
-            if (mob.level >= 41 && mob.level <= 50)
+            if (mob.level >= 41 && mob.level <= 45)
             {
                 LevelsFortyOneToFortyFiveLoot();
+            }
+            if (mob.level >= 46 && mob.level <= 50)
+            {
+                LevelsFortySixToFortyNineLoot();
             }
         }
         #endregion
@@ -331,6 +335,32 @@ namespace The_Darkest_Hour.Items
                     break;
                 case 5:
                     GetPotion("Honor", 250, 401, 600, 951, 45, 86);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public void LevelsFortySixToFortyNineLoot()
+        {
+            rand = new Random();
+            temp = GameState.NumberGenerator.Next(1, 6);
+            switch (temp)
+            {
+                case 1:
+                    GetWeapon("Hero's", "Prestiged", "Royal", 50, 110, 46, 49);
+                    break;
+                case 2:
+                    GetArmor("Hero's", "Prestiged", "Royal", 50, 110, 46, 49);
+                    break;
+                case 3:
+                    GetHelmet("Hero's", "Prestiged", "Royal", 50, 110, 46, 49);
+                    break;
+                case 4:
+                    GetAmulet("Hero's", "Prestiged", "Royal", 50, 110, 46, 49);
+                    break;
+                case 5:
+                    GetPotion("Hero's", 300, 451, 650, 1000, 46, 100);
                     break;
                 default:
                     break;
