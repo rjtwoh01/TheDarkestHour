@@ -186,13 +186,26 @@ namespace The_Darkest_Hour.Areas
                         itemsToBuy.Add(aAmulet);
                         itemsToBuy.Add(aPotion);
                     }
-                    if (GameState.Hero.level >= 41 && GameState.Hero.level <= 50)
+                    if (GameState.Hero.level >= 41 && GameState.Hero.level <= 45)
                     {
                         aWeapon = vendor.GetWeapon("Champion's", "Honor", "Black Market", 45, 86, 41, 46);
                         aArmor = vendor.GetArmor("Champion's", "Honor", "Black Market", 45, 86, 41, 46);
                         aHelmet = vendor.GetHelmet("Champion's", "Honor", "Black Market", 45, 86, 41, 46);
                         aAmulet = vendor.GetAmulet("Champion's", "Honor", "Black Market", 45, 86, 41, 46);
-                        aPotion = vendor.GetPotion("Honor", 250, 401, 600, 951, 45, 86);
+                        aPotion = vendor.GetPotion("Honor", 250, 401, 600, 951, 41, 86);
+                        itemsToBuy.Add(aWeapon);
+                        itemsToBuy.Add(aArmor);
+                        itemsToBuy.Add(aHelmet);
+                        itemsToBuy.Add(aAmulet);
+                        itemsToBuy.Add(aPotion);
+                    }
+                    if (GameState.Hero.level >= 46 && GameState.Hero.level <= 50)
+                    {
+                        aWeapon = vendor.GetWeapon("Hero's", "Prestige", "Royal", 50, 100, 46, 49);
+                        aArmor = vendor.GetArmor("Hero's", "Prestige", "Royal", 50, 100, 46, 49);
+                        aHelmet = vendor.GetHelmet("Hero's", "Prestige", "Royal", 50, 100, 46, 49);
+                        aAmulet = vendor.GetAmulet("Hero's", "Prestige", "Royal", 50, 100, 46, 49);
+                        aPotion = vendor.GetPotion("Hero's", 300, 451, 650, 1000, 80, 100);
                         itemsToBuy.Add(aWeapon);
                         itemsToBuy.Add(aArmor);
                         itemsToBuy.Add(aHelmet);
