@@ -258,6 +258,7 @@
     <Compile Include="Towns\Banken\BankenAshenForestWorshipRegion.cs" />
     <Compile Include="Towns\Banken\BankenForestWilderness.cs" />
     <Compile Include="Towns\Banken\MagesRetreatHouse.cs" />
+    <Compile Include="Towns\Banken\OldForestRuins.cs" />
     <Compile Include="Towns\BeachTower\BeachTowerBattleForTheSeas.cs" />
     <Compile Include="Towns\BeachTower\BeachTowerBeachHead.cs" />
     <Compile Include="Towns\BeachTower\BeachTower.cs" />
