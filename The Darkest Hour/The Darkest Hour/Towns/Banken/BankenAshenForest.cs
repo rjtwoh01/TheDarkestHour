@@ -326,8 +326,12 @@ namespace The_Darkest_Hour.Towns.Watertown
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
             }
 
-            locationDefinition = OldForestRuins.GetTownInstance().GetEntranceDefinition();
-            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            Accomplishment oldForestRuins = Banken.GetBankenAccomplishments().Find(x => x.Name.Contains("Old Forest Ruins"));
+            if (GameState.Hero.Accomplishments.Contains(oldForestRuins))
+            {
+                locationDefinition = BankenOldForestRuins.GetTownInstance().GetEntranceDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
 

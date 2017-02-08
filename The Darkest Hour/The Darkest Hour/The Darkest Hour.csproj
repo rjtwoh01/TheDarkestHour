@@ -102,9 +102,12 @@
     <Compile Include="Characters\Mobs\Bosses\BanditKing.cs" />
     <Compile Include="Characters\Mobs\Bosses\BanditLieutenant.cs" />
     <Compile Include="Characters\Mobs\Bosses\Banken\Ackhan.cs" />
+    <Compile Include="Characters\Mobs\Bosses\Banken\Arth.cs" />
+    <Compile Include="Characters\Mobs\Bosses\Banken\Bothnul.cs" />
     <Compile Include="Characters\Mobs\Bosses\Banken\DemonicNecro.cs" />
     <Compile Include="Characters\Mobs\Bosses\Banken\GiantShadowDemon.cs" />
     <Compile Include="Characters\Mobs\Bosses\Banken\PsychoticBandit.cs" />
+    <Compile Include="Characters\Mobs\Bosses\Banken\Sedhem.cs" />
     <Compile Include="Characters\Mobs\Bosses\Beach Tower\BanditRaidLeader.cs" />
     <Compile Include="Characters\Mobs\Bosses\BanditScholar.cs" />
     <Compile Include="Characters\Mobs\Bosses\BanditSpy.cs" />
@@ -257,8 +260,8 @@
     <Compile Include="Towns\Banken\BankenAshenForestRangerPaths.cs" />
     <Compile Include="Towns\Banken\BankenAshenForestWorshipRegion.cs" />
     <Compile Include="Towns\Banken\BankenForestWilderness.cs" />
-    <Compile Include="Towns\Banken\MagesRetreatHouse.cs" />
-    <Compile Include="Towns\Banken\OldForestRuins.cs" />
+    <Compile Include="Towns\Banken\BankenMagesRetreatHouse.cs" />
+    <Compile Include="Towns\Banken\BankenOldForestRuins.cs" />
     <Compile Include="Towns\BeachTower\BeachTowerBattleForTheSeas.cs" />
     <Compile Include="Towns\BeachTower\BeachTowerBeachHead.cs" />
     <Compile Include="Towns\BeachTower\BeachTower.cs" />

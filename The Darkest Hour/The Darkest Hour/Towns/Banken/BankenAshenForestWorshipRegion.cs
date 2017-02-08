@@ -325,7 +325,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             Accomplishment recruitMage = Banken.GetBankenAccomplishments().Find(x => x.Name.Contains("Recruit Mage"));
             if (GameState.Hero.Accomplishments.Contains(recruitMage))
             {
-                locationDefinition = MagesRetreatHouse.GetTownInstance().GetEntranceDefinition();
+                locationDefinition = BankenMagesRetreatHouse.GetTownInstance().GetEntranceDefinition();
                 adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
             }
 

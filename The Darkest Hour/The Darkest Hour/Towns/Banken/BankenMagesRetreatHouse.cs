@@ -14,7 +14,7 @@ using The_Darkest_Hour.Common;
 
 namespace The_Darkest_Hour.Towns.Watertown
 {
-    class MagesRetreatHouse : Town
+    class BankenMagesRetreatHouse : Town
     {
         #region Location Keys
 
@@ -57,7 +57,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationDefinition locationDefinition = BankenAshenForestWorshipRegion.GetTownInstance().GetReligiousShrineClearingDefinition();
             adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
-            locationDefinition = MagesRetreatHouse.GetTownInstance().GetHallwayDefinition();
+            locationDefinition = BankenMagesRetreatHouse.GetTownInstance().GetHallwayDefinition();
             adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
@@ -95,7 +95,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             Location returnData;
             returnData = new Location();
             returnData.Name = "Hallway";
-            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, MagesRetreatHouse.HALLWAY_MOBS));
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenMagesRetreatHouse.HALLWAY_MOBS));
 
             if (!defeatedMobs)
             {
@@ -118,15 +118,15 @@ namespace The_Darkest_Hour.Towns.Watertown
             Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
 
             //Town Center
-            LocationDefinition locationDefinition = MagesRetreatHouse.GetTownInstance().GetEntranceDefinition();
+            LocationDefinition locationDefinition = BankenMagesRetreatHouse.GetTownInstance().GetEntranceDefinition();
             adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
             if (defeatedMobs)
             {
-                locationDefinition = MagesRetreatHouse.GetTownInstance().GetDiningRoomDefinition();
+                locationDefinition = BankenMagesRetreatHouse.GetTownInstance().GetDiningRoomDefinition();
                 adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
-                locationDefinition = MagesRetreatHouse.GetTownInstance().GetLivingRoomDefinition();
+                locationDefinition = BankenMagesRetreatHouse.GetTownInstance().GetLivingRoomDefinition();
                 adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
             }
 
@@ -139,7 +139,7 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
             {
-                LocationHandler.SetLocationStateValue(Banken.LOCATION_STATE_KEY, MagesRetreatHouse.HALLWAY_MOBS, true);
+                LocationHandler.SetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenMagesRetreatHouse.HALLWAY_MOBS, true);
 
                 //Reload 
                 LocationHandler.ResetLocation(HALLWAY_KEY);
@@ -176,7 +176,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             Location returnData;
             returnData = new Location();
             returnData.Name = "Dining Room";            
-            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, MagesRetreatHouse.DINING_ROOM_MOBS));
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenMagesRetreatHouse.DINING_ROOM_MOBS));
 
             if (!defeatedMobs)
             {
@@ -200,12 +200,12 @@ namespace The_Darkest_Hour.Towns.Watertown
             Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
 
             //Town Center
-            LocationDefinition locationDefinition = MagesRetreatHouse.GetTownInstance().GetHallwayDefinition();
+            LocationDefinition locationDefinition = BankenMagesRetreatHouse.GetTownInstance().GetHallwayDefinition();
             adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
             if (defeatedMobs)
             {
-                locationDefinition = MagesRetreatHouse.GetTownInstance().GetKitchenDefinition();
+                locationDefinition = BankenMagesRetreatHouse.GetTownInstance().GetKitchenDefinition();
                 adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
             }
 
@@ -218,7 +218,7 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
             {
-                LocationHandler.SetLocationStateValue(Banken.LOCATION_STATE_KEY, MagesRetreatHouse.DINING_ROOM_MOBS, true);
+                LocationHandler.SetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenMagesRetreatHouse.DINING_ROOM_MOBS, true);
 
                 //Reload 
                 LocationHandler.ResetLocation(DININING_ROOM_KEY);
@@ -255,7 +255,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             Location returnData;
             returnData = new Location();
             returnData.Name = "Kitchen";            
-            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, MagesRetreatHouse.KITCHEN_MOBS));
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenMagesRetreatHouse.KITCHEN_MOBS));
 
             if (!defeatedMobs)
             {
@@ -277,7 +277,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
 
             //Town Center
-            LocationDefinition locationDefinition = MagesRetreatHouse.GetTownInstance().GetDiningRoomDefinition();
+            LocationDefinition locationDefinition = BankenMagesRetreatHouse.GetTownInstance().GetDiningRoomDefinition();
             adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
             returnData.AdjacentLocationDefinitions = adjacentLocationDefintions;
@@ -289,7 +289,7 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
             {
-                LocationHandler.SetLocationStateValue(Banken.LOCATION_STATE_KEY, MagesRetreatHouse.KITCHEN_MOBS, true);
+                LocationHandler.SetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenMagesRetreatHouse.KITCHEN_MOBS, true);
 
                 //Reload 
                 LocationHandler.ResetLocation(KITCHEN_KEY);
@@ -326,7 +326,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             Location returnData;
             returnData = new Location();
             returnData.Name = "Living Room";            
-            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, MagesRetreatHouse.LIVING_ROOM_MOBS));            
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenMagesRetreatHouse.LIVING_ROOM_MOBS));            
 
             if (!defeatedMobs)
             {
@@ -350,12 +350,12 @@ namespace The_Darkest_Hour.Towns.Watertown
             Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
 
             //Town Center
-            LocationDefinition locationDefinition = MagesRetreatHouse.GetTownInstance().GetHallwayDefinition();
+            LocationDefinition locationDefinition = BankenMagesRetreatHouse.GetTownInstance().GetHallwayDefinition();
             adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
             if (defeatedMobs)
             {
-                locationDefinition = MagesRetreatHouse.GetTownInstance().GetBedroomDefinition();
+                locationDefinition = BankenMagesRetreatHouse.GetTownInstance().GetBedroomDefinition();
                 adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
             }
 
@@ -368,7 +368,7 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
             {
-                LocationHandler.SetLocationStateValue(Banken.LOCATION_STATE_KEY, MagesRetreatHouse.LIVING_ROOM_MOBS, true);
+                LocationHandler.SetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenMagesRetreatHouse.LIVING_ROOM_MOBS, true);
 
                 //Reload 
                 LocationHandler.ResetLocation(LIVING_ROOM_KEY);
@@ -407,8 +407,8 @@ namespace The_Darkest_Hour.Towns.Watertown
             Location returnData;
             returnData = new Location();
             returnData.Name = "Bedroom";            
-            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, MagesRetreatHouse.PSYCHOTIC_BANDIT));
-            bool tookTreasure = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, MagesRetreatHouse.TREASURE));
+            bool defeatedMobs = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenMagesRetreatHouse.PSYCHOTIC_BANDIT));
+            bool tookTreasure = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenMagesRetreatHouse.TREASURE));
             string before = "The Psychotic Bandit hears your foot steps and spins around, a crazed look gleaming in his eyes. \nHe laughs hysterically and says, ''Hah! You're too late! We've already captured that puny mage. She fought  but she could not withstand us!''";
             string after = "You put a knife up to the Psychotic Bandit's throat and growl out, ''Where is the mage? Where is she?''\nHe laughs and coughs up blood. He looks you in the eyes and replies, ''In hell.'' \nThe Psychotic Bandit coughs up blood one last time and then goes limp on the floor";
 
@@ -439,7 +439,7 @@ namespace The_Darkest_Hour.Towns.Watertown
             Dictionary<string, LocationDefinition> adjacentLocationDefintions = new Dictionary<string, LocationDefinition>();
 
             //Town Center
-            LocationDefinition locationDefinition = MagesRetreatHouse.GetTownInstance().GetLivingRoomDefinition();
+            LocationDefinition locationDefinition = BankenMagesRetreatHouse.GetTownInstance().GetLivingRoomDefinition();
             adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
 
             if (defeatedMobs)
@@ -457,7 +457,7 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
             {
-                LocationHandler.SetLocationStateValue(Banken.LOCATION_STATE_KEY, MagesRetreatHouse.PSYCHOTIC_BANDIT, true);
+                LocationHandler.SetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenMagesRetreatHouse.PSYCHOTIC_BANDIT, true);
 
                 //Reload 
                 LocationHandler.ResetLocation(BEDROOM_KEY);
@@ -468,7 +468,7 @@ namespace The_Darkest_Hour.Towns.Watertown
         {
             if (chestEventArgs.ChestResults == ChestResults.Taken)
             {
-                LocationHandler.SetLocationStateValue(Banken.LOCATION_STATE_KEY, MagesRetreatHouse.TREASURE, true);
+                LocationHandler.SetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenMagesRetreatHouse.TREASURE, true);
 
                 //Reload
                 LocationHandler.ResetLocation(BEDROOM_KEY);
@@ -502,13 +502,13 @@ namespace The_Darkest_Hour.Towns.Watertown
 
         #region Get Town Instance
 
-        private static MagesRetreatHouse _MagesRetreatHouse;
+        private static BankenMagesRetreatHouse _MagesRetreatHouse;
 
-        public static MagesRetreatHouse GetTownInstance()
+        public static BankenMagesRetreatHouse GetTownInstance()
         {
             if (_MagesRetreatHouse == null)
             {
-                _MagesRetreatHouse = new MagesRetreatHouse();
+                _MagesRetreatHouse = new BankenMagesRetreatHouse();
             }
 
             return _MagesRetreatHouse;
