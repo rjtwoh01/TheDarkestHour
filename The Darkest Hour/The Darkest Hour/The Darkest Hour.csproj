@@ -260,6 +260,7 @@
     <Compile Include="Towns\Banken\BankenAshenForestRangerPaths.cs" />
     <Compile Include="Towns\Banken\BankenAshenForestWorshipRegion.cs" />
     <Compile Include="Towns\Banken\BankenForestWilderness.cs" />
+    <Compile Include="Towns\Banken\BankenInconspicousCave.cs" />
     <Compile Include="Towns\Banken\BankenMagesRetreatHouse.cs" />
     <Compile Include="Towns\Banken\BankenOldForestRuins.cs" />
     <Compile Include="Towns\BeachTower\BeachTowerBattleForTheSeas.cs" />
