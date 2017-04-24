@@ -108,6 +108,7 @@
     <Compile Include="Characters\Mobs\Bosses\Banken\GiantShadowDemon.cs" />
     <Compile Include="Characters\Mobs\Bosses\Banken\PsychoticBandit.cs" />
     <Compile Include="Characters\Mobs\Bosses\Banken\Sedhem.cs" />
+    <Compile Include="Characters\Mobs\Bosses\Banken\Zulien.cs" />
     <Compile Include="Characters\Mobs\Bosses\Beach Tower\BanditRaidLeader.cs" />
     <Compile Include="Characters\Mobs\Bosses\BanditScholar.cs" />
     <Compile Include="Characters\Mobs\Bosses\BanditSpy.cs" />
@@ -151,6 +152,7 @@
     <Compile Include="Characters\Mobs\Peasant.cs" />
     <Compile Include="Characters\Mobs\Pirate.cs" />
     <Compile Include="Characters\Mobs\PossesedVillager.cs" />
+    <Compile Include="Characters\Mobs\ReAnimatedStatue.cs" />
     <Compile Include="Characters\Mobs\Sailor.cs" />
     <Compile Include="Characters\Mobs\Scout.cs" />
     <Compile Include="Characters\Mobs\SewerRat.cs" />
