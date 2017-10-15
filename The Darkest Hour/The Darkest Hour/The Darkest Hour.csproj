@@ -265,6 +265,7 @@
     <Compile Include="Towns\Banken\BankenInconspicousCave.cs" />
     <Compile Include="Towns\Banken\BankenMagesRetreatHouse.cs" />
     <Compile Include="Towns\Banken\BankenOldForestRuins.cs" />
+    <Compile Include="Towns\Banken\BankenSwampland.cs" />
     <Compile Include="Towns\BeachTower\BeachTowerBattleForTheSeas.cs" />
     <Compile Include="Towns\BeachTower\BeachTowerBeachHead.cs" />
     <Compile Include="Towns\BeachTower\BeachTower.cs" />

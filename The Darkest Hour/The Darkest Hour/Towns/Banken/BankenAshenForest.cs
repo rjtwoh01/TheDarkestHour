@@ -24,7 +24,11 @@ namespace The_Darkest_Hour.Towns.Watertown
         public const string FOREST_NORTHERN_PATH_ONE_KEY = "Banken.BankenAshenForest.NorthernPathOneKEY";
         public const string NORTHERN_PATH_TWO_KEY = "Banken.BankenAshenForest.NorthernPathTwoKey";
         public const string NORTHERN_PATH_THREE_KEY = "Banken.BankenAshenForest.NorthernPathThreeKey";
+        public const string NORTHERN_PATH_FOUR_KEY = "Banken.BankenAshenForest.NorthernPathFourKey";
+        public const string NORTHERN_PATH_FIVE_KEY = "Banken.BankenAshenForest.NorthernPathFiveKey";
+        public const string NORTHERN_FOREST_EDGE_KEY = "Banken.BankenAshenForest.NorthernForestEdgeKey";
         public const string LOOK_FOR_BURIAL_GROUNDS = "Banken.BankenAshenForest.LookForBurialGrounds";
+
 
         #endregion
 
@@ -340,6 +344,9 @@ namespace The_Darkest_Hour.Towns.Watertown
                 adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
             }
 
+            locationDefinition = BankenAshenForest.GetTownInstance().GetNorthernPathFourDefinition();
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+
             returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
 
             return returnData;
@@ -377,9 +384,142 @@ namespace The_Darkest_Hour.Towns.Watertown
             return returnData;
         }
 
+        public Location LoadNorthernPathFour()
+        {
+            Location returnData;
+            returnData = new Location();
+            returnData.Name = "Ashen Forest Northern Path Four";
+            returnData.Description = "The path leads north, deep into the forest. The air is lighter now";
+
+            //Adjacent Locations
+            Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
+
+            //Town Center
+            LocationDefinition locationDefinition = BankenAshenForest.GetTownInstance().GetNorthernPathThreeDefinition();
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+
+            locationDefinition = BankenAshenForest.GetTownInstance().GetNorthernPathFiveDefinition();
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+
+            returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
+
+            return returnData;
+        }
+
+        public LocationDefinition GetNorthernPathFourDefinition()
+        {
+            LocationDefinition returnData = new LocationDefinition();
+            string locationKey = NORTHERN_PATH_FOUR_KEY;
+
+            if (LocationHandler.LocationExists(locationKey))
+            {
+                returnData = LocationHandler.GetLocation(locationKey);
+            }
+            else
+            {
+                returnData.LocationKey = locationKey;
+                returnData.Name = "Ashen Forest Northen Path Four";
+                returnData.DoLoadLocation = LoadNorthernPathFour;
+
+                LocationHandler.AddLocation(returnData);
+            }
+
+            return returnData;
+        }
+
+        public Location LoadNorthernPathFive()
+        {
+            Location returnData;
+            returnData = new Location();
+            returnData.Name = "Ashen Forest Northern Path Five";
+            returnData.Description = "The path leads north, deep into the forest. The air is significantly lighter here.";
+
+            //Adjacent Locations
+            Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
+
+            //Town Center
+            LocationDefinition locationDefinition = BankenAshenForest.GetTownInstance().GetNorthernPathFourDefinition();
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+
+            locationDefinition = BankenAshenForest.GetTownInstance().GetNorthernForestEdgeDefinition();
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+
+            returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
+
+            return returnData;
+        }
+
+        public LocationDefinition GetNorthernPathFiveDefinition()
+        {
+            LocationDefinition returnData = new LocationDefinition();
+            string locationKey = NORTHERN_PATH_FIVE_KEY;
+
+            if (LocationHandler.LocationExists(locationKey))
+            {
+                returnData = LocationHandler.GetLocation(locationKey);
+            }
+            else
+            {
+                returnData.LocationKey = locationKey;
+                returnData.Name = "Ashen Forest Northen Path Five";
+                returnData.DoLoadLocation = LoadNorthernPathFive;
+
+                LocationHandler.AddLocation(returnData);
+            }
+
+            return returnData;
+        }
+
+        public Location LoadNorthernForestEdge()
+        {
+            Location returnData;
+            returnData = new Location();
+            returnData.Name = "Ashen Forest Northern Path Five";
+            returnData.Description = "The Northen Edge of the Ashen Forest. The air is light and clean, far away from ancient evils now.";
+
+            //Adjacent Locations
+            Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
+
+            //Town Center
+            LocationDefinition locationDefinition = BankenAshenForest.GetTownInstance().GetNorthernPathFiveDefinition();
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+
+            Accomplishment swampland = Banken.GetBankenAccomplishments().Find(x => x.Name.Contains("Swampland"));
+            if (GameState.Hero.Accomplishments.Contains(swampland))
+            {
+                locationDefinition = BankenSwampland.GetTownInstance().GetEntranceDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
+
+            returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
+
+            return returnData;
+        }
+
+        public LocationDefinition GetNorthernForestEdgeDefinition()
+        {
+            LocationDefinition returnData = new LocationDefinition();
+            string locationKey = NORTHERN_FOREST_EDGE_KEY;
+
+            if (LocationHandler.LocationExists(locationKey))
+            {
+                returnData = LocationHandler.GetLocation(locationKey);
+            }
+            else
+            {
+                returnData.LocationKey = locationKey;
+                returnData.Name = "Ashen Forest Northen Forest Edge";
+                returnData.DoLoadLocation = LoadNorthernForestEdge;
+
+                LocationHandler.AddLocation(returnData);
+            }
+
+            return returnData;
+        }
+
         #endregion
 
-        
+
         //#region Forest Path Worship Region
 
         //public Location LoadForestPathWorshipRegion()
