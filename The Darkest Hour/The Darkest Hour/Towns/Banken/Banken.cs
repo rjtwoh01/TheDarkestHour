@@ -316,6 +316,10 @@ namespace The_Darkest_Hour.Towns.Watertown
                 bool shadeLordDefeated = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenForestWilderness.SHADE_LORD));
                 bool searchForMage= Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenMagesRetreatHouse.PSYCHOTIC_BANDIT));
                 bool oldForestRuins = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenOldForestRuins.TAKE_ORDERS));
+                bool inconspicuousCavve = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenInconspicousCave.ZULIEN));
+                bool swampLand = false;
+                bool banditCamp = false;
+                bool abandonedFortress = false;
                 if (!investigateReligiousShrine)
                 {
                     rumor = new Rumor("Investigate Religious Shrine", "Welcome to Banken, " + GameState.Hero.Identifier + ". It seems you have accomplished quite a lot in the recent months. Impressive. It seems as if darkness is plauging all of Asku at the moment, and it troubles me. The Ashen Forest wasn't named out of random. It is the job of my Rangers to keep the darkness at bay. However, its becoming more and more apparent that, that's something that we can't do by ourselves anymore. We need help. I have a task for you. There is a religious shrine about a mile outside of the town, in a small clearing in the forest. People regularly travel there to pay their worship to the Gods. However, as of late they have been coming back pale and shaken. Unwilling to speak of what happened. I feel as if something evil has taken root at or near the shrine. My Rangers are spread thin at the moment. Can you go investigate for me? Do what you have to do.");
@@ -345,6 +349,26 @@ namespace The_Darkest_Hour.Towns.Watertown
                 {
                     rumor = new Rumor("Old Forest Ruins", "You weren't able to get anything out of the Psychotic Bandit about the mage? Well, that's a shame. How about this, I'll send my agents off to try to find more information about what happened to the mage stealthily. In the mean time, go to some old abandoned ruins on the northern part of the forest. I've heard tales of bandits in the area and rumors that travelers have gone missing. Hopefully by the time you return we'll have figured out something to do about the mage.");
                     rumor.OnHeardRumor = this.HeardOldForestRuinsRumor;
+                }
+                else if (!inconspicuousCavve)
+                {
+                    rumor = new Rumor("Inconspicious Cave", "You hand Gildan the orders given to the bandits that you found in the Old Forest Ruins. He looks them over, eyebrow raised as he reads. He looks up at you and says, 'Well, this is certainly disturbing. What army? Asku will fall? I'm really starting to become uncomfortable about all this mess. This needs to be looked into further. And unfortunately we still haven't found a mage strong enough to take down the magical barricade on the Abandoned Fortress. During one of our searches, a ranger reported finding a seemingly Inconspicious Cave in the forest. He wouldn't have thought anything of it but there was a flare of dark magic. Go north into the forest and see if you can find out what caused that flare.'");
+                    rumor.OnHeardRumor = this.HeardInconspiciousCaveRumor;
+                }
+                else if (!swampLand)
+                {
+                    rumor = new Rumor("Swampland", "So it was just another necromancer performing a dark ritual? When will these bastards just go away? What is bolstering them to come out in such force lately? Not that we have time to dwell on such mysteries. There is a swampland on the border of the Ashen Forest. Tales have reached my ears of elementals and dark horrors haunting them. Not many people live out there but we do trade with the fishermen. Go, see if you can get to the bottom of this and end whatever evil may be lurking down there.");
+                    rumor.OnHeardRumor = this.HeardSwamplandRumor;
+                }
+                else if (!banditCamp)
+                {
+                    rumor = new Rumor("Bandit Camp", "A High Necromancer? This is starting to get pretty dangerous. I wonder what they wanted with the swamp lands. I will send rangers to the area to see if they can find out anything. I have another task for you. At the edge of the Ashen Forest there is a Bandit Camp forming. The camp is swarming with bandits and mercanaries. I do not want them attacking travelers to and from the forest. Please, go take care of them.");
+                    rumor.OnHeardRumor = this.HeardBanditCampRumor;
+                }
+                else if (!abandonedFortress)
+                {
+                    rumor = new Rumor("Abandoned Fortress", "Good news! The magical barricade on the Abandoned Fortress has collapsed upon itself. Go and meet me outside of its walls and we will begin our assault immediately. We must move swiftly before the enemy restores its shield.");
+                    rumor.OnHeardRumor = this.HeardAbandonedFortressRumor;
                 }
                 else
                     rumor = new Rumor("You want something?", "You want something?");
@@ -402,6 +426,38 @@ namespace The_Darkest_Hour.Towns.Watertown
             LocationHandler.ResetLocation(TOWN_CENTER_KEY);
         }
 
+        public void HeardInconspiciousCaveRumor()
+        {
+            Accomplishment accomplishment = Banken.GetBankenAccomplishments().Find(x => x.Name.Contains("Inconspicious Cave"));
+            GameState.Hero.Accomplishments.Add(accomplishment);
+            //Reload the TownCenter so it will open up the area to Complete the Task that the Task is in
+            LocationHandler.ResetLocation(TOWN_CENTER_KEY);
+        }
+
+        public void HeardSwamplandRumor()
+        {
+            Accomplishment accomplishment = Banken.GetBankenAccomplishments().Find(x => x.Name.Contains("Swampland"));
+            GameState.Hero.Accomplishments.Add(accomplishment);
+            //Reload the TownCenter so it will open up the area to Complete the Task that the Task is in
+            LocationHandler.ResetLocation(TOWN_CENTER_KEY);
+        }
+
+        public void HeardBanditCampRumor()
+        {
+            Accomplishment accomplishment = Banken.GetBankenAccomplishments().Find(x => x.Name.Contains("Bandit Camp"));
+            GameState.Hero.Accomplishments.Add(accomplishment);
+            //Reload the TownCenter so it will open up the area to Complete the Task that the Task is in
+            LocationHandler.ResetLocation(TOWN_CENTER_KEY);
+        }
+
+        public void HeardAbandonedFortressRumor()
+        {
+            Accomplishment accomplishment = Banken.GetBankenAccomplishments().Find(x => x.Name.Contains("Abandoned Fortress"));
+            GameState.Hero.Accomplishments.Add(accomplishment);
+            //Reload the TownCenter so it will open up the area to Complete the Task that the Task is in
+            LocationHandler.ResetLocation(TOWN_CENTER_KEY);
+        }
+
         #endregion
 
         #region Accomplishments
@@ -447,6 +503,30 @@ namespace The_Darkest_Hour.Towns.Watertown
                 accomplishment.NameSpace = "Banken";
                 accomplishment.Name = "Has heard the rumor of Old Forest Ruins";
                 accomplishment.Description = "Has heard the rumor of traveling into the Ashen forest and finding the Old Forest Ruins.";
+                _BankenAccomplishments.Add(accomplishment);
+
+                accomplishment = new Accomplishment();
+                accomplishment.NameSpace = "Banken";
+                accomplishment.Name = "Has heard the rumor of Inconspicious Cave";
+                accomplishment.Description = "Has heard the rumor of traveling into the Ashen forest and finding the Inconspicious Cave and investigating the dark magic flare.";
+                _BankenAccomplishments.Add(accomplishment);
+
+                accomplishment = new Accomplishment();
+                accomplishment.NameSpace = "Banken";
+                accomplishment.Name = "Has heard the rumor of Swampland";
+                accomplishment.Description = "Has heard the rumor of traveling into the Ashen forest and finding the Swampland";
+                _BankenAccomplishments.Add(accomplishment);
+
+                accomplishment = new Accomplishment();
+                accomplishment.NameSpace = "Banken";
+                accomplishment.Name = "Has heard the rumor of Bandit Camp";
+                accomplishment.Description = "Has heard the rumor of traveling into the Ashen forest and finding the Bandit Camp";
+                _BankenAccomplishments.Add(accomplishment);
+
+                accomplishment = new Accomplishment();
+                accomplishment.NameSpace = "Banken";
+                accomplishment.Name = "Has heard the rumor of Abandoned Fortress";
+                accomplishment.Description = "Has heard the rumor of traveling into the Ashen forest and breaching the Abandoned Fortress raid.";
                 _BankenAccomplishments.Add(accomplishment);
             }
 
