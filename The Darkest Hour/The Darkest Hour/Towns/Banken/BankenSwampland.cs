@@ -754,16 +754,16 @@ namespace The_Darkest_Hour.Towns.Watertown
 
         #region Get Town Instance
 
-        private static BankenSwampland _InconspicousCave;
+        private static BankenSwampland _Swampland;
 
         public static BankenSwampland GetTownInstance()
         {
-            if (_InconspicousCave == null)
+            if (_Swampland == null)
             {
-                _InconspicousCave = new BankenSwampland();
+                _Swampland = new BankenSwampland();
             }
 
-            return _InconspicousCave;
+            return _Swampland;
         }
 
         #endregion

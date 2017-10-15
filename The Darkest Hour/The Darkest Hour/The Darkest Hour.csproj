@@ -107,8 +107,10 @@
     <Compile Include="Characters\Mobs\Bosses\Banken\DemonicNecro.cs" />
     <Compile Include="Characters\Mobs\Bosses\Banken\GiantShadowDemon.cs" />
     <Compile Include="Characters\Mobs\Bosses\Banken\Marzen.cs" />
+    <Compile Include="Characters\Mobs\Bosses\Banken\Mathew.cs" />
     <Compile Include="Characters\Mobs\Bosses\Banken\PsychoticBandit.cs" />
     <Compile Include="Characters\Mobs\Bosses\Banken\Sedhem.cs" />
+    <Compile Include="Characters\Mobs\Bosses\Banken\William.cs" />
     <Compile Include="Characters\Mobs\Bosses\Banken\Zulien.cs" />
     <Compile Include="Characters\Mobs\Bosses\Beach Tower\BanditRaidLeader.cs" />
     <Compile Include="Characters\Mobs\Bosses\BanditScholar.cs" />
@@ -262,6 +264,7 @@
     <Compile Include="Towns\Banken\BankenAshenForest.cs" />
     <Compile Include="Towns\Banken\BankenAshenForestRangerPaths.cs" />
     <Compile Include="Towns\Banken\BankenAshenForestWorshipRegion.cs" />
+    <Compile Include="Towns\Banken\BankenBanditCamp.cs" />
     <Compile Include="Towns\Banken\BankenForestWilderness.cs" />
     <Compile Include="Towns\Banken\BankenInconspicousCave.cs" />
     <Compile Include="Towns\Banken\BankenMagesRetreatHouse.cs" />

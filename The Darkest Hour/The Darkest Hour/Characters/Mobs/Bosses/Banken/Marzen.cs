@@ -17,7 +17,7 @@ namespace The_Darkest_Hour.Characters.Mobs.Bosses.Banken
             this.level = 1;
             this.gold = 1850;
             this.xp = 2350;
-            this.Identifier = "Marzen, High Necromancer";
+            this.Identifier = "Marzen - High Necromancer";
         }
     }
 }
