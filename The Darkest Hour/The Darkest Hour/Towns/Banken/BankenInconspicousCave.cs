@@ -691,7 +691,7 @@ namespace The_Darkest_Hour.Towns.Watertown
                 returnData.Actions = locationActions;
             }
             else
-                returnData.Description = "Another dimly lit hallway. This one is far creepier than last. The walls are lined with skulls";
+                returnData.Description = "A large room with magic symbols painted on the ground with blood.";
 
             if (defeatedZulien && !takeTreasure)
             {
