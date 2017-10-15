@@ -316,8 +316,8 @@ namespace The_Darkest_Hour.Towns.Watertown
                 bool shadeLordDefeated = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenForestWilderness.SHADE_LORD));
                 bool searchForMage= Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenMagesRetreatHouse.PSYCHOTIC_BANDIT));
                 bool oldForestRuins = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenOldForestRuins.TAKE_ORDERS));
-                bool inconspicuousCave = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenInconspicousCave.ZULIEN)); ;
-                bool swampLand = false;
+                bool inconspicuousCave = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenInconspicousCave.ZULIEN));
+                bool swampLand = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenSwampland.MARZEN));
                 bool banditCamp = false;
                 bool abandonedFortress = false;
                 if (!investigateReligiousShrine)

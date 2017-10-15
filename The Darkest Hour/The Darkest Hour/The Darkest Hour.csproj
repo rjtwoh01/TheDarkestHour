@@ -106,6 +106,7 @@
     <Compile Include="Characters\Mobs\Bosses\Banken\Bothnul.cs" />
     <Compile Include="Characters\Mobs\Bosses\Banken\DemonicNecro.cs" />
     <Compile Include="Characters\Mobs\Bosses\Banken\GiantShadowDemon.cs" />
+    <Compile Include="Characters\Mobs\Bosses\Banken\Marzen.cs" />
     <Compile Include="Characters\Mobs\Bosses\Banken\PsychoticBandit.cs" />
     <Compile Include="Characters\Mobs\Bosses\Banken\Sedhem.cs" />
     <Compile Include="Characters\Mobs\Bosses\Banken\Zulien.cs" />
