@@ -10,13 +10,13 @@ namespace The_Darkest_Hour.Characters.Mobs.Bosses.Banken
     {
         public Zulien()
         {
-            this.damageMin = 125;
-            this.damageMax = 175;
-            this.health = 1250;
-            this.maxHealth = 1250;
+            this.damageMin = 165;
+            this.damageMax = 225;
+            this.health = 1800;
+            this.maxHealth = 1800;
             this.level = 1;
-            this.gold = 700;
-            this.xp = 700;
+            this.gold = 1800;
+            this.xp = 2300;
             this.Identifier = "Zulien";
         }
     }
