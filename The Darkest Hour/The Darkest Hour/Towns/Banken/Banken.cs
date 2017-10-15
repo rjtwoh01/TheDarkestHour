@@ -316,7 +316,7 @@ namespace The_Darkest_Hour.Towns.Watertown
                 bool shadeLordDefeated = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenForestWilderness.SHADE_LORD));
                 bool searchForMage= Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenMagesRetreatHouse.PSYCHOTIC_BANDIT));
                 bool oldForestRuins = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenOldForestRuins.TAKE_ORDERS));
-                bool inconspicuousCavve = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenInconspicousCave.ZULIEN));
+                bool inconspicuousCave = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenInconspicousCave.ZULIEN)); ;
                 bool swampLand = false;
                 bool banditCamp = false;
                 bool abandonedFortress = false;
@@ -350,7 +350,7 @@ namespace The_Darkest_Hour.Towns.Watertown
                     rumor = new Rumor("Old Forest Ruins", "You weren't able to get anything out of the Psychotic Bandit about the mage? Well, that's a shame. How about this, I'll send my agents off to try to find more information about what happened to the mage stealthily. In the mean time, go to some old abandoned ruins on the northern part of the forest. I've heard tales of bandits in the area and rumors that travelers have gone missing. Hopefully by the time you return we'll have figured out something to do about the mage.");
                     rumor.OnHeardRumor = this.HeardOldForestRuinsRumor;
                 }
-                else if (!inconspicuousCavve)
+                else if (!inconspicuousCave)
                 {
                     rumor = new Rumor("Inconspicious Cave", "You hand Gildan the orders given to the bandits that you found in the Old Forest Ruins. He looks them over, eyebrow raised as he reads. He looks up at you and says, 'Well, this is certainly disturbing. What army? Asku will fall? I'm really starting to become uncomfortable about all this mess. This needs to be looked into further. And unfortunately we still haven't found a mage strong enough to take down the magical barricade on the Abandoned Fortress. During one of our searches, a ranger reported finding a seemingly Inconspicious Cave in the forest. He wouldn't have thought anything of it but there was a flare of dark magic. Go north into the forest and see if you can find out what caused that flare.'");
                     rumor.OnHeardRumor = this.HeardInconspiciousCaveRumor;
