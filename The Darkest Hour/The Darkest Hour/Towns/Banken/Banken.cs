@@ -318,7 +318,7 @@ namespace The_Darkest_Hour.Towns.Watertown
                 bool oldForestRuins = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenOldForestRuins.TAKE_ORDERS));
                 bool inconspicuousCave = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenInconspicousCave.ZULIEN));
                 bool swampLand = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenSwampland.MARZEN));
-                bool banditCamp = false;
+                bool banditCamp = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenBanditCamp.TAKE_LETTER));
                 bool abandonedFortress = false;
                 if (!investigateReligiousShrine)
                 {
@@ -367,7 +367,7 @@ namespace The_Darkest_Hour.Towns.Watertown
                 }
                 else if (!abandonedFortress)
                 {
-                    rumor = new Rumor("Abandoned Fortress", "Good news! The magical barricade on the Abandoned Fortress has collapsed upon itself. Go and meet me outside of its walls and we will begin our assault immediately. We must move swiftly before the enemy restores its shield.");
+                    rumor = new Rumor("Abandoned Fortress", "A letter? We'll have to look at it later, I have ood news! The magical barricade on the Abandoned Fortress has collapsed upon itself. Go and meet me outside of its walls and we will begin our assault immediately. We must move swiftly before the enemy restores its shield. We'll examine this letter once we've completed this raid.");
                     rumor.OnHeardRumor = this.HeardAbandonedFortressRumor;
                 }
                 else
