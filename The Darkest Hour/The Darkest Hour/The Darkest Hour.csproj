@@ -264,6 +264,7 @@
     <Compile Include="Towns\Ankou\AnkouUndergroundHideOut.cs" />
     <Compile Include="Towns\Ankou\AnkouUndergroundTunnel.cs" />
     <Compile Include="Towns\Banken\Banken.cs" />
+    <Compile Include="Towns\Banken\BankenAbandonedFortress.cs" />
     <Compile Include="Towns\Banken\BankenAncientBurialGrounds.cs" />
     <Compile Include="Towns\Banken\BankenAshenForest.cs" />
     <Compile Include="Towns\Banken\BankenAshenForestRangerPaths.cs" />

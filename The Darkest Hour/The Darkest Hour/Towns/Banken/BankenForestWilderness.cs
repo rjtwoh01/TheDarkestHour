@@ -726,6 +726,8 @@ namespace The_Darkest_Hour.Towns.Watertown
             bool defeatedShadeLord = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenForestWilderness.SHADE_LORD));
             bool inspectGate = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenForestWilderness.INSPECT_GATE));
             bool tookTreasure = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Banken.LOCATION_STATE_KEY, BankenForestWilderness.TREASURE));
+            Accomplishment abandonedFortressAccomplishment = Banken.GetBankenAccomplishments().Find(x => x.Name.Contains("Abandoned Fortress"));
+            bool abandonedFortress = GameState.Hero.Accomplishments.Contains(abandonedFortressAccomplishment);
             string before = GameState.Hero.Identifier + ", you dare enter my domain? This fortress stands as a testement to my masters. The void shall claim you!";
             string after = "The shade lord cries out a piercing scream as it fades back into the void that spawned it.";
             string action = "Inspect";
@@ -787,8 +789,10 @@ namespace The_Darkest_Hour.Towns.Watertown
                 itemAction.PostItem += TreasureChest;
                 returnData.Actions = locationActions;
             }
-            else
+            else if (!abandonedFortress)
                 returnData.Description = "Just beyond the creek landing are the gates to an abandoned fortress. The gates appear sealed shut by some dark magic.";
+            else
+                returnData.Description = "Just beyond the creek landing lay the crumpled gates of the Abandoned Fortress. THe gates have crumpled to dust. Whatever magic was sustaining them has imploded on itself.";
 
             //Once the player gets the mages there will be an action to begin unsealing the gate and then the player can proceed into the "abandoned" fortress
 
@@ -802,6 +806,12 @@ namespace The_Darkest_Hour.Towns.Watertown
             if (defeatedMobs && inspectGate && defeatedShadeLord)
             {
                 locationDefinition = Banken.GetTownInstance().GetTownCenterDefinition();
+                adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
+
+            if (abandonedFortress)
+            {
+                locationDefinition = BankenAbandonedFortress.GetTownInstance().GetEntranceDefinition();
                 adjacentLocationDefintions.Add(locationDefinition.LocationKey, locationDefinition);
             }
 
