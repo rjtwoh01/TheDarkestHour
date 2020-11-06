@@ -1,0 +1,14 @@
+C:\Users\illod\OneDrive\Documents\code\TheDarkestHour\The Darkest Hour\The Darkest Hour\bin\Debug\The Darkest Hour.exe.config
+C:\Users\illod\OneDrive\Documents\code\TheDarkestHour\The Darkest Hour\The Darkest Hour\bin\Debug\The Darkest Hour.exe.manifest
+C:\Users\illod\OneDrive\Documents\code\TheDarkestHour\The Darkest Hour\The Darkest Hour\bin\Debug\The Darkest Hour.application
+C:\Users\illod\OneDrive\Documents\code\TheDarkestHour\The Darkest Hour\The Darkest Hour\bin\Debug\The Darkest Hour.exe
+C:\Users\illod\OneDrive\Documents\code\TheDarkestHour\The Darkest Hour\The Darkest Hour\bin\Debug\The Darkest Hour.pdb
+C:\Users\illod\OneDrive\Documents\code\TheDarkestHour\The Darkest Hour\The Darkest Hour\obj\Debug\The Darkest Hour.csprojAssemblyReference.cache
+C:\Users\illod\OneDrive\Documents\code\TheDarkestHour\The Darkest Hour\The Darkest Hour\obj\Debug\The_Darkest_Hour.Characters.Resources.CharacterResources.resources
+C:\Users\illod\OneDrive\Documents\code\TheDarkestHour\The Darkest Hour\The Darkest Hour\obj\Debug\The_Darkest_Hour.GeneralGameResources.resources
+C:\Users\illod\OneDrive\Documents\code\TheDarkestHour\The Darkest Hour\The Darkest Hour\obj\Debug\The Darkest Hour.csproj.GenerateResource.cache
+C:\Users\illod\OneDrive\Documents\code\TheDarkestHour\The Darkest Hour\The Darkest Hour\obj\Debug\The Darkest Hour.csproj.CoreCompileInputs.cache
+C:\Users\illod\OneDrive\Documents\code\TheDarkestHour\The Darkest Hour\The Darkest Hour\obj\Debug\The Darkest Hour.exe.manifest
+C:\Users\illod\OneDrive\Documents\code\TheDarkestHour\The Darkest Hour\The Darkest Hour\obj\Debug\The Darkest Hour.application
+C:\Users\illod\OneDrive\Documents\code\TheDarkestHour\The Darkest Hour\The Darkest Hour\obj\Debug\The Darkest Hour.exe
+C:\Users\illod\OneDrive\Documents\code\TheDarkestHour\The Darkest Hour\The Darkest Hour\obj\Debug\The Darkest Hour.pdb

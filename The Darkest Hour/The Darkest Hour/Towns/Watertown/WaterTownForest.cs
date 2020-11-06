@@ -5,54 +5,334 @@ using System.Text;
 using System.Threading.Tasks;
 using The_Darkest_Hour.Locations;
 using The_Darkest_Hour.Locations.Actions;
+using The_Darkest_Hour.Characters.Mobs;
+using The_Darkest_Hour.Characters.Mobs.Bosses;
+using The_Darkest_Hour.Characters;
+using The_Darkest_Hour.Combat;
 
 namespace The_Darkest_Hour.Towns.Watertown
 {
-    class WaterTownForest : Town
+    class WatertownForest : Town
     {
-        private Location _ForestEntrance;
 
-        public override Location GetStartingLocation()
+        #region Location Keys
+
+        public const string ENTRANCE_KEY = "WatertownForest.Entrance";
+        public const string SIDE_AREA_KEY = "WatertownForest.Side";
+        public const string STRAIGHT_AHEAD_KEY = "WatertownForest.Straight";
+        public const string CLEARING_KEY = "WatertownForest.Clearing";
+        public const string DEFEATED_STRAIGHT_BANDITS_KEY = "DefeatedStraightBandits";
+        public const string DEFEATED_BANDIT_CAPTAIN_KEY = "DefeatedBanditCaptain";
+
+        public const string DEFEATED_CAPTAIN_STATE = "DefeatedCaptain";
+
+        #endregion
+
+        #region Locations
+
+
+        public override LocationDefinition GetStartingLocationDefinition()
         {
-            return GetForestEntrance();
+            return GetForestEntranceDefinition();
         }
 
-        public Location GetForestEntrance()
+        #region Location Side Area
+
+        public Location LoadSideArea()
         {
             Location returnData;
+            returnData = new Location();
+            returnData.Name = "Watertown Forest Side Area";
+            Accomplishment banditCaveAccomplishment = Watertown.GetWatertownAccomplishments().Find(x => x.Name.Contains("Bandit Cave"));
 
-            if (_ForestEntrance == null)
+            if (!(GameState.Hero.Accomplishments.Contains(banditCaveAccomplishment)))
             {
-                returnData = new Location();
-                returnData.Name = "Watertown Forest Entrance";
-                returnData.Description = "A dense yet surprisingly bright forest. You can hear the laughter of the bandits off in the distance (no actions yet).";
+                returnData.Description = "You move off to a little side area you saw. There is nothing here but more trees.";
+            }
+            else
+                returnData.Description = "Now that you were told of the cave's existence, you can spot it hiding behind some trees.";
 
-                _ForestEntrance = returnData;
+            //Adjacent Locations
+            Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
+            LocationDefinition locationDefinition = WatertownForest.GetTownInstance().GetStartingLocationDefinition();
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
 
-                List<Location> adjacentLocations = new List<Location>();
-                Watertown watertown = Watertown.GetTownInstance();
-                adjacentLocations.Add(watertown.GetTownCenter());
+            returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
 
-                returnData.AdjacentLocations = adjacentLocations;
+            if (GameState.Hero.Accomplishments.Contains(banditCaveAccomplishment))
+            {
+                locationDefinition = WatertownBanditCave.GetTownInstance().GetStartingLocationDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
+
+            returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
+
+            return returnData;
+        }
+
+        public LocationDefinition GetSideAreaDefinition()
+        {
+            LocationDefinition returnData = new LocationDefinition();
+            string locationKey = SIDE_AREA_KEY;
+
+            if (LocationHandler.LocationExists(locationKey))
+            {
+                returnData = LocationHandler.GetLocation(locationKey);
             }
             else
             {
-                returnData = _ForestEntrance;
+                returnData.LocationKey = locationKey;
+                returnData.Name = "Watertown Forest Side Area";
+                returnData.DoLoadLocation = LoadSideArea;
+
+                LocationHandler.AddLocation(returnData);
             }
 
             return returnData;
         }
 
-        private static WaterTownForest _WaterTownForest;
+        #endregion
 
-        public static WaterTownForest GetTownInstance()
+        #region Location Straight
+
+        public Location LoadStraight()
         {
-            if (_WaterTownForest == null)
+            Location returnData = new Location();
+            returnData.Name = "Watertown Forest Straight Path";
+            bool defeatedBandits = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForest.DEFEATED_STRAIGHT_BANDITS_KEY));
+
+            if (!defeatedBandits)
+                returnData.Description = "You walk forward on the path and encounter bandits. You must conquer them to move on";
+            else
+                returnData.Description = "The dead bodies of bandits lay strewn across the ground.";
+
+            // Location Actions
+            List<LocationAction> locationActions = new List<LocationAction>();
+
+            if (!defeatedBandits)
             {
-                _WaterTownForest = new WaterTownForest();
+                List<Mob> bandits = new List<Mob>();
+                bandits.Add(new Bandit());
+                bandits.Add(new Bandit());
+                bandits.Add(new Bandit());
+                bandits.Add(new Bandit());
+
+                CombatAction combatAction = new CombatAction("Bandits",bandits);
+                combatAction.PostCombat += StraightBanditResults;
+                locationActions.Add(combatAction);
+                returnData.Actions = locationActions;
             }
 
-            return _WaterTownForest;
+            // Adjacent Locations
+            Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
+
+            LocationDefinition locationDefinition = WatertownForest.GetTownInstance().GetForestEntranceDefinition();
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+
+            if (defeatedBandits)
+            {
+                locationDefinition = WatertownForest.GetTownInstance().GetClearingDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
+
+            returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
+
+            return returnData;
         }
+
+        public LocationDefinition GetStraightDefinition()
+        {
+            LocationDefinition returnData = new LocationDefinition();
+            string locationKey = STRAIGHT_AHEAD_KEY;
+
+            if (LocationHandler.LocationExists(locationKey))
+            {
+                returnData = LocationHandler.GetLocation(locationKey);
+            }
+            else
+            {
+                returnData.LocationKey = locationKey;
+                returnData.Name = "Watertown Forest Straight Path";
+                returnData.DoLoadLocation = LoadStraight;
+
+                LocationHandler.AddLocation(returnData);
+            }
+
+            return returnData;
+        }
+
+        public void StraightBanditResults(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForest.DEFEATED_STRAIGHT_BANDITS_KEY, true);
+
+                // Reload the forest straight path
+                LocationHandler.ResetLocation(DEFEATED_STRAIGHT_BANDITS_KEY);
+
+            }
+        }
+        #endregion
+
+        #region Location Clearing
+
+        public Location LoadClearing()
+        {
+            Location returnData = new Location();
+            returnData.Name = "Forest Clearing";
+            bool defeatedBanditCaptain = Convert.ToBoolean(LocationHandler.GetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForest.DEFEATED_BANDIT_CAPTAIN_KEY));
+            Accomplishment murderRoomAccomplishment = Watertown.GetWatertownAccomplishments().Find(x => x.Name.Contains("Bandit Spy"));
+            if (!defeatedBanditCaptain)
+            {
+                returnData.Description = "The Bandit Captain stands in the clearing and stares at you, daring you to challenge him.";
+            }
+            else if (defeatedBanditCaptain && !GameState.Hero.Accomplishments.Contains(murderRoomAccomplishment))
+                returnData.Description = "The Bandit Captain lays dead in the clearing.";
+            else if (GameState.Hero.Accomplishments.Contains(murderRoomAccomplishment))
+                returnData.Description = "A medium sized clearing. Now that you've been told to search for the tower you can see a covered up entrance to a narrow path. It also looks like the Bandit Captain's body has been removed.";
+
+            // Location Actions
+            List<LocationAction> locationActions = new List<LocationAction>();
+
+            if (!defeatedBanditCaptain)
+            {
+                List<Mob> banditCaptain = new List<Mob>();
+                banditCaptain.Add(new BanditCaptain());
+                CombatAction combatAction = new CombatAction("Bandit Captain", banditCaptain);
+                combatAction.PostCombat += BanditCaptainResults;
+                locationActions.Add(combatAction);
+                returnData.Actions = locationActions;
+            }
+
+            Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
+
+            LocationDefinition locationDefinition = WatertownForest.GetTownInstance().GetStraightDefinition();
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+
+            if (defeatedBanditCaptain)
+            {
+                locationDefinition = Watertown.GetTownInstance().GetTownCenterDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+
+                LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, DEFEATED_CAPTAIN_STATE, true);
+                LocationHandler.ResetLocation(Watertown.INN_KEY); // Need to reload Inn so that new conversation can be set.
+            }
+
+            if (GameState.Hero.Accomplishments.Contains(murderRoomAccomplishment))
+            {
+                locationDefinition = WatertownForestClearingBeforeTower.GetTownInstance().GetEntranceDefinition();
+                adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+            }
+            
+
+            returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
+
+            return returnData;
+        }
+
+        public LocationDefinition GetClearingDefinition()
+        {
+            LocationDefinition returnData = new LocationDefinition();
+            string locationKey = CLEARING_KEY;
+
+            if (LocationHandler.LocationExists(locationKey))
+            {
+                returnData = LocationHandler.GetLocation(locationKey);
+            }
+            else
+            {
+                returnData.LocationKey = locationKey;
+                returnData.Name = "Forest Clearing";
+                returnData.DoLoadLocation = LoadClearing;
+
+                LocationHandler.AddLocation(returnData);
+            }
+
+            return returnData;
+        }
+
+        public void BanditCaptainResults(object sender, CombatEventArgs combatEventArgs)
+        {
+            if (combatEventArgs.CombatResults == CombatResult.PlayerVictory)
+            {
+                LocationHandler.SetLocationStateValue(Watertown.LOCATION_STATE_KEY, WatertownForest.DEFEATED_BANDIT_CAPTAIN_KEY, true);
+
+                // Reload the forest clearing
+                LocationHandler.ResetLocation(DEFEATED_BANDIT_CAPTAIN_KEY);
+
+            }
+        }
+
+        #endregion
+
+        #region Location Entrance
+
+        public Location LoadForestEntrance()
+        {
+            Location returnData;
+            returnData = new Location();
+            returnData.Name = "Watertown Forest Entrance";
+            returnData.Description = "A dense yet surprisingly bright forest. You can hear the laughter of the bandits off in the distance";
+
+            // Adjacent Locations
+            Dictionary<string, LocationDefinition> adjacentLocationDefinitions = new Dictionary<string, LocationDefinition>();
+
+            LocationDefinition locationDefinition = Watertown.GetTownInstance().GetTownCenterDefinition();
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+
+            locationDefinition = WatertownForest.GetTownInstance().GetSideAreaDefinition();
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+
+            locationDefinition = WatertownForest.GetTownInstance().GetStraightDefinition();
+            adjacentLocationDefinitions.Add(locationDefinition.LocationKey, locationDefinition);
+
+            returnData.AdjacentLocationDefinitions = adjacentLocationDefinitions;
+
+
+            return returnData;
+
+        }
+
+        public LocationDefinition GetForestEntranceDefinition()
+        {
+            LocationDefinition returnData = new LocationDefinition();
+            string locationKey = ENTRANCE_KEY;
+
+            if (LocationHandler.LocationExists(locationKey))
+            {
+                returnData = LocationHandler.GetLocation(locationKey);
+            }
+            else
+            {
+                returnData.LocationKey = locationKey;
+                returnData.Name = "Watertown Forest Entrance";
+                returnData.DoLoadLocation = LoadForestEntrance;
+
+                LocationHandler.AddLocation(returnData);
+            }
+
+            return returnData;
+        }
+
+        #endregion
+
+        #endregion
+
+        #region Get Town Entrance
+
+        private static WatertownForest _WatertownForest;
+
+        public static WatertownForest GetTownInstance()
+        {
+            if (_WatertownForest == null)
+            {
+                _WatertownForest = new WatertownForest();
+            }
+
+            return _WatertownForest;
+        }
+
+        #endregion
+
     }
 }
